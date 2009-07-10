@@ -1,0 +1,188 @@
+" ================
+" Macvim Stuff
+" ================
+set lines=82
+set columns=273
+set bg=dark
+
+" Remove scrollbars (one at a time, weak)
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=b
+
+" ================
+" Ruby stuff
+" ================
+syntax on                 " Enable syntax highlighting
+filetype plugin indent on " Enable filetype-specific indenting and plugins
+
+augroup myfiletypes
+  " Clear old autocmds in group
+  autocmd!
+  " autoindent with two spaces, always expand tabs
+  autocmd FileType ruby,eruby,yaml set ai sw=2 sts=2 et
+augroup END
+
+imap <C-s> <esc>:w<CR>
+
+let mapleader = ","
+
+map <Leader>h :FuzzyFinderTextMate<CR> 
+vmap <Leader>b :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+map <Leader>c :Rcontroller 
+map <Leader>co :TComment<CR> 
+map <Leader>vc :RVcontroller 
+map <Leader>sc :RScontroller 
+map <Leader>f :Rfunctional 
+map <Leader>vf :RVfunctional 
+map <Leader>l :!ruby <C-r>% \| less<CR>
+map <Leader>m :Rmodel 
+map <Leader>vm :RVmodel 
+map <Leader>sm :RSmodel 
+map <Leader>n :set nopaste<CR>
+map <Leader>o ?def <CR>:nohl<CR>w"zy$:!ruby <C-r>% -n <C-r>z<CR>
+map <Leader>p :set paste<CR>i
+map <Leader>r :e doc/README_FOR_APP<CR> " Edit the README_FOR_APP (makes :R commands work)
+map <Leader>t :!ruby <C-r>%<CR>
+map <Leader>u :Runittest 
+map <Leader>vu :RVunittest 
+map <Leader>su :RSunittest 
+map <Leader>vv :RVview 
+map <Leader>sv :RSview 
+map <Leader>w <C-w>w
+
+map <C-h> :nohl<CR>
+imap <C-l> <Space>=><Space>
+map <C-s> <esc>:w<CR>
+map <C-t> <esc>:tabnew<CR>
+map <C-x> <C-w>c
+
+nmap <Leader>i :!ruby-code-indenter<cr>
+
+set nocompatible
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set history=500		" keep 500 lines of command line history
+set ruler		" show the cursor position all the time
+set showcmd		" display incomplete commands
+set autoindent
+set showmatch
+set nowrap
+set backupdir=/tmp
+set autoread
+set wmh=0
+set viminfo+=!
+set guioptions-=T
+set guifont=Triskweline_10:h10
+set et
+set sw=2
+set smarttab
+set noincsearch
+set ignorecase smartcase
+set laststatus=2  " Always show status line.
+set number 
+set backupdir=/tmp   
+set directory=/tmp " Don't clutter my dirs up with swp and tmp files
+set scrolloff=3 " keep 3 lines visible at top and bottom 
+set ttimeoutlen=10 " supposedly remove the delay when hitting <esc>o because otherwise vim has to wait to see
+                   " if you were going to type <F4>
+set gdefault " assume the /g flag on :s substitutions to replace all matches in a line
+
+" Edit another file in the same directory as the current file
+" uses expression to extract path from current file's path
+map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
+map <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
+map <Leader>v :vnew <C-R>=expand("%:p:h") . '/'<CR>
+
+" Set the tag file search order
+set tags=/home/ben/code/tags/tags,./tags
+
+" Use _ as a word-separator
+set iskeyword-=_
+
+" Use Ack instead of Grep when available
+if executable("ack")
+  set grepprg=ack\ -H\ --nogroup\ --nocolor
+endif
+
+" Make the omnicomplete text readable
+:highlight PmenuSel ctermfg=black
+
+" Fuzzy finder: ignore stuff that can't be opened, and generated files
+let g:fuzzy_ignore = "*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/**;coverage/**;tmp/**;rdoc/**"
+
+" Highlight the status line
+highlight StatusLine ctermfg=yellow
+
+" Format xml files
+au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null" 
+
+" ========================================================================
+" End of things set by me.
+" ========================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
+" let &guioptions = substitute(&guioptions, "t", "", "g")
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin indent on
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  augroup END
+
+else
+
+  set autoindent		" always set autoindenting on
+
+endif " has("autocmd")
+
+
+
