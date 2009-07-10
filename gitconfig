@@ -1,6 +1,6 @@
 [user]
-	name = Ryan Bates
-	email = ryan@railscasts.com
+	name = Ben Orenstein
+	email = ben.orenstein@gmail.com 
 [alias]
 	co = checkout
 [color]
@@ -8,7 +8,7 @@
 	status = auto
 	branch = auto
 [core]
-	excludesfile = /Users/rbates/.gitignore
-	editor = mate -w
+	excludesfile = /Users/bjo/.gitignore
+	editor = mvim
 [apply]
 	whitespace = nowarn
