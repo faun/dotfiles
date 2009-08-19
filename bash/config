@@ -3,3 +3,6 @@ export EDITOR="vim"
 
 # Autocorrect mispelled directories
 shopt -s cdspell
+
+# Set this so screen will show the currently-running program
+PROMPT_COMMAND='echo -ne "\033k\033\\"'

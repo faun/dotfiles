@@ -14,7 +14,8 @@ msgwait 3
 
 shell -${SHELL}
 
-# http://web.mit.edu/gnu/doc/html/screen_9.html
+# Show the currently-running program
+# (http://web.mit.edu/gnu/doc/html/screen_9.html)
 shelltitle '$ |bash'
 
 # allow for 10,000 lines of scroll back (default 100)
