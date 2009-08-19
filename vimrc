@@ -1,17 +1,4 @@
 " ================
-" Macvim Stuff
-" ================
-set lines=82
-set columns=273
-set bg=dark
-
-" Remove scrollbars (one at a time, weak)
-set guioptions-=l
-set guioptions-=L
-set guioptions-=r
-set guioptions-=b
-
-" ================
 " Ruby stuff
 " ================
 syntax on                 " Enable syntax highlighting
@@ -28,10 +15,10 @@ imap <C-s> <esc>:w<CR>
 
 let mapleader = ","
 
-map <Leader>h :FuzzyFinderTextMate<CR> 
+map <Leader>h :FuzzyFinderTextMate<CR>
 vmap <Leader>b :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 map <Leader>c :Rcontroller 
-map <Leader>co :TComment<CR> 
+map <Leader>co :TComment<CR>
 map <Leader>vc :RVcontroller 
 map <Leader>sc :RScontroller 
 map <Leader>f :Rfunctional 
@@ -58,8 +45,6 @@ map <C-s> <esc>:w<CR>
 map <C-t> <esc>:tabnew<CR>
 map <C-x> <C-w>c
 
-nmap <Leader>i :!ruby-code-indenter<cr>
-
 set nocompatible
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set history=500		" keep 500 lines of command line history
@@ -84,8 +69,6 @@ set number
 set backupdir=/tmp   
 set directory=/tmp " Don't clutter my dirs up with swp and tmp files
 set scrolloff=3 " keep 3 lines visible at top and bottom 
-set ttimeoutlen=10 " supposedly remove the delay when hitting <esc>o because otherwise vim has to wait to see
-                   " if you were going to type <F4>
 set gdefault " assume the /g flag on :s substitutions to replace all matches in a line
 
 " Edit another file in the same directory as the current file
@@ -183,6 +166,3 @@ else
   set autoindent		" always set autoindenting on
 
 endif " has("autocmd")
-
-
-

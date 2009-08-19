@@ -1,15 +1,30 @@
-. ~/.zsh/aliases
-
-# changing directory to code project
-function c { cd ~/code/$1; }
-
-# alternative to "rails" command to use templates
-function railsapp {
-  template=$1
-  appname=$2
-  shift 2
-  rails $appname -m http://github.com/ryanb/rails-templates/raw/master/$template.rb $@
-}
-
-# misc
-alias reload='. ~/.bash_profile'
+# Aliases.  Warning: extreme leetness follows.
+#
+alias a='ls -lrth'
+alias aliases='vim ~/.bash_aliases'
+alias b='cd ~/projects/dfhcc_bayes'
+alias benchmark='./script/plugin install git://github.com/timocratic/test_benchmark.git'
+alias d='cd ~/projects/dfhcc_informatics'
+alias e='cd ~/projects/events'
+alias g='cd ~/projects/grants'
+alias get='sudo apt-get install'
+alias gst='git status'
+alias irb='irb --readline -r irb/completion'
+alias l='ssh lispclub.com'
+alias lm='!! | more'
+alias m='more'
+alias p="cd ~/projects/publications"
+#alias ri='ri -f ansi -T'
+alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
+alias rep="cd ~/projects/dfhcc_reports"
+alias s='screen -dr rails'
+alias sc='script/console'
+alias sd='svn diff | less'
+alias seek='grep $1 -R *'
+alias so='source ~/.bash_aliases'
+alias ss='ruby script/server -p 3001 --debugger'
+alias sst='svn status'
+alias svu='svn update'
+alias t='cd ~/projects/trials'
+alias ta='cd ~/projects/trial_auth'
+alias v='vim'

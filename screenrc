@@ -1,0 +1,21 @@
+
+hardstatus alwayslastline "%{= KW}%-w%{= ck}%50>%n %t%{-}%+w%<%-22=%{w}%c [%l]"
+
+nonblock 5
+
+# detach the screen if we get disconnected
+autodetach on
+
+# show all messages for atleast 1 second
+msgminwait 1
+
+# show the message for at most 3 seconds (defualt 5)
+msgwait 3
+
+shell -${SHELL}
+
+# http://web.mit.edu/gnu/doc/html/screen_9.html
+shelltitle '$ |bash'
+
+# allow for 10,000 lines of scroll back (default 100)
+defscrollback 10000
