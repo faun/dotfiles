@@ -6,11 +6,8 @@ nonblock 5
 # detach the screen if we get disconnected
 autodetach on
 
-# show all messages for atleast 1 second
-msgminwait 1
-
-# show the message for at most 3 seconds (defualt 5)
-msgwait 3
+# Show messages at the bottom for only 0.5s
+msgwait 0.5
 
 shell -${SHELL}
 
