@@ -1,7 +1,7 @@
 # Aliases.  Warning: extreme leetness follows.
 #
 alias a='ls -lrth'
-alias aliases='vim ~/.dotfiles/bash/bash_aliases'
+alias aliases='vim ~/.dotfiles/bash/aliases'
 alias b='cd ~/projects/dfhcc_bayes'
 alias benchmark='./script/plugin install git://github.com/timocratic/test_benchmark.git'
 alias d='cd ~/projects/dfhcc_informatics'
@@ -12,12 +12,13 @@ alias gst='git status'
 alias irb='irb --readline -r irb/completion'
 alias l='ssh lispclub.com'
 alias lm='!! | more'
+alias p='cd ~/code/pockets'
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
 alias rep="cd ~/projects/dfhcc_reports"
 alias s='screen -dr rails'
 alias sc='script/console'
 alias sd='svn diff | less'
-alias so='source ~/.dotfiles/bash/bash_aliases'
+alias so='source ~/.dotfiles/bash/aliases'
 alias ss='ruby script/server -p 3001 --debugger'
 alias sst='svn status'
 alias svu='svn update'
