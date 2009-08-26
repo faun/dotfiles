@@ -13,3 +13,6 @@ stty stop undef
 
 # Use vi mode for readline
 set -o vi
+
+# Make C-l clear screen
+bind -m vi-insert "\C-l":clear-screen
