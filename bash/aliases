@@ -14,6 +14,7 @@ alias irb='irb --readline -r irb/completion'
 alias l='ssh lispclub.com'
 alias lm='!! | more'
 alias p='cd ~/code/pockets'
+alias r='ssh beno@railsdev.dfci.harvard.edu'
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
 alias rep="cd ~/projects/dfhcc_reports"
 alias s='screen -dr rails'
