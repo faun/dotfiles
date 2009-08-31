@@ -16,3 +16,9 @@ set -o vi
 
 # Make C-l clear screen
 bind -m vi-insert "\C-l":clear-screen
+
+# Make C-a go to beginning of line
+bind -m vi-insert 'Control-a: beginning-of-line'
+
+# Make C-e go to end of line
+bind -m vi-insert "\C-l":clear-screen
