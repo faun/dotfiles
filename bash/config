@@ -10,15 +10,3 @@ PROMPT_COMMAND='echo -ne "\033k\033\\"'
 # Disable flow control commands (keeps C-s from freezing everything)
 stty start undef
 stty stop undef
-
-# Use vi mode for readline
-set -o vi
-
-# Make C-l clear screen
-bind -m vi-insert "\C-l":clear-screen
-
-# Make C-a go to beginning of line
-bind -m vi-insert 'Control-a: beginning-of-line'
-
-# Make C-e go to end of line
-bind -m vi-insert "\C-l":clear-screen
