@@ -45,6 +45,9 @@ imap <C-l> <Space>=><Space>
 map <C-s> <esc>:w<CR>
 map <C-t> <esc>:tabnew<CR>
 map <C-x> <C-w>c
+map <C-n> :cn<CR>
+map <C-p> :cp<CR>
+
 
 set nocompatible
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
@@ -84,10 +87,8 @@ set tags=/home/ben/code/tags/tags,./tags
 " Use _ as a word-separator
 set iskeyword-=_
 
-" Use Ack instead of Grep when available
-if executable("ack")
-  set grepprg=ack\ -H\ --nogroup\ --nocolor
-endif
+" Use Ack instead of grep
+set grepprg=ack
 
 " Make the omnicomplete text readable
 :highlight PmenuSel ctermfg=black
