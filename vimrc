@@ -10,8 +10,7 @@ augroup myfiletypes
   " autoindent with two spaces, always expand tabs
   autocmd FileType ruby,eruby,yaml set ai sw=2 sts=2 et
 augroup END
-
-imap <C-s> <esc>:w<CR>
+" ================
 
 let mapleader = ","
 
@@ -43,6 +42,7 @@ map <Leader>w <C-w>w
 map <C-h> :nohl<CR>
 imap <C-l> <Space>=><Space>
 map <C-s> <esc>:w<CR>
+imap <C-s> <esc>:w<CR>
 map <C-t> <esc>:tabnew<CR>
 map <C-x> <C-w>c
 map <C-n> :cn<CR>
@@ -101,6 +101,10 @@ highlight StatusLine ctermfg=yellow
 
 " Format xml files
 au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null" 
+
+set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
+
+set nofoldenable " Fuck code folding...
 
 " ========================================================================
 " End of things set by me.
