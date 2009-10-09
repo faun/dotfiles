@@ -82,7 +82,7 @@ map <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>v :vnew <C-R>=expand("%:p:h") . '/'<CR>
 
 " Set the tag file search order
-set tags=/home/ben/code/tags/tags,./tags
+set tags=./tags;
 
 " Use _ as a word-separator
 set iskeyword-=_
