@@ -7,8 +7,16 @@
 	diff = auto
 	status = auto
 	branch = auto
+
+[color "diff"]
+        meta = yellow 
+        frag = magenta 
+
 [core]
 	excludesfile = /Users/bjo/.gitignore
-	editor = mvim
+	editor = vim
 [apply]
 	whitespace = nowarn
+
+[alias]
+      lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
