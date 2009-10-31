@@ -13,10 +13,12 @@
         frag = magenta 
 
 [core]
-	excludesfile = /Users/bjo/.gitignore
+	excludesfile = /home/beno/.gitignore
 	editor = vim
 [apply]
 	whitespace = nowarn
 
 [alias]
       lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+[help]
+	autocorrect = 1
