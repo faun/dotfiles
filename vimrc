@@ -28,10 +28,10 @@ map <Leader>m :Rmodel
 map <Leader>vm :RVmodel 
 map <Leader>sm :RSmodel 
 map <Leader>n :set nopaste<CR>
-map <Leader>o ?def <CR>:nohl<CR>w"zy$:!ruby <C-r>% -n <C-r>z<CR>
+map <Leader>o ?def <CR>:nohl<CR>w"zy$:!ruby -I"test" <C-r>% -n <C-r>z<CR>
 map <Leader>p :set paste<CR>i
 map <Leader>r :e doc/README_FOR_APP<CR> " Edit the README_FOR_APP (makes :R commands work)
-map <Leader>t :!ruby <C-r>%<CR>
+map <Leader>t :!ruby -I"test" <C-r>%<CR>
 map <Leader>u :Runittest 
 map <Leader>vu :RVunittest 
 map <Leader>su :RSunittest 
