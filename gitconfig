@@ -10,7 +10,6 @@
 
 [color "diff"]
         meta = yellow 
-        frag = magenta 
 
 [core]
 	excludesfile = /home/beno/.gitignore
