@@ -12,8 +12,7 @@ msgwait 0.5
 shell -${SHELL}
 
 # Show the currently-running program
-# (http://web.mit.edu/gnu/doc/html/screen_9.html)
-shelltitle '$ |bash'
+shelltitle '$ |zsh'
 
 # allow for 10,000 lines of scroll back (default 100)
 defscrollback 10000
