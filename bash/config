@@ -1,3 +1,6 @@
+###########
+# general #
+###########
 export EDITOR="vim"
 
 # Autocorrect mispelled directories
@@ -10,17 +13,21 @@ PROMPT_COMMAND='echo -ne "\033k\033\\"'
 stty start undef
 stty stop undef
 
+#switch to a gem directory, trying to match your name the best
+function cdgem {
+cd /usr/lib64/ruby/gems/1.8/gems/; cd `ls|grep $1|sort|tail -1`
+}
+
+
+#################
+#  prompt stuff #
+#################
 function parse_git_branch {
   ref=$(git-symbolic-ref HEAD 2> /dev/null) || return
   echo "("${ref#refs/heads/}")" 
 }
-
 YELLOW="\[\033[0;33m\]"
-
 export PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w$YELLOW \$(parse_git_branch) \$\[\033[00m\] "
-
-
-
 
 #####################
 #  ssh-agent stuff  #
