@@ -12,7 +12,7 @@ msgwait 0.5
 shell -${SHELL}
 
 # Show the currently-running program
-shelltitle '$ |zsh'
+shelltitle '$ |bash'
 
 # allow for 10,000 lines of scroll back (default 100)
 defscrollback 10000
