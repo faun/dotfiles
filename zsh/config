@@ -4,7 +4,7 @@ else
   export PS1='%3~$(git_info_for_prompt)%# '
 fi
 
-export EDITOR='mate -w'
+export EDITOR='vim'
 export PATH="~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
@@ -28,6 +28,7 @@ setopt PROMPT_SUBST
 setopt CORRECT
 setopt COMPLETE_IN_WORD
 setopt IGNORE_EOF
+setopt RMSTARSILENT # don't confirm an rm *
 
 setopt APPEND_HISTORY # adds history
 setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
@@ -43,3 +44,12 @@ bindkey '^[[5C' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char 
+
+# Set screen titles to last run command
+setopt extended_glob
+preexec () {
+  if [[ "$TERM" == "screen" ]]; then
+    local CMD=${1[(wr)^(*=*|sudo|-*)]}
+    echo -ne "\ek$CMD\e\\"
+  fi
+}

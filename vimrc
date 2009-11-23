@@ -21,13 +21,13 @@ map <Leader>d odebugger<cr>puts 'debugger'<esc>:w<cr>
 map <Leader>co :TComment<CR>
 map <Leader>vc :RVcontroller 
 map <Leader>sc :RScontroller 
-map <Leader>f :Rfunctional 
+map <Leader>f :sp test/factories.rb<CR>
 map <Leader>vf :RVfunctional 
 map <Leader>l :!ruby <C-r>% \| less<CR>
 map <Leader>m :Rmodel 
 map <Leader>vm :RVmodel 
 map <Leader>sm :RSmodel 
-map <Leader>n :set nopaste<CR>
+map <Leader>n ,w,t
 map <Leader>o ?def <CR>:nohl<CR>w"zy$:!ruby -I"test" <C-r>% -n <C-r>z<CR>
 map <Leader>p :set paste<CR>i
 map <Leader>r :e doc/README_FOR_APP<CR> " Edit the README_FOR_APP (makes :R commands work)

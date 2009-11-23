@@ -1,11 +1,14 @@
-# cd
+# general
 alias ..='cd ..'
-
-# ls
-alias ls="ls -F"
-alias l="ls -lAh"
-alias ll="ls -l"
-alias la='ls -A'
+alias a='ls -lrth'
+alias aliases='vim ~/.dotfiles/zsh/aliases'
+alias c='ssh ben@colobus.isomerica.net'
+alias d='cd ~/.dotfiles'
+alias n='cd ~/projects/nucleus'
+alias r='ssh beno@railsdev.dfci.harvard.edu'
+alias s='screen -dr rails'
+alias so='source ~/.dotfiles/zsh/aliases'
+alias t='cd ~/projects/dfhcc_trials'
 
 # git
 alias gl='git pull'
@@ -20,13 +23,5 @@ alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 
 # rails
 alias sc='script/console'
-alias ss='script/server'
-alias sg='script/generate'
-alias a='autotest -rails'
+alias ss='script/server -p 3001 --debugger'
 alias tlog='tail -f log/development.log'
-alias scaffold='script/generate nifty_scaffold'
-alias migrate='rake db:migrate db:test:clone'
-alias rst='touch tmp/restart.txt'
-
-# commands starting with % for pasting from web
-alias %=' '
