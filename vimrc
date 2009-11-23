@@ -106,6 +106,8 @@ set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 
 set nofoldenable " Fuck code folding...
 
+command Q q " Bind :Q to :q
+
 " ========================================================================
 " End of things set by me.
 " ========================================================================
