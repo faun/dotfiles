@@ -3,6 +3,7 @@ alias ..='cd ..'
 alias a='ls -lrth'
 alias aliases='vim ~/.dotfiles/zsh/aliases'
 alias c='ssh ben@colobus.isomerica.net'
+alias d='cd ~/.dotfiles'
 alias n='cd ~/projects/nucleus'
 alias r='ssh beno@railsdev.dfci.harvard.edu'
 alias s='screen -dr rails'
@@ -22,5 +23,5 @@ alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 
 # rails
 alias sc='script/console'
-alias ss='script/server'
+alias ss='script/server -p 3001 --debugger'
 alias tlog='tail -f log/development.log'
