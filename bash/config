@@ -27,7 +27,7 @@ sudo apt-get -y install $1
 }
 
 function syi {
-sudo yum install $1
+sudo yum -y install $1
 }
 
 
