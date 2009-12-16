@@ -1,6 +1,6 @@
 # Aliases.  Warning: extreme leetness follows.
 #
-alias a='ls -lrth'
+alias a='ls -lrth --color'
 alias aliases='vim ~/.dotfiles/bash/aliases'
 alias b='ssh ben@benorenstein.com'
 alias c='ssh ben@colobus.isomerica.net'
