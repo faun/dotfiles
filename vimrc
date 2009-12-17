@@ -15,7 +15,7 @@ augroup END
 let mapleader = ","
 
 map <Leader>h :FuzzyFinderTextMate<CR>
-vmap <Leader>b :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 map <Leader>c :Rcontroller 
 map <Leader>d odebugger<cr>puts 'debugger'<esc>:w<cr>
 map <Leader>co :TComment<CR>

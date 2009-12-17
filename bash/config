@@ -13,9 +13,21 @@ PROMPT_COMMAND='echo -ne "\033k\033\\"'
 stty start undef
 stty stop undef
 
-#switch to a gem directory, trying to match your name the best
+# Switch to a gem directory, trying to match your name the best
 function cdgem {
 cd /usr/lib64/ruby/gems/1.8/gems/; cd `ls|grep $1|sort|tail -1`
+}
+
+function sgi {
+sudo gem install $1
+}
+
+function sagi {
+sudo apt-get -y install $1 
+}
+
+function syi {
+sudo yum -y install $1
 }
 
 
