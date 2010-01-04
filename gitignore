@@ -4,3 +4,4 @@
 tags
 log/
 config/database.yml
+db/*.sqlite3
