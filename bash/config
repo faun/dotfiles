@@ -35,10 +35,10 @@ sudo yum -y install $1
 #  prompt stuff #
 #################
 function parse_git_branch {
-  git branch 2>/dev/null | grep '^*' | colrm 1 2
+  git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed 's_\(.*\)_(\1)_'
 }
 YELLOW="\[\033[0;33m\]"
-export PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w$YELLOW (\$(parse_git_branch)) \$\[\033[00m\] "
+export PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w$YELLOW \$(parse_git_branch) \$\[\033[00m\] "
 
 #####################
 #  ssh-agent stuff  #
