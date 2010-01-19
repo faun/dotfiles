@@ -97,7 +97,7 @@ set grepprg=ack
 let g:fuzzy_ignore = "*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/**;coverage/**;tmp/**;rdoc/**"
 
 " Highlight the status line
-highlight StatusLine ctermfg=yellow
+highlight StatusLine ctermfg=blue ctermbg=yellow
 
 " Format xml files
 au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null" 
@@ -107,6 +107,21 @@ set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 set nofoldenable " Fuck code folding...
 
 command Q q " Bind :Q to :q
+
+
+
+fun! ModelTown()
+let fmt = 'ft=%s ts=%d sw=%d %s'
+let x = printf(fmt, &ft, &ts, &sw, (&et?"et":"noet"))
+return x
+endf
+ 
+fun! SynTown()
+let x = synIDattr(synID(line('.'),col('.'),1),'name')
+return x
+endf
+ 
+set statusline=%m\ %-f%=\ \ \ \ %{SynTown()}\ %{ModelTown()}\ %([%l:%c\:%02p%%]%)
 
 " ========================================================================
 " End of things set by me.
