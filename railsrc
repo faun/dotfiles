@@ -12,3 +12,7 @@ end
 def hide_log
   change_log(nil)
 end
+
+def show_session(session)
+  Marshal.load(Base64.decode64(session))
+end
