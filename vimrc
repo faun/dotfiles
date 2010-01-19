@@ -116,12 +116,11 @@ let x = printf(fmt, &ft, &ts, &sw, (&et?"et":"noet"))
 return x
 endf
  
-fun! SynTown()
-let x = synIDattr(synID(line('.'),col('.'),1),'name')
-return x
-endf
- 
-set statusline=%m\ %-f%=\ \ \ \ %{SynTown()}\ %{ModelTown()}\ %([%l:%c\:%02p%%]%)
+set statusline=%m\ %-f%=\ \ \ \ 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+set statusline+=\ %{ModelTown()}\ %([%l:%c\:%02p%%]%)
 
 " ========================================================================
 " End of things set by me.
