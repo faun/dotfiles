@@ -8,6 +8,7 @@ alias benchmark='./script/plugin install git://github.com/timocratic/test_benchm
 alias d='cd ~/.dotfiles'
 alias e='cd ~/projects/dfhcc_events'
 alias g='git status'
+alias gc='git commit'
 alias gca='git commit -a'
 alias gco='git checkout'
 alias gd='git diff'
