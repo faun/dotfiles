@@ -120,7 +120,7 @@ set statusline=%m\ %-f%=\ \ \ \
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-set statusline+=\ %{ModelTown()}\ %([%l:%c\:%02p%%]%)
+set statusline+=\ %{ModelTown()}\ %([%02p%%]%)
 
 " ========================================================================
 " End of things set by me.
