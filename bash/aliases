@@ -2,7 +2,7 @@
 #
 alias a='ls -lrth --color'
 alias aliases='vim ~/.dotfiles/bash/aliases'
-alias b='ssh ben@benorenstein.com'
+alias b='ssh -t ben@benorenstein.com screen -rd irc'
 alias c='ssh ben@colobus.isomerica.net'
 alias benchmark='./script/plugin install git://github.com/timocratic/test_benchmark.git'
 alias d='cd ~/.dotfiles'
