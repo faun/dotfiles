@@ -19,7 +19,7 @@ endfunction
 
 command! -bang -narg=? -complete=file   FuzzyFinderTextMate   call FuzzyFinderTextMateLauncher(<q-args>, len(<q-bang>))
 command! FuzzyFinderTextMateRefreshFiles ruby refresh_finder
-  
+
 function! InstantiateTextMateMode() "{{{
 ruby << RUBY
   begin
@@ -87,7 +87,7 @@ ruby << RUBY
   end
 RUBY
 
-  let g:FuzzyFinderMode.TextMate = copy(g:FuzzyFinderMode.Base)
+  let g:FuzzyFinderMode.TextMate = copy(g:FuzzyFinderMode.File)   " Base does not define 'on_open' anymore
 
   function! g:FuzzyFinderMode.TextMate.on_complete(base)
     if exists('g:fuzzy_enumerating_limit')
@@ -116,9 +116,9 @@ RUBY
   endfunction
 
   function! FuzzyFinderTextMateLauncher(initial_text, partial_matching)
-    call g:FuzzyFinderMode.TextMate.launch(a:initial_text, a:partial_matching)
+    call g:FuzzyFinderMode.TextMate.launch_base(a:initial_text, a:partial_matching)
   endfunction
-  
+
   let g:FuzzyFinderOptions.TextMate = copy(g:FuzzyFinderOptions.File)
 endfunction "}}}
 
