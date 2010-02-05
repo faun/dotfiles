@@ -74,6 +74,7 @@ set backupdir=/tmp
 set directory=/tmp " Don't clutter my dirs up with swp and tmp files
 set scrolloff=3 " keep 3 lines visible at top and bottom 
 set gdefault " assume the /g flag on :s substitutions to replace all matches in a line
+set autoindent " always set autoindenting on
 
 " Edit another file in the same directory as the current file
 " uses expression to extract path from current file's path
@@ -122,6 +123,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set statusline+=\ %{ModelTown()}\ %([%02p%%]%)
 
+
 " ========================================================================
 " End of things set by me.
 " ========================================================================
@@ -140,15 +142,6 @@ set statusline+=\ %{ModelTown()}\ %([%02p%%]%)
 
 
 
-
-
-
-
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -182,9 +175,5 @@ if has("autocmd")
     \ endif
 
   augroup END
-
-else
-
-  set autoindent		" always set autoindenting on
 
 endif " has("autocmd")
