@@ -15,7 +15,10 @@ stty stop undef
 
 # Switch to a gem directory, trying to match your name the best
 function cdgem {
-cd /usr/lib64/ruby/gems/1.8/gems/; cd `ls|grep $1|sort|tail -1`
+  gem_dir=`gem env | grep INSTALLATION | cut -d' ' -f6`
+  cd $gem_dir
+  cd gems
+  cd `ls|grep $1|sort|tail -1`
 }
 
 function sgi {
