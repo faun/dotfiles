@@ -119,7 +119,6 @@ endf
  
 set statusline=%m\ %-f%=\ \ \ \ 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set statusline+=\ %{ModelTown()}\ %([%02p%%]%)
 
