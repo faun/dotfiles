@@ -1,8 +1,6 @@
 --- 
 :sources: 
-- http://gemcutter.org
-- http://gems.rubyforge.org
-- http://gems.github.com
+- http://rubygems.org
 :benchmark: false
 :update_sources: true
 :backtrace: false
