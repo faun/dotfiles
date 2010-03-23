@@ -32,6 +32,10 @@ function syi {
 sudo yum -y install $1
 }
 
+function glg { 
+gem list | grep $1
+}
+
 
 #################
 #  prompt stuff #
