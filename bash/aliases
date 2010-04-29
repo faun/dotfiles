@@ -25,6 +25,8 @@ alias p='cd ~/code/pockets'
 alias r='ssh beno@rd2.dfci.harvard.edu'
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
 alias rep="cd ~/projects/dfhcc_reports"
+alias rc='rails console'
+alias rs='rails server -p 3001'
 alias s='screen -dr rails'
 alias sc='script/console'
 alias sd='svn diff | less'
