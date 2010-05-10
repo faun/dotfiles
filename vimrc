@@ -72,7 +72,6 @@ set laststatus=2  " Always show status line.
 set number 
 set backupdir=/tmp   
 set directory=/tmp " Don't clutter my dirs up with swp and tmp files
-set scrolloff=3 " keep 3 lines visible at top and bottom 
 set gdefault " assume the /g flag on :s substitutions to replace all matches in a line
 set autoindent " always set autoindenting on
 
