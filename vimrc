@@ -109,18 +109,7 @@ set nofoldenable " Fuck code folding...
 
 command Q q " Bind :Q to :q
 
-
-
-fun! ModelTown()
-let fmt = 'ft=%s ts=%d sw=%d %s'
-let x = printf(fmt, &ft, &ts, &sw, (&et?"et":"noet"))
-return x
-endf
- 
-set statusline=%m\ %-f%=\ \ \ \ 
-set statusline+=%#warningmsg#
-set statusline+=%*
-set statusline+=\ %{ModelTown()}\ %([%02p%%]%)
+set statusline+=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 
 " ========================================================================
