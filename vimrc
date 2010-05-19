@@ -31,6 +31,7 @@ map <Leader>n ,w,t
 map <Leader>o ?def <CR>:nohl<CR>w"zy$:!ruby -I"test" <C-r>% -n <C-r>z<CR>
 map <Leader>p :set paste<CR>i
 map <Leader>r :e doc/README_FOR_APP<CR> " Edit the README_FOR_APP (makes :R commands work)
+map <Leader>rf :FuzzyFinderTextMateRefreshFiles<CR>
 map <Leader>t :!ruby -I"test" <C-r>%<CR>
 map <Leader>u :Runittest 
 map <Leader>vu :RVunittest 
@@ -58,6 +59,7 @@ set autoindent
 set showmatch
 set nowrap
 set backupdir=/tmp
+set directory=/tmp/ben " Don't clutter my dirs up with swp and tmp files
 set autoread
 set wmh=0
 set viminfo+=!
@@ -70,8 +72,6 @@ set noincsearch
 set ignorecase smartcase
 set laststatus=2  " Always show status line.
 set number 
-set backupdir=/tmp   
-set directory=/tmp " Don't clutter my dirs up with swp and tmp files
 set gdefault " assume the /g flag on :s substitutions to replace all matches in a line
 set autoindent " always set autoindenting on
 
