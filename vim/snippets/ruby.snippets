@@ -432,3 +432,10 @@ snippet defp
 
 snippet inst
 	institution${1}
+
+snippet test
+	require 'test_helper'
+	
+	class ${1:ClassName} < ActiveSupport::TestCase
+	  ${2}
+	end
