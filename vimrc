@@ -25,7 +25,7 @@ map <Leader>f :sp test/factories.rb<CR>
 
 " Some new git bindings.  I do this stuff too often not to have shortcuts.
 map <Leader>gc :Gcommit -m ""<LEFT>
-map <Leader>gca :Gcommit -m -a ""<LEFT>
+map <Leader>gac :Gcommit -m -a ""<LEFT>
 map <Leader>gs :Gstatus<CR>
 
 map <Leader>vf :RVfunctional 
