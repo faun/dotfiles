@@ -22,6 +22,12 @@ map <Leader>co :TComment<CR>
 map <Leader>vc :RVcontroller 
 map <Leader>sc :RScontroller 
 map <Leader>f :sp test/factories.rb<CR>
+
+" Some new git bindings.  I do this stuff too often not to have shortcuts.
+map <Leader>gc :Gcommit -m ""<LEFT>
+map <Leader>gca :Gcommit -m -a ""<LEFT>
+map <Leader>gs :Gstatus<CR>
+
 map <Leader>vf :RVfunctional 
 map <Leader>l :!ruby <C-r>% \| less<CR>
 map <Leader>m :Rmodel 
@@ -39,6 +45,7 @@ map <Leader>su :RSunittest
 map <Leader>vv :RVview 
 map <Leader>sv :RSview 
 map <Leader>w <C-w>w
+
 
 map <C-h> :nohl<CR>
 imap <C-l> <Space>=><Space>
