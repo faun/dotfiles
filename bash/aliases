@@ -8,6 +8,7 @@ fi
 
 alias aliases='vim ~/.dotfiles/bash/aliases'
 alias b='ssh -t ben@benorenstein.com screen -rd irc'
+alias ben='ssh ben@benorenstein.com'
 alias d='cd ~/.dotfiles'
 alias g='git status'
 alias gc='git commit'
