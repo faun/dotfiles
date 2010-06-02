@@ -27,6 +27,8 @@ alias n='cd ~/projects/nucleus'
 alias r='ssh beno@rd2.dfci.harvard.edu'
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
 alias rep="cd ~/projects/dfhcc_reports"
+alias rdm="rake db:migrate"
+alias rdtp="rake db:test:prepare"
 alias rc='rails console'
 alias rs='rails server -p 3001'
 alias s='screen -dr rails'
