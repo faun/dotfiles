@@ -66,7 +66,7 @@ set autoindent
 set showmatch
 set nowrap
 set backupdir=/tmp
-set directory=/tmp/ben " Don't clutter my dirs up with swp and tmp files
+set directory=/tmp " Don't clutter my dirs up with swp and tmp files
 set autoread
 set wmh=0
 set viminfo+=!
