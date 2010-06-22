@@ -20,7 +20,7 @@ map <Leader>c :Rcontroller
 map <Leader>d odebugger<cr>puts 'debugger'<esc>:w<cr>
 map <Leader>co :TComment<CR>
 map <Leader>vc :RVcontroller 
-map <Leader>sc :e db/schema.rb<cr>
+map <Leader>sc :sp db/schema.rb<cr>
 map <Leader>f :sp test/factories.rb<CR>
 
 " Some new git bindings.  I do this stuff too often not to have shortcuts.
