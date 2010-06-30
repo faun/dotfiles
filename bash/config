@@ -37,6 +37,11 @@ gem list | grep $1
 }
 
 
+function rrg { 
+rake routes | grep $1
+}
+
+
 #################
 #  prompt stuff #
 #################
