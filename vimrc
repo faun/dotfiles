@@ -16,7 +16,7 @@ let mapleader = ","
 
 map <Leader>h :FuzzyFinderTextMate<CR>
 vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
-map <Leader>c :Rcontroller 
+map <Leader>c :!cucumber %<CR>
 map <Leader>d odebugger<cr>puts 'debugger'<esc>:w<cr>
 map <Leader>co :TComment<CR>
 map <Leader>vc :RVcontroller 
@@ -36,7 +36,7 @@ map <Leader>sm :RSmodel
 map <Leader>n ,w,t
 map <Leader>o ?def <CR>:nohl<CR>w"zy$:!ruby -I"test" <C-r>% -n <C-r>z<CR>
 map <Leader>p :set paste<CR>i
-map <Leader>r :e doc/README_FOR_APP<CR> " Edit the README_FOR_APP (makes :R commands work)
+map <Leader>rb :Rake!<CR>
 map <Leader>rf :FuzzyFinderTextMateRefreshFiles<CR>
 map <Leader>t :!ruby -I"test" %<CR>
 map <Leader>u :Runittest 
