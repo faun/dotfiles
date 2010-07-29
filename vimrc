@@ -67,8 +67,8 @@ set showcmd		" display incomplete commands
 set autoindent
 set showmatch
 set nowrap
-set backupdir=/tmp
-set directory=/tmp " Don't clutter my dirs up with swp and tmp files
+set backupdir=~/.tmp
+set directory=~/.tmp " Don't clutter my dirs up with swp and tmp files
 set autoread
 set wmh=0
 set viminfo+=!
@@ -116,6 +116,7 @@ set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 set nofoldenable " Fuck code folding...
 
 command Q q " Bind :Q to :q
+command Qall qall 
 
 set statusline+=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
