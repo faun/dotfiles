@@ -432,10 +432,26 @@ snippet defp
 
 snippet inst
 	institution${1}
-
 snippet test
 	require 'test_helper'
 	
 	class ${1:ClassName}Test < ActiveSupport::TestCase
 	  ${2}
 	end
+
+# For rspec
+snippet desc
+	describe "${1}" do
+	  ${2}
+	end
+
+snippet it
+	it "${1}" do
+	  ${2}
+	end
+
+snippet con
+	context "${1}" do
+	  ${2}
+	end
+
