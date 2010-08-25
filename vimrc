@@ -40,7 +40,7 @@ map <Leader>rb :Rake!<CR>
 map <Leader>rf :FuzzyFinderTextMateRefreshFiles<CR>
 " remove trailing whitespace
 map <Leader>rw :%s/\s\+$//
-map <Leader>t :!ruby -I"test" %<CR>
+map <Leader>t :!ruby -I"test" -I"spec" %<CR>
 map <Leader>u :Runittest 
 map <Leader>vu :RVunittest 
 map <Leader>su :RSunittest 
