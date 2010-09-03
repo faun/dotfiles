@@ -14,40 +14,36 @@ augroup END
 
 let mapleader = ","
 
-map <Leader>h :FuzzyFinderTextMate<CR>
 vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 map <Leader>cc :!cucumber %<CR>
-map <Leader>d odebugger<cr>puts 'debugger'<esc>:w<cr>
 map <Leader>co :TComment<CR>
-map <Leader>vc :RVcontroller 
-map <Leader>sc :sp db/schema.rb<cr>
-map <Leader>f :sp test/factories.rb<CR>
-
-" Some new git bindings.  I do this stuff too often not to have shortcuts.
-map <Leader>gc :Gcommit -m ""<LEFT>
+map <Leader>d odebugger<cr>puts 'debugger'<esc>:w<cr>
 map <Leader>gac :Gcommit -m -a ""<LEFT>
+map <Leader>gc :Gcommit -m ""<LEFT>
 map <Leader>gs :Gstatus<CR>
-
-map <Leader>vf :RVfunctional 
+map <Leader>f :sp spec/factories.rb<CR>
+map <Leader>fa :sp test/factories.rb<CR>
+map <Leader>h :FuzzyFinderTextMate<CR>
 map <Leader>l :!ruby <C-r>% \| less<CR>
 map <Leader>m :Rmodel 
-map <Leader>vm :RVmodel 
-map <Leader>sm :RSmodel 
 map <Leader>n ,w,t
 map <Leader>o ?def <CR>:nohl<CR>w"zy$:!ruby -I"test" <C-r>% -n <C-r>z<CR>
 map <Leader>p :set paste<CR>i
 map <Leader>rb :Rake!<CR>
 map <Leader>rf :FuzzyFinderTextMateRefreshFiles<CR>
-" remove trailing whitespace
 map <Leader>rw :%s/\s\+$//
+map <Leader>sc :sp db/schema.rb<cr>
+map <Leader>sm :RSmodel 
+map <Leader>su :RSunittest 
+map <Leader>sv :RSview 
 map <Leader>t :!ruby -I"test" -I"spec" %<CR>
 map <Leader>u :Runittest 
+map <Leader>vc :RVcontroller 
+map <Leader>vf :RVfunctional 
 map <Leader>vu :RVunittest 
-map <Leader>su :RSunittest 
+map <Leader>vm :RVmodel 
 map <Leader>vv :RVview 
-map <Leader>sv :RSview 
 map <Leader>w <C-w>w
-
 
 map <C-h> :nohl<CR>
 imap <C-l> <Space>=><Space>
