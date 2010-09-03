@@ -40,6 +40,7 @@ map <Leader>t :!ruby -I"test" -I"spec" %<CR>
 map <Leader>u :Runittest 
 map <Leader>vc :RVcontroller 
 map <Leader>vf :RVfunctional 
+map <Leader>vi :tabe ~/.vimrc<CR>
 map <Leader>vu :RVunittest 
 map <Leader>vm :RVmodel 
 map <Leader>vv :RVview 
