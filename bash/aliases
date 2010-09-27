@@ -35,6 +35,7 @@ alias rdm="rake db:migrate"
 alias rdtp="rake db:test:prepare"
 alias rc='rails console'
 alias rs='rails server -p 3001'
+alias rsa='rake spec:all'
 alias s='screen -dr rails'
 alias sc='script/console'
 alias so='source ~/.dotfiles/bash/aliases'
