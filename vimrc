@@ -115,7 +115,17 @@ set nofoldenable " Fuck code folding...
 command Q q " Bind :Q to :q
 command Qall qall 
 
-set statusline+=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+"set statusline+=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
+
+"" Disable all blinking:
+:set guicursor+=a:blinkon0
+"" Remove previous setting:
+:set guicursor-=a:blinkon0
+"" Restore default setting:
+:set guicursor&
+
+
 
 
 " ========================================================================

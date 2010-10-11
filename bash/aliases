@@ -2,15 +2,20 @@
 platform=`uname`
 if [[ $platform == 'Linux' ]]; then
   alias a='ls -lrth --color'
+  alias ls='ls --color=auto' # For linux
+  export EDITOR="vim"
 elif [[ $platform == 'Darwin' ]]; then
   alias a='ls -lrthG'
+  alias ls='ls -G'  # OS-X SPECIFIC - the -G command in OS-X is for colors, in Linux it's no groups
+  export EDITOR='mate -w'  # OS-X SPECIFIC - TextMate, w is to wait for TextMate window to close
 fi
 
+# Editors ----------------------------------------------------------
+# export EDITOR='gedit'  #Linux/gnome
+# export EDITOR='vim'  #Command line
+
 alias aliases='vim ~/.dotfiles/bash/aliases'
-alias b='ssh -t ben@benorenstein.com screen -rd irc'
-alias ben='ssh ben@benorenstein.com'
 alias bi='bundle install'
-alias c='cd ~/code/codeulate_screencasts'
 alias d='cd ~/.dotfiles'
 alias g='git status'
 alias gc='git commit'
@@ -26,11 +31,7 @@ alias gg='git lg'
 alias i='screen -rd irc'
 alias irb='irb --readline -r irb/completion'
 alias lm='!! | more'
-alias m='cd ~/projects/montague'
-alias n='cd ~/projects/nucleus'
-alias r='ssh beno@rd2.dfci.harvard.edu'
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
-alias rep="cd ~/projects/dfhcc_reports"
 alias rdm="rake db:migrate"
 alias rdtp="rake db:test:prepare"
 alias rc='rails console'
@@ -40,4 +41,63 @@ alias s='screen -dr rails'
 alias sc='script/console'
 alias so='source ~/.dotfiles/bash/aliases'
 alias ss='ruby script/server -p 3001 --debugger'
-alias t='cd ~/projects/dfhcc_trials'
+
+# Flush DNS cache
+alias flushdns="dscacheutil -flushcache"
+# Navigation -------------------------------------------------------
+alias ..='cd ..'
+alias ...='cd .. ; cd ..'
+alias ll='ls -hl'
+alias la='ls -a'
+alias lla='ls -lah'
+
+# Misc
+alias g='grep -i'  # Case insensitive grep
+alias f='find . -iname'
+alias ducks='du -cksh * | sort -rn|head -11' # Lists folders and files sizes in the current folder
+alias m='more'
+alias df='df -h'
+
+# Shows most used commands, cool script I got this from: http://lifehacker.com/software/how-to/turbocharge-your-terminal-274317.php
+alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
+
+# Subversion & Diff ------------------------------------------------
+export SV_USER='swinter'  # Change this to your username that you normally use on subversion (only if it is different from your logged in name)
+export SVN_EDITOR='${EDITOR}'
+
+alias svshowcommands="echo -e '${COLOR_BROWN}Available commands: 
+   ${COLOR_GREEN}sv
+   ${COLOR_GREEN}sv${COLOR_NC}help
+   ${COLOR_GREEN}sv${COLOR_NC}import    ${COLOR_GRAY}Example: import ~/projects/my_local_folder http://svn.foo.com/bar
+   ${COLOR_GREEN}sv${COLOR_NC}checkout  ${COLOR_GRAY}Example: svcheckout http://svn.foo.com/bar
+   ${COLOR_GREEN}sv${COLOR_NC}status    
+   ${COLOR_GREEN}sv${COLOR_NC}status${COLOR_GREEN}on${COLOR_NC}server
+   ${COLOR_GREEN}sv${COLOR_NC}add       ${COLOR_GRAY}Example: svadd your_file
+   ${COLOR_GREEN}sv${COLOR_NC}add${COLOR_GREEN}all${COLOR_NC}    ${COLOR_GRAY}Note: adds all files not in repository [recursively]
+   ${COLOR_GREEN}sv${COLOR_NC}delete    ${COLOR_GRAY}Example: svdelete your_file
+   ${COLOR_GREEN}sv${COLOR_NC}diff      ${COLOR_GRAY}Example: svdiff your_file
+   ${COLOR_GREEN}sv${COLOR_NC}commit    ${COLOR_GRAY}Example: svcommit
+   ${COLOR_GREEN}sv${COLOR_NC}update    ${COLOR_GRAY}Example: svupdate
+   ${COLOR_GREEN}sv${COLOR_NC}get${COLOR_GREEN}info${COLOR_NC}   ${COLOR_GRAY}Example: svgetinfo your_file
+   ${COLOR_GREEN}sv${COLOR_NC}blame     ${COLOR_GRAY}Example: svblame your_file
+'"
+   
+alias sv='svn --username ${SV_USER}'
+alias svimport='sv import'
+alias svcheckout='sv checkout'
+alias svstatus='sv status'
+alias svupdate='sv update'
+alias svstatusonserver='sv status --show-updates' # Show status here and on the server
+alias svcommit='sv commit'
+alias svadd='svn add'
+alias svaddall='svn status | grep "^\?" | awk "{print \$2}" | xargs svn add'
+alias svdelete='sv delete'
+alias svhelp='svn help' 
+alias svblame='sv blame'
+alias svdiff='sv diff'
+
+svgetinfo (){
+ 	sv info $@
+	sv log $@
+}
+
