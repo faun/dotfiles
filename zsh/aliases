@@ -2,13 +2,9 @@
 alias ..='cd ..'
 alias a='ls -lrth'
 alias aliases='vim ~/.dotfiles/zsh/aliases'
-alias c='ssh ben@colobus.isomerica.net'
 alias d='cd ~/.dotfiles'
-alias n='cd ~/projects/nucleus'
-alias r='ssh beno@railsdev.dfci.harvard.edu'
 alias s='screen -dr rails'
 alias so='source ~/.dotfiles/zsh/aliases'
-alias t='cd ~/projects/dfhcc_trials'
 
 # git
 alias gl='git pull'
