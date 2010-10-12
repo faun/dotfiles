@@ -1,24 +1,45 @@
 [user]
-	name = Ben Orenstein
-	email = ben.orenstein@gmail.com 
+	name = Faun
+	email = faun@riseup.net
 [alias]
 	co = checkout
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	df = diff
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[color "diff"]
+	whitespace = red reverse
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+
 [color]
 	diff = auto
 	status = auto
 	branch = auto
-
-[color "diff"]
-        meta = yellow 
+	ui = auto
 
 [core]
-	excludesfile = /home/beno/.gitignore
-	editor = vim
+	excludesfile = /home/faun/.gitignore
+	editor = mate -w
+	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+
 [apply]
 	whitespace = nowarn
 
-[alias]
-      lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
 [help]
 	autocorrect = 1
 [branch]
