@@ -30,6 +30,8 @@ task :install do
 
   # Handle ssh pubkey on its own
   puts "Linking public ssh key"
+  system %Q{mkdir -p "$HOME/.ssh/dotfiles_backup"}
+  system %Q{cp "$HOME/.ssh/id_dsa.pub" "$HOME/.ssh/dotfiles_backup/id_dsa.pub"}
   system %Q{rm "$HOME/.ssh/id_dsa.pub"}
   system %Q{ln -s "$PWD/id_dsa.pub" "$HOME/.ssh/id_dsa.pub"}
 
