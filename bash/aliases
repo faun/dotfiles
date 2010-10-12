@@ -4,13 +4,14 @@ if [[ $platform == 'Linux' ]]; then
   alias a='ls -lrth --color'
   alias ls='ls --color=auto' # For linux
   export EDITOR="vim"
+  alias get='sudo apt-get install'
 elif [[ $platform == 'Darwin' ]]; then
   alias a='ls -lrthG'
   alias ls='ls -G'  # OS-X SPECIFIC - the -G command in OS-X is for colors, in Linux it's no groups
   export EDITOR='mate -w'  # OS-X SPECIFIC - TextMate, w is to wait for TextMate window to close
 fi
 
-# Editors ----------------------------------------------------------
+# Other Editors ----------------------------------------------------------
 # export EDITOR='gedit'  #Linux/gnome
 # export EDITOR='vim'  #Command line
 
@@ -24,7 +25,6 @@ alias gcm='git commit -m'
 alias gco='git checkout'
 alias gd='git diff'
 alias gdc='git diff --cached'
-alias get='sudo apt-get install'
 alias get_db='cap production db:download && rake db:backup:load'
 alias get_db_staging='cap staging db:download && rake db:backup:load SOURCE_ENV=staging'
 alias gg='git lg'
@@ -44,6 +44,7 @@ alias ss='ruby script/server -p 3001 --debugger'
 
 # Flush DNS cache
 alias flushdns="dscacheutil -flushcache"
+
 # Navigation -------------------------------------------------------
 alias ..='cd ..'
 alias ...='cd .. ; cd ..'
