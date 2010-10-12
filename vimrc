@@ -118,6 +118,10 @@ command Qall qall
 "set statusline+=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 
+" ========================================================================
+" End of things set by ben.
+" ========================================================================
+
 "" Disable all blinking:
 :set guicursor+=a:blinkon0
 "" Remove previous setting:
@@ -125,16 +129,9 @@ command Qall qall
 "" Restore default setting:
 :set guicursor&
 
-
-
-
 " ========================================================================
 " End of things set by me.
 " ========================================================================
-
-
-
-
 
 
 
