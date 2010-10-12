@@ -1,10 +1,13 @@
 require 'rake'
+require 'ftools'
 
 desc "install the dot files into user's home directory"
 task :install do
+
   replace_all = false
   Dir['*'].each do |file|
-    next if %w[Rakefile README LICENSE id_dsa.pub].include? file
+    next if %w[Rakefile README LICENSE id_dsa.pub].include? file or %r{(.*)\.pub} =~ file
+    
     
     if File.exist?(File.join(ENV['HOME'], ".#{file}"))
       if replace_all
@@ -27,13 +30,27 @@ task :install do
       link_file(file)
     end
   end
-
+	
   # Handle ssh pubkey on its own
-  # puts "Linking public ssh key"
-  # system %Q{mkdir -p "$HOME/.ssh/dotfiles_backup"}
-  # system %Q{cp "$HOME/.ssh/id_dsa.pub" "$HOME/.ssh/dotfiles_backup/id_dsa.pub"}
-  # system %Q{rm "$HOME/.ssh/id_dsa.pub"}
-  # system %Q{ln -s "$PWD/id_dsa.pub" "$HOME/.ssh/id_dsa.pub"}
+	hostname =  `printf ${HOSTNAME%%.*}`
+	home = `printf $HOME`
+	
+	orginal_filename = File.expand_path("#{home}/.ssh/id_dsa.pub")
+
+	pubfile_exists = File.exist? orginal_filename
+	pubfile_symlink = File.symlink? orginal_filename
+	
+	if pubfile_exists && !pubfile_symlink
+		puts "Linking public ssh key"
+		system %Q{mkdir -p "$HOME/.ssh/dotfiles_backup"}
+		system %Q{cp "#{orginal_filename}" "$HOME/.ssh/dotfiles_backup/id_dsa.pub"}
+		system %Q{mv "#{orginal_filename}" "$PWD/#{hostname}.pub"}
+		system %Q{ln -s "$PWD/#{hostname}.pub" "#{orginal_filename}"}
+	elsif !pubfile_exists
+		puts "No existing ssh key. Exiting..."
+	elsif pubfile_symlink
+		puts "Existing linked ssh key. Skipping..."
+	end
 
 end
 
