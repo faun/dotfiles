@@ -1,6 +1,8 @@
 require 'rake'
-
 require 'ftools' if RUBY_VERSION < "1.9"
+
+hostname =  `printf ${HOSTNAME%%.*}`
+home = `printf $HOME`
 
 desc "install the dot files into user's home directory"
 task :install do
@@ -33,9 +35,6 @@ task :install do
   end
 	
   # Handle ssh pubkey on its own
-	hostname =  `printf ${HOSTNAME%%.*}`
-	home = `printf $HOME`
-	
 	orginal_filename = File.expand_path("#{home}/.ssh/id_dsa.pub")
 
 	pubfile_exists = File.exist? orginal_filename
@@ -44,7 +43,7 @@ task :install do
 	if pubfile_exists && !pubfile_symlink
 		puts "Linking public ssh key"
 		system %Q{mkdir -p "$HOME/.ssh/dotfiles_backup"}
-		system %Q{cp  "#{orginal_filename}" "$HOME/.ssh/dotfiles_backup/id_dsa.pub"}
+		system %Q{cp "#{orginal_filename}" "$HOME/.ssh/dotfiles_backup/id_dsa.pub"}
 		system %Q{mv "#{orginal_filename}" "$PWD/#{hostname}.pub"}
 		system %Q{ln -s "$PWD/#{hostname}.pub" "#{orginal_filename}"}
 	elsif !pubfile_exists
