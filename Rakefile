@@ -1,5 +1,6 @@
 require 'rake'
-require 'ftools'
+
+require 'ftools' if RUBY_VERSION < "1.9"
 
 desc "install the dot files into user's home directory"
 task :install do
