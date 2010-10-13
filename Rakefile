@@ -43,7 +43,7 @@ task :install do
 	if pubfile_exists && !pubfile_symlink
 		puts "Linking public ssh key"
 		system %Q{mkdir -p "$HOME/.ssh/dotfiles_backup"}
-		system %Q{cp "#{orginal_filename}" "$HOME/.ssh/dotfiles_backup/id_dsa.pub"}
+		system %Q{cp  "#{orginal_filename}" "$HOME/.ssh/dotfiles_backup/id_dsa.pub"}
 		system %Q{mv "#{orginal_filename}" "$PWD/#{hostname}.pub"}
 		system %Q{ln -s "$PWD/#{hostname}.pub" "#{orginal_filename}"}
 	elsif !pubfile_exists
@@ -55,6 +55,9 @@ task :install do
 end
 
 def replace_file(file)
+	timestamp = Time.now.strftime("%Y-%m-%d")
+	system %Q{mkdir -p "$HOME/dot_backups_#{timestamp}"}
+  system %Q{cp -RLi "$HOME/.#{file}" "$HOME/dot_backups_#{timestamp}/#{file}"}
   system %Q{rm "$HOME/.#{file}"}
   link_file(file)
 end
