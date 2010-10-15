@@ -42,7 +42,15 @@
 
 [help]
 	autocorrect = 1
+	
 [branch]
 	autosetupmerge = true
+	
 [push]
 	default = tracking
+	
+[difftool]
+	prompt = no
+	
+[diff]
+	tool = opendiff
