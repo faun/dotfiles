@@ -1,6 +1,7 @@
 [user]
 	name = Faun
 	email = faun@riseup.net
+
 [alias]
 	co = checkout
 	st = status
@@ -19,6 +20,7 @@
 	added = yellow
 	changed = green
 	untracked = cyan
+
 [color "diff"]
 	whitespace = red reverse
 	meta = yellow bold
@@ -42,15 +44,15 @@
 
 [help]
 	autocorrect = 1
-	
+
 [branch]
 	autosetupmerge = true
-	
+
 [push]
 	default = tracking
-	
+
 [difftool]
 	prompt = no
-	
+
 [diff]
 	tool = opendiff

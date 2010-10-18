@@ -54,6 +54,12 @@ task :install do
 
 end
 
+desc "Setup other user environment settings"
+task :setup do
+	
+end
+
+
 def replace_file(file)
 	timestamp = Time.now.strftime("%Y-%m-%d")
 	system %Q{mkdir -p "$HOME/dot_backups_#{timestamp}"}

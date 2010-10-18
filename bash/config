@@ -1,11 +1,3 @@
-###########
-# general #
-###########
-
-# Colors
-export TERM=xterm-color
-export CLICOLOR=1
-
 # Ignore duplicate entries in bash history
 export HISTCONTROL=ignoredups
 
@@ -14,9 +6,6 @@ shopt -s checkwinsize
 
 # Autocorrect mispelled directories
 shopt -s cdspell
-
-# Set this so screen will show the currently-running program
-PROMPT_COMMAND='echo -ne "\033k\033\\"'
 
 # bash completion settings (actually, these are readline settings)
 bind "set completion-ignore-case on" # note: bind used instead of sticking these in .inputrc
@@ -59,67 +48,6 @@ gem list | grep $1
 function rrg { 
 rake routes | grep $1
 }
-
-
-#################
-#  prompt stuff #
-#################
-function parse_git_branch {
-  git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed 's_\(.*\)_(\1)_'
-}
-YELLOW="\[\033[0;33m\]"
-export PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w$YELLOW \$(parse_git_branch) \$\[\033[00m\] "
-
-# export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
-
-# ls colors, see: http://www.linux-sxs.org/housekeeping/lscolors.html
-# export LS_COLORS='di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rb=90'
-# 
-# # Setup some colors to use later in interactive shell or scripts
-# export COLOR_NC='\e[0m' # No Color
-# export COLOR_WHITE='\e[1;37m'
-# export COLOR_BLACK='\e[0;30m'
-# export COLOR_BLUE='\e[0;34m'
-# export COLOR_LIGHT_BLUE='\e[1;34m'
-# export COLOR_GREEN='\e[0;32m'
-# export COLOR_LIGHT_GREEN='\e[1;32m'
-# export COLOR_CYAN='\e[0;36m'
-# export COLOR_LIGHT_CYAN='\e[1;36m'
-# export COLOR_RED='\e[0;31m'
-# export COLOR_LIGHT_RED='\e[1;31m'
-# export COLOR_PURPLE='\e[0;35m'
-# export COLOR_LIGHT_PURPLE='\e[1;35m'
-# export COLOR_BROWN='\e[0;33m'
-# export COLOR_YELLOW='\e[1;33m'
-# export COLOR_GRAY='\e[1;30m'
-# export COLOR_LIGHT_GRAY='\e[0;37m'
-# alias colorslist="set | egrep 'COLOR_\w*'"  # Lists all the colors
-
-# Prompts ----------------------------------------------------------
-# export PS1="\[${COLOR_GREEN}\]\w > \[${COLOR_NC}\]"  # Primary prompt with only a path	
-# export PS1="\[${COLOR_RED}\]\w > \[${COLOR_NC}\]"  # Primary prompt for root user, to highlight when you're logged in as root
-# export PS1="\[${COLOR_GRAY}\]\u@\h \[${COLOR_GREEN}\]\w > \[${COLOR_NC}\]"  # Primary prompt with user, host, and path 
-
-# This runs before the prompt and sets the title of the xterm* window.  If you set the title in the prompt
-# weird wrapping errors occur on some systems, so this method is superior
-# Turn this off of you are running directly in the console on the machine
-# export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*} ${PWD}"; echo -ne "\007"'  # user@host path
-# 
-# export PS2='> '    # Secondary prompt
-# export PS3='#? '   # Prompt 3
-# export PS4='+'     # Prompt 4
-
-# function xtitle {  # change the title of your xterm* window
-#   unset PROMPT_COMMAND
-#   echo -ne "\033]0;$1\007" 
-# }
-
-
-# Hello Messsage --------------------------------------------------
-# echo -e "Kernel Information: " `uname -smr`
-# echo -e "${COLOR_BROWN}`bash --version`"
-# echo -ne "${COLOR_GRAY}Uptime: "; uptime
-# echo -ne "${COLOR_GRAY}Server time is: "; date
 
 #####################
 #  ssh-agent stuff  #

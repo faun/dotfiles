@@ -1,6 +1,7 @@
-echo "=> Loading `pwd`/bash_profile"
+# echo "=> Loading `pwd`/bash_profile"
+
 source ~/.bash/aliases
-source ~/.bash/completions
+# source ~/.bash/completions
 source ~/.bash/paths
 source ~/.bash/config
 
@@ -13,7 +14,8 @@ fi
 if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi
-
+source ~/.bash/colors
+source ~/.bash/prompt
 
 # Enable RVM
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
