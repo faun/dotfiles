@@ -1,8 +1,7 @@
 # Set this so screen will show the currently-running program
 PROMPT_COMMAND='echo -ne "\033k\033\\"'
-export PS1="$COLOR_RED\$(~/.rvm/bin/rvm-prompt)$COLOR_GREEN\w$COLOR_YELLOW\$(type -P git &>/dev/null && { git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed 's_\(.*\)_(\1)_'; })$COLOR_GREEN\$$COLOR_NC"
+export PS1="$COLOR_RED\$(rvm-prompt) $COLOR_GREEN\w $COLOR_YELLOW\$(type -P git &>/dev/null && { git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed 's_\(.*\)_(\1)_'; })$COLOR_GREEN\$$COLOR_NC\n→ "
 # export PS1="$COLOR_RED\$RUBY_VERSION\[\033[01;32m\]\u@\h\[\033[01;34m\] \w$COLOR_YELLOW\$(parse_git_branch)\$\[\033[00m\] "
-
 # Prompts ----------------------------------------------------------
 # export PS1="\[${COLOR_GREEN}\]\w > \[${COLOR_NC}\]"  # Primary prompt with only a path	
 # export PS1="\[${COLOR_RED}\]\w > \[${COLOR_NC}\]"  # Primary prompt for root user, to highlight when you're logged in as root
@@ -19,7 +18,7 @@ export PS4='+'     # Prompt 4
 
 function xtitle {  # change the title of your xterm* window
   unset PROMPT_COMMAND
-  echo -ne "\033]0;$1\007" 
+  echo -ne "\033]0;$1\007"
 }
 
 # Hello Messsage --------------------------------------------------
