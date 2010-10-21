@@ -9,7 +9,7 @@ task :install do
 
   replace_all = false
   Dir['*'].each do |file|
-    next if %w[Rakefile README LICENSE id_dsa.pub].include? file or %r{(.*)\.pub} =~ file
+    next if %w[Rakefile README LICENSE].include? file or %r{(.*)\.pub} =~ file
     
     
     if File.exist?(File.join(ENV['HOME'], ".#{file}"))
