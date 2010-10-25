@@ -123,12 +123,13 @@ command Qall qall
 " ========================================================================
 
 "" Disable all blinking:
-:set guicursor+=a:blinkon0
+set guicursor+=a:blinkon0
 "" Remove previous setting:
-:set guicursor-=a:blinkon0
+set guicursor-=a:blinkon0
 "" Restore default setting:
-:set guicursor&
+set guicursor&
 
+colorscheme emacs
 " ========================================================================
 " End of things set by me.
 " ========================================================================
