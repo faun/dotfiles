@@ -1,3 +1,5 @@
+#echo "=> Loading `pwd`/colors"
+
 # Colors
 export TERM=xterm-color
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'

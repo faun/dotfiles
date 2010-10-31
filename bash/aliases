@@ -1,3 +1,5 @@
+#echo "=> Loading `pwd`/aliases"
+
 # Handle the fact that this file will be used with multiple OSs
 platform=`uname`
 if [[ $platform == 'Linux' ]]; then
@@ -110,4 +112,7 @@ svgetinfo (){
  	sv info $@
 	sv log $@
 }
+
+
+
 

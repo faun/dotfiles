@@ -1,8 +1,8 @@
+#echo "=> Loading `pwd`/prompt"
 # Set this so screen will show the currently-running program
-PROMPT_COMMAND='echo -ne "\033k\033\\"'
-export PS1="$COLOR_RED\$(~/.rvm/bin/rvm-prompt)$COLOR_GREEN\w$COLOR_YELLOW\$(type -P git &>/dev/null && { git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed 's_\(.*\)_(\1)_'; })$COLOR_GREEN\$$COLOR_NC"
-# export PS1="$COLOR_RED\$RUBY_VERSION\[\033[01;32m\]\u@\h\[\033[01;34m\] \w$COLOR_YELLOW\$(parse_git_branch)\$\[\033[00m\] "
 
+PROMPT_COMMAND='echo -ne "\033k\033\\"'
+	
 # Prompts ----------------------------------------------------------
 # export PS1="\[${COLOR_GREEN}\]\w > \[${COLOR_NC}\]"  # Primary prompt with only a path	
 # export PS1="\[${COLOR_RED}\]\w > \[${COLOR_NC}\]"  # Primary prompt for root user, to highlight when you're logged in as root
@@ -11,11 +11,12 @@ export PS1="$COLOR_RED\$(~/.rvm/bin/rvm-prompt)$COLOR_GREEN\w$COLOR_YELLOW\$(typ
 # This runs before the prompt and sets the title of the xterm* window.  If you set the title in the prompt
 # weird wrapping errors occur on some systems, so this method is superior
 # Turn this off of you are running directly in the console on the machine
-# export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*} ${PWD}"; echo -ne "\007"'  # user@host path
-# 
-export PS2='$COLOR_GREEN> $COLOR_BLACK'    # Secondary prompt
-export PS3='$COLOR_RED#? $COLOR_BLACK'   # Prompt 3
-export PS4='+'     # Prompt 4
+export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*} [${rvm_ruby_string}@${rvm_gemset_name}] ${PWD}"; echo -ne "\007"'  # user@host path
+
+export PS1="$COLOR_BROWN${USER}$COLOR_RED[\$rvm_ruby_string@\$rvm_gemset_name]$COLOR_GREEN\w$COLOR_YELLOW\$(parse_git_branch)\$(parse_svn_branch)$COLOR_GREEN$COLOR_NC\n→ "
+export PS2='>'   # Secondary prompt
+export PS3='?'   # Prompt 3
+export PS4='+'   # Prompt 4
 
 function xtitle {  # change the title of your xterm* window
   unset PROMPT_COMMAND
@@ -27,3 +28,4 @@ function xtitle {  # change the title of your xterm* window
 # echo -e "${COLOR_BROWN}`bash --version`"
 # echo -ne "${COLOR_GRAY}Uptime: "; uptime
 # echo -ne "${COLOR_GRAY}Server time is: "; date
+# 
