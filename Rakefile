@@ -36,13 +36,13 @@ task :install do
 
   # link files in bin dir
   system %Q{mkdir -p "#{home}/bin"}
-  system %Q{mkdir -p "$HOME/dot_backups_#{timestamp}/bin/"}
+  system %Q{mkdir -p "$HOME/_dot_backups/#{timestamp}/bin/"}
   
   Dir['bin/*'].each do |file|
     filepath = File.expand_path("#{home}/#{file}")
     if !(File.exist? filepath) || (File.symlink? filepath)
       puts "linking ~/#{file}"
-      system %Q{cp -RLi "#{home}/#{file}" "#{home}/dot_backups_#{timestamp}/#{file}"}
+      system %Q{cp -RLi "#{home}/#{file}" "#{home}/_dot_backups/#{timestamp}/#{file}"}
       system %Q{rm "#{home}/#{file}"}
       system %Q{ln -s "$PWD/#{file}" "#{home}/#{file}"}
     else
@@ -76,8 +76,8 @@ task :setup do
 end
 
 def replace_file(file, timestamp)
-  system %Q{mkdir -p "$HOME/dot_backups_#{timestamp}"}
-  system %Q{cp -RLi "$HOME/.#{file}" "$HOME/dot_backups_#{timestamp}/#{file}"}
+  system %Q{mkdir -p "$HOME/_dot_backups/#{timestamp}"}
+  system %Q{cp -RLi "$HOME/.#{file}" "$HOME/_dot_backups/#{timestamp}/#{file}"}
   system %Q{rm "$HOME/.#{file}"}
   link_file(file)
 end
