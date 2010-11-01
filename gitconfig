@@ -53,7 +53,9 @@
 	default = tracking
 
 [difftool]
-	prompt = no
+	prompt = false
 
 [diff]
-	tool = opendiff
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
