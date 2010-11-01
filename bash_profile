@@ -1,4 +1,4 @@
-# echo "=> Loading `pwd`/bash_profile"
+#echo "=> Loading `pwd`/bash_profile"
 
 source ~/.bash/aliases
 # source ~/.bash/completions

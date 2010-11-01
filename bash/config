@@ -1,3 +1,5 @@
+#echo "=> Loading `pwd`/config"
+
 # Ignore duplicate entries in bash history
 export HISTCONTROL=ignoredups
 

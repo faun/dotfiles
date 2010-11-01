@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+parse_svn_repository_root() {
+    svn info 2>/dev/null | sed -ne 's#^Repository Root: ##p'
+}
