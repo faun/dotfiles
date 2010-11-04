@@ -63,6 +63,8 @@ alias ll='ls -hl'
 alias la='ls -a'
 alias lla='ls -lah'
 
+alias py='python'
+
 # Misc
 alias g='grep -i'  # Case insensitive grep
 alias f='find . -iname'
