@@ -16,7 +16,7 @@ fi
 # Other Editors ----------------------------------------------------------
 # export EDITOR='gedit'  #Linux/gnome
 # export EDITOR='vim'  #Command line
-
+alias q='exit'
 alias aliases='vim ~/.dotfiles/bash/aliases'
 alias bi='bundle install'
 alias d='cd ~/.dotfiles'
@@ -33,6 +33,7 @@ alias gg='git lg'
 alias i='screen -rd irc'
 alias irb='irb --readline -r irb/completion'
 alias lm='!! | more'
+
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
 alias rdm="rake db:migrate"
 alias rdtp="rake db:test:prepare"
