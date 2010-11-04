@@ -5,7 +5,6 @@ hostname =  `printf ${HOSTNAME%%.*}`
 home = `printf $HOME`
 timestamp = Time.now.strftime("%Y-%m-%d_%I-%M-%S")
 
-
 task :install => 'install:files'
 
 namespace :install do
@@ -15,7 +14,7 @@ namespace :install do
 
     replace_all = false
     Dir['*'].each do |file|
-      next if %w[Rakefile README LICENSE id_dsa.pub bin].include? file or %r{(.*)\.pub} =~ file
+      next if %w[Rakefile README LICENSE bin].include? file or %r{(.*)\.pub} =~ file
     
       if File.exist?(File.join(ENV['HOME'], ".#{file}"))
         if replace_all

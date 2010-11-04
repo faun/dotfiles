@@ -36,7 +36,7 @@
 	ui = auto
 
 [core]
-	excludesfile = /home/faun/.gitignore
+	excludesfile = ~/.gitignore
 	editor = mate -w
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
@@ -57,5 +57,8 @@
 
 [diff]
 	tool = Kaleidoscope
+
+[difftool "Changes"]
+	cmd = chdiff \"$LOCAL\" \"$REMOTE\"
 [difftool "Kaleidoscope"]
 	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
