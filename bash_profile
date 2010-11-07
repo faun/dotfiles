@@ -17,8 +17,10 @@ fi
 source ~/.bash/colors
 source ~/.bash/prompt
 
+export rvm_path="$HOME/.rvm"
 # Enable RVM
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+[[ -s $rvm_path/scripts/rvm ]] && source $rvm_path/scripts/rvm
+[[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
 
 
 # Notes: ----------------------------------------------------------
