@@ -16,7 +16,7 @@ namespace :install do
     Dir['*'].each do |file|
       next if %w[Rakefile README LICENSE bin].include? file or %r{(.*)\.pub} =~ file
     
-      if File.exist?(File.join(ENV['HOME'], ".#{file}"))
+      if File.exist?(File.join(ENV['HOME'], ".#{file}")) || (File.symlink? File.join(ENV['HOME'], ".#{file}"))
         if replace_all
           replace_file(file, timestamp)
         else
@@ -99,8 +99,11 @@ end
 
 def replace_file(file, timestamp)
   system %Q{mkdir -p "$HOME/_dot_backups/#{timestamp}"}
-  system %Q{cp -RLi "$HOME/.#{file}" "$HOME/_dot_backups/#{timestamp}/#{file}"}
-  system %Q{rm "$HOME/.#{file}"}
+  if File.exist?(File.join(ENV['HOME'], ".#{file}"))
+		puts "Backing up $HOME/.#{file} to $HOME/_dot_backups/#{timestamp}/#{file}"
+  	system %Q{cp -RLi "$HOME/.#{file}" "$HOME/_dot_backups/#{timestamp}/#{file}"}
+	  system %Q{rm "$HOME/.#{file}"}
+	end
   link_file(file)
 end
 
