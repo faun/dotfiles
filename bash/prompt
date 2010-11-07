@@ -12,9 +12,23 @@
 # This runs before the prompt and sets the title of the xterm* window.  If you set the title in the prompt
 # weird wrapping errors occur on some systems, so this method is superior
 # Turn this off of you are running directly in the console on the machine
-export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*} [${rvm_ruby_string}@${rvm_gemset_name}] ${PWD}"; echo -ne "\007"'  # user@host path
 
-export PS1="$COLOR_BROWN${USER}$COLOR_RED[\$rvm_ruby_string@\$rvm_gemset_name]$COLOR_GREEN\w$COLOR_YELLOW\$(parse_git_branch)\$(parse_svn_branch)$COLOR_GREEN$COLOR_NC\n→ "
+#git command prompt http://effectif.com/git/config
+if [[ -e ~/src/git/contrib/completion/git-completion.bash ]]; then
+  . ~/src/git/contrib/completion/git-completion.bash
+else
+function __git_ps1 () 
+  {
+      local b="$(git symbolic-ref HEAD 2>/dev/null)";
+      if [ -n "$b" ]; then
+          printf "(%s)" "${b##refs/heads/}";
+      fi
+  }
+fi
+
+export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*} [$(rvm-prompt)] ${PWD}"; echo -ne "\007"'  # user@host path
+
+export PS1="$COLOR_BROWN${USER}$COLOR_RED[\$(rvm-prompt)]$COLOR_GREEN\w$COLOR_YELLOW\$(__git_ps1 \"(%s)\")\$(parse_svn_branch)$COLOR_GREEN\$$COLOR_NC\n→ "
 export PS2='>'   # Secondary prompt
 export PS3='?'   # Prompt 3
 export PS4='+'   # Prompt 4
