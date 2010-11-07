@@ -161,9 +161,9 @@ function parse_git_branch() {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
 }
 
-export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*} [$(rvm-prompt)] ${PWD}"; echo -ne "\007"'  # user@host path
+export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*} [$($HOME/.rvm/bin/rvm-prompt s i v p g)] ${PWD}"; echo -ne "\007"'  # user@host path
 #\$(__git_ps1 \"(%s)\")\$(parse_svn_branch)
-export PS1="$COLOR_BROWN${USER}$COLOR_RED[\$(rvm-prompt)]$COLOR_GREEN\w$COLOR_RED\$(parse_git_svn_revision)$COLOR_GREEN\$$COLOR_NC\n→ "
+export PS1="$COLOR_BROWN${USER}$COLOR_RED[\$($HOME/.rvm/bin/rvm-prompt s i v p g)]$COLOR_GREEN\w$COLOR_RED\$(parse_git_svn_revision)$COLOR_GREEN\$$COLOR_NC\n→ "
 export PS2='>'   # Secondary prompt
 export PS3='?'   # Prompt 3
 export PS4='+'   # Prompt 4
