@@ -10,16 +10,17 @@ if [[ $platform == 'Linux' ]]; then
 elif [[ $platform == 'Darwin' ]]; then
   alias a='ls -lrthG'
   alias ls='ls -G'  # OS-X SPECIFIC - the -G command in OS-X is for colors, in Linux it's no groups
-  export EDITOR='mate -w'  # OS-X SPECIFIC - TextMate, w is to wait for TextMate window to close
+  export EDITOR="vim"
+  # export EDITOR='mate -w'  # OS-X SPECIFIC - TextMate, w is to wait for TextMate window to close
 fi
 
 # Other Editors ----------------------------------------------------------
 # export EDITOR='gedit'  #Linux/gnome
 # export EDITOR='vim'  #Command line
-alias q='exit'
-alias aliases='vim ~/.dotfiles/bash/aliases'
+
+# Version Control --------------------------------------------------------
+
 alias bi='bundle install'
-alias d='cd ~/.dotfiles'
 alias g='git status'
 alias gc='git commit'
 alias gca='git commit -a'
@@ -27,12 +28,12 @@ alias gcm='git commit -m'
 alias gco='git checkout'
 alias gd='git diff'
 alias gdc='git diff --cached'
-alias get_db='cap production db:download && rake db:backup:load'
-alias get_db_staging='cap staging db:download && rake db:backup:load SOURCE_ENV=staging'
 alias gg='git lg'
-alias i='screen -rd irc'
-alias irb='irb --readline -r irb/completion'
-alias lm='!! | more'
+
+alias update_recursive="~/bin/update_recursive.sh"
+alias update_all="cd ~/Documents/Clients/; update_recursive;"
+
+# Code -----------------------------------------------------------------
 
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
 alias rdm="rake db:migrate"
@@ -40,20 +41,21 @@ alias rdtp="rake db:test:prepare"
 alias rc='rails console'
 alias rs='rails server -p 3001'
 alias rsa='rake spec:all'
-alias s='screen -dr rails'
 alias sc='script/console'
 alias so='source ~/.dotfiles/bash/aliases'
 alias ss='ruby script/server -p 3001 --debugger'
+alias irb='irb --readline -r irb/completion'
+alias i='screen -rd irc'
+alias get_db='cap production db:download && rake db:backup:load'
+alias get_db_staging='cap staging db:download && rake db:backup:load SOURCE_ENV=staging'
+
+# RVM -----------------------------------------------------------------
 
 alias gh='rvm use 1.9.2@github'
 alias r2='rvm use 1.8.7@rails2'
 alias r3='rvm use 1.9.2@rails3'
 alias tra='rvm use 1.9.2@traction'
 
-alias update_recursive="/Users/faun/src/update_recursive.sh"
-alias update_all="cd /Users/faun/Documents/Clients/; update_recursive;"
-
-alias showdirs="cat ~/.dirs | ruby -e \"puts STDIN.read.split.map{|x| x.gsub(/^(.+)=.+$/, '\1')}.join(', ')\""
 # Flush DNS cache
 alias flushdns="dscacheutil -flushcache"
 
@@ -63,8 +65,7 @@ alias ...='cd .. ; cd ..'
 alias ll='ls -hl'
 alias la='ls -a'
 alias lla='ls -lah'
-
-alias py='python'
+alias q='exit'
 
 # Misc
 alias g='grep -i'  # Case insensitive grep
@@ -72,6 +73,16 @@ alias f='find . -iname'
 alias ducks='du -cksh * | sort -rn|head -11' # Lists folders and files sizes in the current folder
 alias m='more'
 alias df='df -h'
+
+alias s='screen -dr rails'
+alias aliases='vim ~/.dotfiles/bash/aliases'
+alias d='cd ~/.dotfiles'
+alias showdirs="cat ~/.dirs | ruby -e \"puts STDIN.read.split.map{|x| x.gsub(/^(.+)=.+$/, '\1')}.join(', ')\""
+
+alias lm='!! | more'
+
+alias py='python'
+alias sha1="openssl sha1"
 
 # Shows most used commands, cool script I got this from: http://lifehacker.com/software/how-to/turbocharge-your-terminal-274317.php
 alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
