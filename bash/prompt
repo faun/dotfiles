@@ -1,17 +1,8 @@
 #echo "=> Loading `pwd`/prompt"
-# Set this so screen will show the currently-running program
-
-# export PS1="$COLOR_RED\$(rvm-prompt) $COLOR_GREEN\w $COLOR_YELLOW\$(type -P git &>/dev/null && { git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed 's_\(.*\)_(\1)_'; })$COLOR_GREEN\$$COLOR_NC\n→ "
-# export PS1="$COLOR_RED\$RUBY_VERSION\[\033[01;32m\]\u@\h\[\033[01;34m\] \w$COLOR_YELLOW\$(parse_git_branch)\$\[\033[00m\] "
-
 # Prompts ----------------------------------------------------------
 # export PS1="\[${COLOR_GREEN}\]\w > \[${COLOR_NC}\]"  # Primary prompt with only a path	
 # export PS1="\[${COLOR_RED}\]\w > \[${COLOR_NC}\]"  # Primary prompt for root user, to highlight when you're logged in as root
 # export PS1="\[${COLOR_GRAY}\]\u@\h \[${COLOR_GREEN}\]\w > \[${COLOR_NC}\]"  # Primary prompt with user, host, and path 
-
-# This runs before the prompt and sets the title of the xterm* window.  If you set the title in the prompt
-# weird wrapping errors occur on some systems, so this method is superior
-# Turn this off of you are running directly in the console on the machine
 
 #git command prompt http://effectif.com/git/config
 if [[ -e ~/src/git/contrib/completion/git-completion.bash ]]; then
@@ -79,7 +70,7 @@ function parse_svn_dirty() {
           bits="${bits}☭"
   fi
   if [ "${untracked}" == "0" ]; then
-          bits="${bits}⚡"
+          bits="${bits}?"
   fi
   if [ "${newfile}" == "0" ]; then
           bits="${bits}*"
@@ -142,6 +133,7 @@ function parse_git_dirty() {
 
 function parse_git_svn_revision() {
     ref1=$(__git_ps1 | sed -e "s/ (\(.*\))/(git:\1$(parse_git_dirty))/")
+    
     #ref1=$(parse_git_branch)
 
     if [ "x$ref1" != "x"  ]; then
@@ -160,22 +152,9 @@ function parse_git_svn_revision() {
 function parse_git_branch() {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
 }
-
-export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*} [$($HOME/.rvm/bin/rvm-prompt s i v p g)] ${PWD}"; echo -ne "\007"'  # user@host path
 #\$(__git_ps1 \"(%s)\")\$(parse_svn_branch)
-export PS1="$COLOR_BROWN${USER}$COLOR_RED[\$($HOME/.rvm/bin/rvm-prompt s i v p g)]$COLOR_GREEN\w$COLOR_RED\$(parse_git_svn_revision)$COLOR_GREEN\$$COLOR_NC\n→ "
+export PS1="\[\e[0;33m\]${USER}\[\e[0;31m\][\$($HOME/.rvm/bin/rvm-prompt s i v p g)]\[\e[0;32m\]\w\[\e[0;33m\]\$(parse_git_svn_revision)\[\e[0m\]→ "
+
 export PS2='>'   # Secondary prompt
 export PS3='?'   # Prompt 3
 export PS4='+'   # Prompt 4
-
-function xtitle {  # change the title of your xterm* window
-  unset PROMPT_COMMAND
-  echo -ne "\033]0;$1\007"
-}
-
-# Hello Messsage --------------------------------------------------
-# echo -e "Kernel Information: " `uname -smr`
-# echo -e "${COLOR_BROWN}`bash --version`"
-# echo -ne "${COLOR_GRAY}Uptime: "; uptime
-# echo -ne "${COLOR_GRAY}Server time is: "; date
-# 
