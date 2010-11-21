@@ -55,6 +55,7 @@ alias gh='rvm use 1.9.2@github'
 alias r2='rvm use 1.8.7@rails2'
 alias r3='rvm use 1.9.2@rails3'
 alias tra='rvm use 1.9.2@traction'
+alias system='rvm use system'
 
 # Flush DNS cache
 alias flushdns="dscacheutil -flushcache"
