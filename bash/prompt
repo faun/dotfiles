@@ -1,4 +1,4 @@
-#echo "=> Loading `pwd`/prompt"
+# echo "=> Loading `pwd`/prompt"
 # Prompts ----------------------------------------------------------
 # export PS1="\[${COLOR_GREEN}\]\w > \[${COLOR_NC}\]"  # Primary prompt with only a path	
 # export PS1="\[${COLOR_RED}\]\w > \[${COLOR_NC}\]"  # Primary prompt for root user, to highlight when you're logged in as root
@@ -52,19 +52,19 @@ function parse_svn_revisions_behind() {
 
 function parse_svn_dirty() {
   status=`svn status 2> /dev/null`
-  modified=`  echo -n "${status}" 2> /dev/null | grep -q "M       " 2> /dev/null; echo "$?"`
-  untracked=` echo -n "${status}" 2> /dev/null | grep -q "?       " 2> /dev/null; echo "$?"`
-  newfile=`   echo -n "${status}" 2> /dev/null | grep -q "A       " 2> /dev/null; echo "$?"`
-  conflict=`  echo -n "${status}" 2> /dev/null | grep -q "C       " 2> /dev/null; echo "$?"`
-  prop_con=`  echo -n "${status}" 2> /dev/null | grep -q " C      " 2> /dev/null; echo "$?"`
-  deleted=`   echo -n "${status}" 2> /dev/null | grep -q "D       " 2> /dev/null; echo "$?"`
-  replaced=`  echo -n "${status}" 2> /dev/null | grep -q "R       " 2> /dev/null; echo "$?"`
-  missing=`   echo -n "${status}" 2> /dev/null | grep -q "!       " 2> /dev/null; echo "$?"`
-  rem_lock=`  echo -n "${status}" 2> /dev/null | grep -q "  L     " 2> /dev/null; echo "$?"`
-  local_lock=`echo -n "${status}" 2> /dev/null | grep -q "     K  " 2> /dev/null; echo "$?"`
-  lock_del=`  echo -n "${status}" 2> /dev/null | grep -q "D    K  " 2> /dev/null; echo "$?"`
-  switch=`    echo -n "${status}" 2> /dev/null | grep -q "    S   " 2> /dev/null; echo "$?"`
-  changed=`   echo -n "${status}" 2> /dev/null | grep -q "~       " 2> /dev/null; echo "$?"`
+  modified=`     echo -n "${status}" 2> /dev/null | grep -q "M       " 2> /dev/null; echo "$?"`
+  untracked=`    echo -n "${status}" 2> /dev/null | grep -q "?       " 2> /dev/null; echo "$?"`
+  newfile=`      echo -n "${status}" 2> /dev/null | grep -q "A       " 2> /dev/null; echo "$?"`
+  conflict=`     echo -n "${status}" 2> /dev/null | grep -q "C       " 2> /dev/null; echo "$?"`
+  prop_con=`     echo -n "${status}" 2> /dev/null | grep -q " C      " 2> /dev/null; echo "$?"`
+  deleted=`      echo -n "${status}" 2> /dev/null | grep -q "D       " 2> /dev/null; echo "$?"`
+  replaced=`     echo -n "${status}" 2> /dev/null | grep -q "R       " 2> /dev/null; echo "$?"`
+  missing=`      echo -n "${status}" 2> /dev/null | grep -q "!       " 2> /dev/null; echo "$?"`
+  rem_lock=`     echo -n "${status}" 2> /dev/null | grep -q "  L     " 2> /dev/null; echo "$?"`
+  local_lock=`   echo -n "${status}" 2> /dev/null | grep -q "     K  " 2> /dev/null; echo "$?"`
+  lock_del=`     echo -n "${status}" 2> /dev/null | grep -q "D    K  " 2> /dev/null; echo "$?"`
+  switch=`       echo -n "${status}" 2> /dev/null | grep -q "    S   " 2> /dev/null; echo "$?"`
+  obstructed=`   echo -n "${status}" 2> /dev/null | grep -q "~       " 2> /dev/null; echo "$?"`
   bits=""
   if [ "${modified}" == "0" ]; then
           bits="${bits}☭"
@@ -95,6 +95,9 @@ function parse_svn_dirty() {
   fi
   if [ "${local_lock}" == "0" ]; then
           bits="${bits}L"
+  fi
+  if [ "${obstructed}" == "0" ]; then
+          bits="${bits}!"
   fi
   if [ "${lock_del}" == "0" ]; then
           bits="${bits}ÐL"
@@ -157,7 +160,8 @@ function rvm-prompt-wrapper () {
 }
 
 #\$(__git_ps1 \"(%s)\")\$(parse_svn_branch)
-export PS1="\[\e[0;33m\]${USER}\[\e[0;31m\]\$(rvm-prompt-wrapper)\[\e[0;32m\]\w\[\e[0;33m\]\$(parse_git_svn_revision)\[\e[0m\]→ "
+#export PS1="\[\e[0;33m\]${USER}\[\e[0;31m\]\$(rvm-prompt-wrapper)\[\e[0;32m\]\w\[\e[0;33m\]\$(parse_git_svn_revision)\[\e[0m\]→ "
+export PS1="\[\e[0;33m\]${USER}\[\e[0;31m\][\$($HOME/.rvm/bin/rvm-prompt s i v p g)]\[\e[0;32m\]\w\[\e[0m\]→ "
 
 export PS2='>'   # Secondary prompt
 export PS3='?'   # Prompt 3
