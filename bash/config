@@ -76,6 +76,12 @@ else
 	start_agent;
 fi 
 
+# Silently add github private key with ssh-add
+GITHUB_PRIV="$HOME/.ssh/id_rsa_github"
+if [ -f "${GITHUB_PRIV}" ]; then
+  ssh-add ${GITHUB_PRIV} &> /dev/null
+fi
+
 # =============================
 # = Directory save and recall =
 # =============================
