@@ -62,6 +62,15 @@ nmap <D-]> >>
 vmap <D-[> <gv
 vmap <D-]> >gv
 
+
+" From http://vimcasts.org/episodes/show-invisibles/
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
+ 
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+
+
 set nocompatible
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set history=500		" keep 500 lines of command line history
