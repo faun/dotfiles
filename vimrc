@@ -55,6 +55,12 @@ map <C-x> <C-w>c
 map <C-n> :cn<CR>
 map <C-p> :cp<CR>
 
+" From http://vimcasts.org/episodes/indentation-commands/
+" Make indent/outdent perform like TextMate 
+nmap <D-[> <<
+nmap <D-]> >>
+vmap <D-[> <gv
+vmap <D-]> >gv
 
 set nocompatible
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
