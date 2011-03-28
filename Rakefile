@@ -47,7 +47,7 @@ namespace :install do
       if !(File.exist? filepath) || (File.symlink? filepath)
         puts "linking ~/#{file}"
         system %Q{cp -RLi "#{home}/#{file}" "#{home}/_dot_backups/#{timestamp}/#{file}"}
-        system %Q{rm "#{home}/#{file}"}
+        system %Q{rm -rf "#{home}/#{file}"}
         system %Q{ln -s "$PWD/#{file}" "#{home}/#{file}"}
       else
         puts "Existing ~/#{file} exists. Skipping..." 
@@ -55,21 +55,24 @@ namespace :install do
     end
   
     # Handle ssh pubkey on its own
-    orginal_filename = File.expand_path("#{home}/.ssh/id_dsa.pub")
 
-    pubfile_exists = File.exist? orginal_filename
-    pubfile_symlink = File.symlink? orginal_filename
-  
-    if pubfile_exists && !pubfile_symlink
-      puts "Linking public ssh key"
-      system %Q{mkdir -p "#{home}/.ssh/dotfiles_backup"}
-      system %Q{cp "#{orginal_filename}" "#{home}/.ssh/dotfiles_backup/id_dsa.pub"}
-      system %Q{mv "#{orginal_filename}" "$PWD/#{hostname}.pub"}
-      system %Q{ln -s "$PWD/#{hostname}.pub" "#{orginal_filename}"}
-    elsif !pubfile_exists
-      puts "No existing ssh key. Exiting..."
-    elsif pubfile_symlink
-      puts "Existing linked ssh key. Skipping..."
+    %w{rsa dsa}.each do |algorithm|
+      orginal_pubkey = File.expand_path("#{home}/.ssh/id_#{algorithm}.pub")
+      pubfile_exists = File.exist? orginal_pubkey
+      pubfile_symlink = File.symlink? orginal_pubkey
+      
+      if pubfile_exists && !pubfile_symlink
+        puts "Linking public ssh key"
+        system %Q{mkdir -p "#{home}/.ssh/dotfiles_backup"}
+        system %Q{cp "#{orginal_pubkey}" "#{home}/.ssh/dotfiles_backup/id_#{algorithm}.pub"}
+        system %Q{mv "#{orginal_pubkey}" "$PWD/id_#{algorithm}.pub"}
+        system %Q{ln -s "$PWD/id_dsa.pub" "#{orginal_pubkey}"}
+      elsif !pubfile_exists
+        puts "No existing ssh key. Exiting..."
+      elsif pubfile_symlink
+        puts "Existing linked ssh key. Skipping..."
+      end
+      
     end
 
   end
@@ -100,10 +103,10 @@ end
 def replace_file(file, timestamp)
   system %Q{mkdir -p "$HOME/_dot_backups/#{timestamp}"}
   if File.exist?(File.join(ENV['HOME'], ".#{file}"))
-		puts "Backing up $HOME/.#{file} to $HOME/_dot_backups/#{timestamp}/#{file}"
-  	system %Q{cp -RLi "$HOME/.#{file}" "$HOME/_dot_backups/#{timestamp}/#{file}"}
-	  system %Q{rm "$HOME/.#{file}"}
-	end
+    puts "Backing up $HOME/.#{file} to $HOME/_dot_backups/#{timestamp}/#{file}"
+    system %Q{cp -RLi "$HOME/.#{file}" "$HOME/_dot_backups/#{timestamp}/#{file}"}
+    system %Q{rm -rf "$HOME/.#{file}"}
+  end
   link_file(file)
 end
 
