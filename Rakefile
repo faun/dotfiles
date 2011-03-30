@@ -1,7 +1,6 @@
 require 'rake'
 require 'ftools' if RUBY_VERSION < "1.9"
 
-hostname =  `printf ${HOSTNAME%%.*}`
 home = `printf $HOME`
 timestamp = Time.now.strftime("%Y-%m-%d_%I-%M-%S")
 
@@ -52,27 +51,6 @@ namespace :install do
       else
         puts "Existing ~/#{file} exists. Skipping..." 
       end
-    end
-  
-    # Handle ssh pubkey on its own
-
-    %w{rsa dsa}.each do |algorithm|
-      orginal_pubkey = File.expand_path("#{home}/.ssh/id_#{algorithm}.pub")
-      pubfile_exists = File.exist? orginal_pubkey
-      pubfile_symlink = File.symlink? orginal_pubkey
-      
-      if pubfile_exists && !pubfile_symlink
-        puts "Linking public ssh key"
-        system %Q{mkdir -p "#{home}/.ssh/dotfiles_backup"}
-        system %Q{cp "#{orginal_pubkey}" "#{home}/.ssh/dotfiles_backup/id_#{algorithm}.pub"}
-        system %Q{mv "#{orginal_pubkey}" "$PWD/id_#{algorithm}.pub"}
-        system %Q{ln -s "$PWD/id_dsa.pub" "#{orginal_pubkey}"}
-      elsif !pubfile_exists
-        puts "No existing ssh key. Exiting..."
-      elsif pubfile_symlink
-        puts "Existing linked ssh key. Skipping..."
-      end
-      
     end
 
   end
