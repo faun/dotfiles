@@ -4,18 +4,6 @@
 # export PS1="\[${COLOR_RED}\]\w > \[${COLOR_NC}\]"  # Primary prompt for root user, to highlight when you're logged in as root
 # export PS1="\[${COLOR_GRAY}\]\u@\h \[${COLOR_GREEN}\]\w > \[${COLOR_NC}\]"  # Primary prompt with user, host, and path 
 
-#git command prompt http://effectif.com/git/config
-if [[ -e ~/src/git/contrib/completion/git-completion.bash ]]; then
-  . ~/src/git/contrib/completion/git-completion.bash
-else
-function __git_ps1() {
-    local b="$(git symbolic-ref HEAD 2>/dev/null)";
-    if [ -n "$b" ]; then
-      printf "(%s)" "${b##refs/heads/}";
-    fi
-  }
-fi
-
 function parse_svn_repository_root() {
   if [ -d ".svn" ]; then
     svn info 2>/dev/null | sed -ne 's#^Repository Root: ##p'
@@ -110,7 +98,7 @@ function parse_svn_dirty() {
 
 function parse_git_dirty() {
     status=`git status 2> /dev/null`
-    dirty=`    echo -n "${status}" 2> /dev/null | grep -q "Changed but not updated" 2> /dev/null; echo "$?"`
+    dirty=`    echo -n "${status}" 2> /dev/null | grep -q "Changes to be committed" 2> /dev/null; echo "$?"`
     untracked=`echo -n "${status}" 2> /dev/null | grep -q "Untracked files" 2> /dev/null; echo "$?"`
     ahead=`    echo -n "${status}" 2> /dev/null | grep -q "Your branch is ahead of" 2> /dev/null; echo "$?"`
     newfile=`  echo -n "${status}" 2> /dev/null | grep -q "new file:" 2> /dev/null; echo "$?"`
@@ -160,8 +148,8 @@ function rvm-prompt-wrapper () {
 }
 
 #\$(__git_ps1 \"(%s)\")\$(parse_svn_branch)
-#export PS1="\[\e[0;33m\]${USER}\[\e[0;31m\]\$(rvm-prompt-wrapper)\[\e[0;32m\]\w\[\e[0;33m\]\$(parse_git_svn_revision)\[\e[0m\]→ "
-export PS1="\[\e[0;33m\]${USER}\[\e[0;31m\][\$($HOME/.rvm/bin/rvm-prompt s i v p g)]\[\e[0;32m\]\w\[\e[0m\]→ "
+export PS1="\[\e[0;33m\]${USER}\[\e[0;31m\]\$(rvm-prompt-wrapper)\[\e[0;32m\]\w\[\e[0;33m\]\$(parse_git_svn_revision)\[\e[0m\]→ "
+# export PS1="\[\e[0;33m\]${USER}\[\e[0;31m\][\$($HOME/.rvm/bin/rvm-prompt s i v p g)]\[\e[0;32m\]\w\[\e[0m\]→ "
 
 export PS2='>'   # Secondary prompt
 export PS3='?'   # Prompt 3
