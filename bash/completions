@@ -1,6 +1,14 @@
 #echo "=> Loading `pwd`/completions"
 
-source ~/.bash/completion_scripts/git_completion
 complete -C ~/.bash/completion_scripts/rake_completion -o default rake
 complete -C ~/.bash/completion_scripts/project_completion -o default c
 complete -C ~/.bash/completion_scripts/capistrano_completion -o default cap
+# 
+# git autocompletion via homebrew git installation
+if [ -f `brew --prefix git`/etc/bash_completion.d/git-completion.bash ]; then
+	source `brew --prefix git`/etc/bash_completion.d/git-completion.bash
+else
+	#fallback to local copy
+	source ~/.bash/completion_scripts/git_completion
+fi
+complete -o default -o nospace -F _git g
