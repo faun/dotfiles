@@ -1,13 +1,13 @@
 #echo "=> Loading `pwd`/bash_profile"
 
 source ~/.bash/aliases
-# source ~/.bash/completions
+source ~/.bash/completions
 source ~/.bash/paths
 source ~/.bash/config
 
 # Add bin directory to path
 if [ -d ~/bin ]; then
- export PATH=:~/bin:$PATH
+ export PATH="~/bin:$PATH"
 fi
 
 # Load in .bashrc
