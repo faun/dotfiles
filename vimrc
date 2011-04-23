@@ -89,7 +89,7 @@ set guifont=Triskweline_10:h10
 set et
 set sw=2
 set smarttab
-set noincsearch
+set incsearch
 set ignorecase smartcase
 set laststatus=2  " Always show status line.
 set number 

@@ -1,2 +1,2 @@
-colorscheme macvim
+colorscheme desert
 set bg=dark
