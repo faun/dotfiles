@@ -108,7 +108,7 @@ function! s:ExtractGitDir(path) abort
   let ofn = ""
   let nfn = fn
   while fn != ofn
-    if isdirectory(fn . '/.git')
+    if filereadable(fn . '/.git/HEAD')
       return s:sub(simplify(fnamemodify(fn . '/.git',':p')),'\W$','')
     elseif fn =~ '\.git$' && filereadable(fn . '/HEAD')
       return s:sub(simplify(fnamemodify(fn,':p')),'\W$','')
@@ -592,8 +592,30 @@ function! s:StageToggle(lnum1,lnum2) abort
     let output = ''
     for lnum in range(a:lnum1,a:lnum2)
       let line = getline(lnum)
-      if getline('.') == '# Changes to be committed:'
-        return 'Gcommit'
+      if line ==# '# Changes to be committed:'
+        call s:repo().git_chomp_in_tree('reset','-q')
+        silent! edit!
+        1
+        if !search('^# Untracked files:$','W')
+          call search('^# Change','W')
+        endif
+        return ''
+      elseif line =~# '^# Change\%(d but not updated\|s not staged for commit\):$'
+        call s:repo().git_chomp_in_tree('add','-u')
+        silent! edit!
+        1
+        if !search('^# Untracked files:$','W')
+          call search('^# Change','W')
+        endif
+        return ''
+      elseif line ==# '# Untracked files:'
+        call s:repo().git_chomp_in_tree('add','-N','.')
+        silent! edit!
+        1
+        if !search('^# Change\%(d but not updated\|s not staged for commit\):$','W')
+          call search('^# Change','W')
+        endif
+        return ''
       endif
       let filename = matchstr(line,'^#\t\%([[:alpha:] ]\+: *\)\=\zs.\{-\}\ze\%( (new commits)\)\=$')
       if filename ==# ''
@@ -640,9 +662,9 @@ function! s:StagePatch(lnum1,lnum2) abort
 
   for lnum in range(a:lnum1,a:lnum2)
     let line = getline(lnum)
-    if line == '# Changes to be committed:'
+    if line ==# '# Changes to be committed:'
       return 'Git reset --patch'
-    elseif line == '# Changed but not updated:'
+    elseif line =~# '^# Change\%(d but not updated\|s not staged for commit\):$'
       return 'Git add --patch'
     endif
     let filename = matchstr(line,'^#\t\%([[:alpha:] ]\+: *\)\=\zs.\{-\}\ze\%( (new commits)\)\=$')
@@ -695,16 +717,16 @@ function! s:Commit(args) abort
   let errorfile = tempname()
   try
     execute cd.'`=s:repo().tree()`'
-    let command = ''
     if &shell =~# 'cmd'
+      let command = ''
       let old_editor = $GIT_EDITOR
       let $GIT_EDITOR = 'false'
-    elseif &shell !~# 'csh'
-      let command = 'GIT_EDITOR=false '
+    else
+      let command = 'env GIT_EDITOR=false '
     endif
     let command .= s:repo().git_command('commit').' '.a:args
     if &shell =~# 'csh'
-      silent execute '!setenv GIT_EDITOR false; ('.command.' > '.outfile.') >& '.errorfile
+      silent execute '!('.command.' > '.outfile.') >& '.errorfile
     elseif a:args =~# '\%(^\| \)--interactive\>'
       execute '!'.command.' 2> '.errorfile
     else
@@ -720,7 +742,7 @@ function! s:Commit(args) abort
     else
       let errors = readfile(errorfile)
       let error = get(errors,-2,get(errors,-1,'!'))
-      if error =~# "'false'\\.$"
+      if error =~# '\<false''\=\.$'
         let args = a:args
         let args = s:gsub(args,'%(%(^| )-- )@<!%(^| )@<=%(-[se]|--edit|--interactive)%($| )','')
         let args = s:gsub(args,'%(%(^| )-- )@<!%(^| )@<=%(-F|--file|-m|--message)%(\s+|\=)%(''[^'']*''|"%(\\.|[^"])*"|\\.|\S)*','')
@@ -732,7 +754,7 @@ function! s:Commit(args) abort
         if bufname('%') == '' && line('$') == 1 && getline(1) == '' && !&mod
           edit `=msgfile`
         else
-          split `=msgfile`
+          keepalt split `=msgfile`
         endif
         if old_type ==# 'index'
           bdelete #
@@ -1178,9 +1200,9 @@ function! s:Move(force,destination)
   call fugitive#reload_status()
   if s:buffer().commit() == ''
     if isdirectory(destination)
-      return 'edit '.s:fnameescape(destination)
+      return 'keepalt edit '.s:fnameescape(destination)
     else
-      return 'saveas! '.s:fnameescape(destination)
+      return 'keepalt saveas! '.s:fnameescape(destination)
     endif
   else
     return 'file '.s:fnameescape(s:repo().translate(':0:'.destination)
@@ -1589,10 +1611,8 @@ function! s:ReplaceCmd(cmd,...) abort
       if &shell =~# 'cmd'
         let old_index = $GIT_INDEX_FILE
         let $GIT_INDEX_FILE = a:1
-      elseif &shell =~# 'csh'
-        let prefix = 'setenv GIT_INDEX_FILE '.s:shellesc(a:1).'; '
       else
-        let prefix = 'GIT_INDEX_FILE='.s:shellesc(a:1).' '
+        let prefix = 'env GIT_INDEX_FILE='.s:shellesc(a:1).' '
       endif
     endif
     set noautowrite

@@ -1,3 +1,10 @@
+" Pathogen
+
+filetype off
+call pathogen#runtime_append_all_bundles() " Pathogen hack
+call pathogen#helptags()
+filetype plugin indent on " Enable file-type indentation
+
 " ================
 " Ruby stuff
 " ================
@@ -62,6 +69,8 @@ nmap <D-]> >>
 vmap <D-[> <gv
 vmap <D-]> >gv
 
+" http://sjl.bitbucket.org/gundo.vim/
+nnoremap <F5> :GundoToggle<CR>
 
 " From http://vimcasts.org/episodes/show-invisibles/
 " Shortcut to rapidly toggle `set list`
