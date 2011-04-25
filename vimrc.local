@@ -1,10 +1,3 @@
-" Pathogen
-
-filetype off
-call pathogen#runtime_append_all_bundles() " Pathogen hack
-call pathogen#helptags()
-filetype plugin indent on " Enable file-type indentation
-
 " ================
 " Ruby stuff
 " ================
