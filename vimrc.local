@@ -104,6 +104,9 @@ map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>v :vnew <C-R>=expand("%:p:h") . '/'<CR>
 
+" Open file (for previewing HTML files, etc)
+map <F13> :!open '%'<CR><CR>
+
 " Set the tag file search order
 set tags=./tags;
 
