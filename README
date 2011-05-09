@@ -4,8 +4,20 @@ Credit to Ben Orenstein & Ryan Bates
 
 These are config files to set up a system the way I like it.
 
-Installation
+Step 1: Install dotfiles
 
-  git clone git://github.com/faunzy/dotfiles ~/.dotfiles
-  cd ~/.dotfiles
-  rake install
+  mkdir -p ~/src #make src directory if it doesn't exist
+  git clone git://github.com/faunzy/dotfiles ~/src/dotfiles #clone this repository to your machine
+
+Step 2: Install Janus
+
+  cd ~/src/dotfiles
+  git submodule init #initialize submodule
+  git submodule update #submodule checkout
+  cd vim
+  rake #install janus
+
+Step 3. Symlink
+
+  cd ~/src/dotfiles
+  rake install #backup existing files and symlink new ones
