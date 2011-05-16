@@ -12,3 +12,6 @@ else
 	source ~/.bash/completion_scripts/git_completion
 fi
 complete -o default -o nospace -F _git g
+
+# completion for git-flow
+source ~/.bash/completion_scripts/git_flow/git-flow-completion.bash

@@ -1,3 +1,6 @@
 [submodule "vim"]
 	path = vim
 	url = git@github.com:carlhuda/janus.git
+[submodule "bash/completion_scripts/git_flow"]
+	path = bash/completion_scripts/git_flow
+	url = git://github.com/bobthecow/git-flow-completion.git
