@@ -82,7 +82,6 @@ nmap <leader>l :set list!<CR>
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
 
-
 set nocompatible
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set history=500		" keep 500 lines of command line history
@@ -96,7 +95,6 @@ set directory=~/.tmp " Don't clutter my dirs up with swp and tmp files
 set autoread
 set wmh=0
 set viminfo+=!
-set guioptions-=T
 set guifont=Anonymous\ Pro:h14
 set et
 set sw=2
@@ -107,6 +105,8 @@ set laststatus=2  " Always show status line.
 set number 
 set gdefault " assume the /g flag on :s substitutions to replace all matches in a line
 set autoindent " always set autoindenting on
+set background=dark
+color twilight
 
 " Edit another file in the same directory as the current file
 " uses expression to extract path from current file's path
@@ -130,7 +130,7 @@ set grepprg=ack
 :highlight PmenuSel ctermfg=black
 
 " Fuzzy finder: ignore stuff that can't be opened, and generated files
-let g:fuzzy_ignore = "*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/**;coverage/**;tmp/**;rdoc/**"
+let g:fuzzy_ignore = "*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;*.psd;vendor/**;coverage/**;tmp/**;rdoc/**"
 
 " Highlight the status line
 highlight StatusLine ctermfg=blue ctermbg=yellow

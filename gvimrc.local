@@ -1,2 +1,4 @@
-colorscheme desert
+colorscheme twilight
 set bg=dark
+set guioptions-=T
+set guioptions-=L " disable scrollbar
