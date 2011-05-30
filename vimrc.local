@@ -37,6 +37,7 @@ map <Leader>l :!ruby <C-r>% \| less<CR>
 map <Leader>m :Rmodel 
 map <Leader>n ,w,t
 map <Leader>o ?def <CR>:nohl<CR>w"zy$:!ruby -I"test" <C-r>% -n <C-r>z<CR>
+map <unique> <silent> <D-L> <Plug>PeepOpen "Map peepOpen to Command-shift-L
 map <Leader>p :set paste<CR>i
 imap <Leader>pp  <C-O>:set paste<CR><C-r>*<C-O>:set nopaste<CR>
 map <Leader>rb :Rake!<CR>
@@ -141,9 +142,6 @@ au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 
 set nofoldenable " Fuck code folding...
-
-command Q q " Bind :Q to :q
-command Qall qall 
 
 "set statusline+=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
