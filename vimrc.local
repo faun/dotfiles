@@ -144,6 +144,7 @@ set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 set nofoldenable " Fuck code folding...
 
 "set statusline+=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+map <F6> :NERDTreeToggle<CR>
 
 
 "" Disable all blinking:
