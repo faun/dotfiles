@@ -2,3 +2,9 @@ colorscheme twilight
 set bg=dark
 set guioptions-=T
 set guioptions-=L " disable scrollbar
+ 
+if has("gui_macvim")
+  macmenu &File.New\ Tab key=<nop>
+  map <D-P> <Plug>PeepOpen
+end
+
