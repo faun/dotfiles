@@ -38,7 +38,7 @@ map <Leader>m :Rmodel
 map <Leader>n ,w,t
 map <Leader>o ?def <CR>:nohl<CR>w"zy$:!ruby -I"test" <C-r>% -n <C-r>z<CR>
 map <unique> <silent> <D-L> <Plug>PeepOpen "Map peepOpen to Command-shift-L
-map <Leader>p :set paste<CR>i
+map! <Leader>p :set paste<CR>i
 imap <Leader>pp  <C-O>:set paste<CR><C-r>*<C-O>:set nopaste<CR>
 map <Leader>rb :Rake!<CR>
 map <Leader>rf :FuzzyFinderTextMateRefreshFiles<CR>
