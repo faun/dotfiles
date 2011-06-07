@@ -66,6 +66,7 @@ map <C-x> <C-w>c
 map <C-n> :cn<CR>
 map <C-p> :cp<CR>
 
+nmap <leader:>b :! ruby ~/bin/build_all_in_project.rb %<CR><CR><CR>
 " From http://vimcasts.org/episodes/indentation-commands/
 " Make indent/outdent perform like TextMate 
 nmap <D-[> <<
