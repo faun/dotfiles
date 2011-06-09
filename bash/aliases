@@ -33,7 +33,7 @@ alias gd='git diff'
 alias gdc='git diff --cached'
 alias gg='git lg'
 
-alias update_recursive="~/bin/update_recursive.sh"
+alias update_recursive="~/bin/update_recursive.rb"
 alias update_all="cd ~/Documents/Clients/; update_recursive;"
 
 # Code -----------------------------------------------------------------
