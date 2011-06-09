@@ -3,15 +3,21 @@
 complete -C ~/.bash/completion_scripts/rake_completion -o default rake
 complete -C ~/.bash/completion_scripts/project_completion -o default c
 complete -C ~/.bash/completion_scripts/capistrano_completion -o default cap
-# 
-# git autocompletion via homebrew git installation
-if [ -f `brew --prefix git`/etc/bash_completion.d/git-completion.bash ]; then
-	source `brew --prefix git`/etc/bash_completion.d/git-completion.bash
-else
+
+which brew > /dev/null 2>&1
+return_code=$?
+if [[ $return_code = 0 ]] ; then
+	# git autocompletion via homebrew git installation
+	if [ -f `brew --prefix git`/etc/bash_completion.d/git-completion.bash ]; then
+		source `brew --prefix git`/etc/bash_completion.d/git-completion.bash
+	fi
+elif [ -f $HOME/.bash/completion_scripts/git_completion ]; then
 	#fallback to local copy
-	source ~/.bash/completion_scripts/git_completion
+	source $HOME/.bash/completion_scripts/git_completion
 fi
 complete -o default -o nospace -F _git g
 
 # completion for git-flow
-source ~/.bash/completion_scripts/git_flow/git-flow-completion.bash
+if [ -f $HOME/.bash/completion_scripts/git_flow/git-flow-completion.bash ]; then
+  source $HOME/.bash/completion_scripts/git_flow/git-flow-completion.bash
+fi
