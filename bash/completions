@@ -3,6 +3,7 @@
 complete -C ~/.bash/completion_scripts/rake_completion -o default rake
 complete -C ~/.bash/completion_scripts/project_completion -o default c
 complete -C ~/.bash/completion_scripts/capistrano_completion -o default cap
+source ~/.bash/completion_scripts/git_completion
 
 which brew > /dev/null 2>&1
 return_code=$?
@@ -15,6 +16,7 @@ elif [ -f $HOME/.bash/completion_scripts/git_completion ]; then
 	#fallback to local copy
 	source $HOME/.bash/completion_scripts/git_completion
 fi
+
 complete -o default -o nospace -F _git g
 
 # completion for git-flow
