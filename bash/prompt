@@ -149,9 +149,7 @@ function rvm-prompt-wrapper () {
   fi
 }
 
-#\$(__git_ps1 \"(%s)\")\$(parse_svn_branch)
 export PS1="\[\e[0;33m\]${USER}\[\e[0;31m\]\$(rvm-prompt-wrapper)\[\e[0;32m\]\w\[\e[0;33m\]\$(parse_git_svn_revision)\[\e[0m\]→ "
-# export PS1="\[\e[0;33m\]${USER}\[\e[0;31m\][\$($HOME/.rvm/bin/rvm-prompt s i v p g)]\[\e[0;32m\]\w\[\e[0m\]→ "
 
 export PS2='>'   # Secondary prompt
 export PS3='?'   # Prompt 3
