@@ -144,7 +144,9 @@ function parse_git_branch() {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
 }
 function rvm-prompt-wrapper () {
-	[ -a "$HOME/.rvm/bin/rvm-prompt" ] && echo "[$($HOME/.rvm/bin/rvm-prompt s i v p g)]"
+  if [ -f "$HOME/.rvm/bin/rvm-prompt" ];then
+  	[ -a "$HOME/.rvm/bin/rvm-prompt" ] && echo "[$($HOME/.rvm/bin/rvm-prompt s i v p g)]"
+  fi
 }
 
 #\$(__git_ps1 \"(%s)\")\$(parse_svn_branch)
