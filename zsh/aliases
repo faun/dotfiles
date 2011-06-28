@@ -1,10 +1,29 @@
-# general
+#echo "=> Loading `pwd`/aliases"
+
+# Handle the fact that this file will be used with multiple OSs
+platform=`uname`
+if [[ $platform == 'Linux' ]]; then
+  alias a='ls -lrth --color'
+  alias ls='ls --color=auto'
+  alias get='sudo apt-get install'
+elif [[ $platform == 'Darwin' ]]; then
+  alias a='ls -lrthG'
+  alias ls='ls -G'  # OS-X SPECIFIC - the -G command in OS-X is for colors, in Linux it's no groups
+  if [ -d /Applications/MacVim.app/ ]; then
+    # use MacVim over built-in Mac OS version
+    export PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
+  fi
+fi
+
+# directory listing & navigation
+alias l="ls -lAh"
+alias ll='ls -hl'
+alias la='ls -a'
+alias lla='ls -lah'
+
 alias ..='cd ..'
-alias a='ls -lrth'
-alias aliases='vim ~/.dotfiles/zsh/aliases'
-alias d='cd ~/.dotfiles'
-alias s='screen -dr rails'
-alias so='source ~/.dotfiles/zsh/aliases'
+alias ...='cd .. ; cd ..'
+alias q='exit'
 
 # git
 alias gl='git pull'
@@ -12,12 +31,114 @@ alias gp='git push'
 alias gd='git diff'
 alias gc='git commit'
 alias gca='git commit -a'
+alias gcm='git commit -m'
 alias gco='git checkout'
 alias gb='git branch'
+alias g='git status'
 alias gs='git status'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
+alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gg='git lg'
+
+# Subversion & diff 
+export SV_USER='swinter'  # Change this to your username that you normally use on subversion (only if it is different from your logged in name)
+export SVN_EDITOR='${EDITOR}'
+
+alias sv='svn --username ${SV_USER}'
+alias svimport='sv import'
+alias svcheckout='sv checkout'
+alias svstatus='sv status'
+alias svupdate='sv update'
+alias svstatusonserver='sv status --show-updates' # Show status here and on the server
+alias svcommit='sv commit'
+alias svadd='svn add'
+alias svaddall='svn status | grep "^\?" | awk "{print \$2}" | xargs svn add'
+alias svdelete='sv delete'
+alias svhelp='svn help' 
+alias svblame='sv blame'
+alias svdiff='sv diff'
+
+function svgetinfo (){
+  sv info $@
+  sv log $@
+}
+
+# ruby
+alias irb='irb --readline -r irb/completion'
+
+# RVM
+alias gh='rvm use 1.9.2@github'
+alias r2='rvm use 1.8.7@rails2'
+alias r3='rvm use 1.9.2@rails3'
+alias tra='rvm use 1.9.2@traction'
+alias system='rvm use system'
 
 # rails
 alias sc='script/console'
-alias ss='script/server -p 3001 --debugger'
+alias ss='script/server'
+alias sg='script/generate'
+alias a='autotest -rails'
 alias tlog='tail -f log/development.log'
+alias scaffold='script/generate nifty_scaffold'
+alias migrate='rake db:migrate db:test:clone'
+alias rst='touch tmp/restart.txt'
+
+alias rdm="rake db:migrate"
+alias rdtp="rake db:test:prepare"
+alias rc='rails console'
+alias ss='ruby script/server -p 3001 --debugger'
+alias rs='rails server -p 3001'
+alias rsa='rake spec:all'
+alias sc='script/console'
+alias s='screen -dr rails'
+
+# bundler 
+alias bi='bundle install'
+
+# capistrano
+alias get_db='cap production db:download && rake db:backup:load'
+alias get_db_staging='cap staging db:download && rake db:backup:load SOURCE_ENV=staging'
+
+# misc
+alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
+alias so='source ~/.dotfiles/zsh/aliases'
+alias i='screen -rd irc'
+alias g='grep -i'  # Case insensitive grep
+alias f='find . -iname'
+alias ducks='du -cksh * | sort -rn|head -11' # Lists folders and files sizes in the current folder
+alias m='more'
+alias df='df -h'
+alias lm='!! | more'
+
+alias py='python'
+alias sha1="openssl sha1"
+alias lock="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
+
+alias aliases='vim ~/src/dotfiles/zsh/aliases'
+alias d='cd ~/src/dotfiles'
+
+alias showdirs="cat ~/.dirs | ruby -e \"puts STDIN.read.split.map{|x| x.gsub(/^(.+)=.+$/, '\1')}.join(', ')\""
+
+# commands starting with % for pasting from web
+alias %=' '
+
+# subversion recursive update
+alias update_recursive="~/bin/update_recursive.rb"
+alias update_all="cd ~/Documents/Clients/; update_recursive;"
+
+# Flush DNS cache
+alias flushdns="dscacheutil -flushcache"
+
+#save & show
+if [ ! -f ~/.dirs ]; then  # if doesn't exist, create it
+	touch ~/.dirs
+fi
+
+alias show='cat ~/.dirs'
+save (){
+	command sed "/!$/d" ~/.dirs > ~/.dirs1; \mv ~/.dirs1 ~/.dirs; echo "$@"=\"`pwd`\" >> ~/.dirs; source ~/.dirs ; 
+}
+source ~/.dirs  # Initialization for the above 'save' facility: source the .sdirs file
+setopt CDABLE_VARS
