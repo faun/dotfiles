@@ -21,9 +21,6 @@ export DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git rails rails3 vi-mode rvm svn ssh-agent git ruby osx gem homebrew bundler cap git-flow)
-
-source $ZSH/oh-my-zsh.sh
 
 source $HOME/.zsh/aliases
 source $HOME/.zsh/completion
@@ -45,4 +42,8 @@ export rvm_path="$HOME/.rvm"
 
 __rvm_project_rvmrc
 
-source ~/.oh-my-zsh/oh-my-zsh.sh 
+source $ZSH/oh-my-zsh.sh
+
+source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+plugins=(git rails rails3 rvm svn compleat git ruby pow osx gem brew bundler cap git-flow zsh-syntax-highlighting)
+
