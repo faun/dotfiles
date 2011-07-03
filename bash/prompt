@@ -149,7 +149,7 @@ function rvm-prompt-wrapper () {
   fi
 }
 
-export PS1="\[\e[0;33m\]${USER}\[\e[0;31m\]\$(type -t rvm-prompt-wrapper 2>&1 /dev/null | grep -q "^function$" && echo $(rvm-prompt-wrapper))\[\e[0;32m\]\w\[\e[0;33m\]\$(type -t parse_git_svn_revision 2>&1 /dev/null | grep -q "^function$" && echo $(parse_git_svn_revision))\[\e[0m\]→ "
+export PS1="\[\e[0;33m\]$(whoami)\[\e[0;31m\]\$(type -t rvm-prompt-wrapper 2>&1 /dev/null | grep -q "^function$" && echo $(rvm-prompt-wrapper))\[\e[0;32m\]\w\[\e[0;33m\]\$(type -t parse_git_svn_revision 2>&1 /dev/null | grep -q "^function$" && echo $(parse_git_svn_revision))\[\e[0m\]→ "
 
 export PS2='>'   # Secondary prompt
 export PS3='?'   # Prompt 3
