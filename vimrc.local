@@ -98,7 +98,7 @@ set directory=~/.tmp " Don't clutter my dirs up with swp and tmp files
 set autoread
 set wmh=0
 set viminfo+=!
-set guifont=Anonymous\ Pro:h14
+set guifont=Anonymous\ Pro:h16
 set et
 set sw=2
 set smarttab
