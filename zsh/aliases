@@ -133,14 +133,78 @@ alias update_all="cd ~/Documents/Clients/; update_recursive;"
 # Flush DNS cache
 alias flushdns="dscacheutil -flushcache"
 
-#save & show
+#Directory save & recall with save and show
+
 if [ ! -f ~/.dirs ]; then  # if doesn't exist, create it
-	touch ~/.dirs
+  touch ~/.dirs
 fi
 
 alias show='cat ~/.dirs'
+alias showdirs="cat ~/.dirs | ruby -e \"puts STDIN.read.split(10.chr).sort.map{|x| x.gsub(/^(.+)=.+$/, '\\1')}.join(', ')\""
 save (){
-	command sed "/!$/d" ~/.dirs > ~/.dirs1; \mv ~/.dirs1 ~/.dirs; echo "$@"=\"`pwd`\" >> ~/.dirs; source ~/.dirs ; 
+  local usage
+  usage="Usage: save shortcut_name"
+  if [ $# -lt 1 ]; then
+    echo "$usage"
+    return 1
+  fi
+  if [ $# -gt 1 ]; then
+    echo "Too many arguments!"
+    echo "$usage"
+    return 1
+  fi
+  if [ -z $(echo $@ | grep --color=never "^[a-zA-Z]\w*$") ]; then
+    echo "Bad argument! $@ is not a valid alias!"
+    return 1
+  fi
+  if [ $(cat ~/.dirs | grep --color=never "^$@=" | wc -l) -gt 0 ]; then
+    echo -n "That alias is already set to: "
+    echo $(cat ~/.dirs | awk "/^$@=/" | sed "s/^$@=//" | tail -1)
+    read -p "Do you want to overwrite it? (y/n) " answer
+    if [ ! "$answer" == "y" -a ! "$answer" == "yes" ]; then
+      return 0
+    else
+      # backup just in case
+      cp ~/.dirs ~/.dirs.bak
+      # delete existing version(s) of this alias
+      $(cat ~/.dirs | sed "s/^$@=.*//" | sed '/^$/d' > ~/.dirs)
+    fi
+  fi
+  echo "$@"=\"`pwd`\" >> ~/.dirs
+  source ~/.dirs
+  echo "Directory shortcuts:" `showdirs`
 }
-source ~/.dirs  # Initialization for the above 'save' facility: source the .sdirs file
-setopt CDABLE_VARS
+source ~/.dirs  # Initialization for the above 'save' facility: source the .dirs file
+setopt CDABLE_VARS # set the zsh option so that no '$' is required when using the above facility
+
+# show dirs at login
+echo "Directory shortcuts:" `showdirs`
+
+######## misc ##########
+
+# mkdir, cd into it
+mkcd () {
+  mkdir -p "$*"
+  cd "$*"
+}
+
+# Trash files
+function trash () {
+  local path
+  for path in "$@"; do
+    # ignore any arguments
+    if [[ "$path" = -* ]]; then :
+    else
+      local dst=${path##*/}
+      # append the time if necessary
+      while [ -e ~/.Trash/"$dst" ]; do
+        dst="$dst "$(date +%H-%M-%S)
+      done
+      mv "$path" ~/.Trash/"$dst"
+    fi
+  done
+}
+
+function copypath () {
+  echo -n $PWD | pbcopy
+}
