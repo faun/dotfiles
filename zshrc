@@ -1,12 +1,5 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-export ZSH_THEME="murilasso"
-
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
 
@@ -21,11 +14,6 @@ export DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-
-source $HOME/.zsh/aliases
-source $HOME/.zsh/completion
-source $HOME/.zsh/config
-source $HOME/.zsh/paths
 
 # use .localrc for settings specific to one system
 [[ -f ~/.localrc ]] && .  ~/.localrc
@@ -47,3 +35,21 @@ source $ZSH/oh-my-zsh.sh
 source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 plugins=(git rails rails3 rvm svn compleat git ruby pow osx gem brew bundler cap git-flow zsh-syntax-highlighting)
 
+source $HOME/.zsh/aliases
+source $HOME/.zsh/completion
+source $HOME/.zsh/config
+source $HOME/.zsh/paths
+
+# override default rvm_prompt_info
+function rvm_prompt_info() {
+  ruby_version=$(~/.rvm/bin/rvm-prompt s i v p 2> /dev/null) || return
+  echo "($ruby_version)"
+}
+
+source $HOME/.zsh/faunzy.zsh-theme
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+# export ZSH_THEME="random"
