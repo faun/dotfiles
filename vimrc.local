@@ -98,7 +98,6 @@ set directory=~/.tmp " Don't clutter my dirs up with swp and tmp files
 set autoread
 set wmh=0
 set viminfo+=!
-set guifont=Anonymous\ Pro:h16
 set et
 set sw=2
 set smarttab
@@ -108,8 +107,10 @@ set laststatus=2  " Always show status line.
 set number 
 set gdefault " assume the /g flag on :s substitutions to replace all matches in a line
 set autoindent " always set autoindenting on
-set background=dark
-color twilight
+
+set guifont=Anonymous\ Pro:h14
+set background=light
+color bclear
 
 " Edit another file in the same directory as the current file
 " uses expression to extract path from current file's path

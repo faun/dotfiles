@@ -1,7 +1,8 @@
-colorscheme twilight
-set bg=dark
+colorscheme bclear
+set bg=light
 set guioptions-=T
 set guioptions-=L " disable scrollbar
+set guioptions-=r " disable right-hand scrollbar
  
 if has("gui_macvim")
   macmenu &File.New\ Tab key=<nop>
