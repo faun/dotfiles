@@ -91,9 +91,9 @@ map <S-space> ?
 
 set nocompatible
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
-set history=500		" keep 500 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
+set history=500  " keep 500 lines of command line history
+set ruler " show the cursor position all the time
+set showcmd  " display incomplete commands
 set autoindent
 set showmatch
 set nowrap
@@ -151,8 +151,9 @@ set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 set nofoldenable " Fuck code folding...
 
 "set statusline+=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-map <F6> :NERDTreeToggle<CR>
 
+" toggle NERDTree with F6
+map <F6> :NERDTreeToggle<CR>
 
 "" Disable all blinking:
 set guicursor+=a:blinkon0
@@ -226,6 +227,7 @@ endif
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
+
 " Source the vimrc file after saving it
   autocmd! bufwritepost vimrc.local source %
   " Enable file type detection.
