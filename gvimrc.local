@@ -9,3 +9,7 @@ if has("gui_macvim")
   map <D-P> <Plug>PeepOpen
 end
 
+
+if exists("loaded_nerd_tree")
+    autocmd VimEnter * NERDTreeClose
+endif
