@@ -9,8 +9,8 @@
 	br = branch
 	co = checkout
 	df = diff
-  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-  logc = log --graph --pretty=format:'%C(yellow)commit %h %Creset(%cr)%nAuthor: %C(green)%aN <%aE>%Creset%n%n    %Cblue%s%Creset%n '
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+	logc = log --graph --pretty=format:'%C(yellow)commit %h %Creset(%cr)%nAuthor: %C(green)%aN <%aE>%Creset%n%n %Cblue%s%Creset%n '
 	d = difftool
 
 [color "branch"]
@@ -37,11 +37,11 @@
 	ui = auto
 
 [merge]
-  tool = mvim
+	tool = mvim
 
 [mergetool "mvim"]
-  cmd=mvim -d -g $LOCAL $MERGED $REMOTE
-  keepbackup=false
+	cmd=mvim -d -g $LOCAL $MERGED $REMOTE
+	keepbackup=false
 
 [core]
 	excludesfile = ~/.gitignore
@@ -71,4 +71,4 @@
 [difftool "Kaleidoscope"]
 	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
 [difftool "mvim"]
-  cmd = mvim -d \"$LOCAL\" \"$REMOTE\"
+	cmd = mvim -d \"$LOCAL\" \"$REMOTE\"
