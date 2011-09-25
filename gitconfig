@@ -64,7 +64,7 @@
 	prompt = false
 
 [diff]
-	tool = mvim
+	tool = Kaleidoscope
 
 [difftool "Changes"]
 	cmd = chdiff \"$LOCAL\" \"$REMOTE\"
