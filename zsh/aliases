@@ -17,9 +17,9 @@ elif [[ $platform == 'Darwin' ]]; then
     # use MacVim over built-in Mac OS version
     export PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
     alias e='mvim . 2>/dev/null'
-    alias -g vi='MacVim 2>/dev/null'
+    alias vi='MacVim 2>/dev/null'
     export EDITOR='mvim -f --nomru -c "au VimLeave * !open -a Terminal"'
-    alias -g vimdiff="MacVim -d 2>/dev/null"
+    alias vimdiff="MacVim -d 2>/dev/null"
   fi
   
   # Change to current Finder directory
