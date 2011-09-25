@@ -11,10 +11,12 @@ elif [[ $platform == 'Darwin' ]]; then
   alias a='ls -lrthG'
   alias ls='ls -G'  # OS-X SPECIFIC - the -G command in OS-X is for colors, in Linux it's no groups
   export EDITOR="vim"
-	if [ -d /Applications/MacVim.app/ ]; then
-		# use MacVim over built-in Mac OS version
-		export PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
-	fi
+  if [ -d /Applications/MacVim.app/ ]; then
+    # use MacVim over built-in Mac OS version
+    export PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
+  fi
+  # Change to current Finder directory
+  cd "`osascript -e 'tell application "Finder" to if window 1 exists then if target of window 1 as string is not ":" then get POSIX path of (target of window 1 as alias)'`"
 fi
 
 # Other Editors ----------------------------------------------------------

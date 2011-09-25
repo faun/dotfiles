@@ -12,6 +12,7 @@ elif [[ $platform == 'Darwin' ]]; then
   alias ls='ls -G'  # OS-X SPECIFIC - the -G command in OS-X is for colors, in Linux it's no groups
   alias show_invisibles='defaults write com.Apple.Finder AppleShowAllFiles true'
   alias hide_invisibles='defaults write com.Apple.Finder AppleShowAllFiles false'
+
   if [ -d /Applications/MacVim.app/ ]; then
     # use MacVim over built-in Mac OS version
     export PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
@@ -20,6 +21,9 @@ elif [[ $platform == 'Darwin' ]]; then
     export EDITOR='mvim -f --nomru -c "au VimLeave * !open -a Terminal"'
     alias -g vimdiff="MacVim -d 2>/dev/null"
   fi
+  
+  # Change to current Finder directory
+  cd "`osascript -e 'tell application "Finder" to if window 1 exists then if target of window 1 as string is not ":" then get POSIX path of (target of window 1 as alias)'`"
 fi
 
 # directory listing & navigation
