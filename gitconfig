@@ -72,3 +72,5 @@
 	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
 [difftool "mvim"]
 	cmd = mvim -d \"$LOCAL\" \"$REMOTE\"
+[init]
+	templatedir = ~/.git_template
