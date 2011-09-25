@@ -6,6 +6,7 @@ if [[ $platform == 'Linux' ]]; then
   alias a='ls -lrth --color'
   alias ls='ls --color=auto'
   alias get='sudo apt-get install'
+  export EDITOR=$(which vim)
 elif [[ $platform == 'Darwin' ]]; then
   alias a='ls -lrthG'
   alias ls='ls -G'  # OS-X SPECIFIC - the -G command in OS-X is for colors, in Linux it's no groups
@@ -15,6 +16,9 @@ elif [[ $platform == 'Darwin' ]]; then
     # use MacVim over built-in Mac OS version
     export PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
     alias e='mvim . 2>/dev/null'
+    alias -g vi='MacVim 2>/dev/null'
+    export EDITOR='mvim -f --nomru -c "au VimLeave * !open -a Terminal"'
+    alias -g vimdiff="MacVim -d 2>/dev/null"
   fi
 fi
 

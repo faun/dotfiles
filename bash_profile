@@ -22,7 +22,6 @@ export rvm_path="$HOME/.rvm"
 [[ -s $rvm_path/scripts/rvm ]] && source $rvm_path/scripts/rvm
 [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
 
-
 # Notes: ----------------------------------------------------------
 # When you start an interactive shell (log in, open terminal or iTerm in OS X, 
 # or create a new tab in iTerm) the following files are read and run, in this order:
