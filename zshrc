@@ -43,7 +43,6 @@ plugins=(git rails rails3 rvm svn compleat git ruby pow osx gem brew bundler cap
 source $HOME/.zsh/aliases
 source $HOME/.zsh/completion
 source $HOME/.zsh/config
-source $HOME/.zsh/paths
 
 # override default rvm_prompt_info
 function rvm_prompt_info() {
