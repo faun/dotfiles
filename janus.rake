@@ -26,8 +26,6 @@ vim_plugin_task "css-snippets-snipmate", do
   sh "curl 'https://raw.github.com/tisho/css-snippets-snipmate/master/css.snippets' -o snippets/css.snippets"
 end
 
-remove_plugin_task "jslint"
-vim_plugin_task "jshint", "https://github.com/wookiehangover/jshint.vim.git"
 vim_plugin_task "ruby", "https://github.com/vim-ruby/vim-ruby.git"
 vim_plugin_task "repeat", "git://github.com/tpope/vim-repeat.git"
 vim_plugin_task "liquid", "git://github.com/vim-ruby/vim-ruby.git"
@@ -41,6 +39,9 @@ vim_plugin_task "delimitMate", "https://github.com/Raimondi/delimitMate.git"
 vim_plugin_task "css-color", "https://github.com/ap/vim-css-color.git" do
   sh "cp after/syntax/{css,less}.vim"
   sh "cp after/syntax/{css,scss}.vim"
+end
+vim_plugin_task "hammer",           "git://github.com/robgleeson/hammer.vim.git" do
+  sh "gem install github-markup redcarpet"
 end
 
 vim_plugin_task "html5-syntax",     "git://github.com/othree/html5-syntax.vim.git"

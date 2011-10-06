@@ -30,6 +30,11 @@ export rvm_path="$HOME/.rvm"
 
 __rvm_project_rvmrc
 
+mvim()
+{
+  (unset GEM_PATH GEM_HOME; command mvim "$@")
+}
+
 source $ZSH/oh-my-zsh.sh
 
 source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
