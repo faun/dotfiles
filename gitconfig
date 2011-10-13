@@ -2,9 +2,12 @@
 	name = Faun
 	email = faun@riseup.net
 
+[github]
+	user = faunzy
+
 [alias]
 	co = checkout
-	st = status
+  st = status -sb
 	ci = commit
 	br = branch
 	co = checkout
@@ -12,6 +15,7 @@
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %Cblue[%cN]%Creset' --abbrev-commit --date=relative
 	logc = log --graph --pretty=format:'%C(yellow)commit %h %Creset(%cr)%nAuthor: %C(green)%aN <%aE>%Creset%n%n %Cblue%s%Creset%n '
 	d = difftool
+	dt = difftool --cached
 
 [color "branch"]
 	current = yellow reverse
@@ -55,7 +59,7 @@
 	autocorrect = 1
 
 [branch]
-	autosetupmerge = true
+	autosetuprebase = always
 
 [push]
 	default = tracking
