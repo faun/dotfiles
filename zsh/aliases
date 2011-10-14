@@ -40,17 +40,20 @@ alias q='exit'
 alias gl='git pull'
 alias gp='git push'
 alias gd='git diff'
+alias ga='git add'
 alias gc='git commit'
 alias gca='git commit -a'
 alias gcm='git commit -m'
+alias gcam='git commit -am'
 alias gco='git checkout'
 alias gb='git branch'
-alias g='git status'
+alias g='git status -sb'
 alias gs='git status'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
-alias gd='git diff'
-alias gdc='git diff --cached'
+alias dt='git difftool'
+alias dtc='git difftool --cached'
+alias dth='git difftool HEAD'
 alias gg='git lg'
 
 # Subversion & diff 
@@ -116,7 +119,6 @@ alias get_db_staging='cap staging db:download && rake db:backup:load SOURCE_ENV=
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
 alias so='source ~/.dotfiles/zsh/aliases'
 alias i='screen -rd irc'
-alias g='grep -i'  # Case insensitive grep
 alias f='find . -iname'
 alias ducks='du -cksh * | sort -rn|head -11' # Lists folders and files sizes in the current folder
 alias m='more'
