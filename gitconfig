@@ -16,6 +16,7 @@
 	logc = log --graph --pretty=format:'%C(yellow)commit %h %Creset(%cr)%nAuthor: %C(green)%aN <%aE>%Creset%n%n %Cblue%s%Creset%n '
 	d = difftool
 	dt = difftool --cached
+	wdiff = diff --color-words
 
 [color "branch"]
 	current = yellow reverse
@@ -31,8 +32,8 @@
 	whitespace = red reverse
 	meta = yellow bold
 	frag = magenta bold
-	old = red bold
-	new = green bold
+	old = red
+	new = green
 
 [color]
 	diff = auto
@@ -42,6 +43,7 @@
 
 [merge]
 	tool = mvim
+	stat = true
 
 [mergetool "mvim"]
 	cmd=mvim -d -g $LOCAL $MERGED $REMOTE
@@ -53,7 +55,7 @@
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
 [apply]
-	whitespace = nowarn
+	whitespace = fix
 
 [help]
 	autocorrect = 1
