@@ -71,6 +71,8 @@
 
 [diff]
 	tool = Kaleidoscope
+	renames = copies
+	mnemonicprefix = true
 
 [difftool "Changes"]
 	cmd = chdiff \"$LOCAL\" \"$REMOTE\"
