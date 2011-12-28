@@ -55,6 +55,7 @@ alias dt='git difftool'
 alias dtc='git difftool --cached'
 alias dth='git difftool HEAD'
 alias gg='git lg'
+alias today='git lg --since="1 day ago"'
 
 # Subversion & diff 
 export SV_USER='swinter'  # Change this to your username that you normally use on subversion (only if it is different from your logged in name)
