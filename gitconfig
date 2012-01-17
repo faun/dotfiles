@@ -17,6 +17,7 @@
 	d = difftool
 	dt = difftool --cached
 	wdiff = diff --color-words
+	clone = clone --recursive
 
 [color "branch"]
 	current = yellow reverse
