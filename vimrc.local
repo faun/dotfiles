@@ -116,6 +116,9 @@ set guifont=Anonymous\ Pro:h14
 set background=light
 color bclear
 
+" Remove splash screen
+set shortmess+=I
+
 " Edit another file in the same directory as the current file
 " uses expression to extract path from current file's path
 map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
