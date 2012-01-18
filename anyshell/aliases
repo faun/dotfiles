@@ -189,7 +189,6 @@ save (){
   echo "Directory shortcuts:" `showdirs`
 }
 source ~/.dirs  # Initialization for the above 'save' facility: source the .dirs file
-setopt CDABLE_VARS # set the zsh option so that no '$' is required when using the above facility
 
 # show dirs at login
 echo "Directory shortcuts:" `showdirs`
