@@ -139,6 +139,7 @@ alias showdirs="cat ~/.dirs | ruby -e \"puts STDIN.read.split.map{|x| x.gsub(/^(
 # commands starting with % for pasting from web
 alias %=' '
 
+
 # subversion recursive update
 alias update_recursive="~/bin/update_recursive.rb"
 alias update_all="cd ~/Documents/Clients/; update_recursive;"

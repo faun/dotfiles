@@ -1,6 +1,6 @@
 #echo "=> Loading `pwd`/bash_profile"
 
-source ~/.bash/aliases
+source ~/.anyshell/aliases
 source ~/.bash/completions
 source ~/.bash/paths
 source ~/.bash/config

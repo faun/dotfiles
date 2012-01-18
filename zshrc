@@ -40,7 +40,7 @@ source $ZSH/oh-my-zsh.sh
 source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 plugins=(git rails rails3 rvm svn compleat git ruby pow osx gem brew bundler cap git-flow zsh-syntax-highlighting)
 
-source $HOME/.zsh/aliases
+source $HOME/.anyshell/aliases
 source $HOME/.zsh/completion
 source $HOME/.zsh/config
 
