@@ -49,7 +49,7 @@ alias gco='git checkout'
 alias gb='git branch'
 alias g='git status -sb'
 alias gs='git status'
-alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
+alias grm='git status --porcelain | ruby -e "puts STDIN.read.scan(/^\\s+D\\s+(.+)\$/).join(\"\\n\")" | xargs git rm'
 alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
 alias dt='git difftool'
 alias dtc='git difftool --cached'
