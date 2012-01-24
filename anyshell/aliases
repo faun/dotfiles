@@ -37,7 +37,7 @@ alias ...='cd .. ; cd ..'
 alias q='exit'
 
 # git
-alias gl='git pull'
+alias gl='git pull --rebase'
 alias gp='git push'
 alias gd='git diff'
 alias ga='git add'
