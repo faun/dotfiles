@@ -115,7 +115,7 @@ alias get_db_staging='cap staging db:download && rake db:backup:load SOURCE_ENV=
 
 # misc
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
-alias so='source ~/.dotfiles/zsh/aliases'
+alias so='source $HOME/.dotfiles/zsh/aliases'
 alias i='screen -rd irc'
 alias f='find . -iname'
 alias ducks='du -cksh * | sort -rn|head -11' # Lists folders and files sizes in the current folder
@@ -128,10 +128,10 @@ alias py='python'
 alias sha1="openssl sha1"
 alias lock="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
 
-alias aliases='vim ~/src/dotfiles/zsh/aliases'
-alias d='cd ~/src/dotfiles'
+alias aliases='vim $HOME/src/dotfiles/zsh/aliases'
+alias d='cd $HOME/src/dotfiles'
 
-alias showdirs="cat ~/.dirs | ruby -e \"puts STDIN.read.split.map{|x| x.gsub(/^(.+)=.+$/, '\1')}.join(', ')\""
+alias showdirs="cat $HOME/.dirs | ruby -e \"puts STDIN.read.split.map{|x| x.gsub(/^(.+)=.+$/, '\1')}.join(', ')\""
 
 # commands starting with % for pasting from web
 alias %=' '

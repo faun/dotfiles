@@ -16,11 +16,11 @@ export DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
 # use .localrc for settings specific to one system
-[[ -f ~/.localrc ]] && .  ~/.localrc
+[[ -f $HOME/.localrc ]] && .  $HOME/.localrc
 
 # Add bin directory to path
-if [ -d ~/bin ]; then
- export PATH="~/bin:$PATH"
+if [ -d $HOME/bin ]; then
+ export PATH="$HOME/bin:$PATH"
 fi
 
 # Enable RVM
@@ -32,7 +32,7 @@ __rvm_project_rvmrc
 
 source $ZSH/oh-my-zsh.sh
 
-source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 plugins=(git rails rails3 svn textmate compleat ruby pow osx gem brew bundler cap git-flow zsh-syntax-highlighting)
 
 source $HOME/.anyshell/functions
