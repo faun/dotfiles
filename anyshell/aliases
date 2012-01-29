@@ -21,9 +21,6 @@ elif [[ $platform == 'Darwin' ]]; then
     export EDITOR='mvim -f --nomru'
     alias vimdiff="mvim -d"
   fi
-
-  # Change to current Finder directory
-  cd "`osascript -e 'tell application "Finder" to if window 1 exists then if target of window 1 as string is not ":" then get POSIX path of (target of window 1 as alias)'`"
 fi
 
 # directory listing & navigation
