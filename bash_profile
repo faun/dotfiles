@@ -1,22 +1,23 @@
 #echo "=> Loading `pwd`/bash_profile"
 
-source ~/.anyshell/aliases
-source ~/.bash/aliases
-source ~/.bash/completions
-source ~/.bash/paths
-source ~/.bash/config
+source $HOME/.anyshell/functions
+source $HOME/.anyshell/aliases
+source $HOME/.bash/aliases
+source $HOME/.bash/completions
+source $HOME/.bash/paths
+source $HOME/.bash/config
 
 # Add bin directory to path
-if [ -d ~/bin ]; then
- export PATH="~/bin:$PATH"
+if [ -d $HOME/bin ]; then
+ export PATH="$HOME/bin:$PATH"
 fi
 
 # Load in .bashrc
-if [ -f ~/.bashrc ]; then
-  . ~/.bashrc
+if [ -f $HOME/.bashrc ]; then
+  . $HOME/.bashrc
 fi
-source ~/.bash/colors
-source ~/.bash/prompt
+source $HOME/.bash/colors
+source $HOME/.bash/prompt
 
 export rvm_path="$HOME/.rvm"
 # Enable RVM

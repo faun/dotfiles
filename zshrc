@@ -40,20 +40,11 @@ source $ZSH/oh-my-zsh.sh
 source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 plugins=(git rails rails3 svn textmate compleat ruby pow osx gem brew bundler cap git-flow zsh-syntax-highlighting)
 
+source $HOME/.anyshell/functions
 source $HOME/.anyshell/aliases
 source $HOME/.zsh/aliases
 source $HOME/.zsh/completion
 source $HOME/.zsh/config
-
-# override default rvm_prompt_info
-function rvm_prompt_info() {
-  ruby_version=$(~/.rvm/bin/rvm-prompt i v p 2> /dev/null)
-  if [[ -n $ruby_version ]]; then
-    echo "($ruby_version)"
-  else
-    echo "(system)"
-  fi
-}
 
 source $HOME/.zsh/faunzy.zsh-theme
 
