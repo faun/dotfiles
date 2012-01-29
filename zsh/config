@@ -36,6 +36,7 @@ setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
 setopt HIST_REDUCE_BLANKS
 
 unsetopt correct_all # don't autocorrect
+unsetopt correct
 
 zle -N newtab
 
