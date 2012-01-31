@@ -141,7 +141,7 @@ function parse_git_svn_revision() {
       else
           echo " ${ref1} "
       fi
-    elif [ "`svnversion`" != "exported"  ];then 
+    elif [ "`svnversion`" != "exported" ] && [ "`svnversion`" != "Unversioned directory" ];then 
       echo "(svn:`parse_svn_branch``parse_svn_dirty`)"
     fi
 }
