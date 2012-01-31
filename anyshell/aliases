@@ -7,11 +7,16 @@ if [[ $platform == 'Linux' ]]; then
   alias ls='ls --color=auto'
   alias get='sudo apt-get install'
   export EDITOR=$(which vim)
+elif [[ $platform == 'FreeBSD' ]]; then
+  export EDITOR=$(which vi)
 elif [[ $platform == 'Darwin' ]]; then
   alias a='ls -lrthG'
   alias ls='ls -G'  # OS-X SPECIFIC - the -G command in OS-X is for colors, in Linux it's no groups
   alias show_invisibles='defaults write com.Apple.Finder AppleShowAllFiles true'
   alias hide_invisibles='defaults write com.Apple.Finder AppleShowAllFiles false'
+  alias open_html='open -a Safari build/*/index_us.html'
+  alias lock="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
+  alias flushdns="dscacheutil -flushcache"
 
   if [ -d /Applications/MacVim.app/ ]; then
     # use MacVim over built-in Mac OS version
@@ -120,10 +125,8 @@ alias m='more'
 alias df='df -h'
 alias lm='!! | more'
 
-alias open_html='open -a Safari build/*/index_us.html'
 alias py='python'
 alias sha1="openssl sha1"
-alias lock="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
 
 alias aliases='vim $HOME/src/dotfiles/zsh/aliases'
 alias d='cd $HOME/src/dotfiles'
@@ -133,5 +136,3 @@ alias showdirs="cat $HOME/.dirs | ruby -e \"puts STDIN.read.split.map{|x| x.gsub
 # commands starting with % for pasting from web
 alias %=' '
 
-# Flush DNS cache
-alias flushdns="dscacheutil -flushcache"
