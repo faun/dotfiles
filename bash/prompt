@@ -33,11 +33,6 @@ function parse_svn_branch() {
   fi
 }
 
-function parse_svn_revisions_behind() {
-  # shows how many commits behind remote server
-  echo $(parse_svn_revision) $(svnversion) | awk '{print $1 - int($2)}'
-}
-
 function parse_svn_dirty() {
   if [ -d ".svn" ]; then
     status=`svn status 2> /dev/null`
@@ -149,13 +144,8 @@ function parse_git_svn_revision() {
 function parse_git_branch() {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
 }
-function rvm-prompt-wrapper () {
-  if [ -f "$HOME/.rvm/bin/rvm-prompt" ];then
-  	[ -a "$HOME/.rvm/bin/rvm-prompt" ] && echo "[$($HOME/.rvm/bin/rvm-prompt s i v p g)]"
-  fi
-}
 
-export PS1="\[\e[0;33m\]${USER}\[\e[0;31m\]@\[\e[0;34m\]\h\[\e[0;31m\]\$(type -t rvm-prompt-wrapper 2>&1 /dev/null | grep -q '^function$' && echo $(rvm-prompt-wrapper) || echo '')\[\e[0;32m\]\w\[\e[0;33m\]\$(type -t parse_git_svn_revision 2>&1 /dev/null | grep -q '^function$' && echo \$(parse_git_svn_revision))\[\e[0m\]→ "
+export PS1="\[\e[0;33m\]${USER}\[\e[0;31m\]@\[\e[0;34m\]\h\[\e[0;31m\]\$(rvm_prompt_info)\[\e[0;32m\]\w\[\e[0m\]→ "
 
 export PS2='>'   # Secondary prompt
 export PS3='?'   # Prompt 3
