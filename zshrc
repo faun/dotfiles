@@ -48,3 +48,5 @@ source $HOME/.zsh/faunzy.zsh-theme
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # export ZSH_THEME="random"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
