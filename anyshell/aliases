@@ -117,6 +117,7 @@ alias s='screen -dr rails'
 
 # bundler 
 alias bi='bundle install'
+alias be='bundle exec'
 
 # capistrano
 alias get_db='cap production db:download && rake db:backup:load'
