@@ -126,7 +126,7 @@ alias get_db_staging='cap staging db:download && rake db:backup:load SOURCE_ENV=
 
 # misc
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
-alias so='source $HOME/.dotfiles/zsh/aliases'
+alias so='source $HOME/src/dotfiles/anyshell/aliases'
 alias i='screen -rd irc'
 alias f='find . -iname'
 alias ducks='du -cksh * | sort -rn|head -11' # Lists folders and files sizes in the current folder
