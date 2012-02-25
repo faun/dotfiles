@@ -1,4 +1,4 @@
-colorscheme bclear
+colorscheme solarized
 set bg=light
 set guioptions-=T
 set guioptions-=L " disable scrollbar

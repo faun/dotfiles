@@ -115,6 +115,7 @@ set autoindent " always set autoindenting on
 set guifont=Anonymous\ Pro:h14
 set background=light
 color bclear
+colorscheme solarized
 
 " Remove splash screen
 set shortmess+=I
