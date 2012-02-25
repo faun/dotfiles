@@ -22,6 +22,7 @@ elif [[ $platform == 'Darwin' ]]; then
     # use MacVim over built-in Mac OS version
     export PATH="$PATH:/Applications/MacVim.app/Contents/MacOS"
     alias mvim='MacVim'
+    alias vim='Vim'
     export EDITOR='vim -f'
     alias vimdiff="MacVim -d"
   fi
