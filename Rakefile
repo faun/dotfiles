@@ -34,9 +34,9 @@ def replace_file(filename)
 end
 
 def backup_file(filename)
-  center_command "Backing up $HOME/#{filename} to $HOME/_dot_backups/#{@timestamp}/#{filename}"
-  center_command %Q{mkdir -p "$HOME/_dot_backups/#{@timestamp}"}
-  center_command %Q{cp -Rf "$HOME/#{filename}" "$HOME/_dot_backups/#{@timestamp}/#{filename}"}
+  system "Backing up $HOME/#{filename} to $HOME/_dot_backups/#{@timestamp}/#{filename}"
+  system %Q{mkdir -p "$HOME/_dot_backups/#{@timestamp}"}
+  system %Q{cp -Rf "$HOME/#{filename}" "$HOME/_dot_backups/#{@timestamp}/#{filename}"}
 end
 
 def replace(filename)
@@ -57,12 +57,12 @@ def replace(filename)
 end
 
 def link_file(filename)
-  center_command %Q{ln -s "#{currentpath(filename.gsub(/^./, ""))}" "#{homepath(filename)}"}
+  system %Q{ln -s "#{currentpath(filename.gsub(/^./, ""))}" "#{homepath(filename)}"}
 end
 
 def remove_file(filepath)
-   center_command %Q{rm -rf #{filepath}}
-   center_command %Q{rm -rf #{filepath}}
+   system %Q{rm -rf #{filepath}}
+   system %Q{rm -rf #{filepath}}
 end
 
 def homepath(filename)
@@ -79,10 +79,6 @@ def divider
   puts
 end
 
-def center_command(command)
-  system(command).center(NUM)
-end
-
 def center_string(string)
   puts string.center(NUM)
 end
@@ -97,7 +93,7 @@ namespace :install do
     %w{.gvimrc.old .vimrc.old .vim.old}.each do |file|
       old_file = "#{home}/#{file}"
       if File.exist? old_file
-        center_command("rm -rf #{old_file}")
+        system("rm -rf #{old_file}")
       end
     end
     system("curl -Lo- http://bit.ly/janus-bootstrap | bash")
