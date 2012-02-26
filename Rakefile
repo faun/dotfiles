@@ -92,8 +92,9 @@ namespace :install do
   task :janus do
     %w{.gvimrc.old .vimrc.old .vim.old}.each do |file|
       old_file = "#{home}/#{file}"
-      if File.exist? old_file
-        system("rm -rf #{old_file}")
+      if File.exist? old_file or File.directory? old_file or File.symlink? old_file
+        puts "removing #{old_file}"
+        remove_file(old_file)
       end
     end
     system("curl -Lo- http://bit.ly/janus-bootstrap | bash")
