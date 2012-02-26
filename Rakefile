@@ -61,7 +61,7 @@ def link_file(filename)
 end
 
 def remove_file(filepath)
-   system %Q{rm -rf #{filepath}}
+   puts %Q{rm -rf #{filepath}}
    system %Q{rm -rf #{filepath}}
 end
 
