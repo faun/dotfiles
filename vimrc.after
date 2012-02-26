@@ -22,8 +22,6 @@ filetype plugin indent on " Enable filetype-specific indenting and plugins
 
 " ================
 
-let mapleader = ","
-
 vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 map <Leader>cc :!cucumber %<CR>
 map <Leader>co :TComment<CR>
@@ -108,7 +106,7 @@ set smarttab
 set incsearch
 set ignorecase smartcase
 set laststatus=2  " Always show status line.
-set number 
+set number
 set gdefault " assume the /g flag on :s substitutions to replace all matches in a line
 set autoindent " always set autoindenting on
 
