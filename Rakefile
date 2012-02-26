@@ -4,10 +4,19 @@ require 'ftools' if RUBY_VERSION < "1.9"
 home = `printf $HOME`
 timestamp = Time.now.strftime("%Y-%m-%d_%I-%M-%S")
 
-task :install => 'install:files'
+task :default => 'install:all'
 
 namespace :install do
 
+  task :all do
+     Rake::Task['install:janus'].invoke
+     Rake::Task['install:files'].invoke
+  end
+
+  task :janus do
+    system("curl -Lo- http://bit.ly/janus-bootstrap | bash")
+  end
+  
   desc "install the dot files into user's home directory"
   task :files do
 
