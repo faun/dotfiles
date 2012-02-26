@@ -2,66 +2,119 @@ require 'rake'
 require 'ftools' if RUBY_VERSION < "1.9"
 
 home = `printf $HOME`
-timestamp = Time.now.strftime("%Y-%m-%d_%I-%M-%S")
+@timestamp = Time.now.strftime("%Y-%m-%d_%H-%M-%S")
+@replace_all = false
+NUM = 75
 
 task :default => 'install:all'
 
-namespace :install do
+def replace_file(filename)
+  dest_file = homepath(filename)
+  if (File.exist? dest_file) && !(File.symlink? dest_file)
+    if @replace_all
+      replace(filename)
+    else
+      print "Overwrite #{dest_file}? [ynaq] "
+      case $stdin.gets.chomp
+      when 'a'
+        puts "Replacing all files..."
+        @replace_all = true
+        replace(filename)
+      when 'y'
+        replace(filename)
+      when 'q'
+        exit
+      else
+        puts "Skipping #{dest_file}"
+      end
+    end
+  else
+    replace(filename)
+  end
+end
 
+def backup_file(filename)
+  center_command "Backing up $HOME/#{filename} to $HOME/_dot_backups/#{@timestamp}/#{filename}"
+  center_command %Q{mkdir -p "$HOME/_dot_backups/#{@timestamp}"}
+  center_command %Q{cp -Rf "$HOME/#{filename}" "$HOME/_dot_backups/#{@timestamp}/#{filename}"}
+end
+
+def replace(filename)
+  filepath = homepath(filename)
+  if (File.exist? filepath) && !(File.symlink? filepath)
+    center_string "#{filepath} is a regular file, replacing."
+    backup_file(filename)
+    remove_file(filepath)
+    link_file(filename)
+  elsif (File.symlink? filepath)
+    center_string "#{filepath} is a symlink, replacing."
+    remove_file(filepath)
+    link_file(filename)
+  elsif !(File.exist? filepath)
+    center_string "#{filepath} doesn't exist, linking."
+    link_file(filename)
+  end
+end
+
+def link_file(filename)
+  center_command %Q{ln -s "#{currentpath(filename.gsub(/^./, ""))}" "#{homepath(filename)}"}
+end
+
+def remove_file(filepath)
+   center_command %Q{rm -rf #{filepath}}
+   center_command %Q{rm -rf #{filepath}}
+end
+
+def homepath(filename)
+  File.join(ENV['HOME'], filename)
+end
+
+def currentpath(filename)
+  File.join(ENV['PWD'], filename)
+end
+
+def divider
+  puts
+  NUM.times do print "=" end
+  puts
+end
+
+def center_command(command)
+  system(command).center(NUM)
+end
+
+def center_string(string)
+  puts string.center(NUM)
+end
+
+namespace :install do
   task :all do
      Rake::Task['install:janus'].invoke
      Rake::Task['install:files'].invoke
   end
 
   task :janus do
+    %w{.gvimrc.old .vimrc.old .vim.old}.each do |file|
+      old_file = "#{home}/#{file}"
+      if File.exist? old_file
+        center_command("rm -rf #{old_file}")
+      end
+    end
     system("curl -Lo- http://bit.ly/janus-bootstrap | bash")
   end
-  
+
   desc "install the dot files into user's home directory"
   task :files do
+    files = Dir['*']
 
-    replace_all = false
-    Dir['*'].each do |file|
-      next if %w[Rakefile README LICENSE bin].include? file or %r{(.*)\.pub} =~ file
-    
-      if File.exist?(File.join(ENV['HOME'], ".#{file}")) || (File.symlink? File.join(ENV['HOME'], ".#{file}"))
-        if replace_all
-          replace_file(file, timestamp)
-        else
-          print "overwrite ~/.#{file}? [ynaq] "
-          case $stdin.gets.chomp
-          when 'a'
-            replace_all = true
-            replace_file(file, timestamp)
-          when 'y'
-            replace_file(file, timestamp)
-          when 'q'
-            exit
-          else
-            puts "skipping ~/.#{file}"
-          end
-        end
-      else
-        link_file(file)
-      end
+    files.each do |file|
+      next if %w[Rakefile README LICENSE bin].include? file
+      divider if file == files.first
+      puts
+      replace_file("."+file)
+      divider
+      puts if file == files.last
     end
-
-    # link files in bin dir
-    system %Q{mkdir -p "#{home}/bin"}
-    system %Q{mkdir -p "$HOME/_dot_backups/#{timestamp}/bin/"}
-  
-    Dir['bin/*'].each do |file|
-      filepath = File.expand_path("#{home}/#{file}")
-      if !(File.exist? filepath) || (File.symlink? filepath)
-        puts "linking ~/#{file}"
-        system %Q{cp -RLi "#{home}/#{file}" "#{home}/_dot_backups/#{timestamp}/#{file}"}
-        system %Q{rm -rf "#{home}/#{file}"}
-        system %Q{ln -s "$PWD/#{file}" "#{home}/#{file}"}
-      else
-        puts "Existing ~/#{file} exists. Skipping..." 
-      end
-    end
-
   end
 
   desc "Create symbolic link for kaleidoscope integration with git difftool"
@@ -82,22 +135,7 @@ namespace :install do
         puts "file already linked"
       end
     else
-      puts "please install ksdiff before runnning this tool"
+      puts "please install ksdiff before running this tool"
     end
   end
-end
-
-def replace_file(file, timestamp)
-  system %Q{mkdir -p "$HOME/_dot_backups/#{timestamp}"}
-  if File.exist?(File.join(ENV['HOME'], ".#{file}"))
-    puts "Backing up $HOME/.#{file} to $HOME/_dot_backups/#{timestamp}/#{file}"
-    system %Q{cp -RLi "$HOME/.#{file}" "$HOME/_dot_backups/#{timestamp}/#{file}"}
-    system %Q{rm -rf "$HOME/.#{file}"}
-  end
-  link_file(file)
-end
-
-def link_file(file)
-  puts "linking ~/.#{file}"
-  system %Q{ln -s "$PWD/#{file}" "$HOME/.#{file}"}
 end
