@@ -34,7 +34,7 @@ def replace_file(filename)
 end
 
 def backup_file(filename)
-  system "Backing up $HOME/#{filename} to $HOME/_dot_backups/#{@timestamp}/#{filename}"
+  puts "Backing up $HOME/#{filename} to $HOME/_dot_backups/#{@timestamp}/#{filename}"
   system %Q{mkdir -p "$HOME/_dot_backups/#{@timestamp}"}
   system %Q{cp -Rf "$HOME/#{filename}" "$HOME/_dot_backups/#{@timestamp}/#{filename}"}
 end
@@ -61,7 +61,7 @@ def link_file(filename)
 end
 
 def remove_file(filepath)
-   puts %Q{rm -rf #{filepath}}
+   puts "rm -rf #{filepath}"
    system %Q{rm -rf #{filepath}}
 end
 
@@ -85,19 +85,7 @@ end
 
 namespace :install do
   task :all do
-     Rake::Task['install:janus'].invoke
      Rake::Task['install:files'].invoke
-  end
-
-  task :janus do
-    %w{.gvimrc.old .vimrc.old .vim.old}.each do |file|
-      old_file = "#{home}/#{file}"
-      if File.exist? old_file or File.directory? old_file or File.symlink? old_file
-        puts "removing #{old_file}"
-        remove_file(old_file)
-      end
-    end
-    system("curl -Lo- http://bit.ly/janus-bootstrap | bash")
   end
 
   desc "install the dot files into user's home directory"
