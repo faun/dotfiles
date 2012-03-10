@@ -1,11 +1,14 @@
-runtime bundle/vim-pathogen/autoload/pathogen.vim
+set nocompatible
 let mapleader = ","
+
 call pathogen#infect()
 call pathogen#helptags()
 
 map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 syntax on
 filetype plugin indent on
+set background=light
+colorscheme solarized
 
 "Hide the vim splash screen
 set shortmess+=I
