@@ -1,6 +1,8 @@
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 let mapleader = ","
 call pathogen#infect()
+call pathogen#helptags()
+
 map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 syntax on
 filetype plugin indent on
