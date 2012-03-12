@@ -109,3 +109,10 @@ set encoding=utf-8 " Necessary to show unicode glyphs
 map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 
 " ==========================================
+" Tab settings
+
+set ts=2 sts=2 sw=2 expandtab "set two spaces by default
+
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
