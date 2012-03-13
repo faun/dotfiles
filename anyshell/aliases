@@ -88,6 +88,9 @@ alias svhelp='svn help'
 alias svblame='sv blame'
 alias svdiff='sv diff'
 
+# tmux
+alias tmux="TERM=screen-256color-bce tmux"
+
 # ruby
 alias irb='irb --readline -r irb/completion'
 
