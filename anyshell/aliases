@@ -70,7 +70,7 @@ alias today='git lg --since="1 day ago"'
 alias tower='gittower'
 alias stashpop="git stash; git pull; git stash pop"
 
-# Subversion & diff 
+# Subversion & diff
 export SV_USER='swinter'  # Change this to your username that you normally use on subversion (only if it is different from your logged in name)
 export SVN_EDITOR='${EDITOR}'
 
@@ -84,7 +84,7 @@ alias svcommit='sv commit'
 alias svadd='svn add'
 alias svaddall='svn status | grep "^\?" | awk "{print \$2}" | xargs svn add'
 alias svdelete='sv delete'
-alias svhelp='svn help' 
+alias svhelp='svn help'
 alias svblame='sv blame'
 alias svdiff='sv diff'
 
@@ -117,7 +117,7 @@ alias rsa='rake spec:all'
 alias sc='script/console'
 alias s='screen -dr rails'
 
-# bundler 
+# bundler
 alias bi='bundle install'
 alias be='bundle exec'
 
