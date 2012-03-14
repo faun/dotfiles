@@ -20,7 +20,7 @@ These are config files to set up a system the way I like it.
 
 Install Command-T C extension:
 
-    rvm use system (if using rvm)
+    rvm use system #(if using rvm)
     cd vim/bundle/command-t/ruby/command-t/
     ruby extconf.rb
     make
