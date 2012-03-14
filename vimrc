@@ -59,8 +59,14 @@ if &term =~ "xterm" || &term =~ "screen"
   let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
 endif
 
+" ==========================================
+" NERDTree Settings
+
 " Automatically open NERDTree if vim is invoked without a file
 autocmd vimenter * if !argc() | NERDTree | endif
+
+" toggle NERDTree with F6
+map <F6> :NERDTreeToggle<CR>
 
 " ==========================================
 " Color scheme settings:
