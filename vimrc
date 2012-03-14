@@ -34,6 +34,10 @@ set smarttab      " insert tabs on the start of a line according to
                   "    shiftwidth, not tabstop
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
+
+" ==========================================
+" iTerm and screen/tmux settings
+
 if has('mouse')
   set mouse=a
   if &term =~ "xterm" || &term =~ "screen"
