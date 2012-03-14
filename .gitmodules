@@ -54,3 +54,6 @@
 [submodule "vim/bundle/tslime.vim"]
 	path = vim/bundle/tslime.vim
 	url = git://github.com/kikijump/tslime.vim.git
+[submodule "vim/bundle/gundo.vim"]
+	path = vim/bundle/gundo.vim
+	url = git://github.com/sjl/gundo.vim.git

@@ -99,6 +99,10 @@ autocmd FileType ruby setlocal ts=2
 " Make Rspec files work with MakeGreen
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
+" ==========================================
+" Gundo Toggle
+
+nnoremap <F5> :GundoToggle<CR>
 
 " ==========================================
 " Smart Tab completion
