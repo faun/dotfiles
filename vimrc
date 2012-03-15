@@ -35,6 +35,9 @@ set smarttab      " insert tabs on the start of a line according to
                   "    shiftwidth, not tabstop
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
+set tags=./tags; " Set the tag file search order
+set iskeyword-=_  " Use _ as a word-separator
+set grepprg=ack " Use Ack instead of grep
 
 " ==========================================
 " NERDTree Settings
@@ -66,6 +69,13 @@ au BufWritePost vimrc so ~/.vimrc
 
 " Force save files that require root permission
 cmap w!! %!sudo tee > /dev/null %
+
+nnoremap <F2> :set invpaste paste?<CR>
+set showmode
+
+" ==========================================
+" Make the omnicomplete text readable
+set ofu=syntaxcomplete#Complete
 
 " ==========================================
 " Filetype settings:
@@ -127,6 +137,7 @@ set ts=2 sts=2 sw=2 expandtab "set two spaces by default
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 
 " ==========================================
 " Highlight trailing whitespace
