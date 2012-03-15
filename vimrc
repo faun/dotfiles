@@ -89,6 +89,7 @@ autocmd FileType ruby setlocal ts=2
 " Make Rspec files work with MakeGreen
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
+let g:pasta_enabled_filetypes = ['ruby', 'javascript', 'css', 'sh', 'html']
 " ==========================================
 " Gundo Toggle
 
