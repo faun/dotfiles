@@ -83,7 +83,7 @@ nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Automatically reload vimrc when it's saved
-au BufWritePost .vimrc so ~/.vimrc
+au BufWritePost vimrc so ~/.vimrc
 
 " ==========================================
 " Command shortcuts:
