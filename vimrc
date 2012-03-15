@@ -42,6 +42,9 @@ set grepprg=ack " Use Ack instead of grep
 " ==========================================
 " NERDTree Settings
 
+" unload netrw
+let g:loaded_netrwPlugin = 1
+
 " Automatically open NERDTree if vim is invoked without a file
 autocmd vimenter * if !argc() | NERDTree | endif
 
