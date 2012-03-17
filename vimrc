@@ -36,9 +36,9 @@ set smarttab      " insert tabs on the start of a line according to
                   "    shiftwidth, not tabstop
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
-set tags=./tags; " Set the tag file search order
+set tags=./tags;  " Set the tag file search order
 set iskeyword-=_  " Use _ as a word-separator
-set grepprg=ack " Use Ack instead of grep
+set grepprg=ack   " Use Ack instead of grep
 
 " ==========================================
 " NERDTree Settings
