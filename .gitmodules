@@ -57,3 +57,6 @@
 [submodule "vim/bundle/gundo.vim"]
 	path = vim/bundle/gundo.vim
 	url = git://github.com/sjl/gundo.vim.git
+[submodule "vim/bundle/syntastic"]
+	path = vim/bundle/syntastic
+	url = git://github.com/scrooloose/syntastic.git
