@@ -39,6 +39,9 @@ set incsearch     " show search matches as you type
 set tags=./tags;  " Set the tag file search order
 set iskeyword-=_  " Use _ as a word-separator
 set grepprg=ack   " Use Ack instead of grep
+set nobackup      " no backup files
+set nowritebackup " only in case you don't want a backup file while editing
+set noswapfile    " no swap files
 
 " ==========================================
 " NERDTree Settings
