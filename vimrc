@@ -97,8 +97,21 @@ set pastetoggle=<F2>
 set showmode
 
 " ==========================================
-" Make the omnicomplete text readable
-set ofu=syntaxcomplete#Complete
+" Omnicomplete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=cssomplete#completecss
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 4
+
+
+" ==========================================
+" Supertab settings
+
+let g:SuperTabDefaultCompletionType = "context"
 
 " ==========================================
 " Filetype settings:
