@@ -52,6 +52,13 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" ==========================================
+" ctags
+
+set tags=.tags,gems.tags,.gems.tags
+noremap <leader>pt :!ctags -RV --languages=ruby -f .gems.tags `gem env gemdir` && ctags -f .tags -RV . <cr>
+
+" ==========================================
 " NERDTree Settings
 
 " Automatically close vim if the only window left open is NERDTree
