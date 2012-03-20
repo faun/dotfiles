@@ -44,6 +44,14 @@ set nowritebackup " only in case you don't want a backup file while editing
 set noswapfile    " no swap files
 
 " ==========================================
+" windows and splits
+nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <leader>l <ESC>:vsp .<CR>
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 " NERDTree Settings
 
 " Automatically close vim if the only window left open is NERDTree
