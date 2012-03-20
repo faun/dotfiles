@@ -46,14 +46,17 @@ set noswapfile    " no swap files
 " ==========================================
 " NERDTree Settings
 
-" unload netrw
-let g:loaded_netrwPlugin = 1
-
-" Automatically open NERDTree if vim is invoked without a file
-autocmd vimenter * if !argc() | NERDTree | endif
+" Automatically close vim if the only window left open is NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " toggle NERDTree with F6
 map <F6> :NERDTreeToggle<CR>
+let g:NERDTreeHijackNetrw = 0
+let g:loaded_netrw = 1 " Disable netrw
+let g:loaded_netrwPlugin = 1 " Disable netrw
+let g:NERDTreeShowLineNumbers = 0
+let g:NERDTreeMinimalUI = 1 " Disable help message
+let g:NERDTreeDirArrows = 1
 
 " ==========================================
 " Color scheme settings:
