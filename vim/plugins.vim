@@ -29,14 +29,15 @@ let g:pasta_enabled_filetypes = ['ruby', 'javascript', 'css', 'sh', 'html', 'php
 
 nnoremap <F5> :GundoToggle<CR>
 
-" ==========================================
 
+" ==========================================
 " Powerline settings:
+
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show unicode glyphs
 let g:Powerline_symbols = 'fancy'
 
+" ==========================================
 " RedGreen settings:
 map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
-
 
