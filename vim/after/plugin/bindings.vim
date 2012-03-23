@@ -20,3 +20,6 @@ nnoremap *   *zz
 nnoremap #   #zz
 nnoremap g*  g*zz
 nnoremap g#  g#z
+
+map <F1> <nop>
+imap <F1> <nop>
