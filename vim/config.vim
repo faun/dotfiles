@@ -71,9 +71,11 @@ set showmode
 
 set ts=2 sts=2 sw=2 expandtab "set two spaces by default
 set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
-
 " ==========================================
 " File settings:
+function TrimWhiteSpace()
+  %s/\s\+$//e
+:endfunction
 
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
@@ -89,7 +91,7 @@ autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 4
-
+autocmd BufWritePre *.rb :call TrimWhiteSpace() " remove trailing whitespace on write
 " ==========================================
 " Make Rspec files work with MakeGreen
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
