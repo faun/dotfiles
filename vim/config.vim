@@ -70,7 +70,6 @@ set showmode
 " Tab settings
 
 set ts=2 sts=2 sw=2 expandtab "set two spaces by default
-set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 " ==========================================
 " File settings:
 function TrimWhiteSpace()
