@@ -41,3 +41,12 @@ let g:Powerline_symbols = 'fancy'
 " RedGreen settings:
 map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 
+" ==========================================
+" Command-T Settings
+
+" refresh command-t cache when files are written or when vim gains focus
+augroup CommandTExtension
+  autocmd!
+  autocmd FocusGained * CommandTFlush
+  autocmd BufWritePost * CommandTFlush
+augroup END
