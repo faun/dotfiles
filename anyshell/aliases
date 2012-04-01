@@ -55,6 +55,7 @@ alias gco='git checkout'
 alias gb='git branch'
 alias g='git status -sb'
 alias gs='git status'
+alias gr='git reset HEAD'
 alias grm='git status --porcelain | ruby -e "puts STDIN.read.scan(/^\\s+D\\s+(.+)\$/).join(\"\\n\")" | xargs git rm'
 alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %aN: %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias lg="gg"
