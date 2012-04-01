@@ -27,7 +27,7 @@ set grepprg=ack   " Use Ack instead of grep
 set nobackup      " no backup files
 set nowritebackup " only in case you don't want a backup file while editing
 set noswapfile    " no swap files
-
+set wildmode=longest,list,full
 " ==========================================
 " windows and splits
 nnoremap <leader>w <C-w>v<C-w>l
