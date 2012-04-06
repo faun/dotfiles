@@ -28,6 +28,8 @@ set nobackup      " no backup files
 set nowritebackup " only in case you don't want a backup file while editing
 set noswapfile    " no swap files
 set wildmode=longest,list,full
+set wildignore+=*.jpg,*.jpeg,*.gif,*.png
+
 " ==========================================
 " windows and splits
 nnoremap <leader>w <C-w>v<C-w>l
@@ -90,7 +92,7 @@ autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 4
-autocmd BufWritePre *.rb :call TrimWhiteSpace() " remove trailing whitespace on write
+autocmd BufWritePre *.rb,*.erb,*.html,*.yml :call TrimWhiteSpace() " remove trailing whitespace on write
 " ==========================================
 " Make Rspec files work with MakeGreen
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
