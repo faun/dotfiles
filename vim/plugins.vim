@@ -11,7 +11,7 @@ let g:SuperTabDefaultCompletionType = "context"
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " toggle NERDTree with F6
-map <F6> :NERDTreeToggle<CR>
+map <silent> <F6> :NERDTreeToggle<CR>
 let g:NERDTreeHijackNetrw = 0
 let g:loaded_netrw = 1 " Disable netrw
 let g:loaded_netrwPlugin = 1 " Disable netrw
