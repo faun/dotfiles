@@ -79,6 +79,9 @@ function TrimWhiteSpace()
   %s/\s\+$//e
 :endfunction
 
+"show tab and space characters
+set list listchars=tab:»·,trail:·
+
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
