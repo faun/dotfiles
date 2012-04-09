@@ -72,7 +72,7 @@ alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG
 alias dt='git difftool'
 alias dtc='git difftool --cached'
 alias dth='git difftool HEAD'
-
+alias last_commit_diff='git difftool HEAD~1..HEAD'
 alias gg='git lg'
 alias today='git lg --since="1 day ago"'
 
