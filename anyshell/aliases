@@ -40,6 +40,10 @@ alias ...='cd .. ; cd ..'
 alias q='exit'
 
 # git
+
+alias got='git'
+alias get='git'
+
 alias gl='git pull --ff-only'
 alias glr='git pull --rebase'
 alias gp='git push'
