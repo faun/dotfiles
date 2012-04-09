@@ -59,6 +59,7 @@ alias gco='git checkout'
 alias gb='git branch'
 alias g='git status -sb'
 alias gs='git status'
+alias stashpop="git stash; git pull; git stash pop"
 alias gr='git reset HEAD'
 alias grm='git status --porcelain | ruby -e "puts STDIN.read.scan(/^\\s+D\\s+(.+)\$/).join(\"\\n\")" | xargs git rm'
 alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %aN: %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
@@ -71,10 +72,15 @@ alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG
 alias dt='git difftool'
 alias dtc='git difftool --cached'
 alias dth='git difftool HEAD'
+
 alias gg='git lg'
 alias today='git lg --since="1 day ago"'
+
 alias tower='gittower'
-alias stashpop="git stash; git pull; git stash pop"
+alias gt='gittower'
+alias gk='gitk --all&'
+alias gx='gitx --all'
+
 
 # Subversion & diff
 export SV_USER='swinter'  # Change this to your username that you normally use on subversion (only if it is different from your logged in name)
