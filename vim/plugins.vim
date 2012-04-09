@@ -50,3 +50,7 @@ augroup CommandTExtension
   autocmd FocusGained * CommandTFlush
   autocmd BufWritePost * CommandTFlush
 augroup END
+
+" ==========================================
+" Yankring Settings
+nnoremap <silent> <F11> :YRShow<CR> " Show Yankring with F11
