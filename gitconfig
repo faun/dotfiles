@@ -8,11 +8,16 @@
 [alias]
 	co = checkout
 	st = status -sb
+	ci = commit
+	br = branch
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %Cblue[%cN]%Creset' --abbrev-commit --date=relative
 	logc = log --graph --pretty=format:'%C(yellow)commit %h %Creset(%cr)%nAuthor: %C(green)%aN <%aE>%Creset%n%n %Cblue%s%Creset%n '
 	wdiff = diff --color-words
 	clone = clone --recursive
 	branches = branch -a -vv
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
 
 [color "branch"]
 	current = yellow reverse
