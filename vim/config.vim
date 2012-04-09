@@ -82,6 +82,9 @@ function TrimWhiteSpace()
 "show tab and space characters
 set list listchars=tab:»·,trail:·
 
+" Remove trailing whitespace with F3
+map <silent> <F3> :call TrimWhiteSpace()<CR>``
+
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
