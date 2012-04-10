@@ -58,3 +58,8 @@ nnoremap <silent> <F11> :YRShow<CR> " Show Yankring with F11
 " Indent Guide Settings
 " Show indent guides when editing common formats
 autocmd FileType html,css,ruby,eruby,javascript,php,xml call indent_guides#enable()
+
+" ==========================================
+" Taglist settings
+nnoremap <silent> <F8> :TlistToggle<CR>
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
