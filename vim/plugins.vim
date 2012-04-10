@@ -5,7 +5,7 @@
 let g:SuperTabDefaultCompletionType = "context"
 
 " ==========================================
-" NERDTree Settings
+" NERDTree settings
 
 " Automatically close vim if the only window left open is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -25,10 +25,9 @@ let g:NERDTreeDirArrows = 1
 let g:pasta_enabled_filetypes = ['ruby', 'javascript', 'css', 'sh', 'html', 'php', 'xml', 'eruby']
 
 " ==========================================
-" Gundo Toggle
+" Gundo Toggle settings
 
 nnoremap <F5> :GundoToggle<CR>
-
 
 " ==========================================
 " Powerline settings:
@@ -42,7 +41,7 @@ let g:Powerline_symbols = 'fancy'
 map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 
 " ==========================================
-" Command-T Settings
+" Command-T settings
 
 " refresh command-t cache when files are written or when vim gains focus
 augroup CommandTExtension
@@ -52,7 +51,7 @@ augroup CommandTExtension
 augroup END
 
 " ==========================================
-" Yankring Settings
+" Yankring settings
 nnoremap <silent> <F11> :YRShow<CR> " Show Yankring with F11
 
 " ==========================================
