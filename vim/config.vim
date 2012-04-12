@@ -30,7 +30,7 @@ set noswapfile    " no swap files
 set wildmenu      " Use wildmenu
 set wildmode=longest,list,full " set completion style
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png
-set autochdir     " Always cd to current directory of file being edited.
+
 " ==========================================
 " windows and splits
 nnoremap <leader>w <C-w>v<C-w>l
