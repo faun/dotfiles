@@ -101,6 +101,8 @@ autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 4
 autocmd BufWritePre *.rb,*.erb,*.html,*.yml,*.vim :call TrimWhiteSpace() " remove trailing whitespace on write
+imap <C-l> <Space>=><Space>
+              "Make hashrocket with control-l
 " ==========================================
 " Make Rspec files work with MakeGreen
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
