@@ -30,6 +30,7 @@ set noswapfile    " no swap files
 set wildmenu      " Use wildmenu
 set wildmode=longest,list,full " set completion style
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png
+set whichwrap+=<,>,h,l,[,] " let cursor keys wrap around lines
 
 " ==========================================
 " windows and splits
