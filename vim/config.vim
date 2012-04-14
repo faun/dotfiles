@@ -75,7 +75,7 @@ set showmode
 set ts=2 sts=2 sw=2 expandtab "set two spaces by default
 " ==========================================
 " File settings:
-function TrimWhiteSpace()
+function! TrimWhiteSpace()
   %s/\s\+$//e
 :endfunction
 
