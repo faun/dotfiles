@@ -22,7 +22,6 @@ set smarttab      " insert tabs on the start of a line according to
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 set tags=./tags;  " Set the tag file search order
-set iskeyword-=_  " Use _ as a word-separator
 set grepprg=ack   " Use Ack instead of grep
 set nobackup      " no backup files
 set nowritebackup " only in case you don't want a backup file while editing
