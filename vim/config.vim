@@ -30,6 +30,7 @@ set wildmenu      " Use wildmenu
 set wildmode=longest,list,full " set completion style
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png
 set whichwrap+=<,>,h,l,[,] " let cursor keys wrap around lines
+set clipboard=unnamed " use Mac clipboard for yank/paste/etc.
 
 " ==========================================
 " windows and splits
