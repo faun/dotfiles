@@ -103,7 +103,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 4
 autocmd BufWritePre *.rb,*.erb,*.html,*.yml,*.vim :call TrimWhiteSpace() " remove trailing whitespace on write
 imap <C-l> <Space>=><Space>
               "Make hashrocket with control-l
-map <F7> :!rspec --color<CR>
+map <F7> :wall<esc> :!rspec --color<CR>
 " ==========================================
 " Make Rspec files work with MakeGreen
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
