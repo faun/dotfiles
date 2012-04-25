@@ -63,3 +63,8 @@ autocmd FileType html,css,ruby,eruby,javascript,php,xml call indent_guides#enabl
 " Taglist settings
 nnoremap <silent> <F8> :TlistToggle<CR>
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+
+" ==========================================
+" UltiSnips settings
+set runtimepath+=$HOME/.vim/snippets
+let g:UltiSnipsSnippetDirectories= ["UltiSnips", "snippets"]
