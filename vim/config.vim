@@ -97,13 +97,6 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 
-autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 4
-imap <C-l> <Space>=><Space>
-              "Make hashrocket with control-l
-map <F7> :wall<esc> :!rspec --color<CR>
 " ==========================================
 " Make Rspec files work with MakeGreen
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
