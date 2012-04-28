@@ -15,6 +15,8 @@
 	wdiff = diff --color-words
 	clone = clone --recursive
 	branches = branch -a -vv
+	current-branch = !git branch | grep '^*' | sed s/\\*\\ //
+	track = !git branch --set-upstream $(git current-branch) origin/$(git current-branch)
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	type = cat-file -t
 	dump = cat-file -p
