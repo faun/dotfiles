@@ -96,6 +96,7 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType gitconfig setlocal noet
 
 " ==========================================
 " Make Rspec files work with MakeGreen
