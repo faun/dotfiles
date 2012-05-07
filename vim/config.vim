@@ -82,7 +82,8 @@ function! TrimWhiteSpace()
 :endfunction
 
 "show tab and space characters
-set list listchars=tab:»·,trail:·
+set list listchars=tab:» ,trail:·
+hi SpecialKey ctermbg=white ctermfg=lightred
 
 " Remove trailing whitespace with F3
 map <silent> <F3> :call TrimWhiteSpace()<CR>``
