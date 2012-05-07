@@ -124,10 +124,11 @@ alias rst='touch tmp/restart.txt'
 
 alias rdm="rake db:migrate"
 alias rdtp="rake db:test:prepare"
-alias rc='rails console'
-alias ss='ruby script/server -p 3001 --debugger'
-alias rs='rails server -p 3001'
 alias rsa='rake spec:all'
+alias rc='rails console'
+alias rs='rails server'
+alias rsd='rails server --debugger'
+alias ss='ruby script/server --debugger'
 alias sc='script/console'
 alias s='screen -dr rails'
 
