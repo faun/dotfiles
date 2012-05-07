@@ -18,13 +18,14 @@ elif [[ $platform == 'Darwin' ]]; then
   alias lock="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
   alias flushdns="dscacheutil -flushcache"
   export JAVA_HOME=`/usr/libexec/java_home`
-
+  export EDITOR='vim'
   if [ -d /Applications/MacVim.app/ ]; then
     # use MacVim over built-in Mac OS version
     export PATH="/Applications/MacVim.app/Contents/MacOS:$PATH"
     alias mvim='MacVim'
     alias vim='Vim'
-    export EDITOR='vim -f'
+    alias vi='Vim'
+    export EDITOR='/Applications/MacVim.app/Contents/MacOS/Vim'
     alias vimdiff="MacVim -d"
   fi
 fi
