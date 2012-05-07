@@ -88,7 +88,7 @@ hi SpecialKey ctermbg=white ctermfg=lightred
 " Remove trailing whitespace with F3
 map <silent> <F3> :call TrimWhiteSpace()<CR>``
 
-autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+autocmd Filetype javascript setlocal noet ts=4 sts=4 sw=4
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
