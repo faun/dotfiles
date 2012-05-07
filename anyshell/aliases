@@ -30,6 +30,10 @@ elif [[ $platform == 'Darwin' ]]; then
   fi
 fi
 
+if [ -f $HOME/.local.sh ]; then
+  source $HOME/.local.sh
+fi
+
 # directory listing & navigation
 alias l="ls -lAh"
 alias ll='ls -hl'
