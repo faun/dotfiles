@@ -21,6 +21,9 @@
 	type = cat-file -t
 	dump = cat-file -p
 	unpushed = !GIT_CURRENT_BRANCH=$(git name-rev --name-only HEAD) && git log origin/$GIT_CURRENT_BRANCH..$GIT_CURRENT_BRANCH --oneline
+	sm = submodule foreach
+	modules = submodule foreach git pull origin master
+	count = !git shortlog -n $@ | grep \"):\" | sed \"s|:||\"
 
 [color "branch"]
 	current = yellow reverse
