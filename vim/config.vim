@@ -102,7 +102,7 @@ map <silent> <F3> :call TrimWhiteSpace()<CR>``
 autocmd Filetype javascript setlocal noet ts=4 sts=4 sw=4
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
-autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype html setlocal noet ts=2 sts=2 sw=2
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
