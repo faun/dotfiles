@@ -38,7 +38,9 @@ Set homebrew zsh as your default user
 
     sudo chsh -s /usr/local/bin/zsh $(whoami)
 
-Reboot.
+Install RVM (recommended)
+
+    curl -L get.rvm.io | bash -s stable
 
 ###Patch your terminal font with Powerline glyphs for maximum awesomeness:
   See [Powerline repo](https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher) for more info.
