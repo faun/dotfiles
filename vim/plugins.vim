@@ -1,9 +1,3 @@
-
-" ==========================================
-" Supertab settings
-
-let g:SuperTabDefaultCompletionType = "context"
-
 " ==========================================
 " NERDTree settings
 
