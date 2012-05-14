@@ -94,7 +94,9 @@ function! TrimWhiteSpace()
 
 "show tab and space characters
 set list listchars=tab:» ,trail:·
-hi SpecialKey ctermbg=white ctermfg=lightred
+" highlight trailing whitespace
+highlight ExtraWhitespace ctermbg=lightgrey guibg=lightgrey ctermfg=red guifg=lightred
+match ExtraWhitespace /\s\+$/
 
 " Remove trailing whitespace with F3
 map <silent> <F3> :call TrimWhiteSpace()<CR>``
