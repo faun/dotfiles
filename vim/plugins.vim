@@ -37,12 +37,8 @@ map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 " ==========================================
 " Command-T settings
 
-" refresh command-t cache when files are written or when vim gains focus
-augroup CommandTExtension
-  autocmd!
-  autocmd FocusGained * CommandTFlush
-  autocmd BufWritePost * CommandTFlush
-augroup END
+" refresh command-t cache every time
+map <leader>t :CommandTFlush<cr>\|:CommandT<cr>
 
 " ==========================================
 " Yankring settings
