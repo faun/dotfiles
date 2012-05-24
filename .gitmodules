@@ -96,3 +96,6 @@
 [submodule "vim/bundle/vim-jst"]
 	path = vim/bundle/vim-jst
 	url = git://github.com/briancollins/vim-jst.git
+[submodule "vim/bundle/greplace"]
+	path = vim/bundle/greplace
+	url = git://github.com/vim-scripts/greplace.vim.git
