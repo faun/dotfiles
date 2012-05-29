@@ -1,5 +1,6 @@
---ignore-dir=rails
-
-# Add the .rake extension to ruby types
---type-add
-ruby=.rake
+--type-add=ruby=.rake,.haml=html=.erb=js=.coffee=css=.scss,.sass=cucumber=.feature
+--ignore-dir=vendor, log, tmp, doc, coverage, spec/fixtures, public/system, .bin
+--sort-files
+--follow
+--color
+--group
