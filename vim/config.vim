@@ -32,6 +32,8 @@ set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.ico,*.psd,*.pid,*/tmp/*,*.sqlite3,*.i
 set whichwrap+=<,>,h,l,[,] " let cursor keys wrap around lines
 set clipboard=unnamed " use Mac clipboard for yank/paste/etc.
 set pumheight =15 " Limit completion popup menu height
+" Press Space to toggle highlighting on/off, and show current value.
+nnoremap <Space> :set hlsearch! hlsearch?<CR>
 
 " ==========================================
 " windows and splits
