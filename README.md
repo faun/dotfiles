@@ -10,7 +10,7 @@ These are config files to set up a system the way I like it.
     mkdir -p ~/src
 
     #clone this repository to your machine, initialize submodules (submodule init requires git >= 1.6.5)
-    git clone --recursive git://github.com/faunzy/dotfiles ~/src/dotfiles
+    git clone --recursive git://github.com/faun/dotfiles ~/src/dotfiles
 
 ###Step 2: Install
 
