@@ -159,4 +159,3 @@ alias showdirs="cat $HOME/.dirs | ruby -e \"puts STDIN.read.split.map{|x| x.gsub
 
 # commands starting with % or $ for pasting from web
 alias %=' '
-alias $=' '
