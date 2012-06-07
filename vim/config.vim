@@ -109,7 +109,9 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd Filetype html setlocal noet ts=2 sts=2 sw=2
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
+autocmd Filetype css setlocal noet ts=2 sts=2 sw=2
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType gitconfig setlocal noet
