@@ -228,4 +228,21 @@ if [ -f "${SSH_ENV}" ]; then
 	}
 else
 	start_agent;
-fi 
+fi
+
+function dotimes () {
+ if [[ $# -lt 2 ]]; then
+   echo "usage: dotimes number-of-times command-to-run"
+   return 1
+ fi
+ local max=$1
+ local i=0
+ shift
+ while [ $i -lt $max ]; do
+   i=`expr $i + 1`
+   $@
+   if [[ $? -gt 0 ]]; then
+     echo "FAILED on try $i" && return 1
+   fi
+ done
+}
