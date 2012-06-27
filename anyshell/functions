@@ -230,19 +230,28 @@ else
 	start_agent;
 fi
 
+# run a command multiple times
 function dotimes () {
- if [[ $# -lt 2 ]]; then
-   echo "usage: dotimes number-of-times command-to-run"
-   return 1
- fi
- local max=$1
- local i=0
- shift
- while [ $i -lt $max ]; do
-   i=`expr $i + 1`
-   $@
-   if [[ $? -gt 0 ]]; then
-     echo "FAILED on try $i" && return 1
-   fi
- done
+  if [[ $# -lt 2 ]]; then
+    echo "usage: dotimes number-of-times command-to-run"
+    return 1
+  fi
+  local max=$1
+  local i=0
+  local fails=0
+  shift
+  while [ $i -lt $max ]; do
+    i=`expr $i + 1`
+    $@
+    echo -n "\n#### "
+    if [[ $? -gt 0 ]]; then
+      echo -n "FAILED"
+      fails=`expr $fails + 1`
+    else
+      echo -n "PASSED"
+    fi
+    echo -n " ($i/$max, $fails fails)"
+    echo -n " ####\n\n"
+  done
+  echo "\n\n#### $fails out of $max runs failed. ####\n"
 }
