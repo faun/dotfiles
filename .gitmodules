@@ -99,3 +99,6 @@
 [submodule "vim/bundle/greplace"]
 	path = vim/bundle/greplace
 	url = git://github.com/vim-scripts/greplace.vim.git
+[submodule "vim/bundle/localvimrc"]
+	path = vim/bundle/localvimrc
+	url = git@github.com:ggilder/localvimrc.git
