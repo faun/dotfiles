@@ -1,9 +1,12 @@
+function rvm-prompt-wrapper () {
+  [ -e "$HOME/.rvm/bin/rvm-prompt" ] && echo "$($HOME/.rvm/bin/rvm-prompt i v p g s)"
+}
 #Based off the murilasso zsh theme
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 local user_host='%{$terminfo[bold]$fg[green]%}%n@%m%{$reset_color%}'
 local current_dir='%{$fg[blue]%}%/%{$reset_color%}'
-local rvm_ruby='%{$fg[red]%}$(rvm_prompt_info)%{$reset_color%}'
-local git_branch='%{$fg[blue]%}$(git_prompt_info)%{$reset_color%}'
+local rvm_ruby='%{$fg[red]%}$(rvm-prompt-wrapper)%{$reset_color%}'
+local git_branch='%{$fg[blue]%}%{$reset_color%}'
 
 PROMPT="${user_host}:${current_dir} ${rvm_ruby}
 %{$fg[blue]%}${git_branch} %B$%b "
