@@ -2,9 +2,6 @@
 .svn
 *~
 *.swp
-log/
-config/database.yml
-db/*.sqlite3
 /icon.jpg
 tags
 .tags
