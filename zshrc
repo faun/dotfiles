@@ -50,4 +50,5 @@ source $HOME/.zsh/faunzy.zsh-theme
 # time that oh-my-zsh is loaded.
 # export ZSH_THEME="random"
 
+export PATH=$HOME/node_modules/.bin/lessc:$PATH
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
