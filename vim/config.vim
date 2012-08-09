@@ -109,13 +109,13 @@ match ExtraWhitespace /\s\+$/
 " Remove trailing whitespace with F3
 map <silent> <F3> :call TrimWhiteSpace()<CR>``
 
-autocmd Filetype javascript setlocal noet ts=4 sts=4 sw=4
+autocmd Filetype javascript setlocal et ts=4 sts=4 sw=4
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
-autocmd Filetype html setlocal noet ts=2 sts=2 sw=2
+autocmd Filetype html setlocal et ts=2 sts=2 sw=2
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
-autocmd Filetype css setlocal noet ts=2 sts=2 sw=2
+autocmd Filetype css setlocal et ts=2 sts=2 sw=2
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
