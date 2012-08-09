@@ -102,3 +102,6 @@
 [submodule "vim/bundle/localvimrc"]
 	path = vim/bundle/localvimrc
 	url = git@github.com:ggilder/localvimrc.git
+[submodule "vim/bundle/vim-less"]
+	path = vim/bundle/vim-less
+	url = https://github.com/groenewege/vim-less.git
