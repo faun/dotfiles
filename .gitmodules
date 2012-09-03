@@ -108,3 +108,6 @@
 [submodule "vim/bundle/vim-css3-syntax"]
 	path = vim/bundle/vim-css3-syntax
 	url = https://github.com/hail2u/vim-css3-syntax.git
+[submodule "vim/bundle/vim-unimpared"]
+	path = vim/bundle/vim-unimpared
+	url = git://github.com/tpope/vim-unimpaired.git
