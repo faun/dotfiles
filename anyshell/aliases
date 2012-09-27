@@ -133,6 +133,8 @@ alias rsd='rails server --debugger'
 alias ss='ruby script/server --debugger'
 alias sc='script/console'
 alias s='screen -dr rails'
+alias spec='rspec'
+alias rpsec='rspec'
 
 # capistrano
 alias get_db='cap production db:download && rake db:backup:load'
