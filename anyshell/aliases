@@ -153,6 +153,7 @@ alias lm='!! | more'
 alias py='python'
 alias sha1="openssl sha1"
 
+alias heroku='/usr/bin/heroku'
 alias aliases='$EDITOR $HOME/src/dotfiles/anyshell/aliases'
 alias d='cd $HOME/src/dotfiles'
 
