@@ -1,5 +1,13 @@
 --type-add=ruby=.rake,.haml=html=.erb=js=.coffee=css=.scss,.sass=cucumber=.feature
---ignore-dir=vendor, log, tmp, doc, coverage, spec/fixtures, public/system, .bin
+--ignore-dir=vendor
+--ignore-dir=log
+--ignore-dir=tmp
+--ignore-dir=doc
+--ignore-dir=coverage
+--ignore-dir=spec/fixtures
+--ignore-dir=public/system
+--ignore-dir=.bin
+--ignore-dir=public/assets
 --sort-files
 --follow
 --color
