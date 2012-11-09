@@ -27,9 +27,6 @@ elif [[ $platform == 'Darwin' ]]; then
     export EDITOR='/Applications/MacVim.app/Contents/MacOS/Vim'
     alias vimdiff="MacVim -d"
   fi
-  if [ -d /usr/local/lib/node_modules ]; then
-    export NODE_PATH="/usr/local/lib/node_modules"
-  fi
 fi
 
 if [ -f $HOME/.local.sh ]; then

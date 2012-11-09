@@ -1,3 +1,7 @@
+if [ -f $HOME/.anyshell/paths ]; then
+  source $HOME/.anyshell/paths
+fi
+
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
 # Set to this to use case-sensitive completion
@@ -51,4 +55,4 @@ source $HOME/.zsh/faunzy.zsh-theme
 # export ZSH_THEME="random"
 
 export PATH=$HOME/node_modules/.bin/lessc:$PATH
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
