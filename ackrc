@@ -8,6 +8,7 @@
 --ignore-dir=public/system
 --ignore-dir=.bin
 --ignore-dir=public/assets
+--ignore-dir=spec/vcr
 --sort-files
 --follow
 --color
