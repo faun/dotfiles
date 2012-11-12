@@ -29,7 +29,7 @@ set nowritebackup " only in case you don't want a backup file while editing
 set noswapfile    " no swap files
 set wildmenu      " Use wildmenu
 set wildmode=longest,list,full " set completion style
-set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.ico,*.psd,*.pid,*/tmp/*,*.sqlite3,*.ipa,*.xcodeproj/*,*.xib,*.cer,*.icns,public/assets/*
+set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.ico,*.psd,*.pid,*/tmp/*,*.sqlite3,*.ipa,*.xcodeproj/*,*.xib,*.cer,*.icns,public/assets/*,spec/vcr/*,bundler_stubs/*,bin/*
 set whichwrap+=<,>,h,l,[,] " let cursor keys wrap around lines
 set clipboard=unnamed " use Mac clipboard for yank/paste/etc.
 set pumheight =15 " Limit completion popup menu height
