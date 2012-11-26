@@ -49,7 +49,7 @@
 	ui = auto
 
 [merge]
-	tool = mvim
+	tool = Kaleidoscope
 	stat = true
 
 [mergetool "mvim"]
@@ -83,8 +83,12 @@
 [difftool "Changes"]
 	cmd = chdiff \"$LOCAL\" \"$REMOTE\"
 [difftool "Kaleidoscope"]
-	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool "mvim"]
 	cmd = mvim -d \"$LOCAL\" \"$REMOTE\"
 [get]
 	recurseSubmodules = always
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+[mergetool]
+	prompt = false
