@@ -87,6 +87,9 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " Force save files that require root permission
 cmap w!! %!sudo tee > /dev/null %
 
+" Make the dot command work with visual mode
+:vnoremap . :norm.<CR>
+
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
