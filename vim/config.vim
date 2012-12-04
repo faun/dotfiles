@@ -126,7 +126,7 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType gitconfig setlocal noet
 
-autocmd BufNewFile,BufRead *.js.coffee.erb, set filetype=coffee
+autocmd BufNewFile,BufRead *.js.coffee.erb, set filetype=coffee.ruby.eruby
 " ==========================================
 " Make Rspec files work with MakeGreen
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
