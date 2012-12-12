@@ -37,6 +37,12 @@ set pumheight =15 " Limit completion popup menu height
 nnoremap <Space> :set hlsearch! hlsearch?<CR>
 
 " ==========================================
+" Code folding
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+
+" ==========================================
 " windows and splits
 nnoremap <leader>l <ESC>:vsp .<CR>
 nnoremap <C-h> <C-w>h
