@@ -24,6 +24,7 @@
 	sm = submodule foreach
 	modules = submodule foreach git pull origin master
 	count = !git shortlog -n $@ | grep \"):\" | sed \"s|:||\"
+	ksreview = "!f() { local SHA=${1:-HEAD}; local BRANCH=${2:-master}; if [ $SHA == $BRANCH ]; then SHA=HEAD; fi; git difftool -y -t Kaleidoscope $BRANCH...$SHA; }; f"
 
 [color "branch"]
 	current = yellow reverse
