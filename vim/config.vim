@@ -3,8 +3,7 @@ set shortmess+=I
 
 syntax on
 filetype plugin indent on
-nnoremap ; :
-                  " allow commands to be run with ;
+
 set hidden
 set nowrap        " don't wrap lines
 set backspace=indent,eol,start
