@@ -138,6 +138,11 @@ autocmd BufNewFile,BufRead *.js.coffee.erb, set filetype=coffee.ruby.eruby
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
 " ==========================================
+" Run spec for current line
+map <leader>r :w<Bar>let linenumber = line('.')<Bar>exec ":!rspec " . expand("%") . ":" . linenumber<CR>
+map <leader>R :w<Bar>!rspec %<CR>
+
+" ==========================================
 " iTerm and screen/tmux settings
 
 if has('mouse')
