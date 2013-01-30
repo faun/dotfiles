@@ -132,7 +132,7 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType gitconfig setlocal noet
 
 autocmd BufNewFile,BufRead *_spec.rb, set filetype=ruby.rails.rspec
-autocmd BufNewFile,BufRead *.js.coffee.erb, set filetype=coffee.ruby.eruby
+autocmd BufNewFile,BufRead *.js.coffee.erb, set filetype=eruby.coffee
 " ==========================================
 " Make Rspec files work with MakeGreen
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
