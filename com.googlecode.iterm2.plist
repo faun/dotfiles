@@ -2692,6 +2692,8 @@
 	<true/>
 	<key>MaxVertically</key>
 	<false/>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 0</string>
 	<key>NSFontPanelPreviewHeight</key>
 	<real>0.0</real>
 	<key>NSFontPanelSizeList</key>
@@ -2842,11 +2844,11 @@
 	<key>NSWindow Frame NSColorPanel</key>
 	<string>567 444 201 309 0 0 2560 1418 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>6 693 924 485 0 0 1600 1178 </string>
+	<string>81 1093 924 485 0 0 2560 1578 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 834 592 584 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 10 2554 1408 0 0 2560 1418 </string>
+	<string>0 0 2560 1600 0 0 2560 1578 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -3789,11 +3791,11 @@
 			<key>Ansi 7 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.86876362562179565</real>
+				<real>0.80669593811035156</real>
 				<key>Green Component</key>
-				<real>0.97553330659866333</real>
+				<real>0.90583759546279907</real>
 				<key>Red Component</key>
-				<real>1</real>
+				<real>0.92855626344680786</real>
 			</dict>
 			<key>Ansi 8 Color</key>
 			<dict>
@@ -5255,7 +5257,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<integer>1</integer>
 	<key>SULastCheckTime</key>
-	<date>2012-10-01T17:20:41Z</date>
+	<date>2013-01-31T01:37:27Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>Show Toolbelt</key>
