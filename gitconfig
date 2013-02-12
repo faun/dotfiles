@@ -94,4 +94,3 @@
 	trustExitCode = true
 [mergetool]
 	prompt = false
-	keepBackup = true
