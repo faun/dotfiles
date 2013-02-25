@@ -1,4 +1,13 @@
---type-add=ruby=.rake,.haml=html=.erb=js=.coffee=css=.scss,.sass=cucumber=.feature
+--type-set
+ruby=.rake,.haml,.rb,.erb,.slim
+--type-set
+html=.erb,.html
+--type-set
+js=.coffee,.js,js.coffee,.js.coffee.erb
+--type-set
+css=.scss,.sass,.css
+--type-set
+cucumber=.feature
 --ignore-dir=vendor
 --ignore-dir=log
 --ignore-dir=tmp
