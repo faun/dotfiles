@@ -1,5 +1,5 @@
 " Rename file function.
-" Call using :Rename new_file_name.txt
+" Call using :Rename
 function RenameFile()
   let oldpath = expand('%')
   let newpath = input('New file name: ', expand('%'), 'file')
@@ -19,4 +19,5 @@ function RenameFile()
   endif
   echohl None
 endfunction
+command! -nargs=* -complete=file Rename call RenameFile()
 map <leader>n :call RenameFile()<cr>
