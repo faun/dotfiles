@@ -133,14 +133,11 @@ autocmd FileType gitconfig setlocal noet
 
 autocmd BufNewFile,BufRead *_spec.rb, set filetype=ruby.rails.rspec
 autocmd BufNewFile,BufRead *.js.coffee.erb, set filetype=eruby.coffee
-" ==========================================
-" Make Rspec files work with MakeGreen
-autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
 " ==========================================
-" Run spec for current line
-map <leader>r :w<Bar>let linenumber = line('.')<Bar>exec ":!rspec " . expand("%") . ":" . linenumber<CR>
-map <leader>R :w<Bar>!rspec %<CR>
+" Set proper filetype for spec files
+"
+autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
 " ==========================================
 " iTerm and screen/tmux settings
