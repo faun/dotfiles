@@ -2848,7 +2848,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 834 592 584 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>4 40 1362 706 0 0 1366 746 </string>
+	<string>4 872 1362 706 0 0 2560 1578 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -5367,11 +5367,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<integer>1</integer>
 	<key>SULastCheckTime</key>
-	<date>2013-02-19T21:38:54Z</date>
+	<date>2013-02-27T01:26:23Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>Show Toolbelt</key>
-	<true/>
+	<false/>
 	<key>ShowBookmarkName</key>
 	<true/>
 	<key>ShowFullScreenTabBar</key>
