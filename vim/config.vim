@@ -26,6 +26,8 @@ set title         " Set terminal title bar
 set grepprg=ack   " Use Ack instead of grep
 set nobackup      " no backup files
 set nowritebackup " only in case you don't want a backup file while editing
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set noswapfile    " no swap files
 set wildmenu      " Use wildmenu
 set wildmode=longest,list,full " set completion style
