@@ -22,6 +22,7 @@ set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 set tags+=./tags " Set the tag file search order
 set tags+=gems.tags
+set title         " Set terminal title bar
 set grepprg=ack   " Use Ack instead of grep
 set nobackup      " no backup files
 set nowritebackup " only in case you don't want a backup file while editing
