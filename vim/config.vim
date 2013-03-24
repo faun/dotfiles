@@ -114,6 +114,10 @@ function! TrimWhiteSpace()
 
 "show tab and space characters
 set list listchars=tab:» ,trail:·
+
+" Toggle invisible characters with leader-tab
+:nmap <silent> <leader><tab> :set nolist!<CR>
+
 " highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=lightgrey guibg=lightgrey ctermfg=red guifg=lightred
 match ExtraWhitespace /\s\+$/
