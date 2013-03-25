@@ -16,7 +16,7 @@ let g:NERDTreeDirArrows = 1
 " ==========================================
 " Vim pasta settings
 
-let g:pasta_enabled_filetypes = ['ruby', 'javascript', 'css', 'sh', 'html', 'php', 'xml', 'eruby']
+let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml']
 
 " ==========================================
 " Gundo Toggle settings
