@@ -166,10 +166,6 @@ autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 " ==========================================
 " iTerm and screen/tmux settings
 
-" Send test output to tmux
-let g:slime_target = "tmux"
-
-
 if has('mouse')
   set mouse=a
   if &term =~ "xterm" || &term =~ "screen"
