@@ -39,6 +39,8 @@ map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 
 " refresh command-t cache every time
 map <leader>t :CommandTFlush<cr>\|:CommandT<cr>
+map <leader>p :CommandTFlush<cr>\|:CommandT<cr>
+nmap <C-P> :CommandTFlush<cr>\|:CommandT<cr>
 
 " ==========================================
 " Indent Guide Settings
