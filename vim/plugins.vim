@@ -41,10 +41,6 @@ map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 map <leader>t :CommandTFlush<cr>\|:CommandT<cr>
 
 " ==========================================
-" Yankring settings
-nnoremap <silent> <F11> :YRShow<CR> " Show Yankring with F11
-
-" ==========================================
 " Indent Guide Settings
 " Show indent guides when editing common formats
 autocmd FileType html,css,ruby,eruby,javascript,php,xml call indent_guides#enable()
