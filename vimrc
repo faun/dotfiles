@@ -3,6 +3,7 @@
 
 set nocompatible
 let mapleader = ","
+nmap \ , " Also use backslash as leader key
 
 " ==========================================
 " Pathogen settings:
