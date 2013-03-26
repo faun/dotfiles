@@ -106,6 +106,9 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " ==========================================
 " Command shortcuts:
 
+"Save with leader-w
+nmap <leader>w :w!<cr>
+
 " Force save files that require root permission
 cmap w!! %!sudo tee > /dev/null %
 
