@@ -95,6 +95,7 @@ noremap <leader>pt :!ctags -V --languages=ruby -f .gems.tags `gem env gemdir` &&
 
 set background=light
 colorscheme solarized
+se t_Co=256
 
 " ==========================================
 " Vimrc settings:
