@@ -53,11 +53,6 @@ nnoremap <silent> <F8> :TlistToggle<CR>
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 
 " ==========================================
-" UltiSnips settings
-set runtimepath+=$HOME/.vim/snippets
-let g:UltiSnipsSnippetDirectories= ["UltiSnips", "snippets"]
-
-" ==========================================
 " Ragtag settings
 
 inoremap <M-o>       <Esc>o
