@@ -35,14 +35,6 @@ let g:Powerline_symbols = 'fancy'
 map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 
 " ==========================================
-" Command-T settings
-
-" refresh command-t cache every time
-map <leader>t :CommandTFlush<cr>\|:CommandT<cr>
-map <leader>p :CommandTFlush<cr>\|:CommandT<cr>
-nmap <C-P> :CommandTFlush<cr>\|:CommandT<cr>
-
-" ==========================================
 " Indent Guide Settings
 " Show indent guides when editing common formats
 autocmd FileType html,css,ruby,eruby,javascript,php,xml call indent_guides#enable()
