@@ -2,8 +2,7 @@
 " Basic settings:
 
 set nocompatible
-let mapleader = ","
-nmap \ , " Also use backslash as leader key
+let mapleader = "\\"
 
 " ==========================================
 " Pathogen settings:
