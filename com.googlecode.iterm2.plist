@@ -2850,11 +2850,11 @@
 	<key>NSWindow Frame NSColorPanel</key>
 	<string>567 444 201 309 0 0 2560 1418 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>300 933 605 485 0 0 2560 1418 </string>
+	<string>81 933 605 485 0 0 2560 1418 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 834 592 584 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1366 768 0 0 1366 746 </string>
+	<string>4 0 1362 746 0 0 1366 746 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -5378,7 +5378,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<integer>1</integer>
 	<key>SULastCheckTime</key>
-	<date>2013-03-23T22:49:35Z</date>
+	<date>2013-04-06T22:52:57Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>Show Toolbelt</key>
@@ -6081,6 +6081,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>1.0.0.20130302</string>
+	<string>1.0.0.20130319</string>
 </dict>
 </plist>
