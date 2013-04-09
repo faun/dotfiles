@@ -52,37 +52,50 @@ alias get='git'
 alias gl='git pull'
 alias glf='git pull --ff-only'
 alias glr='git pull --rebase'
+alias gpu='git pull'
 alias gp='git push'
-alias gd='git diff'
-alias gdc='git diff --cached'
+alias gb='git branch'
+alias g='git status -sb'
+
 alias ga='git add'
 alias gaa='git add --all'
 alias gap='git add --patch'
+alias gs='git status'
+
+alias gra='git remote add'
+alias grr='git remote rm'
+alias gcl='git clone'
+
 alias gc='git commit'
 alias gca='git commit -a'
 alias gcm='git commit -m'
+alias gma='git commit -am'
 alias gcam='git commit -am'
 alias gco='git checkout'
-alias gb='git branch'
-alias g='git status -sb'
-alias gs='git status'
+
 alias stashpop="git stash; git pull; git stash pop"
 alias gr='git reset HEAD'
 alias grm='git status --porcelain | ruby -e "puts STDIN.read.scan(/^\\s+D\\s+(.+)\$/).join(\"\\n\")" | xargs git rm'
+
+# What changed?
+
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias dt='git difftool'
+alias dtc='git difftool --cached'
+alias dth='git difftool HEAD'
+
+alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
+alias last_commit_diff='git difftool HEAD~1..HEAD'
+
 alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %aN: %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias lg="gg"
 alias ggg="git log --graph --pretty=format:'%C(yellow)%h %Creset(%cr)%nAuthor: %C(green)%aN <%aE>%Creset%n%n    %Cblue%s%Creset%n'"
 alias gggg="git log --pretty=format:'%C(yellow)%h %Creset(%cr) %C(green)%aN <%aE>%Creset%n%Cblue%s%Creset%n ' --numstat"
 alias gitmine="git log --author='$(git config --get user.name)' --pretty=format:'%Cgreen%ad%Creset %s%C(yellow)%d%Creset %Cred(%h)%Creset' --date=short"
-
-alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
-alias dt='git difftool'
-alias dtc='git difftool --cached'
-alias dth='git difftool HEAD'
-alias last_commit_diff='git difftool HEAD~1..HEAD'
-alias gg='git lg'
 alias today='git lg --since="1 day ago"'
 
+# External Tools
 alias tower='gittower'
 alias gt='gittower'
 alias gk='gitk --all&'
@@ -90,7 +103,6 @@ alias gx='gitx --all'
 
 
 # Subversion & diff
-export SV_USER='swinter'  # Change this to your username that you normally use on subversion (only if it is different from your logged in name)
 export SVN_EDITOR='${EDITOR}'
 
 alias sv='svn --username ${SV_USER}'
