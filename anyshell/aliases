@@ -73,7 +73,7 @@ alias gma='git commit -am'
 alias gcam='git commit -am'
 alias gco='git checkout'
 
-alias stashpop="git stash; git pull; git stash pop"
+alias stashpop="git stash && git pull && git stash pop"
 alias gr='git reset HEAD'
 alias grm='git status --porcelain | ruby -e "puts STDIN.read.scan(/^\\s+D\\s+(.+)\$/).join(\"\\n\")" | xargs git rm'
 
