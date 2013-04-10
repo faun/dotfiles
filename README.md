@@ -38,6 +38,10 @@ Set homebrew zsh as your default user
 
     sudo chsh -s /usr/local/bin/zsh $(whoami)
 
+Fix an apple mis-configuration for zsh
+
+    sudo mv -i /etc/zshenv /etc/zprofile
+
 Install RVM (recommended)
 
     curl -L get.rvm.io | bash -s stable
