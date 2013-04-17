@@ -38,21 +38,21 @@ set noswapfile                                      " no swap files
 " ==========================================
 " Wildmenu Settings
 "
-set wildmenu                                             " Use wildmenu
-set wildmode=longest,list,full                           " Set completion style
-set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.ico           " Ignore images
-set wildignore+=*.psd                                    " Ignore PSDs
-set wildignore+=*.pid                                    " Ignore PID files
-set wildignore+=*/tmp/*                                  " Ignore files in tmp
-set wildignore+=*.sqlite3                                " Ignore sqlite databases
-set wildignore+=*.ipa,*.xcodeproj/*,*.xib,*.cer,*.icns   " ignore xcode files
-set wildignore+=public/assets/*                          " ignore asset pipeline]
-set wildignore+=spec/vcr/*                               " ignore vcr cassettes
-set wildignore+=bundler_stubs/*                          " ignore bundler files
+set wildmenu                                                   " Use wildmenu
+set wildmode=longest,list,full                                 " Set completion style
+set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.ico                 " Ignore images
+set wildignore+=*.psd                                          " Ignore PSDs
+set wildignore+=*.pid                                          " Ignore PID files
+set wildignore+=*/tmp/*                                        " Ignore files in tmp
+set wildignore+=*.sqlite3                                      " Ignore sqlite databases
+set wildignore+=*.ipa,*.xcodeproj/*,*.xib,*.cer,*.icns         " ignore xcode files
+set wildignore+=public/assets/*,public/stylesheets/compiled/* " ignore asset pipeline
+set wildignore+=spec/vcr/*                                     " ignore vcr cassettes
+set wildignore+=bundler_stubs/*                                " ignore bundler files
 set wildignore+=bin/*
-set whichwrap+=<,>,h,l,[,]                               " let cursor keys wrap around lines
-set clipboard=unnamed                                    " use Mac clipboard for yank/paste/etc.
-set pumheight =15                                        " Limit completion popup menu height
+set whichwrap+=<,>,h,l,[,]                                     " let cursor keys wrap around lines
+set clipboard=unnamed                                          " use Mac clipboard for yank/paste/etc.
+set pumheight =15                                              " Limit completion popup menu height
 " ==========================================
 " Code folding
 "

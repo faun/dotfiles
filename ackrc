@@ -15,6 +15,7 @@ cucumber=.feature
 --ignore-dir=coverage
 --ignore-dir=spec/fixtures
 --ignore-dir=public/system
+--ignore-dir=public/stylesheets/compiled
 --ignore-dir=.bin
 --ignore-dir=public/assets
 --ignore-dir=spec/vcr
