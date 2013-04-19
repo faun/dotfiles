@@ -179,6 +179,10 @@ function! TrimWhiteSpace()
   autocmd BufNewFile,BufRead *_spec.rb, set filetype=ruby.rails.rspec
   autocmd BufNewFile,BufRead *.js.coffee.erb, set filetype=eruby.coffee
 
+  if has("autocmd")
+    au BufNewFile,BufRead *.handlebars,*.hbs set filetype=handlebars
+  endif
+
   " ==========================================
   " Set proper filetype for spec files
   "
