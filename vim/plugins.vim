@@ -14,6 +14,23 @@ let g:NERDTreeMinimalUI = 1 " Disable help message
 let g:NERDTreeDirArrows = 1
 
 " ==========================================
+" Control-P Settings
+" Open CtrlP in working directory rather than SCM root
+
+map <leader>gv :CtrlP app/views<cr>
+map <leader>gc :CtrlP app/controllers<cr>
+map <leader>gm :CtrlP app/models<cr>
+map <leader>gh :CtrlP app/helpers<cr>
+map <leader>gj :CtrlP app/assets/javascripts/<cr>
+map <leader>gl :CtrlP lib<cr>
+map <leader>gp :CtrlP public<cr>
+map <leader>gs :CtrlP public/stylesheets<cr>
+map <leader>gf :CtrlP features<cr>
+
+" Find files in current working dir
+map <leader>f :CtrlP =expand('%:h').<cr> 
+
+" ==========================================
 " Vim pasta settings
 
 let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml', 'vim']
