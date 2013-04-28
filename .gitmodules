@@ -20,7 +20,7 @@
 	url = git://github.com/tpope/vim-fugitive.git
 [submodule "vim/bundle/L9"]
 	path = vim/bundle/L9
-	url = https://github.com/vim-scripts/L9
+	url = git@github.com:vim-scripts/L9.git
 [submodule "vim/bundle/vim-fuzzyfinder"]
 	path = vim/bundle/vim-fuzzyfinder
 	url = https://github.com/clones/vim-fuzzyfinder
@@ -105,3 +105,6 @@
 [submodule "vim/bundle/vim-handlebars"]
 	path = vim/bundle/vim-handlebars
 	url = git@github.com:nono/vim-handlebars.git
+[submodule "vim/bundle/vim-autocomplpop"]
+	path = vim/bundle/vim-autocomplpop
+	url = git@github.com:othree/vim-autocomplpop.git
