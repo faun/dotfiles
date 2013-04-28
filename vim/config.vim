@@ -24,7 +24,7 @@ set ignorecase                                           " ignore case when sear
 set hlsearch                                             " highlight search terms
 set incsearch                                            " show search matches as you type
 set grepprg=ack                                          " Use Ack instead of grep
-
+set colorcolumn=80
 nnoremap <Space> :set hlsearch! hlsearch?<CR>
                                                          " Press Space to toggle highlighting on/off, and show current value.
 " ==========================================
