@@ -71,3 +71,4 @@ let g:ragtag_global_maps = 1
 " ==========================================
 " Syntastic settings
 let g:syntastic_javascript_syntax_checker="jshint"
+let g:syntastic_auto_loc_list=1
