@@ -4,6 +4,7 @@
 *.swp
 /icon.jpg
 tags
+tags-ja
 .tags
 gems.tags
 .gems.tags
