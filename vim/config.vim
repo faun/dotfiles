@@ -131,83 +131,83 @@ set ts=2 sts=2 sw=2 expandtab "set two spaces by default
 " File settings:
 function! TrimWhiteSpace()
   %s/\s\+$//e
-  :endfunction
+:endfunction
 
-  "show tab and space characters
-  set list listchars=tab:» ,trail:·
+"show tab and space characters
+set list listchars=tab:» ,trail:·
 
-  " Toggle invisible characters with leader-tab
-  :nmap <silent> <leader><tab> :set nolist!<CR>
+" Toggle invisible characters with leader-tab
+:nmap <silent> <leader><tab> :set nolist!<CR>
 
-  " highlight trailing whitespace
-  highlight ExtraWhitespace ctermbg=lightgrey guibg=lightgrey ctermfg=red guifg=lightred
-  match ExtraWhitespace /\s\+$/
+" highlight trailing whitespace
+highlight ExtraWhitespace ctermbg=lightgrey guibg=lightgrey ctermfg=red guifg=lightred
+match ExtraWhitespace /\s\+$/
 
-  " Remove trailing whitespace with F3
-  map <silent> <F3> :call TrimWhiteSpace()<CR>``
+" Remove trailing whitespace with F3
+map <silent> <F3> :call TrimWhiteSpace()<CR>``
 
-  " ==========================================
-  " PROMOTE VARIABLE TO RSPEC LET
-  " ==========================================
-  function! PromoteToLet()
-    :normal! dd
-    " :exec '?^\s*it\>'
-    :normal! P
-    :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
-    :normal ==
-  endfunction
-  :command! PromoteToLet :call PromoteToLet()
-  :map <leader>p :PromoteToLet<cr>
+" ==========================================
+" PROMOTE VARIABLE TO RSPEC LET
+" ==========================================
+function! PromoteToLet()
+  :normal! dd
+  " :exec '?^\s*it\>'
+  :normal! P
+  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+  :normal ==
+endfunction
+:command! PromoteToLet :call PromoteToLet()
+:map <leader>p :PromoteToLet<cr>
 
 
-  " ==========================================
-  " Filetype Definitions
-  " ==========================================
-  autocmd Filetype javascript setlocal et ts=4 sts=4 sw=4
-  autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+" ==========================================
+" Filetype Definitions
+" ==========================================
+autocmd Filetype javascript setlocal et ts=4 sts=4 sw=4
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
-  autocmd Filetype html setlocal et ts=2 sts=2 sw=2
-  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd Filetype html setlocal et ts=2 sts=2 sw=2
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
-  autocmd Filetype css setlocal et ts=2 sts=2 sw=2
-  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd Filetype css setlocal et ts=2 sts=2 sw=2
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
-  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-  autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-  autocmd FileType gitconfig setlocal noet
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType gitconfig setlocal noet
 
-  autocmd BufNewFile,BufRead *_spec.rb, set filetype=ruby.rails.rspec
-  autocmd BufNewFile,BufRead *.js.coffee.erb, set filetype=eruby.coffee
+autocmd BufNewFile,BufRead *_spec.rb, set filetype=ruby.rails.rspec
+autocmd BufNewFile,BufRead *.js.coffee.erb, set filetype=eruby.coffee
 
-  if has("autocmd")
-    au BufNewFile,BufRead *.handlebars,*.hbs set filetype=handlebars
-  endif
+if has("autocmd")
+  au BufNewFile,BufRead *.handlebars,*.hbs set filetype=handlebars
+endif
 
-  " ==========================================
-  " Set proper filetype for spec files
-  "
-  autocmd BufNewFile,BufRead *_spec.rb compiler rspec
+" ==========================================
+" Set proper filetype for spec files
+"
+autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
-  " ==========================================
-  " iTerm and screen/tmux settings
+" ==========================================
+" iTerm and screen/tmux settings
 
-  if has('mouse')
-    set mouse=a
-    if &term =~ "xterm" || &term =~ "screen"
-      " for some reason, doing this directly with 'set ttymouse=xterm2'
-      " doesn't work -- 'set ttymouse?' returns xterm2 but the mouse
-      " makes tmux enter copy mode instead of selecting or scrolling
-      " inside Vim -- but luckily, setting it up from within autocmds
-      " works
-      autocmd VimEnter * set ttymouse=xterm2
-      autocmd FocusGained * set ttymouse=xterm2
-      autocmd BufEnter * set ttymouse=xterm2
-    endif
-  endif
-  set ttimeoutlen=50
-
+if has('mouse')
+  set mouse=a
   if &term =~ "xterm" || &term =~ "screen"
-    let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
-    let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
-    let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
+    " for some reason, doing this directly with 'set ttymouse=xterm2'
+    " doesn't work -- 'set ttymouse?' returns xterm2 but the mouse
+    " makes tmux enter copy mode instead of selecting or scrolling
+    " inside Vim -- but luckily, setting it up from within autocmds
+    " works
+    autocmd VimEnter * set ttymouse=xterm2
+    autocmd FocusGained * set ttymouse=xterm2
+    autocmd BufEnter * set ttymouse=xterm2
   endif
+endif
+set ttimeoutlen=50
+
+if &term =~ "xterm" || &term =~ "screen"
+  let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
+  let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
+  let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
+endif
