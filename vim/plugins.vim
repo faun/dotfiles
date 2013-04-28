@@ -20,7 +20,7 @@ map <leader>gv :CtrlP app/views<cr>
 map <leader>gc :CtrlP app/controllers<cr>
 map <leader>gm :CtrlP app/models<cr>
 map <leader>gh :CtrlP app/helpers<cr>
-map <leader>gj :CtrlP app/assets/javascripts/<cr>
+map <leader>gg :CtrlP app/assets/javascripts/<cr>
 map <leader>ggv :CtrlP app/assets/javascripts/views<cr>
 map <leader>ggc :CtrlP app/assets/javascripts/controllers<cr>
 map <leader>ggm :CtrlP app/assets/javascripts/models<cr>
