@@ -1,4 +1,3 @@
-
 syntax on
 filetype plugin indent on
 
@@ -191,6 +190,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 4
 imap <C-l> <Space>=><Space>
               "Make hashrocket with control-l
 map <F7> :wall<esc> :!rspec --color<CR>
+imap <S-CR>    <CR><CR>end<Esc>-cc
 
 " ==========================================
 " Set proper filetype for spec files
