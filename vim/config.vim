@@ -4,29 +4,31 @@ filetype plugin indent on
 
 " ==========================================
 " Viewport
-set shortmess+=I                                         " Hide the vim splash screen
-set title                                                " Set terminal title bar
-set hidden                                               " Use hidden buffers
-set nowrap                                               " don't wrap lines
-set backspace=indent,eol,start                           " allow backspacing over everything in insert mode
-set number                                               " always show line numbers
+set shortmess+=I                                          " Hide the vim splash screen
+set title                                                 " Set terminal title bar
+set hidden                                                " Use hidden buffers
+set nowrap                                                " don't wrap lines
+set backspace=indent,eol,start                            " allow backspacing over everything in insert mode
+set number                                                " always show line numbers
 
-set autoindent                                           " always set autoindenting on
-set copyindent                                           " copy the previous indentation on autoindenting
-set shiftround                                           " use multiple of shiftwidth when indenting with '<' and '>'
-set showmatch                                            " set show matching parenthesis
-set smarttab                                             " insert tabs on the start of a line according to
-                                                         " shiftwidth, not tabstop
+set clipboard=unnamed                                     " use Mac clipboard for yank/paste/etc.
+set whichwrap+=<,>,h,l,[,]                                " let cursor keys wrap around lines
+set autoindent                                            " always set autoindenting on
+set copyindent                                            " copy the previous indentation on autoindenting
+set shiftround                                            " use multiple of shiftwidth when indenting with '<' and '>'
+set showmatch                                             " set show matching parenthesis
+set smarttab                                              " insert tabs on the start of a line according to
+                                                          " shiftwidth, not tabstop
 
-set smartcase                                            " ignore case if search pattern is all lowercase,
-                                                         " case-sensitive otherwise
-set ignorecase                                           " ignore case when searching
-set hlsearch                                             " highlight search terms
-set incsearch                                            " show search matches as you type
-set grepprg=ack                                          " Use Ack instead of grep
+set smartcase                                             " ignore case if search pattern is all lowercase,
+                                                          " case-sensitive otherwise
+set ignorecase                                            " ignore case when searching
+set hlsearch                                              " highlight search terms
+set incsearch                                             " show search matches as you type
+set grepprg=ack                                           " Use Ack instead of grep
 set colorcolumn=80
 nnoremap <Space> :set hlsearch! hlsearch?<CR>
-                                                         " Press Space to toggle highlighting on/off, and show current value.
+                                                          " Press Space to toggle highlighting on/off, and show current value.
 " ==========================================
 " File backups
 set nobackup                                        " no backup files
@@ -50,8 +52,6 @@ set wildignore+=public/assets/*,public/stylesheets/compiled/* " ignore asset pip
 set wildignore+=spec/vcr/*                                     " ignore vcr cassettes
 set wildignore+=bundler_stubs/*                                " ignore bundler files
 set wildignore+=bin/*
-set whichwrap+=<,>,h,l,[,]                                     " let cursor keys wrap around lines
-set clipboard=unnamed                                          " use Mac clipboard for yank/paste/etc.
 set pumheight =15                                              " Limit completion popup menu height
 " ==========================================
 " Code folding
