@@ -54,7 +54,7 @@ map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 " ==========================================
 " Indent Guide Settings
 " Show indent guides when editing common formats
-autocmd FileType html,css,ruby,eruby,javascript,php,xml call indent_guides#enable()
+autocmd FileType html,css,ruby,eruby,javascript,php,xml,coffee call indent_guides#enable()
 
 " ==========================================
 " Taglist settings
