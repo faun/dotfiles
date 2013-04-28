@@ -50,7 +50,7 @@
 	url = git://github.com/scrooloose/syntastic.git
 [submodule "vim/bundle/supertab"]
 	path = vim/bundle/supertab
-	url = git://github.com/ervandew/supertab.git
+	url = git@github.com:ervandew/supertab.git
 [submodule "vim/bundle/vim-ragtag"]
 	path = vim/bundle/vim-ragtag
 	url = git://github.com/tpope/vim-ragtag.git
