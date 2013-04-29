@@ -4,7 +4,7 @@ function rvm-prompt-wrapper () {
 #Based off the murilasso zsh theme
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 local user_host='%{$terminfo[bold]$fg[green]%}%n@%m%{$reset_color%}'
-local current_dir='%{$fg[blue]%}%/%{$reset_color%}'
+local current_dir='%{$fg[blue]%}$(pwd -P)%{$reset_color%}'
 local rvm_ruby='%{$fg[red]%}$(rvm-prompt-wrapper)%{$reset_color%}'
 local git_branch='%{$fg[blue]%}$(git_prompt_info)%{$reset_color%}'
 
