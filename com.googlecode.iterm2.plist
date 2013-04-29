@@ -2847,14 +2847,19 @@
 		<key>TB Size Mode</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSUserKeyEquivalents</key>
+	<dict>
+		<key>Reset</key>
+		<string>@~^$r</string>
+	</dict>
 	<key>NSWindow Frame NSColorPanel</key>
 	<string>567 444 201 309 0 0 2560 1418 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>22 261 924 485 0 0 1366 746 </string>
+	<string>81 933 605 485 0 0 2560 1418 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 834 592 584 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>4 0 1362 746 0 0 1366 746 </string>
+	<string>4 18 1362 728 0 0 1366 746 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -5378,7 +5383,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<integer>1</integer>
 	<key>SULastCheckTime</key>
-	<date>2013-04-09T01:18:11Z</date>
+	<date>2013-04-29T01:50:57Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>Show Toolbelt</key>
