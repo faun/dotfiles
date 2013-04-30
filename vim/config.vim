@@ -162,7 +162,7 @@ endfunction
 " ==========================================
 " Filetype Definitions
 " ==========================================
-autocmd Filetype javascript setlocal et ts=4 sts=4 sw=4
+autocmd Filetype javascript setlocal et ts=2 sts=2 sw=2
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
 autocmd Filetype html setlocal et ts=2 sts=2 sw=2
