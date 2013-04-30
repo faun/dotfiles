@@ -105,3 +105,6 @@
 [submodule "vim/bundle/AfterColors.vim"]
 	path = vim/bundle/AfterColors.vim
 	url = git@github.com:vim-scripts/AfterColors.vim.git
+[submodule "vim/bundle/vim-ember-script"]
+	path = vim/bundle/vim-ember-script
+	url = git@github.com:heartsentwined/vim-ember-script.git
