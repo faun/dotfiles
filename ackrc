@@ -8,6 +8,8 @@ js=.coffee,.js,js.coffee,.js.coffee.erb
 css=.scss,.sass,.css
 --type-set
 cucumber=.feature
+--type-set
+handlebars=.handlebars,.hdb,.mustache
 --ignore-dir=vendor
 --ignore-dir=log
 --ignore-dir=tmp
