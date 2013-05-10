@@ -10,3 +10,5 @@ gems.tags
 .gems.tags
 .dropbox
 Icon?
+custom_plan.rb
+zeus.json
