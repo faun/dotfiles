@@ -16,15 +16,6 @@ These are config files to set up a system the way I like it.
 
     rake
 
-###Additional Tools
-
-Install Command-T C extension:
-
-    #if using rvm: rvm use system
-    cd vim/bundle/command-t/ruby/command-t/
-    ruby extconf.rb
-    make
-
 ###Change shell to latest zsh
 
     brew install zsh
@@ -41,6 +32,11 @@ Set homebrew zsh as your default user
 Fix an apple mis-configuration for zsh
 
     sudo mv -i /etc/zshenv /etc/zprofile
+
+Install tmux
+
+    brew install tmux
+    brew install reattach-to-user-namespace
 
 Install RVM (recommended)
 
