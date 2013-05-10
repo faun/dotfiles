@@ -9,7 +9,7 @@ set hidden                                                " Use hidden buffers
 set nowrap                                                " don't wrap lines
 set backspace=indent,eol,start                            " allow backspacing over everything in insert mode
 set number                                                " always show line numbers
-
+set encoding=utf-8
 set clipboard=unnamed                                     " use Mac clipboard for yank/paste/etc.
 set whichwrap+=<,>,h,l,[,]                                " let cursor keys wrap around lines
 set autoindent                                            " always set autoindenting on
