@@ -108,3 +108,6 @@
 [submodule "vim/bundle/vim-ember-script"]
 	path = vim/bundle/vim-ember-script
 	url = git@github.com:heartsentwined/vim-ember-script.git
+[submodule "vim/bundle/vim-dispatch"]
+	path = vim/bundle/vim-dispatch
+	url = git://github.com/tpope/vim-dispatch.git
