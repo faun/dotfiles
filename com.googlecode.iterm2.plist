@@ -2855,11 +2855,11 @@
 	<key>NSWindow Frame NSColorPanel</key>
 	<string>567 444 201 309 0 0 2560 1418 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>81 933 605 485 0 0 2560 1418 </string>
+	<string>399 936 924 485 0 0 2560 1578 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 834 592 584 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>4 18 1362 728 0 0 1366 746 </string>
+	<string>4 22 1277 1556 0 0 2560 1578 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -3503,11 +3503,11 @@
 			<key>Name</key>
 			<string>Bash</string>
 			<key>Non Ascii Font</key>
-			<string>AnonymousPro 16</string>
+			<string>InconsolataForPowerline 16</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>AnonymousPro 16</string>
+			<string>InconsolataForPowerline 14</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -4318,11 +4318,11 @@
 			<key>Name</key>
 			<string>Zsh by Day</string>
 			<key>Non Ascii Font</key>
-			<string>Inconsolata-dzForPowerline 14</string>
+			<string>InconsolataForPowerline 16</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Inconsolata-dzForPowerline 14</string>
+			<string>InconsolataForPowerline 16</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -5133,11 +5133,11 @@
 			<key>Name</key>
 			<string>Zsh by Night</string>
 			<key>Non Ascii Font</key>
-			<string>Inconsolata-dzForPowerline 14</string>
+			<string>InconsolataForPowerline 16</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Inconsolata-dzForPowerline 14</string>
+			<string>InconsolataForPowerline 16</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -5383,7 +5383,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<integer>1</integer>
 	<key>SULastCheckTime</key>
-	<date>2013-04-29T01:50:57Z</date>
+	<date>2013-05-02T18:34:37Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>Show Toolbelt</key>
