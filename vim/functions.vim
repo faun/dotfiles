@@ -1,3 +1,104 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RUNNING TESTS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>t :call RunTestFile()<cr>
+map <leader>r :call RunNearestTest()<cr>
+map <leader>bt <ESC>:w<CR>\|:Dispatch bundle exec rspec --color --no-drb %<cr>
+map <leader>z <ESC>:w<CR>\|:Dispatch rspec --color --no-drb %<cr>
+map <leader>tu <ESC>:w<CR>\|:Dispatch rspec --color --no-drb spec/lib<cr>
+map <leader>bu <ESC>:w<CR>\|:Dispatch bundle exec rspec --color --no-drb spec/lib<cr>
+
+function! RunTestFile(...)
+  if a:0
+    let command_suffix = a:1
+  else
+    let command_suffix = ""
+  endif
+
+  " Run the tests for the previously-marked file.
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\|_test.js\|_spec.js\)')
+
+  if in_test_file >= 0
+    call SetTestFile()
+  elseif !exists("t:grb_test_file")
+    :echo "Vim: I don't know what file to test :("
+    return
+  end
+  call RunTests(t:grb_test_file . command_suffix)
+endfunction
+
+function! RunNearestTest()
+    let spec_line_number = line('.')
+    call RunTestFile(":" . spec_line_number)
+endfunction
+
+function! SetTestFile()
+    " Set the spec file that tests will be run for.
+    let t:grb_test_file=@%
+endfunction
+
+function! RunTests(filename)
+
+  " JAVASCRIPT
+  if match(expand("%"), '\(._test.js\|_spec.js\)') >= 0
+
+    let filename_for_spec = substitute(expand("%"), "spec/javascripts/", "", "")
+    "Konacha
+    if filereadable("Gemfile") && match(readfile("Gemfile"), "konacha") >= 0
+
+      " Konacha with Zeus
+      if filereadable("zeus.json")
+        :silent !echo "Konacha with zeus"
+        exec ":Dispatch zeus rake konacha:run SPEC=" . filename_for_spec
+
+      " Konacha with bundle exec
+      else
+        :silent !echo "Konacha with bundle exec"
+        exec ":Dispatch bundle exec rake konacha:run SPEC=" . filename_for_spec
+      endif
+
+    " Everything else (QUnit)
+    else
+      "Rake
+      exec ":Dispatch rake"
+    endif
+
+  " RUBY
+  elseif match(a:filename, '\(._test.rb\|_spec.rb\)') >= 0
+
+    let filename_without_line_number = substitute(a:filename, ':\d\+$', '', '')
+    " Minitest
+    if match(a:filename, '\(_test\)') != -1
+      exec ":Dispatch ruby -Ilib/ " . a:filename
+
+    " Bundler
+    elseif match(readfile(filename_without_line_number), '\("spec_helper\|''spec_helper\|capybara_helper\|acceptance_spec_helper\|acceptance_helper\)') >= 0
+
+      " Zeus
+      if filereadable("zeus.json") && filereadable("Gemfile")
+        :silent !echo "Using zeus"
+        exec ":Dispatch zeus rspec -O ~/.rspec --color --format progress --no-drb --order random " . a:filename
+
+      " bundle exec
+      elseif filereadable("Gemfile")
+        :silent !echo "Using bundle exec"
+        exec ":Dispatch bundle exec rspec --color --order random " . a:filename
+
+      " pure rspec
+      else
+        :silent !echo "Using vanilla rspec"
+        exec ":Dispatch rspec -O ~/.rspec --color --format progress --no-drb --order random " . a:filename
+      end
+
+    " Everything else
+    else
+      :silent !echo "Using vanilla rspec outside Rails"
+      exec ":Dispatch rspec -O ~/.rspec --color --format progress --no-drb --order random " . a:filename
+    end
+  end
+endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ==========================================
 " Smart Tab completion
 " http://vim.wikia.com/wiki/VimTip102
