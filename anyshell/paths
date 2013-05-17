@@ -1,5 +1,11 @@
 #echo "=> Loading `pwd`/paths"
 
+if ! brew_location="$(type -p "$brew")" || [ -z "$brew_location" ]; then
+  # homebrew doesn't exist
+else
+  # we have homebrew installed
+  export PATH="$(brew --prefix)/lib/python2.7/site-packages:$PATH"
+fi
 export PATH="$(brew --prefix)/lib/python2.7/site-packages:$PATH"
 export PATH="~/bin:/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:$HOME/.gem/ruby/1.8/bin:/usr/local/share/python:$PATH"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
