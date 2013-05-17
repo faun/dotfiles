@@ -2855,7 +2855,7 @@
 	<key>NSWindow Frame NSColorPanel</key>
 	<string>567 444 201 309 0 0 2560 1418 </string>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>892 22 445 270 0 0 1366 746 </string>
+	<string>537 22 800 270 0 0 1366 746 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>4 261 924 485 0 0 1366 746 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
@@ -3505,11 +3505,11 @@
 			<key>Name</key>
 			<string>Bash</string>
 			<key>Non Ascii Font</key>
-			<string>InconsolataForPowerline-dz 14</string>
+			<string>InconsolataForPowerline-dzForPowerline 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>InconsolataForPowerline-dz 14</string>
+			<string>InconsolataForPowerline-dzForPowerline 14</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -4320,11 +4320,11 @@
 			<key>Name</key>
 			<string>Zsh by Day</string>
 			<key>Non Ascii Font</key>
-			<string>InconsolataForPowerline-dz 14</string>
+			<string>InconsolataForPowerline-dzForPowerline 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>InconsolataForPowerline-dz 14</string>
+			<string>InconsolataForPowerline-dzForPowerline 14</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -5135,11 +5135,11 @@
 			<key>Name</key>
 			<string>Zsh by Night</string>
 			<key>Non Ascii Font</key>
-			<string>InconsolataForPowerline-dz 14</string>
+			<string>InconsolataForPowerline-dzForPowerline 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>InconsolataForPowerline-dz 14</string>
+			<string>InconsolataForPowerline-dzForPowerline 14</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
