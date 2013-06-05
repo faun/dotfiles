@@ -146,6 +146,9 @@ alias spec='/usr/bin/time rspec'
 alias get_db='cap production db:download && rake db:backup:load'
 alias get_db_staging='cap staging db:download && rake db:backup:load SOURCE_ENV=staging'
 
+#Zeus
+alias z='zeus'
+
 # misc
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
 alias so='source $HOME/src/dotfiles/anyshell/aliases'
