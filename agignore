@@ -1,0 +1,12 @@
+vendor
+log
+tmp
+doc
+coverage
+spec/fixtures
+public/system
+public/stylesheets/compiled
+.bin
+public/assets
+vendor/assets
+spec/vcr
