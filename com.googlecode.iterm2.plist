@@ -2857,11 +2857,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>537 22 800 270 0 0 1366 746 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>4 261 924 485 0 0 1366 746 </string>
+	<string>1141 164 924 485 0 0 2560 1418 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 834 592 584 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>4 0 1362 746 0 0 1366 746 </string>
+	<string>4 40 1362 706 0 0 1366 746 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -3750,11 +3750,11 @@
 			<key>Ansi 15 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.87778401374816895</real>
+				<real>0.86405980587005615</real>
 				<key>Green Component</key>
-				<real>0.96944600343704224</real>
+				<real>0.95794391632080078</real>
 				<key>Red Component</key>
-				<real>1</real>
+				<real>0.98943418264389038</real>
 			</dict>
 			<key>Ansi 2 Color</key>
 			<dict>
@@ -3804,18 +3804,18 @@
 			<key>Ansi 7 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.80669593811035156</real>
+				<real>0.79781103134155273</real>
 				<key>Green Component</key>
-				<real>0.90583759546279907</real>
+				<real>0.89001238346099854</real>
 				<key>Red Component</key>
-				<real>0.92855626344680786</real>
+				<real>0.91611063480377197</real>
 			</dict>
 			<key>Ansi 8 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.7874717116355896</real>
+				<real>0.15170273184776306</real>
 				<key>Green Component</key>
-				<real>0.60998660326004028</real>
+				<real>0.11783610284328461</real>
 				<key>Red Component</key>
 				<real>0.0</real>
 			</dict>
@@ -3835,11 +3835,11 @@
 			<key>Background Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.87778401374816895</real>
+				<real>0.86405980587005615</real>
 				<key>Green Component</key>
-				<real>0.96944600343704224</real>
+				<real>0.95794391632080078</real>
 				<key>Red Component</key>
-				<real>1</real>
+				<real>0.98943418264389038</real>
 			</dict>
 			<key>Background Image Location</key>
 			<string></string>
@@ -3891,7 +3891,7 @@
 			<key>Cursor Type</key>
 			<integer>2</integer>
 			<key>Custom Command</key>
-			<string>Yes</string>
+			<string>No</string>
 			<key>Custom Directory</key>
 			<string>Recycle</string>
 			<key>Default Bookmark</key>
@@ -4470,7 +4470,7 @@
 				</dict>
 			</array>
 			<key>Sync Title</key>
-			<true/>
+			<false/>
 			<key>Tags</key>
 			<array/>
 			<key>Terminal Type</key>
@@ -4628,9 +4628,9 @@
 			<key>Ansi 8 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.21456094086170197</real>
+				<real>0.53505516052246094</real>
 				<key>Green Component</key>
-				<real>0.15580950677394867</real>
+				<real>0.39142724871635437</real>
 				<key>Red Component</key>
 				<real>0.0</real>
 			</dict>
@@ -4722,11 +4722,11 @@
 			<key>Foreground Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.40821197628974915</real>
+				<real>0.51685798168182373</real>
 				<key>Green Component</key>
-				<real>0.40339389443397522</real>
+				<real>0.50962930917739868</real>
 				<key>Red Component</key>
-				<real>0.34752649068832397</real>
+				<real>0.44058024883270264</real>
 			</dict>
 			<key>Guid</key>
 			<string>57DA12FB-C8A2-4ECC-83D9-5C71BCFE2C38</string>
@@ -5285,7 +5285,7 @@
 				</dict>
 			</array>
 			<key>Sync Title</key>
-			<true/>
+			<false/>
 			<key>Tags</key>
 			<array/>
 			<key>Terminal Type</key>
@@ -5385,7 +5385,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<integer>1</integer>
 	<key>SULastCheckTime</key>
-	<date>2013-05-15T00:28:53Z</date>
+	<date>2013-05-22T21:46:16Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>Show Toolbelt</key>
