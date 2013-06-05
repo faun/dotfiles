@@ -20,6 +20,7 @@ handlebars=.handlebars,.hdb,.mustache
 --ignore-dir=public/stylesheets/compiled
 --ignore-dir=.bin
 --ignore-dir=public/assets
+--ignore-dir=vendor/assets
 --ignore-dir=spec/vcr
 --sort-files
 --follow
