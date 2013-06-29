@@ -2,6 +2,7 @@
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>t :call RunTestFile()<cr>
+map <leader>R :call RunTestFile()<cr>
 map <leader>r :call RunNearestTest()<cr>
 map <leader>bt <ESC>:w<CR>\|:Dispatch bundle exec rspec --color --no-drb %<cr>
 map <leader>z <ESC>:w<CR>\|:Dispatch rspec --color --no-drb %<cr>
