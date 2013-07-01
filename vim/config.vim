@@ -120,6 +120,7 @@ cmap w!! %!sudo tee > /dev/null %
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
 nnoremap <F2> :set invpaste paste?<CR>
+nnoremap <leader>pm :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 
