@@ -53,6 +53,8 @@ map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
 " ==========================================
 " Indent Guide Settings
 " Show indent guides when editing common formats
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=darkgrey   ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey   ctermbg=237
 autocmd FileType html,css,ruby,eruby,javascript,php,xml,coffee call indent_guides#enable()
 
 " ==========================================
