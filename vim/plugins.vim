@@ -29,10 +29,6 @@ map <leader>f :CtrlP<cr>
 map <leader>F :CtrlP %%<cr>
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_max_height = 20
-" ==========================================
-" Vim pasta settings
-
-let g:pasta_disabled_filetypes = ['python', 'coffee', 'yaml', 'vim']
 
 " ==========================================
 " Gundo Toggle settings
