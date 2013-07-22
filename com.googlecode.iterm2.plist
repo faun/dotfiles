@@ -3067,11 +3067,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>537 22 800 270 0 0 1366 746 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>442 728 924 485 0 0 2560 1418 </string>
+	<string>442 870 924 485 0 0 2560 1600 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 834 592 584 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 2560 1440 0 0 2560 1418 </string>
+	<string>0 2 1148 694 0 0 1152 698 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -3723,7 +3723,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>InconsolataForPowerline-dzForPowerline 14</string>
+			<string>InconsolataForPowerline-dzForPowerline 12</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -5685,11 +5685,11 @@
 			<key>Background Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.098682582378387451</real>
+				<real>0.10897243767976761</real>
 				<key>Green Component</key>
-				<real>0.11838251352310181</real>
+				<real>0.10897058993577957</real>
 				<key>Red Component</key>
-				<real>0.11495672911405563</real>
+				<real>0.10897385329008102</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -6170,7 +6170,7 @@
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
-			<string>Cody</string>
+			<string>Molokai</string>
 			<key>Non Ascii Font</key>
 			<string>InconsolataForPowerline-dzForPowerline 14</string>
 			<key>Non-ASCII Anti Aliased</key>
@@ -6426,7 +6426,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<integer>1</integer>
 	<key>SULastCheckTime</key>
-	<date>2013-06-27T15:12:12Z</date>
+	<date>2013-07-09T15:30:14Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>Show Toolbelt</key>
