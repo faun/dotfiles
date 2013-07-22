@@ -70,3 +70,13 @@ let g:syntastic_auto_loc_list = 1
 let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
+
+" =========================================
+" Vim-Vroom Settings
+let g:vroom_use_dispatch = 1
+let g:vroom_use_colors = 1
+
+" =========================================
+" Vim-Dispatch Settings
+autocmd BufNewFile,BufRead *_spec.{js,js.coffee,coffee} let b:dispatch= 'rake teaspoon -q %'
+autocmd BufNewFile,BufRead *_spec.rb compiler rspec
