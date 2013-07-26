@@ -120,7 +120,8 @@ alias svblame='sv blame'
 alias svdiff='sv diff'
 
 # tmux
-alias tmux="TERM=screen-256color-bce tmux"
+alias tat='tmux_attach'
+alias t='tmux_attach'
 
 # ruby
 alias irb='irb --readline -r irb/completion'
@@ -146,8 +147,9 @@ alias spec='/usr/bin/time rspec'
 alias get_db='cap production db:download && rake db:backup:load'
 alias get_db_staging='cap staging db:download && rake db:backup:load SOURCE_ENV=staging'
 
-#Zeus
+# Zeus
 alias z='zeus'
+alias zs='zeus start'
 
 # misc
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
