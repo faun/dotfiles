@@ -41,11 +41,9 @@ export rvm_path="$HOME/.rvm"
 
 __rvm_project_rvmrc
 
-plugins=(git rails rails3 rails4 brew bundler zsh-syntax-highlighting)
+plugins=(git rails rails3 rails4 brew bundler)
 
 source $ZSH/oh-my-zsh.sh
-
-source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source $HOME/.anyshell/functions
 source $HOME/.anyshell/aliases
