@@ -41,7 +41,7 @@ export rvm_path="$HOME/.rvm"
 
 __rvm_project_rvmrc
 
-plugins=(git rails rails3 svn textmate compleat ruby pow osx gem brew bundler cap git-flow zsh-syntax-highlighting nyan)
+plugins=(git rails rails3 rails4 brew bundler zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
