@@ -45,41 +45,30 @@ alias ...='cd .. ; cd ..'
 alias q='exit'
 
 # git
-
 alias got='git'
 alias get='git'
 
-alias gl='git pull'
-alias glf='git pull --ff-only'
-alias glr='git pull --rebase'
-alias gpu='git pull'
-alias gp='git push'
-alias gb='git branch'
+# git status
+alias gs='git status'
 alias g='git status -sb'
 
+# git pull
+alias glf='git pull --ff-only'
+alias glr='git pull --rebase'
+
+# git add
 alias ga='git add'
 alias gaa='git add --all'
 alias gap='git add --patch'
-alias gs='git status'
 
-alias gra='git remote add'
-alias grr='git remote rm'
+# git clone
 alias gcl='git clone'
 
-alias gc='git commit'
-alias gca='git commit -a'
-alias gcm='git commit -m'
-alias gma='git commit -am'
-alias gcam='git commit -am'
-alias gco='git checkout'
+# git commit
+alias gcm='git commit -v -m'
+alias gcam='git commit -a -m'
 
-alias stashpop="git stash && git pull && git stash pop"
-alias gr='git reset HEAD'
-alias grm='git status --porcelain | ruby -e "puts STDIN.read.scan(/^\\s+D\\s+(.+)\$/).join(\"\\n\")" | xargs git rm'
-
-# What changed?
-
-alias gd='git diff'
+# git diff
 alias gdc='git diff --cached'
 alias dt='git difftool'
 alias dtc='git difftool --cached'
@@ -87,6 +76,9 @@ alias dth='git difftool HEAD'
 
 alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
 alias last_commit_diff='git difftool HEAD~1..HEAD'
+
+alias stashpop="git stash && git pull && git stash pop"
+alias grm='git status --porcelain | ruby -e "puts STDIN.read.scan(/^\\s+D\\s+(.+)\$/).join(\"\\n\")" | xargs git rm'
 
 alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %aN: %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias lg="gg"

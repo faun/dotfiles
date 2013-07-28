@@ -16,3 +16,29 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh_cache
 
+# git
+compdef _git got=git
+compdef _git get=git
+
+# git status
+compdef _git gs=git-status
+compdef _git g=git-status
+
+# git pull
+compdef _git glf=git-pull
+compdef _git glr=git-pull
+
+# git add
+compdef _git gap=git-add
+compdef _git gaa=git-add
+compdef _git ga=git-add
+
+# git clone
+compdef _git gcl=git-clone
+
+# git commit
+compdef _git gcm=git-commit
+compdef _git gcam=git-commit
+
+# git diff
+compdef _git gdc=git-diff
