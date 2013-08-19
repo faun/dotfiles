@@ -14,19 +14,19 @@ alias gp='git push'
 
 alias gd='git diff'
 
-gdv() { git diff -w "$@" | view - }
-
 alias gc='git commit -v'
+
+alias gcm='git commit -m'
 
 alias gc!='git commit -v --amend'
 
 alias gca='git commit -v -a'
 
+alias gcam='git commit -v -a -m'
+
 alias gca!='git commit -v -a --amend'
 
 alias gco='git checkout'
-
-alias gcm='git checkout master'
 
 alias gr='git remote'
 
