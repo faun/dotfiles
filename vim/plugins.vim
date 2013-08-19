@@ -6,7 +6,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " toggle NERDTree with F6
 map <silent> <F6> :NERDTreeToggle<CR>
-let g:NERDTreeHijackNetrw = 0
 let g:loaded_netrw = 1 " Disable netrw
 let g:loaded_netrwPlugin = 1 " Disable netrw
 let g:NERDTreeShowLineNumbers = 0
