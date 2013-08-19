@@ -93,6 +93,15 @@ alias gt='gittower'
 alias gk='gitk --all&'
 alias gx='gitx --all'
 
+gdv() {
+  args=("$@")
+  git diff -w ${args} | view -
+}
+
+gdvc() {
+  args=("$@")
+  git diff --cached -w ${args} | view -
+}
 
 # Subversion & diff
 export SVN_EDITOR='${EDITOR}'
