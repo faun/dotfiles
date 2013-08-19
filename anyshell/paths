@@ -1,8 +1,6 @@
 #echo "=> Loading `pwd`/paths"
 
-if ! brew_location="$(type -p "$brew")" || [ -z "$brew_location" ]; then
-  # homebrew doesn't exist
-else
+if $(brew_location="$(type -p "$brew")" && [ -z "$brew_location" ]); then
   # we have homebrew installed
   export PATH="$(brew --prefix)/lib/python2.7/site-packages:$PATH"
 fi
