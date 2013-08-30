@@ -1,10 +1,3 @@
-[user]
-	name = Faun
-	email = faun@riseup.net
-
-[github]
-	user = faun
-
 [alias]
 	co = checkout
 	st = status -sb
@@ -98,3 +91,6 @@
 	trustExitCode = true
 [mergetool]
 	prompt = false
+
+[include]
+  path = .gitconfig.local
