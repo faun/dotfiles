@@ -26,7 +26,6 @@ setopt EXTENDED_HISTORY # add timestamps to history
 setopt PROMPT_SUBST
 setopt CORRECT
 setopt COMPLETE_IN_WORD
-setopt IGNORE_EOF
 setopt RMSTARSILENT # don't confirm an rm *
 setopt CDABLE_VARS # set the option so that no '$' is required when using the save function
 

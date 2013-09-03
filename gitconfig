@@ -93,4 +93,4 @@
 	prompt = false
 
 [include]
-  path = .gitconfig.local
+  path = ~/.gitconfig.local
