@@ -39,7 +39,7 @@ Add any additional settings in `~/.vimrc.local` or `.vimrc.local` in a project d
 
 Add any addtional configuration settings to `~/.local.sh` and these will be sourced at login.
 
-Things that can be added to this file includes custom aliases, configuration settings, private evirnment variables, paths, etc.
+Things that can be added to this file include custom aliases, configuration settings, private evironment variables, paths, etc.
 
 ###Change shell to latest zsh
 
