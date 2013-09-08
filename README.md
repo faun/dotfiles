@@ -1,4 +1,4 @@
-##Faun's Dot Files
+##About these dotfiles
 
 These are config files to set up a system the way I like it.
 
@@ -15,6 +15,31 @@ These are config files to set up a system the way I like it.
 ###Step 2: Install
 
     rake
+
+###Step 3: Customize
+
+There are a number of settings that can be configured for these dotfiles. They are:
+
+##### Git (This requires installing Git version 1.7.10 or greater)
+
+Create a file at `~/.gitignore.local`:
+
+    [user]
+      name = Your Name
+      email = email@example.com
+
+    [github]
+      user = username
+
+##### Vim
+
+Add any additional settings in `~/.vimrc.local` or `.vimrc.local` in a project directory for project-specific settings
+
+##### Shell config
+
+Add any addtional configuration settings to `~/.local.sh` and these will be sourced at login.
+
+Things that can be added to this file includes custom aliases, configuration settings, private evirnment variables, paths, etc.
 
 ###Change shell to latest zsh
 
