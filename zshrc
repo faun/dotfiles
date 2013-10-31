@@ -22,13 +22,6 @@ export DISABLE_AUTO_UPDATE="true"
 # use .localrc for settings specific to one system
 [[ -f $HOME/.localrc ]] && .  $HOME/.localrc
 
-# Autojump
-
-if [[ `uname` == 'Darwin' ]]; then
-  [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
-  autoload -U compinit && compinit
-fi
-
 # Add bin directory to path
 if [ -d $HOME/bin ]; then
  export PATH="$HOME/bin:$PATH"
