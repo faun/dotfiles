@@ -27,13 +27,6 @@ if [ -d $HOME/bin ]; then
  export PATH="$HOME/bin:$PATH"
 fi
 
-# Enable RVM
-export rvm_path="$HOME/.rvm"
-
-[[ -s $rvm_path/scripts/rvm ]] && source $rvm_path/scripts/rvm
-
-__rvm_project_rvmrc
-
 plugins=(git rails rails3 rails4 brew bundler)
 
 source $ZSH/oh-my-zsh.sh
@@ -44,13 +37,12 @@ source $HOME/.zsh/aliases
 source $HOME/.zsh/completion
 source $HOME/.zsh/config
 
-source $HOME/.zsh/faunzy.zsh-theme
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-# export ZSH_THEME="random"
-
 export PATH=$HOME/node_modules/.bin/lessc:$PATH
 export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+#
+# Enable RVM
+export rvm_path="$HOME/.rvm"
+
+[[ -s $rvm_path/scripts/rvm ]] && source $rvm_path/scripts/rvm
+
+source $HOME/.zsh/faunzy.zsh-theme
