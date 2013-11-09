@@ -120,3 +120,6 @@
 [submodule "vim/bundle/vim-dispatch"]
 	path = vim/bundle/vim-dispatch
 	url = git@github.com:tpope/vim-dispatch.git
+[submodule "vim/bundle/vundle"]
+	path = vim/bundle/vundle
+	url = git@github.com:gmarik/vundle.git
