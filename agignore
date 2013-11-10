@@ -3,7 +3,6 @@ log
 tmp
 doc
 coverage
-spec/fixtures
 public/system
 public/stylesheets/compiled
 .bin
