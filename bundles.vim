@@ -1,4 +1,5 @@
 "Syntax and Languages
+Bundle 'JSON.vim'
 Bundle 'astashov/vim-ruby-debugger'
 Bundle 'briancollins/vim-jst'
 Bundle 'groenewege/vim-less'
@@ -24,7 +25,7 @@ Bundle 'vim-ember-script'
 Bundle 'vim-javascript'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/matchit.zip'
-"
+
 "Interface improvements
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'altercation/vim-colors-solarized'
