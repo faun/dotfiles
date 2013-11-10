@@ -89,5 +89,5 @@ let g:vroom_use_colors = 1
 
 " =========================================
 " Vim-Dispatch Settings
-autocmd BufNewFile,BufRead *_spec.{js,js.coffee,coffee} let b:dispatch= 'rake teaspoon -q %'
+autocmd BufNewFile,BufRead *_spec.{js,js.coffee,coffee} let b:dispatch= 'COLOR=false rake teaspoon -q %'
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
