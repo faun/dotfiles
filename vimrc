@@ -17,8 +17,8 @@ Bundle 'gmarik/vundle'
 source $HOME/.bundles.vim
 
 " Add custom Vundle plugins in ~/.vundle.local
-if filereadable(expand("$HOME/.vundle.local"))
-  source $HOME/.vundle.local
+if filereadable(expand("$HOME/.bundles.local.vim"))
+  source $HOME/.bundles.local.vim
 endif
 
 filetype plugin indent on "required for Vundle
