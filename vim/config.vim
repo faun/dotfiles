@@ -130,6 +130,14 @@ set showmode
 " Tab settings
 
 set ts=2 sts=2 sw=2 expandtab "set two spaces by default
+
+" ==========================================
+" Spelling settings
+set spellfile=~/.vim/spell/en.utf-8.add
+
+" ==========================================
+" Tab settings
+
 " ==========================================
 " File settings:
 function! TrimWhiteSpace()
