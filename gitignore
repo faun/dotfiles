@@ -12,3 +12,4 @@ gems.tags
 Icon?
 custom_plan.rb
 zeus.json
+.agignore
