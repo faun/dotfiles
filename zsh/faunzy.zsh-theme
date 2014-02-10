@@ -1,7 +1,9 @@
 # show current rbenv version if different from rbenv global
 rbenv_version_status() {
-  local ver=$(rbenv version-name)
-  [ "$(rbenv global)" != "$ver" ] && echo "[$ver]"
+  if which rbenv > /dev/null; then
+    local ver=$(rbenv version-name)
+    [ "$(rbenv global)" != "$ver" ] && echo "[$ver]"
+  fi
 }
 #Based off the murilasso zsh theme
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
