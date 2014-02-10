@@ -38,11 +38,4 @@ source $HOME/.zsh/completion
 source $HOME/.zsh/config
 
 export PATH=$HOME/node_modules/.bin/lessc:$PATH
-export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-#
-# Enable RVM
-export rvm_path="$HOME/.rvm"
-
-[[ -s $rvm_path/scripts/rvm ]] && source $rvm_path/scripts/rvm
-
 source $HOME/.zsh/faunzy.zsh-theme
