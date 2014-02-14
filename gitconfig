@@ -22,6 +22,18 @@
 	conflicts = !git ls-files --unmerged | cut -c51- | sort -u | xargs $EDITOR
 	sup = "submodule foreach 'git checkout master; git pull'"
 	update = !git commit --amend --date=\"$(date)\"
+	di = diff
+	sta = stash
+	llog = log --date=local
+	flog = log --pretty=fuller --decorate
+	lol = log --graph --decorate --oneline
+	lola = log --graph --decorate --oneline --all
+	blog = log origin/master... --left-right
+	ds = diff --staged
+	fixup = commit --fixup
+	squash = commit --squash
+	unstage = reset HEAD
+	rum = rebase master@{u}
 
 [color "branch"]
 	current = yellow reverse
@@ -45,6 +57,7 @@
 	status = auto
 	branch = auto
 	ui = auto
+	interactive = auto
 
 [merge]
 	tool = Kaleidoscope
@@ -57,15 +70,17 @@
 [core]
 	excludesfile = ~/.gitignore
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	pager = less -FXRS -x2
 
 [apply]
-	whitespace = fix
+	whitespace = nowarn
 
 [help]
 	autocorrect = 1
 
 [branch]
 	autosetuprebase = always
+	autosetupmerge = true
 
 [push]
 	default = tracking
@@ -94,3 +109,5 @@
 
 [include]
   path = ~/.gitconfig.local
+[rebase]
+	autosquash = true
