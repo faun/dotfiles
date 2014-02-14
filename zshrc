@@ -39,4 +39,5 @@ source $HOME/.zsh/config
 
 export PATH=$HOME/node_modules/.bin/lessc:$PATH
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export RBENV_ROOT=$HOME/.rbenv
 source $HOME/.zsh/faunzy.zsh-theme
