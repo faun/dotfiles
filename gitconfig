@@ -33,6 +33,7 @@
 	fixup = commit --fixup
 	squash = commit --squash
 	unstage = reset HEAD
+	uncommit = reset HEAD~1
 	rum = rebase master@{u}
 
 [color "branch"]
