@@ -1,15 +1,17 @@
 # show current rbenv version if different from rbenv global
-rbenv_version_status() {
+ruby_version_status() {
   if which rbenv > /dev/null; then
     local ver=$(rbenv version-name)
     echo "[$(rbenv global)]"
+  else
+    [ -e "$HOME/.rvm/bin/rvm-prompt" ] && echo "$($HOME/.rvm/bin/rvm-prompt i v p g s)"
   fi
 }
 #Based off the murilasso zsh theme
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 local user_host='%{$terminfo[bold]$fg[green]%}%n@%m%{$reset_color%}'
 local current_dir='%{$fg[blue]%}$(pwd -P)%{$reset_color%}'
-local ruby_version='%{$fg[red]%}$(rbenv_version_status)%{$reset_color%}'
+local ruby_version='%{$fg[red]%}$(ruby_version_status)%{$reset_color%}'
 local git_branch='%{$fg[blue]%}$(git_prompt_info)%{$reset_color%}'
 
 PROMPT="${user_host}:${current_dir} ${ruby_version}

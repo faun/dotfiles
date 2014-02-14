@@ -38,6 +38,18 @@ source $HOME/.zsh/completion
 source $HOME/.zsh/config
 
 export PATH=$HOME/node_modules/.bin/lessc:$PATH
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-export RBENV_ROOT=$HOME/.rbenv
+
+# enable rvm if it exists
+if [ -d $HOME/.rvm ]; then
+  export PATH=$HOME/.rvm/bin:$PATH
+  export rvm_path="$HOME/.rvm"
+  [[ -s $rvm_path/scripts/rvm ]] && source $rvm_path/scripts/rvm
+fi
+
+# otherwise use rbenv
+if which rbenv > /dev/null; then
+  eval "$(rbenv init -)"
+  export RBENV_ROOT=$HOME/.rbenv
+fi
+
 source $HOME/.zsh/faunzy.zsh-theme
