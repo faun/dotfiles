@@ -49,7 +49,7 @@ fi
 # otherwise use rbenv
 
 if [ -d $HOME/.rbenv ]; then
-  export PATH=$HOME/.rbenv/bin:$PATH
+  export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
 fi
 if which rbenv > /dev/null; then
   eval "$(rbenv init -)"
