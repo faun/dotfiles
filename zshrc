@@ -27,7 +27,7 @@ if [ -d $HOME/bin ]; then
  export PATH="$HOME/bin:$PATH"
 fi
 
-plugins=(git rails rails3 rails4 brew bundler)
+plugins=(git rails brew bundler)
 
 source $ZSH/oh-my-zsh.sh
 
