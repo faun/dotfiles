@@ -2,7 +2,7 @@
 rbenv_version_status() {
   if which rbenv > /dev/null; then
     local ver=$(rbenv version-name)
-    [ "$(rbenv global)" != "$ver" ] && echo "[$ver]"
+    echo "[$(rbenv global)]"
   fi
 }
 #Based off the murilasso zsh theme
