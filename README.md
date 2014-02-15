@@ -1,13 +1,22 @@
+# Dotfiles
+
 ## About these dotfiles
 
-These are config files to set up a system the way I like it.
+These are config files to set up a system the way I like it. I primarily use Vim for development. I develop mostly on Mac OS. In Ruby. For the web. With CoffeeScript. If you don't do all of these things on a regular basis, move along. There's not much here that will do you any good.
+
+## Installation
+
+#### Prerequisites:
+
+* Rake
+* Git >= 1.7.10
 
 ### Step 1: Clone the repository with submodules
 
     # Make src directory if it doesn't exist
     mkdir -p ~/src
 
-    # Clone this repository to your machine & initialize submodules (submodule init requires git >= 1.6.5)
+    # Clone this repository to your machine & initialize submodules
     git clone --recursive git://github.com/faun/dotfiles ~/src/dotfiles
 
 ### Step 2: Install
@@ -18,11 +27,11 @@ These are config files to set up a system the way I like it.
     # Install vim bundles
     vim +BundleInstall +qall
 
-### Step 3: Customize
+## Configuration
 
 There are a number of settings that can be configured for these dotfiles. They are:
 
-##### Git (This requires installing Git version 1.7.10 or greater)
+##### Git
 
 Create a file at `~/.gitignore.local`:
 
