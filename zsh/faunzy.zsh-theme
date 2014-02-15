@@ -2,7 +2,12 @@
 ruby_version_status() {
   if which rbenv > /dev/null; then
     local ver=$(rbenv version-name)
-    echo "[$(rbenv global)]"
+    if [ "$(rbenv global)" != "$ver" ]; then
+      echo "[$ver]"
+    else
+      # mark the ruby version as implicit
+      echo "($ver)"
+    fi
   else
     [ -e "$HOME/.rvm/bin/rvm-prompt" ] && echo "$($HOME/.rvm/bin/rvm-prompt i v p g s)"
   fi
