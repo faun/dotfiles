@@ -63,9 +63,9 @@ Install tmux
     brew install tmux
     brew install reattach-to-user-namespace
 
-Install RVM (recommended)
+Install rbenv (recommended)
 
-    curl -L get.rvm.io | bash -s stable
+    git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 
 ### Patch your terminal font with Powerline glyphs for maximum awesomeness:
   See [Powerline repo](https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher) for more info.
