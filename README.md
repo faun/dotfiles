@@ -14,7 +14,11 @@ These are config files to set up a system the way I like it.
 
 ### Step 2: Install
 
+    # Make symlinks to $HOME
     rake
+
+    # Install vim bundles
+    vim +BundleInstall +qall
 
 ### Step 3: Customize
 
@@ -44,7 +48,6 @@ Things that can be added to this file include custom aliases, configuration sett
 ### Change shell to latest Zsh
 
     brew install zsh
-
 
 Add Homebrew Zsh to /etc/shells
 
