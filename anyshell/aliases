@@ -75,7 +75,6 @@ alias dtc='git difftool --cached'
 alias dth='git difftool HEAD'
 
 alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
-alias last_commit_diff='git difftool HEAD~1..HEAD'
 
 alias stashpop="git stash && git pull && git stash pop"
 alias grm='git status --porcelain | ruby -e "puts STDIN.read.scan(/^\\s+D\\s+(.+)\$/).join(\"\\n\")" | xargs git rm'
