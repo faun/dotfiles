@@ -1,22 +1,22 @@
-##About these dotfiles
+## About these dotfiles
 
 These are config files to set up a system the way I like it.
 
 ![iTerm solarized](http://cl.ly/1m312N052t0m3P2W1D3V/iTerm%20Solarized.png "iTerm solarized")
 
-###Step 1: Install dotfiles
+### Step 1: Install dotfiles
 
-    #make src directory if it doesn't exist
+    # Make src directory if it doesn't exist
     mkdir -p ~/src
 
-    #clone this repository to your machine, initialize submodules (submodule init requires git >= 1.6.5)
+    # Clone this repository to your machine & initialize submodules (submodule init requires git >= 1.6.5)
     git clone --recursive git://github.com/faun/dotfiles ~/src/dotfiles
 
-###Step 2: Install
+### Step 2: Install
 
     rake
 
-###Step 3: Customize
+### Step 3: Customize
 
 There are a number of settings that can be configured for these dotfiles. They are:
 
@@ -37,24 +37,24 @@ Add any additional settings in `~/.vimrc.local` or `.vimrc.local` in a project d
 
 ##### Shell config
 
-Add any addtional configuration settings to `~/.local.sh` and these will be sourced at login.
+Add any additional configuration settings to `~/.local.sh` and these will be sourced at login.
 
-Things that can be added to this file include custom aliases, configuration settings, private evironment variables, paths, etc.
+Things that can be added to this file include custom aliases, configuration settings, private environment variables, paths, etc.
 
-###Change shell to latest zsh
+### Change shell to latest Zsh
 
     brew install zsh
 
 
-Add homebrew zsh to /etc/shells
+Add Homebrew Zsh to /etc/shells
 
     echo "/usr/local/bin/zsh" >> /etc/shells
 
-Set homebrew zsh as your default user
+Set Homebrew Zsh as your default user
 
     sudo chsh -s /usr/local/bin/zsh $(whoami)
 
-Fix an apple mis-configuration for zsh
+Fix an apple mis-configuration for Zsh
 
     sudo mv -i /etc/zshenv /etc/zprofile
 
@@ -67,8 +67,8 @@ Install RVM (recommended)
 
     curl -L get.rvm.io | bash -s stable
 
-###Patch your terminal font with Powerline glyphs for maximum awesomeness:
+### Patch your terminal font with Powerline glyphs for maximum awesomeness:
   See [Powerline repo](https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher) for more info.
 
-###Integrate iTerm2 with tmux
+### Integrate iTerm2 with tmux
   See [iTerm2 downloads](http://code.google.com/p/iterm2/downloads/list) for more info
