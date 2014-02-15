@@ -37,8 +37,6 @@ source $HOME/.zsh/aliases
 source $HOME/.zsh/completion
 source $HOME/.zsh/config
 
-export PATH=$HOME/node_modules/.bin/lessc:$PATH
-
 # enable rvm if it exists
 if [ -d $HOME/.rvm ]; then
   export PATH=$HOME/.rvm/bin:$PATH
