@@ -12,7 +12,9 @@ ruby_version_status() {
     [ -e "$HOME/.rvm/bin/rvm-prompt" ] && echo "$($HOME/.rvm/bin/rvm-prompt i v p g s)"
   fi
 }
-#Based off the murilasso zsh theme
+
+# Based off the murilasso zsh theme
+
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 local user_host='%{$terminfo[bold]$fg[green]%}%n@%m%{$reset_color%}'
 local current_dir='%{$fg[blue]%}$(pwd -P)%{$reset_color%}'
