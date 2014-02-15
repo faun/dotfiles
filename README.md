@@ -2,7 +2,7 @@
 
 These are config files to set up a system the way I like it.
 
-### Step 1: Install dotfiles
+### Step 1: Clone the repository with submodules
 
     # Make src directory if it doesn't exist
     mkdir -p ~/src
