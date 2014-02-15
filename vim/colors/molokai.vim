@@ -148,8 +148,10 @@ if &t_Co > 255
    hi Delimiter       ctermfg=241
 
    hi DiffAdd                     ctermbg=24
+   hi DiffAdded       ctermfg=106 ctermbg=22
    hi DiffChange      ctermfg=181 ctermbg=239
    hi DiffDelete      ctermfg=162 ctermbg=53
+   hi DiffRemoved     ctermfg=173 ctermbg=52
    hi DiffText                    ctermbg=102 cterm=bold
 
    hi Directory       ctermfg=118               cterm=bold
