@@ -2,8 +2,6 @@
 
 These are config files to set up a system the way I like it.
 
-![iTerm solarized](http://cl.ly/1m312N052t0m3P2W1D3V/iTerm%20Solarized.png "iTerm solarized")
-
 ### Step 1: Install dotfiles
 
     # Make src directory if it doesn't exist
