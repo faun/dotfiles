@@ -35,6 +35,7 @@
 	unstage = reset HEAD
 	uncommit = reset HEAD~1
 	rum = rebase master@{u}
+	last = difftool HEAD~1..HEAD
 
 [color "branch"]
 	current = yellow reverse
