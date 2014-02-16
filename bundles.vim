@@ -21,7 +21,6 @@ Bundle 'altercation/vim-colors-solarized'
 
 "Usability improvements
 Bundle 'L9'
-Bundle 'ervandew/supertab'
 Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
