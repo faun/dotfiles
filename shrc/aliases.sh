@@ -138,6 +138,3 @@ alias aliases='$EDITOR $HOME/src/dotfiles/shrc/aliases'
 alias d='cd $HOME/src/dotfiles'
 
 alias showdirs="cat $HOME/.dirs | ruby -e \"puts STDIN.read.split.map{|x| x.gsub(/^(.+)=.+$/, '\1')}.join(', ')\""
-
-# commands starting with % or $ for pasting from web
-alias %=' '
