@@ -5,15 +5,19 @@ if $(brew_location="$(type -p "$brew")" && [ -z "$brew_location" ]); then
   export PYTHONPATH="$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH"
 fi
 
-export PATH="~/bin:$PATH"
-export PATH="/usr/local/share/npm/bin:$PATH"
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-export PATH="/usr/local/mysql/bin:$PATH"
-export PATH="/usr/local/git/bin:$PATH"
+PATH="~/bin:$PATH"
 
-export MANPATH="/usr/local/man:$MANPATH"
-export MANPATH="/usr/local/mysql/man:$MANPATH"
-export MANPATH="/usr/local/git/man:$MANPATH"
+PATH="/usr/local/share/npm/bin:$PATH"
+PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+
+PATH="/usr/local/mysql/bin:$PATH"
+PATH="/usr/local/git/bin:$PATH"
+export PATH
+
+MANPATH="/usr/local/man:$MANPATH"
+MANPATH="/usr/local/mysql/man:$MANPATH"
+MANPATH="/usr/local/git/man:$MANPATH"
+export MANPATH
 
 export NODE_PATH="/usr/local/lib/node_modules"
 
