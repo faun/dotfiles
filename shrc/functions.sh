@@ -1,4 +1,3 @@
-#echo "=> Loading `pwd`/functions"
 function tmux_attach () {
   `which tmux` attach -t `basename $PWD` 2>/dev/null || `which tmux` new-session -s `basename $PWD`
 }

@@ -1,7 +1,3 @@
-if [ -f $HOME/.anyshell/paths ]; then
-  source $HOME/.anyshell/paths
-fi
-
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -32,9 +28,10 @@ plugins=(git rails brew bundler)
 
 source $ZSH/oh-my-zsh.sh
 
-source $HOME/.anyshell/config
-source $HOME/.anyshell/functions
-source $HOME/.anyshell/aliases
+for file in $HOME/.shrc/*.sh; do
+  source "$file"
+done
+
 source $HOME/.zsh/aliases
 source $HOME/.zsh/completion
 source $HOME/.zsh/config

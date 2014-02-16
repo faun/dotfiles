@@ -1,5 +1,3 @@
-#echo "=> Loading `pwd`/paths"
-
 if $(brew_location="$(type -p "$brew")" && [ -z "$brew_location" ]); then
   # we have homebrew installed
   export PYTHONPATH="$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH"

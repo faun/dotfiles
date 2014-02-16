@@ -1,5 +1,3 @@
-#echo "=> Loading `pwd`/aliases"
-
 # directory listing & navigation
 alias l="ls -lAh"
 alias ll='ls -hl'
@@ -124,7 +122,7 @@ alias docker='docker -H tcp://0.0.0.0:4243'
 
 # misc
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
-alias so='source $HOME/src/dotfiles/anyshell/aliases'
+alias so='source $HOME/src/dotfiles/shrc/aliases'
 alias i='screen -rd irc'
 alias f='find . -iname'
 alias ducks='du -cksh * | sort -rn|head -11' # Lists folders and files sizes in the current folder
@@ -136,7 +134,7 @@ alias py='python'
 alias sha1="openssl sha1"
 
 alias heroku='/usr/bin/heroku'
-alias aliases='$EDITOR $HOME/src/dotfiles/anyshell/aliases'
+alias aliases='$EDITOR $HOME/src/dotfiles/shrc/aliases'
 alias d='cd $HOME/src/dotfiles'
 
 alias showdirs="cat $HOME/.dirs | ruby -e \"puts STDIN.read.split.map{|x| x.gsub(/^(.+)=.+$/, '\1')}.join(', ')\""
