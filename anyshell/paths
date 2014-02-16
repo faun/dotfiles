@@ -4,9 +4,19 @@ if $(brew_location="$(type -p "$brew")" && [ -z "$brew_location" ]); then
   # we have homebrew installed
   export PYTHONPATH="$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH"
 fi
-export PATH="~/bin:/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:$HOME/.gem/ruby/1.8/bin:$PATH"
-export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
+
+export PATH="~/bin:$PATH"
+export PATH="/usr/local/share/npm/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="/usr/local/mysql/bin:$PATH"
+export PATH="/usr/local/git/bin:$PATH"
+
+export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/mysql/man:$MANPATH"
+export MANPATH="/usr/local/git/man:$MANPATH"
+
 export NODE_PATH="/usr/local/lib/node_modules"
+
 export DOCKER_HOST=tcp://0.0.0.0:4243
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
