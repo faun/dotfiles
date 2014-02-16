@@ -193,9 +193,7 @@ autocmd FileType gitconfig setlocal noet
 autocmd BufNewFile,BufRead *_spec.rb, set filetype=ruby.rails.rspec
 autocmd BufNewFile,BufRead *.js.coffee.erb, set filetype=eruby.coffee
 
-if has("autocmd")
-  au BufNewFile,BufRead *.handlebars,*.hbs set filetype=handlebars
-endif
+au BufNewFile,BufRead *.handlebars,*.hbs set filetype=handlebars
 autocmd BufEnter Gemfile set ft=ruby.rails.bundler
 autocmd FileType ruby set ft=ruby.rails
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
