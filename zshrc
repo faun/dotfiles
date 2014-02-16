@@ -4,6 +4,7 @@ fi
 
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
+
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
 
@@ -20,7 +21,7 @@ export DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
 # use .localrc for settings specific to one system
-[[ -f $HOME/.localrc ]] && .  $HOME/.localrc
+[[ -f $HOME/.localrc ]] && . $HOME/.localrc
 
 # Add bin directory to path
 if [ -d $HOME/bin ]; then
@@ -31,6 +32,7 @@ plugins=(git rails brew bundler)
 
 source $ZSH/oh-my-zsh.sh
 
+source $HOME/.anyshell/config
 source $HOME/.anyshell/functions
 source $HOME/.anyshell/aliases
 source $HOME/.zsh/aliases
