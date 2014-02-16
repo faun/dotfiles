@@ -74,6 +74,8 @@ alias lm='!! | more'
 alias py='python'
 alias sha1="openssl sha1"
 
+alias vim_bundle='vim +BundleInstall +qall'
+
 # It's aliases all the way down
 alias local_vim_bundles='$EDITOR $HOME/.bundles.local.vim'
 alias local_gitconfig='$EDITOR $HOME/.gitconfig.local'
