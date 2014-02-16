@@ -52,3 +52,5 @@ preexec () {
     echo -ne "\ek$CMD\e\\"
   fi
 }
+
+unalias md

@@ -28,13 +28,15 @@ plugins=(git rails brew bundler)
 
 source $ZSH/oh-my-zsh.sh
 
+# Source shell-agnostic config files
 for file in $HOME/.shrc/*.sh; do
   source "$file"
 done
 
-source $HOME/.zsh/aliases
-source $HOME/.zsh/completion
-source $HOME/.zsh/config
+# Then source zsh-specific files
+for file in $HOME/.zsh/*.sh; do
+  source "$file"
+done
 
 # enable rvm if it exists
 if [ -d $HOME/.rvm ]; then
