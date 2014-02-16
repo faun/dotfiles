@@ -77,13 +77,6 @@ let g:syntastic_coffee_coffeelint_args="--csv --file $HOME/.coffeelint.json"
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:syntastic_check_on_open = 1
 
-" ==========================================
-" SuperTab Settings
-
-let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
-
 " =========================================
 " Vim-Vroom Settings
 let g:vroom_use_dispatch = 1
