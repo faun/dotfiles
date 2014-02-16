@@ -1,6 +1,5 @@
 #echo "=> Loading `pwd`/config"
 
-export LANG=en_US.UTF-8
 
 # Ignore duplicate entries in bash history
 export HISTCONTROL=ignoredups
