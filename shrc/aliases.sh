@@ -64,7 +64,6 @@ alias docker='docker -H tcp://0.0.0.0:4243'
 
 # misc
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
-alias so='source $HOME/src/dotfiles/shrc/aliases'
 alias i='screen -rd irc'
 alias f='find . -iname'
 alias ducks='du -cksh * | sort -rn|head -11' # Lists folders and files sizes in the current folder
@@ -75,8 +74,12 @@ alias lm='!! | more'
 alias py='python'
 alias sha1="openssl sha1"
 
-alias heroku='/usr/bin/heroku'
-alias aliases='$EDITOR $HOME/src/dotfiles/shrc/aliases'
-alias d='cd $HOME/src/dotfiles'
+# It's aliases all the way down
+alias local_vim_bundles='$EDITOR $HOME/.bundles.local.vim'
+alias local_gitconfig='$EDITOR $HOME/.gitconfig.local'
+alias local_shell_conf='$EDITOR $HOME/.local.sh'
+alias local_tmux_conf='$EDITOR $HOME/.tmux.local'
+alias local_vimrc='$EDITOR $HOME/.vimrc.local'
+
 
 alias showdirs="cat $HOME/.dirs | ruby -e \"puts STDIN.read.split.map{|x| x.gsub(/^(.+)=.+$/, '\1')}.join(', ')\""
