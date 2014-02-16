@@ -59,3 +59,8 @@ Bundle 'rking/ag.vim'
 Bundle 'jgdavey/vim-turbux'
 Bundle 'skalnik/vim-vroom'
 Bundle 'tpope/vim-dispatch'
+
+" Add custom Vundle plugins in ~/.bundles.local.vim
+if filereadable(expand("$HOME/.bundles.local.vim"))
+  source $HOME/.bundles.local.vim
+endif
