@@ -41,7 +41,6 @@ fi
 # Initialization for the 'save' facility: source the .dirs file
 source ~/.dirs
 
-alias show='cat ~/.dirs'
 alias showdirs="cat ~/.dirs | ruby -e \"puts STDIN.read.split(10.chr).sort.map{|x| x.gsub(/^(.+)=.+$/, '\\1')}.join(', ')\""
 
 function save (){

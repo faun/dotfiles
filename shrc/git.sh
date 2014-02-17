@@ -28,6 +28,16 @@ alias dt='git difftool'
 alias dtc='git difftool --cached'
 alias dth='git difftool HEAD'
 
+show() {
+  # Show a given commit in git difftool
+  args=("$1")
+  if [ "x${args}" != "x" ];then
+    git difftool "${args}~1..${args}"
+  else
+    echo "Usage: show SHA"
+  fi
+}
+
 alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
 
 alias stashpop="git stash && git pull && git stash pop"
