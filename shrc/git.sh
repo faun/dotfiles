@@ -21,6 +21,7 @@ alias gcl='git clone'
 # git commit
 alias gcm='git commit -v -m'
 alias gcam='git commit -a -m'
+alias amend='git commit --amend'
 
 # git diff
 alias gdc='git diff --cached'
