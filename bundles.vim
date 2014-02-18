@@ -14,6 +14,7 @@ Bundle 'vim-ember-script'
 Bundle 'vim-javascript'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/matchit.zip'
+Bundle 'tejr/vim-tmux'
 
 "Interface improvements
 Bundle 'Lokaltog/vim-powerline'
