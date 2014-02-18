@@ -22,4 +22,3 @@ export NODE_PATH="/usr/local/lib/node_modules"
 export DOCKER_HOST=tcp://0.0.0.0:4243
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
-export TERM=screen-256color-bce
