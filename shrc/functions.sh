@@ -255,3 +255,9 @@ function 64font() {
   openssl base64 -in $1 | awk -v ext="${1#*.}" '{ str1=str1 $0 }END{ print "src:url(\"data:font/"ext";base64,"str1"\")  format(\"woff\");" }'|pbcopy
   echo "$1 encoded as font and copied to clipboard"
 }
+
+function show_colors() {
+  for i in {0..255} ; do
+      printf "\x1b[38;5;${i}mcolour${i}\n"
+  done
+}
