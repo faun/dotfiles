@@ -30,7 +30,7 @@ for file in $HOME/.shrc/*.sh; do
   source "$file"
 done
 
-# Then source zsh-specific files
+# Source zsh-specific files
 for file in $HOME/.zsh/*.sh; do
   source "$file"
 done
