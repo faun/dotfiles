@@ -9,7 +9,7 @@ if [ -d $HOME/bin ]; then
  export PATH="$HOME/bin:$PATH"
 fi
 
-plugins=(git rails brew bundler)
+plugins=(git rails brew bundler zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
