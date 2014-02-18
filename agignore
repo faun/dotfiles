@@ -7,3 +7,4 @@ public/stylesheets/compiled
 .bin
 public/assets
 spec/vcr
+*.svg
