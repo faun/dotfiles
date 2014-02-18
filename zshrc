@@ -16,9 +16,6 @@ export DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
-# use .localrc for settings specific to one system
-[[ -f $HOME/.localrc ]] && . $HOME/.localrc
-
 # Add bin directory to path
 if [ -d $HOME/bin ]; then
  export PATH="$HOME/bin:$PATH"
