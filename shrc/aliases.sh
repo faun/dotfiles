@@ -8,23 +8,6 @@ alias ..='cd ..'
 alias ...='cd .. ; cd ..'
 alias q='exit'
 
-# Subversion & diff
-export SVN_EDITOR='${EDITOR}'
-
-alias sv='svn --username ${SV_USER}'
-alias svimport='sv import'
-alias svcheckout='sv checkout'
-alias svstatus='sv status'
-alias svupdate='sv update'
-alias svstatusonserver='sv status --show-updates' # Show status here and on the server
-alias svcommit='sv commit'
-alias svadd='svn add'
-alias svaddall='svn status | grep "^\?" | awk "{print \$2}" | xargs svn add'
-alias svdelete='sv delete'
-alias svhelp='svn help'
-alias svblame='sv blame'
-alias svdiff='sv diff'
-
 # tmux
 alias tat='tmux_attach'
 alias t='tmux_attach'
