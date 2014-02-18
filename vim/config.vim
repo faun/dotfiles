@@ -187,7 +187,7 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 
 au BufNewFile,BufRead .gitconfig.local set filetype=gitconfig
-au BufNewFile,BufRead .tmux.local,.tmux.conf set filetype=sh
+au BufNewFile,BufRead .tmux.local,.tmux.conf,tmux.conf set filetype=sh
 autocmd FileType gitconfig setlocal noet
 
 autocmd BufNewFile,BufRead *_spec.rb, set filetype=ruby.rails.rspec
