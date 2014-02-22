@@ -42,6 +42,7 @@ Bundle 'ecomba/vim-ruby-refactoring'
 Bundle 'kana/vim-textobj-user'
 Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'jgdavey/vim-blockle'
+Bundle 'michaeljsmith/vim-indent-object'
 
 "Local vim config
 Bundle 'AfterColors.vim'
