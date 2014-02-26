@@ -202,6 +202,8 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 4
 imap <C-l> <Space>=><Space>
               "Make hashrocket with control-l
+imap <C-K> <Space>-><CR>
+              "coffeescript skinny arrow with control-l-l
 map <F7> :wall<esc> :!rspec --color<CR>
 imap <S-CR>    <CR><CR>end<Esc>-cc
 
