@@ -91,3 +91,4 @@ autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 " Commentary Settings
 "
 autocmd FileType tmux set commentstring=#\ %s
+autocmd FileType moon set commentstring=--\ %s
