@@ -109,6 +109,9 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " ==========================================
 " Command shortcuts:
 
+" Quickly quit without saving with QQ
+nmap QQ :q!<cr>
+
 "Save with leader-w
 nmap <leader>w :update!<cr>
 nmap <leader><leader> :update!<cr>
