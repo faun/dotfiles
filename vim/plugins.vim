@@ -79,7 +79,7 @@ let g:syntastic_check_on_open = 1
 
 " =========================================
 " Vim-Vroom Settings
-let g:vroom_use_dispatch = 1
+let g:vroom_use_vimux = 1
 let g:vroom_use_colors = 1
 
 " =========================================
@@ -92,3 +92,7 @@ autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 "
 autocmd FileType tmux set commentstring=#\ %s
 autocmd FileType moon set commentstring=--\ %s
+
+" =========================================
+" Turbux + Vimux FTW
+let g:turbux_runner  = 'vimux'
