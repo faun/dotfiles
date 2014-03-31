@@ -204,10 +204,25 @@ autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 4
+
+
+" ==========================================
+" Keymap Definitions
+" ==========================================
+
+" CoffeeScript
+" Compile CoffeeScript to scratch buffer with leader-c
+vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
+map <leader>c :CoffeeCompile<CR>
+
+" Jump to line in compiled JavaScript from CoffeScript source file
+command -nargs=1 C CoffeeCompile | :<args>
+
 imap <C-l> <Space>=><Space>
               "Make hashrocket with control-l
 imap <C-K> <Space>-><CR>
               "coffeescript skinny arrow with control-l-l
+
 map <F7> :wall<esc> :!rspec --color<CR>
 imap <S-CR>    <CR><CR>end<Esc>-cc
 
