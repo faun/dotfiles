@@ -54,11 +54,6 @@ set encoding=utf-8 " Necessary to show unicode glyphs
 let g:Powerline_symbols = 'fancy'
 
 " ==========================================
-" RedGreen settings:
-map <Leader>] <Plug>MakeGreen " change from <Leader>t to <Leader>]
-
-
-" ==========================================
 " Taglist settings
 nnoremap <silent> <F8> :TlistToggle<CR>
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
