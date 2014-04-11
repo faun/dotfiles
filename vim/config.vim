@@ -216,7 +216,7 @@ vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
 map <leader>c :CoffeeCompile<CR>
 
 " Jump to line in compiled JavaScript from CoffeScript source file
-command -nargs=1 C CoffeeCompile | :<args>
+command! -nargs=1 C CoffeeCompile | :<args>
 
 imap <C-l> <Space>=><Space>
               "Make hashrocket with control-l
