@@ -52,6 +52,7 @@ Bundle 'IndexedSearch'
 Bundle 'greplace.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'rking/ag.vim'
+Bundle 'tpope/vim-abolish'
 
 "Testing tools
 Bundle 'jgdavey/vim-turbux'
