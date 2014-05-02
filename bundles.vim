@@ -36,6 +36,7 @@ Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'christoomey/vim-tmux-navigator'
 
 " Custom text-objects
 Bundle 'ecomba/vim-ruby-refactoring'
