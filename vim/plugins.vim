@@ -91,3 +91,5 @@ autocmd FileType moon set commentstring=--\ %s
 " =========================================
 " Turbux + Vimux FTW
 let g:turbux_runner  = 'vimux'
+
+cnoreabbrev <expr> Gcommit ((getcmdtype() is# ':' && getcmdline() is# 'Gcommit')?('Gcommit -v'):('Gcommit'))
