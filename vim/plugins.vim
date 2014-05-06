@@ -4,7 +4,7 @@
 " Automatically close vim if the only window left open is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-" toggle NERDTree with F6
+" Toggle NERDTree with F6
 map <silent> <F6> :NERDTreeToggle<CR>
 let g:loaded_netrw = 1 " Disable netrw
 let g:loaded_netrwPlugin = 1 " Disable netrw
@@ -14,6 +14,7 @@ let g:NERDTreeDirArrows = 1
 
 " ==========================================
 " Control-P Settings
+
 let g:ctrlp_working_path_mode = 'a'
 map <leader>gv :CtrlP app/views<cr>
 map <leader>gc :CtrlP app/controllers<cr>
@@ -54,19 +55,8 @@ set encoding=utf-8 " Necessary to show unicode glyphs
 let g:Powerline_symbols = 'fancy'
 
 " ==========================================
-" Taglist settings
-nnoremap <silent> <F8> :TlistToggle<CR>
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
-
-" ==========================================
-" Ragtag settings
-
-inoremap <M-o>       <Esc>o
-inoremap <C-j>       <Down>
-let g:ragtag_global_maps = 1
-
-" ==========================================
 " Syntastic settings
+
 let g:syntastic_javascript_syntax_checker = "jshint"
 let g:syntastic_coffee_coffeelint_args="--csv --file $HOME/.coffeelint.json"
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
@@ -74,22 +64,23 @@ let g:syntastic_check_on_open = 1
 
 " =========================================
 " Vim-Vroom Settings
+
 let g:vroom_use_vimux = 1
 let g:vroom_use_colors = 1
 
 " =========================================
-" Vim-Dispatch Settings
-autocmd BufNewFile,BufRead *_spec.{js,js.coffee,coffee} let b:dispatch= 'COLOR=false rake teaspoon -q %'
-autocmd BufNewFile,BufRead *_spec.rb compiler rspec
-
-" =========================================
 " Commentary Settings
-"
+
 autocmd FileType tmux set commentstring=#\ %s
 autocmd FileType moon set commentstring=--\ %s
 
 " =========================================
 " Turbux + Vimux FTW
+
 let g:turbux_runner  = 'vimux'
 
+" =========================================
+" Fugitive Settings
+
+" Map :Gcommit to Gcommit -v to get diffs with commit entry
 cnoreabbrev <expr> Gcommit ((getcmdtype() is# ':' && getcmdline() is# 'Gcommit')?('Gcommit -v'):('Gcommit'))
