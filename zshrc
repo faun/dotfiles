@@ -4,11 +4,6 @@ export ZSH=$HOME/.oh-my-zsh
 # Comment this out to disable weekly auto-update checks
 export DISABLE_AUTO_UPDATE="true"
 
-# Add bin directory to path
-if [ -d $HOME/bin ]; then
- export PATH="$HOME/bin:$PATH"
-fi
-
 plugins=(git rails brew bundler zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
