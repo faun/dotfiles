@@ -3,6 +3,7 @@ filetype plugin indent on
 
 " ==========================================
 " Viewport
+
 set shortmess+=I                                           " Hide the vim splash screen
 set title                                                  " Set terminal title bar
 set hidden                                                 " Use hidden buffers
@@ -17,10 +18,8 @@ set shiftround                                             " use multiple of shi
 set showmatch                                              " set show matching parenthesis
 set smarttab                                               " insert tabs on the start of a line according to
                                                            " shiftwidth, not tabstop
-
 " When a file has been detected to have been changed outside of Vim and it has not been changed inside of Vim, automatically read it again.
 set autoread
-
 set smartcase                                              " ignore case if search pattern is all lowercase,
                                                            " case-sensitive otherwise
 set ignorecase                                             " ignore case when searching
@@ -31,8 +30,10 @@ set colorcolumn=80                                         " Highlight right gut
 set cursorline                                             " highlight the current cursor line
 nnoremap <Space> :set hlsearch! hlsearch?<CR>
                                                           " Press Space to toggle highlighting on/off, and show current value.
+
 " ==========================================
 " File backups
+
 set nobackup                                        " no backup files
 set nowritebackup                                   " only in case you don't want a backup file while editing
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
@@ -41,7 +42,7 @@ set noswapfile                                      " no swap files
 
 " ==========================================
 " Wildmenu Settings
-"
+
 set wildmenu                                                   " Use wildmenu
 set wildmode=longest,list,full                                 " Set completion style
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.ico                 " Ignore images
@@ -55,25 +56,31 @@ set wildignore+=spec/vcr/*                                     " ignore vcr cass
 set wildignore+=bundler_stubs/*                                " ignore bundler files
 set wildignore+=bin/*
 set pumheight =15                                              " Limit completion popup menu height
+
 " ==========================================
 " Code folding
-"
+
 set foldmethod=indent   "fold based on indent
 set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 
+" ==========================================
+" Window split key bindings
 " See http://technotales.wordpress.com/2010/04/29/vim-splits-a-guide-to-doing-exactly-what-you-want/
+
 " window
 nmap <leader>sw<left>  :topleft  vnew<CR>
 nmap <leader>sw<right> :botright vnew<CR>
 nmap <leader>sw<up>    :topleft  new<CR>
 nmap <leader>sw<down>  :botright new<CR>
+
 " buffer
 nmap <leader>s<left>   :leftabove  vnew<CR>
 nmap <leader>s<right>  :rightbelow vnew<CR>
 nmap <leader>s<up>     :leftabove  new<CR>
 nmap <leader>s<down>   :rightbelow new<CR>
 
+" split prompts with directory pre-filled
 map <leader>e :edit %%
 map <leader>v :view %%
 map <leader>s :split %%
@@ -85,7 +92,7 @@ set tags=tags,.tags,gems.tags,.gems.tags
 noremap <leader>pt :!ctags -V --languages=ruby -f .gems.tags `gem env gemdir` && ctags -f .tags -RV . <cr>
 
 " ==========================================
-" Color scheme settings:
+" Color scheme settings
 
 set background=light
 set t_Co=256
@@ -100,7 +107,6 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " ==========================================
 " Command shortcuts:
-
 " Quickly quit without saving with QQ
 nmap QQ :q!<cr>
 
@@ -129,13 +135,12 @@ set ts=2 sts=2 sw=2 expandtab "set two spaces by default
 
 " ==========================================
 " Spelling settings
+
 set spellfile=~/.vim/spell/en.utf-8.add
 
 " ==========================================
-" Tab settings
+" File settings
 
-" ==========================================
-" File settings:
 function! TrimWhiteSpace()
   %s/\s\+$//e
 :endfunction
@@ -154,8 +159,8 @@ match ExtraWhitespace /\s\+$/
 map <silent> <F3> :call TrimWhiteSpace()<CR>``
 
 " ==========================================
-" PROMOTE VARIABLE TO RSPEC LET
-" ==========================================
+" Promote variable to RSpec let
+
 function! PromoteToLet()
   :normal! dd
   " :exec '?^\s*it\>'
@@ -166,37 +171,49 @@ endfunction
 :command! PromoteToLet :call PromoteToLet()
 :map <leader>p :PromoteToLet<cr>
 
-
 " ==========================================
 " Filetype Definitions
-" ==========================================
+
+" Javascript
 autocmd Filetype javascript setlocal et ts=2 sts=2 sw=2
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
+" HTML
 autocmd Filetype html setlocal et ts=2 sts=2 sw=2
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
+" CSS
 autocmd Filetype css setlocal et ts=2 sts=2 sw=2
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
+" PHP
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+
+" XML
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 
+" Gitconfig
 au BufNewFile,BufRead .gitconfig.local set filetype=gitconfig
 au BufNewFile,BufRead .tmux.local,.tmux.conf,tmux.conf set filetype=tmux
 autocmd FileType gitconfig setlocal noet
 
+" RSpec
 autocmd BufNewFile,BufRead *_spec.rb, set filetype=ruby.rails.rspec
 autocmd BufNewFile,BufRead *.js.coffee.erb, set filetype=eruby.coffee
+autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
+" Handlebars
 au BufNewFile,BufRead *.handlebars,*.hbs set filetype=handlebars
+
+" Gemfile
 autocmd BufEnter Gemfile set ft=ruby.rails.bundler
+
+" Ruby
 autocmd FileType ruby set ft=ruby.rails
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 4
-
 
 " ==========================================
 " Keymap Definitions
