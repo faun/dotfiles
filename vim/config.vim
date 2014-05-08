@@ -232,13 +232,7 @@ imap <C-l> <Space>=><Space>
 imap <C-K> <Space>-><CR>
               "coffeescript skinny arrow with control-l-l
 
-map <F7> :wall<esc> :!rspec --color<CR>
 imap <S-CR>    <CR><CR>end<Esc>-cc
-
-" ==========================================
-" Set proper filetype for spec files
-"
-autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
 " ==========================================
 " iTerm and screen/tmux settings
