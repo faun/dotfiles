@@ -36,3 +36,6 @@ if which rbenv > /dev/null; then
 fi
 
 source $HOME/.zsh/faunzy.zsh-theme
+
+bindkey "^[b" backward-word
+bindkey "^[w" forward-word
