@@ -1,5 +1,7 @@
 function tmux_attach () {
-  `which tmux` attach -t `basename $PWD` 2>/dev/null || `which tmux` new-session -s `basename $PWD`
+  directory_name=$(basename $PWD)
+  session_name=${directory_name//\./_}
+  `which tmux` attach -t $session_name 2>/dev/null || `which tmux` new-session -s $session_name
 }
 
 # Subversion
