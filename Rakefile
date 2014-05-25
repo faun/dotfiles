@@ -1,7 +1,6 @@
 require 'rake'
 require 'ftools' if RUBY_VERSION < "1.9"
 
-home = `printf $HOME`
 @timestamp = Time.now.strftime("%Y-%m-%d_%H-%M-%S")
 @replace_all = false
 NUM = 75
@@ -99,28 +98,6 @@ namespace :install do
       replace_file("."+file)
       divider
       puts if file == files.last
-    end
-  end
-
-  desc "Create symbolic link for kaleidoscope integration with git difftool"
-  task :ksdiff do
-    ksdiff = File.expand_path("/usr/local/bin/ksdiff-wrapper")
-    opendiff = File.expand_path("/usr/bin/opendiff")
-    if File.exist?(ksdiff)
-      if !File.exist?(opendiff) && !File.symlink?(opendiff)
-        puts "#{opendiff} doesn't exist, linking..."
-        system %Q{sudo ln -s #{ksdiff} #{opendiff}}
-      elsif File.exist?(opendiff) && !File.symlink?(opendiff)
-        # file already exists. back it up
-        puts "moving #{opendiff} to #{opendiff}_orig"
-        system %Q{sudo mv #{opendiff} #{opendiff}_orig}
-        puts "linking #{ksdiff} to #{opendiff}"
-        system %Q{sudo ln -s #{ksdiff} #{opendiff}}
-      else File.exist?(opendiff) && File.symlink?(opendiff)
-        puts "file already linked"
-      end
-    else
-      puts "please install ksdiff before running this tool"
     end
   end
 end
