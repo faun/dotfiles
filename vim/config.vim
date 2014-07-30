@@ -193,13 +193,15 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 
 " Gitconfig
-au BufNewFile,BufRead .gitconfig.local set filetype=gitconfig
-au BufNewFile,BufRead .tmux.local,.tmux.conf,tmux.conf set filetype=tmux
+au BufNewFile,BufRead gitconfig,gitconfig.local set filetype=gitconfig
 autocmd FileType gitconfig setlocal noet
 
+" Tmux
+au BufNewFile,BufRead .tmux.local,.tmux.conf,tmux.conf set filetype=tmux
+
 " RSpec
-autocmd BufNewFile,BufRead *_spec.rb, set filetype=ruby.rails.rspec
-autocmd BufNewFile,BufRead *.js.coffee.erb, set filetype=eruby.coffee
+autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rails.rspec
+autocmd BufNewFile,BufRead *.js.coffee.erb set filetype=eruby.coffee
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
 " Handlebars
