@@ -16,6 +16,7 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'tejr/vim-tmux'
 Bundle 'rodjek/vim-puppet'
+Bundle 'ekalinin/Dockerfile.vim'
 
 "Interface improvements
 Bundle 'Lokaltog/vim-powerline'
