@@ -42,9 +42,6 @@ alias get_db_staging='cap staging db:download && rake db:backup:load SOURCE_ENV=
 alias z='zeus'
 alias zs='zeus start'
 
-# Docker
-alias docker='docker -H tcp://0.0.0.0:4243'
-
 # misc
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
 alias i='screen -rd irc'
