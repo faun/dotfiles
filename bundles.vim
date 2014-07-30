@@ -15,6 +15,7 @@ Bundle 'vim-javascript'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'tejr/vim-tmux'
+Bundle 'rodjek/vim-puppet'
 
 "Interface improvements
 Bundle 'Lokaltog/vim-powerline'
