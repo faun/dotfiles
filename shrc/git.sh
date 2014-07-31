@@ -39,6 +39,17 @@ show() {
   fi
 }
 
+# Show commits that differ from the master branch
+divergent () {
+  current_branch="$(git rev-parse --abbrev-ref HEAD)"
+  if [[ "${current_branch}" == "master" ]]
+  then
+    echo "This command cannot be run against the master branch"
+  else
+    git log --left-right --graph --cherry-pick --oneline master..${current_branch}
+  fi
+}
+
 alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
 
 alias stashpop="git stash && git pull && git stash pop"
