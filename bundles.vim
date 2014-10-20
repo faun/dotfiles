@@ -1,5 +1,4 @@
 " Syntax and Languages
-Bundle 'astashov/vim-ruby-debugger'
 Bundle 'elzr/vim-json'
 Bundle 'othree/html5.vim'
 Bundle 'pangloss/vim-javascript'
