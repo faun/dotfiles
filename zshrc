@@ -19,6 +19,3 @@ for file in $HOME/.zsh/*.sh; do
 done
 
 source $HOME/.zsh/faunzy.zsh-theme
-
-bindkey "^[b" backward-word
-bindkey "^[w" forward-word
