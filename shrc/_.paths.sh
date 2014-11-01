@@ -4,7 +4,6 @@ if $(brew_location="$(type -p "$brew")" && [ -z "$brew_location" ]); then
 fi
 
 PATH="~/bin:$PATH"
-
 PATH="/usr/local/heroku/bin:$PATH"
 PATH="/usr/local/share/npm/bin:$PATH"
 PATH="/usr/local/bin:/usr/local/sbin:$PATH"
