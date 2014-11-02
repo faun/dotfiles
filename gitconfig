@@ -1,41 +1,41 @@
 [alias]
-	co = checkout
-	st = status -sb
-	ci = commit
+	blog = log origin/master... --left-right
 	br = branch
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %Cblue[%cN]%Creset' --abbrev-commit --date=relative
-	ls = log --all --pretty=format:'%C(red)%ad %C(reset)[%cN]%C(magenta)%d%C(reset) %s%C(reset)' --abbrev-commit --since=2.weeks --date="local" -30
-	logc = log --graph --pretty=format:'%C(yellow)commit %h %Creset(%cr)%nAuthor: %C(green)%aN <%aE>%Creset%n%n %Cblue%s%Creset%n '
-	wdiff = diff --color-words
-	clone = clone --recursive
 	branches = branch -a -vv
-	current-branch = !git branch | grep '^*' | sed s/\\*\\ //
-	track = !git branch --set-upstream $(git current-branch) origin/$(git current-branch)
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-	type = cat-file -t
-	dump = cat-file -p
-	unpushed = !GIT_CURRENT_BRANCH=$(git name-rev --name-only HEAD) && git log origin/$GIT_CURRENT_BRANCH..$GIT_CURRENT_BRANCH --oneline
-	sm = submodule foreach
-	modules = submodule foreach git pull origin master
-	count = !git shortlog -n $@ | grep \"):\" | sed \"s|:||\"
-	ksreview = "!f() { local SHA=${1:-HEAD}; local BRANCH=${2:-master}; if [ $SHA == $BRANCH ]; then SHA=HEAD; fi; git difftool -y -t Kaleidoscope $BRANCH...$SHA; }; f"
+	ci = commit
+	clone = clone --recursive
+	co = checkout
 	conflicts = !git ls-files --unmerged | cut -c51- | sort -u | xargs $EDITOR
-	sup = "submodule foreach 'git checkout master; git pull'"
-	update = !git commit --amend --date=\"$(date)\"
+	count = !git shortlog -n $@ | grep \"):\" | sed \"s|:||\"
+	current-branch = !git branch | grep '^*' | sed s/\\*\\ //
 	di = diff
-	sta = stash
-	llog = log --date=local
+	ds = diff --staged
+	dump = cat-file -p
+	fixup = commit --fixup
 	flog = log --pretty=fuller --decorate
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	ksreview = "!f() { local SHA=${1:-HEAD}; local BRANCH=${2:-master}; if [ $SHA == $BRANCH ]; then SHA=HEAD; fi; git difftool -y -t Kaleidoscope $BRANCH...$SHA; }; f"
+	last = difftool HEAD~1..HEAD
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %Cblue[%cN]%Creset' --abbrev-commit --date=relative
+	llog = log --date=local
+	logc = log --graph --pretty=format:'%C(yellow)commit %h %Creset(%cr)%nAuthor: %C(green)%aN <%aE>%Creset%n%n %Cblue%s%Creset%n '
 	lol = log --graph --decorate --oneline
 	lola = log --graph --decorate --oneline --all
-	blog = log origin/master... --left-right
-	ds = diff --staged
-	fixup = commit --fixup
-	squash = commit --squash
-	unstage = reset HEAD
-	uncommit = reset HEAD~1
+	ls = log --all --pretty=format:'%C(red)%ad %C(reset)[%cN]%C(magenta)%d%C(reset) %s%C(reset)' --abbrev-commit --since=2.weeks --date="local" -30
+	modules = submodule foreach git pull origin master
 	rum = rebase master@{u}
-	last = difftool HEAD~1..HEAD
+	sm = submodule foreach
+	squash = commit --squash
+	st = status -sb
+	sta = stash
+	sup = "submodule foreach 'git checkout master; git pull'"
+	track = !git branch --set-upstream $(git current-branch) origin/$(git current-branch)
+	type = cat-file -t
+	uncommit = reset HEAD~1
+	unpushed = !GIT_CURRENT_BRANCH=$(git name-rev --name-only HEAD) && git log origin/$GIT_CURRENT_BRANCH..$GIT_CURRENT_BRANCH --oneline
+	unstage = reset HEAD
+	update = !git commit --amend --date=\"$(date)\"
+	wdiff = diff --color-words
 
 [color "branch"]
 	current = yellow reverse
