@@ -22,10 +22,11 @@
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	ksreview = "!f() { local SHA=${1:-HEAD}; local BRANCH=${2:-master}; if [ $SHA == $BRANCH ]; then SHA=HEAD; fi; git difftool -y -t Kaleidoscope $BRANCH...$SHA; }; f"
 	last = difftool HEAD~1..HEAD
+	l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %Cblue[%cN]%Creset' --abbrev-commit --date=relative
 	llog = log --date=local
 	logc = log --graph --pretty=format:'%C(yellow)commit %h %Creset(%cr)%nAuthor: %C(green)%aN <%aE>%Creset%n%n %Cblue%s%Creset%n '
-	lol = log --graph --decorate --oneline
+	lol = log --pretty=oneline --abbrev-commit --graph --decorate
 	lola = log --graph --decorate --oneline --all
 	ls = log --all --pretty=format:'%C(red)%ad %C(reset)[%cN]%C(magenta)%d%C(reset) %s%C(reset)' --abbrev-commit --since=2.weeks --date="local" -30
 	modules = submodule foreach git pull origin master
