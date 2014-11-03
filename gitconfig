@@ -1,15 +1,21 @@
 [alias]
+	aa = add --all
 	blog = log origin/master... --left-right
 	br = branch
 	branches = branch -a -vv
-	ci = commit
+	ci = commit -v
+	cleanup = !git remote prune origin && git gc && git clean -df && git stash clear
 	clone = clone --recursive
 	co = checkout
+	d = diff
 	conflicts = !git ls-files --unmerged | cut -c51- | sort -u | xargs $EDITOR
 	count = !git shortlog -n $@ | grep \"):\" | sed \"s|:||\"
 	current-branch = !git branch | grep '^*' | sed s/\\*\\ //
 	di = diff
 	ds = diff --staged
+	current-branch = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
+	unstaged = diff
+	staged = diff --cached
 	dump = cat-file -p
 	fixup = commit --fixup
 	flog = log --pretty=fuller --decorate
@@ -36,6 +42,8 @@
 	unstage = reset HEAD
 	update = !git commit --amend --date=\"$(date)\"
 	wdiff = diff --color-words
+	prom = pull --rebase origin master
+	pom = push origin master
 
 [color "branch"]
 	current = yellow reverse
