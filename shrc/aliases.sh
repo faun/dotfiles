@@ -34,6 +34,7 @@ alias rc='rails console'
 alias rs='rails server'
 alias rsd='rails server --debugger'
 alias spec='/usr/bin/time rspec'
+
 # capistrano
 alias get_db='cap production db:download && rake db:backup:load'
 alias get_db_staging='cap staging db:download && rake db:backup:load SOURCE_ENV=staging'
