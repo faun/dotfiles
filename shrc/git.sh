@@ -11,7 +11,9 @@ alias glf='git pull --ff-only'
 alias glr='git pull --rebase'
 
 # git push
-alias gpo="git push --set-upstream origin $(git branch | awk '/^\* / { print $2 }') >> /dev/null"
+gpo() {
+  git push --set-upstream origin $(git branch | awk '/^\* / { print $2 }') >> /dev/null
+}
 
 # git add
 alias ga='git add'
