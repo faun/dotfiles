@@ -128,6 +128,9 @@ nnoremap <leader>pm :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 
+" Auto-indent the whole file with ===
+nmap === gg=G
+
 " ==========================================
 " Tab settings
 
