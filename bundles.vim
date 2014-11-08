@@ -2,6 +2,7 @@ Bundle 'AfterColors.vim'
 Bundle 'IndexedSearch'
 Bundle 'L9'
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'ZoomWin'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'benmills/vimux'
 Bundle 'christoomey/vim-tmux-navigator'
@@ -48,7 +49,6 @@ Bundle 'vim-coffee-script'
 Bundle 'vim-ember-script'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/matchit.zip'
-Bundle 'ZoomWin'
 
 " Add custom Vundle plugins in ~/.bundles.local.vim
 if filereadable(expand("$HOME/.bundles.local.vim"))
