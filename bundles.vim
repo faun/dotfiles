@@ -1,4 +1,5 @@
 Bundle 'AfterColors.vim'
+Bundle 'AndrewRadev/switch.vim'
 Bundle 'IndexedSearch'
 Bundle 'L9'
 Bundle 'Lokaltog/vim-powerline'
