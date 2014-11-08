@@ -33,7 +33,7 @@ alias rsa='rake spec:all'
 alias rc='rails console'
 alias rs='rails server'
 alias rsd='rails server --debugger'
-alias spec='/usr/bin/time rspec'
+alias spec='/usr/bin/time bundle exec rspec'
 
 # capistrano
 alias get_db='cap production db:download && rake db:backup:load'
