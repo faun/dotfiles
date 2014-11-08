@@ -6,7 +6,6 @@ fi
 PATH="~/bin:$PATH"
 PATH=".git/safe/../../bin:$PATH"
 PATH="/usr/local/heroku/bin:$PATH"
-PATH="/usr/local/share/npm/bin:$PATH"
 PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 PATH="/usr/local/mysql/bin:$PATH"
