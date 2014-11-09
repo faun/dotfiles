@@ -221,9 +221,6 @@ autocmd FileType gitconfig setlocal noet
 " Handlebars
 au BufNewFile,BufRead *.handlebars,*.hbs set filetype=handlebars
 
-" Gemfile
-autocmd BufEnter Gemfile set ft=ruby.rails.bundler
-
 " ==========================================
 " Keymap Definitions
 
