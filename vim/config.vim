@@ -215,19 +215,6 @@ set ts=2 sts=2 sw=2 expandtab
 set spellfile=~/.vim/spell/en.utf-8.add
 
 " ==========================================
-" Promote variable to RSpec let
-
-function! PromoteToLet()
-  :normal! dd
-  " :exec '?^\s*it\>'
-  :normal! P
-  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
-  :normal ==
-endfunction
-:command! PromoteToLet :call PromoteToLet()
-:map <leader>p :PromoteToLet<cr>
-
-" ==========================================
 " Filetype Definitions
 
 " Javascript
