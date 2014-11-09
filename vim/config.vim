@@ -218,9 +218,6 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 au BufNewFile,BufRead gitconfig,gitconfig.local set filetype=gitconfig
 autocmd FileType gitconfig setlocal noet
 
-" Tmux
-au BufNewFile,BufRead .tmux.local,.tmux.conf,tmux.conf set filetype=tmux
-
 " RSpec
 autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rails.rspec
 autocmd BufNewFile,BufRead *.js.coffee.erb set filetype=eruby.coffee

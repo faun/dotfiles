@@ -1,3 +1,6 @@
+" Tmux filetypes
+au BufNewFile,BufRead .tmux.local,.tmux.conf,tmux.conf set filetype=tmux
+
 " ==========================================
 " iTerm and screen/tmux settings
 
