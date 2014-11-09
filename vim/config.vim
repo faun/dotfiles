@@ -214,10 +214,6 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 " XML
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 
-" Gitconfig
-au BufNewFile,BufRead gitconfig,gitconfig.local set filetype=gitconfig
-autocmd FileType gitconfig setlocal noet
-
 " Handlebars
 au BufNewFile,BufRead *.handlebars,*.hbs set filetype=handlebars
 
