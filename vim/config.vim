@@ -211,9 +211,6 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 " PHP
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
-" XML
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-
 " ==========================================
 " Keymap Definitions
 
