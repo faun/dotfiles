@@ -196,10 +196,6 @@ set spellfile=~/.vim/spell/en.utf-8.add
 " ==========================================
 " Filetype Definitions
 
-" HTML
-autocmd Filetype html setlocal et ts=2 sts=2 sw=2
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-
 " CSS
 autocmd Filetype css setlocal et ts=2 sts=2 sw=2
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
