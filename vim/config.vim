@@ -214,9 +214,6 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 " XML
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 
-" Handlebars
-au BufNewFile,BufRead *.handlebars,*.hbs set filetype=handlebars
-
 " ==========================================
 " Keymap Definitions
 
