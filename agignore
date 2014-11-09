@@ -8,4 +8,4 @@ public/stylesheets/compiled
 public/assets
 spec/vcr
 *.svg
-spec/fixtures/vcr_cassettes
+vcr_cassettes/*
