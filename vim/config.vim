@@ -196,10 +196,6 @@ set spellfile=~/.vim/spell/en.utf-8.add
 " ==========================================
 " Filetype Definitions
 
-" Javascript
-autocmd Filetype javascript setlocal et ts=2 sts=2 sw=2
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-
 " HTML
 autocmd Filetype html setlocal et ts=2 sts=2 sw=2
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
