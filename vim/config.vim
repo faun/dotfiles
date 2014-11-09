@@ -194,12 +194,6 @@ set ts=2 sts=2 sw=2 expandtab
 set spellfile=~/.vim/spell/en.utf-8.add
 
 " ==========================================
-" Filetype Definitions
-
-" PHP
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-
-" ==========================================
 " Keymap Definitions
 
 imap <C-l> <Space>=><Space>
