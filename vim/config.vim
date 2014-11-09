@@ -215,26 +215,6 @@ set ts=2 sts=2 sw=2 expandtab
 set spellfile=~/.vim/spell/en.utf-8.add
 
 " ==========================================
-" Whitespace settings
-
-function! TrimWhiteSpace()
-  %s/\s\+$//e
-endfunction
-
-" show tab and space characters
-set list listchars=tab:» ,trail:·
-
-" Toggle invisible characters with leader-tab
-:nmap <silent> <leader><tab> :set nolist!<CR>
-
-" highlight trailing whitespace
-highlight ExtraWhitespace ctermbg=lightgrey guibg=lightgrey ctermfg=red guifg=lightred
-match ExtraWhitespace /\s\+$/
-
-" Remove trailing whitespace with F3
-map <silent> <F3> :call TrimWhiteSpace()<CR>``
-
-" ==========================================
 " Promote variable to RSpec let
 
 function! PromoteToLet()
