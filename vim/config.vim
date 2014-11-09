@@ -224,13 +224,6 @@ au BufNewFile,BufRead *.handlebars,*.hbs set filetype=handlebars
 " Gemfile
 autocmd BufEnter Gemfile set ft=ruby.rails.bundler
 
-" Ruby
-autocmd FileType ruby set ft=ruby.rails
-autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 4
-
 " ==========================================
 " Keymap Definitions
 " ==========================================
