@@ -226,14 +226,6 @@ autocmd BufEnter Gemfile set ft=ruby.rails.bundler
 
 " ==========================================
 " Keymap Definitions
-" ==========================================
-
-" Compile CoffeeScript to scratch buffer with leader-c
-vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
-map <leader>c :CoffeeCompile<CR>
-
-" Jump to line in compiled JavaScript from CoffeScript source file
-command! -nargs=1 C CoffeeCompile | :<args>
 
 imap <C-l> <Space>=><Space>
 
@@ -242,4 +234,3 @@ imap <C-K> <Space>-><CR>
 
 " Make CoffeeScript skinny arrow with control-l-l
 imap <S-CR>    <CR><CR>end<Esc>-cc
-
