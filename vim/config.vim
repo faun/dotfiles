@@ -215,123 +215,123 @@ set ts=2 sts=2 sw=2 expandtab
 set spellfile=~/.vim/spell/en.utf-8.add
 
 " ==========================================
-" File settings
+" Whitespace settings
 
 function! TrimWhiteSpace()
   %s/\s\+$//e
-  :endfunction
+endfunction
 
-  " show tab and space characters
-  set list listchars=tab:» ,trail:·
+" show tab and space characters
+set list listchars=tab:» ,trail:·
 
-  " Toggle invisible characters with leader-tab
-  :nmap <silent> <leader><tab> :set nolist!<CR>
+" Toggle invisible characters with leader-tab
+:nmap <silent> <leader><tab> :set nolist!<CR>
 
-  " highlight trailing whitespace
-  highlight ExtraWhitespace ctermbg=lightgrey guibg=lightgrey ctermfg=red guifg=lightred
-  match ExtraWhitespace /\s\+$/
+" highlight trailing whitespace
+highlight ExtraWhitespace ctermbg=lightgrey guibg=lightgrey ctermfg=red guifg=lightred
+match ExtraWhitespace /\s\+$/
 
-  " Remove trailing whitespace with F3
-  map <silent> <F3> :call TrimWhiteSpace()<CR>``
+" Remove trailing whitespace with F3
+map <silent> <F3> :call TrimWhiteSpace()<CR>``
 
-  " ==========================================
-  " Promote variable to RSpec let
+" ==========================================
+" Promote variable to RSpec let
 
-  function! PromoteToLet()
-    :normal! dd
-    " :exec '?^\s*it\>'
-    :normal! P
-    :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
-    :normal ==
-  endfunction
-  :command! PromoteToLet :call PromoteToLet()
-  :map <leader>p :PromoteToLet<cr>
+function! PromoteToLet()
+  :normal! dd
+  " :exec '?^\s*it\>'
+  :normal! P
+  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+  :normal ==
+endfunction
+:command! PromoteToLet :call PromoteToLet()
+:map <leader>p :PromoteToLet<cr>
 
-  " ==========================================
-  " Filetype Definitions
+" ==========================================
+" Filetype Definitions
 
-  " Javascript
-  autocmd Filetype javascript setlocal et ts=2 sts=2 sw=2
-  autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+" Javascript
+autocmd Filetype javascript setlocal et ts=2 sts=2 sw=2
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
-  " HTML
-  autocmd Filetype html setlocal et ts=2 sts=2 sw=2
-  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+" HTML
+autocmd Filetype html setlocal et ts=2 sts=2 sw=2
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
-  " CSS
-  autocmd Filetype css setlocal et ts=2 sts=2 sw=2
-  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+" CSS
+autocmd Filetype css setlocal et ts=2 sts=2 sw=2
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
-  " PHP
-  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+" PHP
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
-  " XML
-  autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+" XML
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 
-  " Gitconfig
-  au BufNewFile,BufRead gitconfig,gitconfig.local set filetype=gitconfig
-  autocmd FileType gitconfig setlocal noet
+" Gitconfig
+au BufNewFile,BufRead gitconfig,gitconfig.local set filetype=gitconfig
+autocmd FileType gitconfig setlocal noet
 
-  " Tmux
-  au BufNewFile,BufRead .tmux.local,.tmux.conf,tmux.conf set filetype=tmux
+" Tmux
+au BufNewFile,BufRead .tmux.local,.tmux.conf,tmux.conf set filetype=tmux
 
-  " RSpec
-  autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rails.rspec
-  autocmd BufNewFile,BufRead *.js.coffee.erb set filetype=eruby.coffee
-  autocmd BufNewFile,BufRead *_spec.rb compiler rspec
+" RSpec
+autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rails.rspec
+autocmd BufNewFile,BufRead *.js.coffee.erb set filetype=eruby.coffee
+autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
-  " Handlebars
-  au BufNewFile,BufRead *.handlebars,*.hbs set filetype=handlebars
+" Handlebars
+au BufNewFile,BufRead *.handlebars,*.hbs set filetype=handlebars
 
-  " Gemfile
-  autocmd BufEnter Gemfile set ft=ruby.rails.bundler
+" Gemfile
+autocmd BufEnter Gemfile set ft=ruby.rails.bundler
 
-  " Ruby
-  autocmd FileType ruby set ft=ruby.rails
-  autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
-  autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 4
+" Ruby
+autocmd FileType ruby set ft=ruby.rails
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 4
 
-  " ==========================================
-  " Keymap Definitions
-  " ==========================================
+" ==========================================
+" Keymap Definitions
+" ==========================================
 
-  " Compile CoffeeScript to scratch buffer with leader-c
-  vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
-  map <leader>c :CoffeeCompile<CR>
+" Compile CoffeeScript to scratch buffer with leader-c
+vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
+map <leader>c :CoffeeCompile<CR>
 
-  " Jump to line in compiled JavaScript from CoffeScript source file
-  command! -nargs=1 C CoffeeCompile | :<args>
+" Jump to line in compiled JavaScript from CoffeScript source file
+command! -nargs=1 C CoffeeCompile | :<args>
 
-  imap <C-l> <Space>=><Space>
+imap <C-l> <Space>=><Space>
 
-  " Make hashrocket with control-l
-  imap <C-K> <Space>-><CR>
+" Make hashrocket with control-l
+imap <C-K> <Space>-><CR>
 
-  " Make CoffeeScript skinny arrow with control-l-l
-  imap <S-CR>    <CR><CR>end<Esc>-cc
+" Make CoffeeScript skinny arrow with control-l-l
+imap <S-CR>    <CR><CR>end<Esc>-cc
 
-  " ==========================================
-  " iTerm and screen/tmux settings
+" ==========================================
+" iTerm and screen/tmux settings
 
-  if has('mouse')
-    set mouse=a
-    if &term =~ "xterm" || &term =~ "screen"
-      " for some reason, doing this directly with 'set ttymouse=xterm2'
-      " doesn't work -- 'set ttymouse?' returns xterm2 but the mouse
-      " makes tmux enter copy mode instead of selecting or scrolling
-      " inside Vim -- but luckily, setting it up from within autocmds
-      " works
-      autocmd VimEnter * set ttymouse=xterm2
-      autocmd FocusGained * set ttymouse=xterm2
-      autocmd BufEnter * set ttymouse=xterm2
-    endif
-  endif
-  set ttimeoutlen=50
-
+if has('mouse')
+  set mouse=a
   if &term =~ "xterm" || &term =~ "screen"
-    let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
-    let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
-    let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
+    " for some reason, doing this directly with 'set ttymouse=xterm2'
+    " doesn't work -- 'set ttymouse?' returns xterm2 but the mouse
+    " makes tmux enter copy mode instead of selecting or scrolling
+    " inside Vim -- but luckily, setting it up from within autocmds
+    " works
+    autocmd VimEnter * set ttymouse=xterm2
+    autocmd FocusGained * set ttymouse=xterm2
+    autocmd BufEnter * set ttymouse=xterm2
   endif
+endif
+set ttimeoutlen=50
+
+if &term =~ "xterm" || &term =~ "screen"
+  let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
+  let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
+  let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
+endif
