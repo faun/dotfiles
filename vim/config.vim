@@ -6,60 +6,81 @@ filetype plugin indent on
 
 " Hide the vim splash screen
 set shortmess+=I
+
 " Set terminal title bar
 set title
+
 " Use hidden buffers
 set hidden
-" don't wrap lines
+
+" Don't wrap lines
 set nowrap
-" allow backspacing over everything in insert mode
+
+" Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
-" always show line numbers
+
+" Always show line numbers
 set number
 set encoding=utf-8
-" let cursor keys wrap around lines
+
+" Let cursor keys wrap around lines
 set whichwrap+=<,>,h,l,[,]
-" always set autoindenting on
+
+" Always set autoindenting on
 set autoindent
-" copy the previous indentation on autoindenting
+
+" Copy the previous indentation on autoindenting
 set copyindent
-" use multiple of shiftwidth when indenting with '<' and '>'
+
+" Use multiple of shiftwidth when indenting with '<' and '>'
 set shiftround
-" set show matching parenthesis
+
+" Set show matching parenthesis
 set showmatch
-" insert tabs on the start of a line according to
+
+" Insert tabs on the start of a line according to shiftwidth, not tabstop
 set smarttab
-" shiftwidth, not tabstop
+
 " When a file has been detected to have been changed outside of Vim and it has not been changed inside of Vim, automatically read it again.
 set autoread
-" ignore case if search pattern is all lowercase,
-" case-sensitive otherwise
+
+" Ignore case if search pattern is all lowercase, case-sensitive otherwise
 set smartcase
-" ignore case when searching
+
+" Ignore case when searching
 set ignorecase
-" highlight search terms
+
+" Highlight search terms
 set hlsearch
-" show search matches as you type
+
+" Show search matches as you type
 set incsearch
+
 " Use Ack instead of grep
 set grepprg=ack
-" Highlight right gutter at 8o characters
+
+" Highlight right gutter at 80 characters
 set colorcolumn=80
-" highlight the current cursor line
+
+" Highlight the current cursor line
 set cursorline
+
 " Press Space to toggle highlighting on/off, and show current value.
 nnoremap <Space> :set hlsearch! hlsearch?<CR>
 
 " ==========================================
 " File backups
 
-" no backup files
+" No backup files
+
 set nobackup
-" only in case you don't want a backup file while editing
+
+" Only in case you don't want a backup file while editing
 set nowritebackup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
- " no swap files
+
+" No swap files
 set noswapfile
 
 " ==========================================
@@ -67,39 +88,52 @@ set noswapfile
 
 " Use wildmenu
 set wildmenu
+
 " Set completion style
 set wildmode=longest,list,full
+
 " Ignore images
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.ico
+
 " Ignore PSDs
 set wildignore+=*.psd
+
 " Ignore PID files
 set wildignore+=*.pid
+
 " Ignore files in tmp
 set wildignore+=*/tmp/*
+
 " Ignore sqlite databases
 set wildignore+=*.sqlite3
-" ignore xcode files
+
+" Ignore xcode files
 set wildignore+=*.ipa,*.xcodeproj/*,*.xib,*.cer,*.icns
-" ignore asset pipeline
+
+" Ignore asset pipeline
 set wildignore+=public/assets/*,public/stylesheets/compiled/*
-" ignore vcr cassettes
+
+" Ignore vcr cassettes
 set wildignore+=spec/vcr/*
-" ignore bundler files
+
+" Ignore bundler files
 set wildignore+=bundler_stubs/*
 set wildignore+=bin/*
+
 " Limit completion popup menu height
 set pumheight =15
 
 " ==========================================
 " Code folding
 
-"fold based on indent
+" Fold based on indent
 set foldmethod=indent
-"deepest fold is 10 levels
+
+" Set the deepest fold is 10 levels
 set foldnestmax=10
-"dont fold by default
-set nofoldenable        
+
+" Don't fold code by default
+set nofoldenable
 
 " ==========================================
 " Window split key bindings
@@ -144,10 +178,11 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " ==========================================
 " Command shortcuts:
+
 " Quickly quit without saving with QQ
 nmap QQ :q!<cr>
 
-"Save with leader-w
+" Save with leader-w
 nmap <leader>w :update!<cr>
 nmap <leader><leader> :update!<cr>
 
@@ -171,8 +206,8 @@ nmap === gg=G''
 " ==========================================
 " Tab settings
 
-"set two spaces by default
-set ts=2 sts=2 sw=2 expandtab 
+" Set two spaces by default
+set ts=2 sts=2 sw=2 expandtab
 
 " ==========================================
 " Spelling settings
@@ -186,7 +221,7 @@ function! TrimWhiteSpace()
   %s/\s\+$//e
   :endfunction
 
-  "show tab and space characters
+  " show tab and space characters
   set list listchars=tab:» ,trail:·
 
   " Toggle invisible characters with leader-tab
@@ -262,7 +297,6 @@ function! TrimWhiteSpace()
   " Keymap Definitions
   " ==========================================
 
-  " CoffeeScript
   " Compile CoffeeScript to scratch buffer with leader-c
   vmap <leader>c <esc>:'<,'>:CoffeeCompile<CR>
   map <leader>c :CoffeeCompile<CR>
@@ -271,10 +305,11 @@ function! TrimWhiteSpace()
   command! -nargs=1 C CoffeeCompile | :<args>
 
   imap <C-l> <Space>=><Space>
-  "Make hashrocket with control-l
-  imap <C-K> <Space>-><CR>
-  "coffeescript skinny arrow with control-l-l
 
+  " Make hashrocket with control-l
+  imap <C-K> <Space>-><CR>
+
+  " Make CoffeeScript skinny arrow with control-l-l
   imap <S-CR>    <CR><CR>end<Esc>-cc
 
   " ==========================================
