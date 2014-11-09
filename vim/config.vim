@@ -218,11 +218,6 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 au BufNewFile,BufRead gitconfig,gitconfig.local set filetype=gitconfig
 autocmd FileType gitconfig setlocal noet
 
-" RSpec
-autocmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rails.rspec
-autocmd BufNewFile,BufRead *.js.coffee.erb set filetype=eruby.coffee
-autocmd BufNewFile,BufRead *_spec.rb compiler rspec
-
 " Handlebars
 au BufNewFile,BufRead *.handlebars,*.hbs set filetype=handlebars
 
