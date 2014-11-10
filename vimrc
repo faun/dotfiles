@@ -5,6 +5,7 @@ set nocompatible
 let mapleader = "\\"
 " remap ',' as a leader key as well
 :nmap , \
+syntax on
 
 " ==========================================
 " Vundle Settings
@@ -18,7 +19,7 @@ Bundle 'gmarik/vundle'
 
 source $HOME/.bundles.vim
 
-filetype plugin indent on "required for Vundle
+filetype plugin indent on
 
 " ==========================================
 
