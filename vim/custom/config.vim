@@ -181,12 +181,6 @@ set showmode
 nmap === gg=G''
 
 " ==========================================
-" Tab settings
-
-" Set two spaces by default
-set ts=2 sts=2 sw=2 expandtab
-
-" ==========================================
 " Spelling settings
 
 set spellfile=~/.vim/spell/en.utf-8.add

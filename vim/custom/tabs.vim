@@ -1,3 +1,6 @@
+" Set two spaces by default
+set ts=2 sts=2 sw=2 expandtab
+
 " ==========================================
 " Quickly switch tab settings
 " http://vimcasts.org/episodes/tabs-and-spaces/
