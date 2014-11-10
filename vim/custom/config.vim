@@ -69,9 +69,6 @@ set cursorline
 " Remove the noise in the vertical divider between splits
 :set fillchars+=vert:\ 
 
-" Press Space to toggle highlighting on/off, and show current value.
-nnoremap <Space> :set hlsearch! hlsearch?<CR>
-
 " ==========================================
 " File backups
 
@@ -136,11 +133,6 @@ cmap w!! %!sudo tee > /dev/null %
 
 " Edit or view files in same directory as current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
-
-nnoremap <F2> :set invpaste paste?<CR>
-nnoremap <leader>pm :set invpaste paste?<CR>
-set pastetoggle=<F2>
-set showmode
 
 " Auto-indent the whole file with ===
 nmap === gg=G''
