@@ -1,3 +1,18 @@
+" Ignore case if search pattern is all lowercase, case-sensitive otherwise
+set smartcase
+
+" Ignore case when searching
+set ignorecase
+
+" Highlight search terms
+set hlsearch
+
+" Show search matches as you type
+set incsearch
+
+" Use Ack instead of grep
+set grepprg=ack
+
 " ==========================================
 " Search in project/directory
 

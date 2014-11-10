@@ -25,21 +25,6 @@ set smarttab
 " and it has not been changed inside of Vim, automatically read it again.
 set autoread
 
-" Ignore case if search pattern is all lowercase, case-sensitive otherwise
-set smartcase
-
-" Ignore case when searching
-set ignorecase
-
-" Highlight search terms
-set hlsearch
-
-" Show search matches as you type
-set incsearch
-
-" Use Ack instead of grep
-set grepprg=ack
-
 " ==========================================
 " File backups
 
@@ -60,7 +45,6 @@ set noswapfile
 
 set tags=tags,.tags,gems.tags,.gems.tags
 noremap <leader>pt :!ctags -V --languages=ruby -f .gems.tags `gem env gemdir` && ctags -f .tags -RV . <cr>
-
 
 " ==========================================
 " Vimrc settings:
