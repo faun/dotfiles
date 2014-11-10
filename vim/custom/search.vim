@@ -16,7 +16,7 @@ set grepprg=ack
 " ==========================================
 " Search in project/directory
 
-nnoremap <leader>/ :Ag<Space>
+nnoremap ./ :Ag<Space>
 " Search current word in project/directory
 " With or without word boundaries
 function! SearchInProject()
