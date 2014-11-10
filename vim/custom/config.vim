@@ -163,10 +163,6 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " Quickly quit without saving with QQ
 nmap QQ :q!<cr>
 
-" Save with leader-w
-nmap <leader>w :update!<cr>
-nmap <leader><leader> :update!<cr>
-
 " Force save files that require root permission
 cmap w!! %!sudo tee > /dev/null %
 
