@@ -25,6 +25,13 @@ set colorcolumn=80
 " Highlight the current cursor line
 set cursorline
 
+" When a file has been detected to have been changed outside of Vim
+" and it has not been changed inside of Vim, automatically read it again.
+set autoread
+
+" Set show matching parenthesis
+set showmatch
+
 " Remove the noise in the vertical divider between splits
 :set fillchars+=vert:\ 
 

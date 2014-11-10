@@ -74,15 +74,8 @@ set copyindent
 " Use multiple of shiftwidth when indenting with '<' and '>'
 set shiftround
 
-" Set show matching parenthesis
-set showmatch
-
 " Insert tabs on the start of a line according to shiftwidth, not tabstop
 set smarttab
-
-" When a file has been detected to have been changed outside of Vim
-" and it has not been changed inside of Vim, automatically read it again.
-set autoread
 
 " ==========================================
 " Ctags
