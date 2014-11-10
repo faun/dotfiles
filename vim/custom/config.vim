@@ -4,27 +4,7 @@ filetype plugin indent on
 " ==========================================
 " Viewport
 
-" Hide the vim splash screen
-set shortmess+=I
-
-" Set terminal title bar
-set title
-
-" Use hidden buffers
-set hidden
-
-" Don't wrap lines
-set nowrap
-
-" Allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-" Always show line numbers
-set number
 set encoding=utf-8
-
-" Let cursor keys wrap around lines
-set whichwrap+=<,>,h,l,[,]
 
 " Always set autoindenting on
 set autoindent
@@ -60,15 +40,6 @@ set incsearch
 " Use Ack instead of grep
 set grepprg=ack
 
-" Highlight right gutter at 80 characters
-set colorcolumn=80
-
-" Highlight the current cursor line
-set cursorline
-
-" Remove the noise in the vertical divider between splits
-:set fillchars+=vert:\ 
-
 " ==========================================
 " File backups
 
@@ -84,33 +55,12 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 " No swap files
 set noswapfile
 
-" Limit completion popup menu height
-set pumheight =15
-
-" ==========================================
-" Code folding
-
-" Fold based on indent
-set foldmethod=indent
-
-" Set the deepest fold is 10 levels
-set foldnestmax=10
-
-" Don't fold code by default
-set nofoldenable
-
 " ==========================================
 " Ctags
 
 set tags=tags,.tags,gems.tags,.gems.tags
 noremap <leader>pt :!ctags -V --languages=ruby -f .gems.tags `gem env gemdir` && ctags -f .tags -RV . <cr>
 
-" ==========================================
-" Color scheme settings
-
-set background=light
-set t_Co=256
-colorscheme solarized
 
 " ==========================================
 " Vimrc settings:
