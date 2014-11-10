@@ -22,8 +22,8 @@ filetype plugin indent on "required for Vundle
 
 " ==========================================
 
-" Load all of the vim files in ~/.vim
-for file in split(glob('$HOME/.vim/*.vim'), '\n')
+" Load all of the vim files in ~/.vim/custom
+for file in split(glob('$HOME/.vim/custom/*.vim'), '\n')
   exe 'source' file
 endfor
 
