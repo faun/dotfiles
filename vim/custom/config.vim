@@ -65,6 +65,9 @@ set colorcolumn=80
 " Highlight the current cursor line
 set cursorline
 
+" Remove the noise in the vertical divider between splits
+:set fillchars+=vert:\ 
+
 " Press Space to toggle highlighting on/off, and show current value.
 nnoremap <Space> :set hlsearch! hlsearch?<CR>
 
