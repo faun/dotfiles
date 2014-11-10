@@ -41,7 +41,8 @@ set showmatch
 " Insert tabs on the start of a line according to shiftwidth, not tabstop
 set smarttab
 
-" When a file has been detected to have been changed outside of Vim and it has not been changed inside of Vim, automatically read it again.
+" When a file has been detected to have been changed outside of Vim
+" and it has not been changed inside of Vim, automatically read it again.
 set autoread
 
 " Ignore case if search pattern is all lowercase, case-sensitive otherwise
