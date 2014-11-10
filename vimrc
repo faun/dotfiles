@@ -4,7 +4,7 @@
 set nocompatible
 let mapleader = "\\"
 " remap ',' as a leader key as well
-:nmap , \
+nmap , \
 syntax on
 
 " ==========================================
@@ -46,7 +46,7 @@ map <leader>rr :w<CR>:!ruby %<CR>
 cmap w!! %!sudo tee > /dev/null %
 
 " Make the dot command work with visual mode
-:vnoremap . :norm.<CR>
+vnoremap . :norm.<CR>
 
 " Edit or view files in same directory as current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
