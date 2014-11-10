@@ -20,6 +20,7 @@ Bundle 'gmarik/vundle'
 source $HOME/.bundles.vim
 
 filetype plugin indent on
+set encoding=utf-8
 
 " ==========================================
 
@@ -62,6 +63,3 @@ imap <C-l> <Space>=><Space>
 
 " Make skinny hashrocket with control-k
 imap <C-K> <Space>-><CR>
-
-set encoding=utf-8
-
