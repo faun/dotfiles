@@ -4,14 +4,14 @@
 nnoremap <leader>/ :Ag<Space>
 " Search current word in project/directory
 " With or without word boundaries
-function SearchInProject()
+function! SearchInProject()
   let word = expand("<cword>")
   let @/=word
   set hls
   exec "Ag " . word
 endfunction
 
-function SearchWordInProject()
+function! SearchWordInProject()
   let word = expand("<cword>")
   let @/='\<' . word . '\>'
   set hls
