@@ -29,13 +29,6 @@ set tags=tags,.tags,gems.tags,.gems.tags
 noremap <leader>pt :!ctags -V --languages=ruby -f .gems.tags `gem env gemdir` && ctags -f .tags -RV . <cr>
 
 " ==========================================
-" Vimrc settings:
-
-" Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
-
-" ==========================================
 " Command shortcuts:
 
 " Quickly quit without saving with QQ
