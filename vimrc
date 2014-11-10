@@ -60,6 +60,7 @@ imap <C-l> <Space>=><Space>
 " Make skinny hashrocket with control-k
 imap <C-K> <Space>-><CR>
 
+" Initiate search with ./
 nnoremap ./ :Ag<Space>
 
 nnoremap <leader>w :call SearchInProject()<CR>
