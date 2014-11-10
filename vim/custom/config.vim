@@ -121,7 +121,6 @@ set wildignore+=spec/vcr/*
 
 " Ignore bundler files
 set wildignore+=bundler_stubs/*
-set wildignore+=bin/*
 
 " Limit completion popup menu height
 set pumheight =15
