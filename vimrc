@@ -65,18 +65,6 @@ imap <C-K> <Space>-><CR>
 
 set encoding=utf-8
 
-" Always set autoindenting on
-set autoindent
-
-" Copy the previous indentation on autoindenting
-set copyindent
-
-" Use multiple of shiftwidth when indenting with '<' and '>'
-set shiftround
-
-" Insert tabs on the start of a line according to shiftwidth, not tabstop
-set smarttab
-
 " ==========================================
 " Ctags
 
