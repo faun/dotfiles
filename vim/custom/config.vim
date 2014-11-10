@@ -153,10 +153,8 @@ set spellfile=~/.vim/spell/en.utf-8.add
 " ==========================================
 " Keymap Definitions
 
+" Make fat hashrocket with control-l
 imap <C-l> <Space>=><Space>
 
-" Make hashrocket with control-l
+" Make skinny hashrocket with control-k
 imap <C-K> <Space>-><CR>
-
-" Make CoffeeScript skinny arrow with control-l-l
-imap <S-CR>    <CR><CR>end<Esc>-cc
