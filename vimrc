@@ -34,11 +34,7 @@ if filereadable(expand("$HOME/.vimrc.local"))
   source $HOME/.vimrc.local
 endif
 
-" ==========================================
-
-" Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+" Remapped keys:
 
 " Quickly quit without saving with QQ
 nmap QQ :q!<cr>
