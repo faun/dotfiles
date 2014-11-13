@@ -6,7 +6,7 @@ function! TrimWhiteSpace()
 endfunction
 
 " show tab and space characters
-set list listchars=tab:» ,trail:·
+set list listchars=tab:»-,trail:·,extends:»,precedes:«
 
 " Toggle invisible characters with leader-tab
 nmap <silent> <leader><tab> :set nolist!<CR>
