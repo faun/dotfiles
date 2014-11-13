@@ -29,6 +29,12 @@ for file in split(glob('$HOME/.vim/custom/*.vim'), '\n')
   exe 'source' file
 endfor
 
+" ==========================================
+" Colors
+
+set background=dark
+colorscheme base16-twilight
+
 " Load a custom vimrc file if it exist
 if filereadable(expand("$HOME/.vimrc.local"))
   source $HOME/.vimrc.local
