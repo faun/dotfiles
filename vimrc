@@ -35,6 +35,9 @@ endfor
 set background=dark
 colorscheme base16-twilight
 
+" ==========================================
+" Custom Vimrc
+
 " Load a custom vimrc file if it exist
 if filereadable(expand("$HOME/.vimrc.local"))
   source $HOME/.vimrc.local
