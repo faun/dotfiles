@@ -43,6 +43,9 @@ if filereadable(expand("$HOME/.vimrc.local"))
   source $HOME/.vimrc.local
 endif
 
+" Use the system clipboard by default
+set clipboard=unnamed
+
 " Remapped keys:
 
 " Quickly quit without saving with QQ
