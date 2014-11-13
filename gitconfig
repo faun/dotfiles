@@ -104,17 +104,10 @@
 	renames = copies
 	mnemonicprefix = true
 
-[difftool "Changes"]
-	cmd = chdiff \"$LOCAL\" \"$REMOTE\"
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool "mvim"]
 	cmd = mvim -d \"$LOCAL\" \"$REMOTE\"
 [get]
 	recurseSubmodules = always
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
 [mergetool]
 	prompt = false
 
