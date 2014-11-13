@@ -100,7 +100,7 @@
 	prompt = false
 
 [diff]
-	tool = Kaleidoscope
+	tool = vimdiff
 	renames = copies
 	mnemonicprefix = true
 
