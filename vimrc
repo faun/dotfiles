@@ -74,3 +74,9 @@ nnoremap ./ :Ag<Space>
 
 nnoremap <leader>w :call SearchInProject()<CR>
 nnoremap <leader>W :call SearchWordInProject()<CR>
+
+" Get off my lawn
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
