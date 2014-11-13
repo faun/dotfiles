@@ -1,18 +1,4 @@
 " =========================================
-" Vim-Vroom Settings
-
-let g:vroom_use_vimux = 1
-let g:vroom_use_colors = 1
-
-" =========================================
-" Commentary Settings
-
-autocmd FileType tmux set commentstring=#\ %s
-autocmd FileType moon set commentstring=--\ %s
-autocmd FileType puppet set commentstring=#\ %s
-autocmd FileType dockerfile set commentstring=#\ %s
-
-" =========================================
 " Turbux + Vimux FTW
 
 let g:turbux_runner  = 'vimux'
