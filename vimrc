@@ -32,8 +32,9 @@ endfor
 " ==========================================
 " Colors
 
+let base16colorspace=256
 set background=dark
-colorscheme base16-twilight
+colorscheme base16-tomorrow
 
 " ==========================================
 " Custom Vimrc

@@ -18,4 +18,8 @@ for file in $HOME/.zsh/*.sh; do
   source "$file"
 done
 
+# Base16 Shell
+BASE16_SHELL="$HOME/.base16-shell/base16-tomorrow.dark.sh"
+[[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
+
 source $HOME/.zsh/faunzy.zsh-theme
