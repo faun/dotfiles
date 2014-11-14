@@ -2,7 +2,6 @@ Bundle 'AfterColors.vim'
 Bundle 'AndrewRadev/switch.vim'
 Bundle 'IndexedSearch'
 Bundle 'L9'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'ZoomWin'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'benmills/vimux'
@@ -50,6 +49,7 @@ Bundle 'vim-ember-script'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/matchit.zip'
 Plugin 'chriskempson/base16-vim'
+Plugin 'bling/vim-airline'
 
 " Add custom Vundle plugins in ~/.bundles.local.vim
 if filereadable(expand("$HOME/.bundles.local.vim"))
