@@ -64,7 +64,7 @@ vnoremap . :norm.<CR>
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
 " Auto-indent the whole file with ===
-nmap === gg=G''
+nmap === mzgg=G`z
 
 " Make fat hashrocket with control-l
 imap <C-l> <Space>=><Space>
