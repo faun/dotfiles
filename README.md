@@ -78,9 +78,9 @@ Install rbenv (recommended)
     git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 
 ### Patch your terminal font with Powerline glyphs for maximum awesomeness:
-  See [Powerline repo](https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher) for more info.
+  See [Powerline repo](https://github.com/Lokaltog/powerline-fonts) for more info.
 
-  My personal favorite is [inconsolata-dz](https://github.com/Lokaltog/powerline-fonts/blob/master/InconsolataDz/Inconsolata-dz%20for%20Powerline.otf?raw=true).
+  My personal favorite is [inconsolata-dz](https://github.com/Lokaltog/powerline-fonts/raw/master/InconsolataDz/Inconsolata-dz%20for%20Powerline.otf).
 
 ### Integrate iTerm2 with tmux
   See [iTerm2 downloads](http://code.google.com/p/iterm2/downloads/list) for more info
