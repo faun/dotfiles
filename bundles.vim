@@ -48,8 +48,8 @@ Bundle 'vim-coffee-script'
 Bundle 'vim-ember-script'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/matchit.zip'
-Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
+Plugin 'chriskempson/base16-vim'
 
 " Add custom Vundle plugins in ~/.bundles.local.vim
 if filereadable(expand("$HOME/.bundles.local.vim"))
