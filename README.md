@@ -58,11 +58,11 @@ Things that can be added to this file include custom aliases, configuration sett
 
 Add Homebrew Zsh to /etc/shells
 
-    echo "/usr/local/bin/zsh" >> /etc/shells
+    echo "$(which zsh)" >> /etc/shells
 
 Set Homebrew Zsh as your default user
 
-    sudo chsh -s /usr/local/bin/zsh $(whoami)
+    sudo chsh -s $(which zsh) $(whoami)
 
 Fix an apple mis-configuration for Zsh
 
