@@ -33,7 +33,7 @@ There are a number of settings that can be configured for these dotfiles. They a
 
 ##### Git
 
-Create a file at `~/.gitignore.local`:
+Create a file at `~/.gitconfig.local`:
 
     [user]
       name = Your Name
