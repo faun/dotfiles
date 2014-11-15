@@ -58,7 +58,7 @@ Things that can be added to this file include custom aliases, configuration sett
 
 Add Homebrew Zsh to /etc/shells
 
-    echo "$(which zsh)" >> /etc/shells
+    sudo sh -c 'echo "$(which zsh)" >> /etc/shells'
 
 Set Homebrew Zsh as your default user
 
