@@ -18,10 +18,6 @@ alias bi='bundle install'
 alias be='bundle exec'
 
 # rails
-alias sc='script/console'
-alias ss='script/server'
-alias sg='script/generate'
-alias a='autotest -rails'
 alias tlog='tail -f log/development.log'
 alias scaffold='script/generate nifty_scaffold'
 alias migrate='rake db:migrate db:test:clone'
@@ -35,17 +31,8 @@ alias rs='rails server'
 alias rsd='rails server --debugger'
 alias spec='/usr/bin/time bundle exec rspec'
 
-# capistrano
-alias get_db='cap production db:download && rake db:backup:load'
-alias get_db_staging='cap staging db:download && rake db:backup:load SOURCE_ENV=staging'
-
-# Zeus
-alias z='zeus'
-alias zs='zeus start'
-
 # misc
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
-alias i='screen -rd irc'
 alias f='find . -iname'
 alias ducks='du -cksh * | sort -rn|head -11' # Lists folders and files sizes in the current folder
 alias m='more'
