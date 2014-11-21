@@ -16,7 +16,7 @@ gpo() {
 
 # git add
 alias ga='git add'
-alias gaa='git add --all'
+alias gaa='git add -A .'
 alias gap='git add --patch'
 
 # git clone
@@ -25,13 +25,19 @@ alias gcl='git clone'
 # git commit
 alias gcm='git commit -v -m'
 alias gcam='git commit -a -m'
-alias amend='git commit --amend'
+alias gca='git commit -v --amend'
+alias amend='git commit -v --amend'
 
 # git diff
 alias gdc='git diff --cached'
 alias dt='git difftool'
 alias dtc='git difftool --cached'
 alias dth='git difftool HEAD'
+
+
+# git rebase
+alias grc='git rebase --continue'
+alias gri='git fetch && git rebase -i origin/master'
 
 show() {
   # Show a given commit in git difftool
