@@ -9,3 +9,4 @@ public/assets
 spec/vcr
 *.svg
 vcr_cassettes/*
+*.min.js
