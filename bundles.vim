@@ -53,6 +53,7 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/matchit.zip'
 Plugin 'bling/vim-airline'
 Plugin 'chriskempson/base16-vim'
+Plugin 'mustache/vim-mustache-handlebars'
 
 " Add custom Vundle plugins in ~/.bundles.local.vim
 if filereadable(expand("$HOME/.bundles.local.vim"))
