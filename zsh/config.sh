@@ -57,3 +57,4 @@ preexec () {
 }
 
 unalias md
+alias help="man zshbuiltins"
