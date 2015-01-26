@@ -28,7 +28,6 @@ elif [[ $platform == 'Darwin' ]]; then
   fi
 fi
 
-
 # enable rvm if it exists
 if [[ "x$RVM_ROOT" == "x" ]]
 then
