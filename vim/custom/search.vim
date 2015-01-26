@@ -10,9 +10,6 @@ set hlsearch
 " Show search matches as you type
 set incsearch
 
-" Use Ack instead of grep
-set grepprg=ack
-
 " ==========================================
 " Search in project/directory
 
@@ -31,3 +28,9 @@ function! SearchWordInProject()
   set hls
   exec "Ag '\\b" . word . "\\b'"
 endfunction
+
+if executable('ag')
+  " Note we extract the column as well as the file and line number
+  set grepprg=ag\ --nogroup\ --nocolor\ --column
+  set grepformat=%f:%l:%c%m
+endif
