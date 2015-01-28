@@ -19,7 +19,7 @@ MANPATH="/usr/local/git/man:$MANPATH"
 export MANPATH
 
 export NODE_PATH="/usr/local/lib/node_modules"
-export GOPATH="$HOME/go"
+export GOPATH="$HOME"
 export PATH=$PATH:$GOPATH/bin
 
 if [[ "$(boot2docker status)" -eq "running" ]]
