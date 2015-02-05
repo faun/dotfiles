@@ -1,5 +1,6 @@
 PATH="/opt/boxen/homebrew/bin:$PATH"
-if $(brew_location="$(type -p "$brew")" && [ -z "$brew_location" ]); then
+if which brew > /dev/null 2>&1
+then
   # we have homebrew installed
   export PYTHONPATH="$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH"
 fi
