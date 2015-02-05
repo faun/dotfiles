@@ -1,10 +1,3 @@
-PATH="/opt/boxen/homebrew/bin:$PATH"
-if which brew > /dev/null 2>&1
-then
-  # we have homebrew installed
-  export PYTHONPATH="$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH"
-fi
-
 PATH="~/bin:$PATH"
 PATH=".git/safe/../../bin:$PATH"
 PATH="/usr/local/heroku/bin:$PATH"
@@ -28,5 +21,17 @@ then
   if [[ "$(boot2docker status)" -eq "running" ]]
   then
     export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2375
+  fi
+fi
+
+if which brew > /dev/null 2>&1
+then
+  echo "homebrew installed"
+  export BREW_BIN="`brew --prefix`/bin:$PATH"
+  [[ -f `brew --prefix`/etc/profile.d/z.sh ]] && source `brew --prefix`/etc/profile.d/z.sh
+
+  if [[ -d $(brew --prefix)/lib/python2.7/ ]]
+  then
+    export PYTHONPATH="$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH"
   fi
 fi
