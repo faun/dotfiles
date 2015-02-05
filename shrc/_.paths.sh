@@ -14,7 +14,6 @@ export MANPATH
 
 export NODE_PATH="/usr/local/lib/node_modules"
 export GOPATH="$HOME"
-export PATH=$PATH:$GOPATH/bin
 
 if which boot2docker > /dev/null 2>&1
 then
