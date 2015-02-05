@@ -4,12 +4,6 @@ function tmux_attach () {
   `which tmux` attach -t $session_name 2>/dev/null || `which tmux` new-session -s $session_name
 }
 
-# Subversion
-function svgetinfo (){
-  sv info $@
-  sv log $@
-}
-
 # Override default rvm_prompt_info
 function rvm_prompt_info() {
   ruby_version=$(~/.rvm/bin/rvm-prompt i v p 2> /dev/null)
