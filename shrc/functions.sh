@@ -84,7 +84,7 @@ function dotimes () {
   echo "\n\n#### $fails out of $max runs failed. ####\n"
 }
 
- # see http://brettterpstra.com/2013/07/24/bash-image-tools-for-web-designers/
+# See http://brettterpstra.com/2013/07/24/bash-image-tools-for-web-designers/
 # Quickly get image dimensions from the command line
 function imgsize() {
   local width height
