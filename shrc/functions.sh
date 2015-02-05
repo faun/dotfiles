@@ -14,100 +14,6 @@ function rvm_prompt_info() {
   fi
 }
 
-# =============================
-# = Directory save and recall =
-# =============================
-
-# I got the following from, and mod'd it: http://www.macosxhints.com/article.php?story=20020716005123797
-#    The following aliases (save & show) are for saving frequently used directories
-#    You can save a directory using an abbreviation of your choosing. Eg. save ms
-#    You can subsequently move to one of the saved directories by using cd with
-#    the abbreviation you chose. Eg. cd ms  (Note that no '$' is necessary.)
-#    
-#    Make sure to also set the appropriate shell option:
-#    zsh:
-#      setopt CDABLE_VARS
-#    bash:
-#      shopt -s cdable_vars
-
-# if ~/.dirs file doesn't exist, create it
-if [ ! -f ~/.dirs ]; then
-  touch ~/.dirs
-fi
-# Initialization for the 'save' facility: source the .dirs file
-source ~/.dirs
-
-alias showdirs="cat ~/.dirs | ruby -e \"puts STDIN.read.split(10.chr).sort.map{|x| x.gsub(/^(.+)=.+$/, '\\1')}.join(', ')\""
-
-function save (){
-  local usage
-  usage="Usage: save shortcut_name"
-  if [ $# -lt 1 ]; then
-    echo "$usage"
-    return 1
-  fi
-  if [ $# -gt 1 ]; then
-    echo "Too many arguments!"
-    echo "$usage"
-    return 1
-  fi
-  if [ -z $(echo $@ | grep --color=never "^[a-zA-Z]\w*$") ]; then
-    echo "Bad argument! $@ is not a valid alias!"
-    return 1
-  fi
-  if [ $(cat ~/.dirs | grep --color=never "^$@=" | wc -l) -gt 0 ]; then
-    echo -n "That alias is already set to: "
-    echo $(cat ~/.dirs | awk "/^$@=/" | sed "s/^$@=//" | tail -1)
-    echo -n "Do you want to overwrite it? (y/n) "
-    read answer
-    if [ ! "$answer" = "y" -a ! "$answer" = "yes" ]; then
-      return 0
-    else
-      # backup just in case
-      cp ~/.dirs ~/.dirs.bak
-      # delete existing version(s) of this alias
-      cat ~/.dirs | sed "/^$@=.*/d" > ~/.dirs.tmp
-      mv ~/.dirs.tmp ~/.dirs
-    fi
-  fi
-  # add a newline to the end of the file if necessary
-  if [ $(cat ~/.dirs | sed -n '/.*/p' | wc -l) -gt $(cat ~/.dirs | wc -l) ]; then
-    echo >> ~/.dirs
-  fi
-  echo "$@"=\"`pwd`\" >> ~/.dirs
-  source ~/.dirs
-  echo "Directory shortcuts:" `showdirs`
-}
-
-#### Functions to inspect ruby gems ###########################
-## removed old `gemdir` function in favor of a ruby script, see bin/gemdir ##
-function cdgem {
-  local GEMDIR
-  GEMDIR=$(gemdir $1)
-  if [ "$GEMDIR" ] && [ -d "$GEMDIR" ]; then
-    cd $GEMDIR
-  else
-    echo "No gem found for $1"
-    return 1
-  fi
-}
-function mategem {
-  (cdgem $1 && mate .)
-}
-
-######## misc ##########
-
-# update dotfiles
-function dotfiles_update {
-  local SAVED_PWD
-  SAVED_PWD="$PWD"
-  cd $HOME/src/dotfiles
-  git pull --ff-only
-  git submodule update --init
-  rake install
-  cd "$SAVED_PWD"
-}
-
 # mkdir, cd into it
 mkcd () {
   mkdir -p "$*"
@@ -131,32 +37,6 @@ function trash () {
   done
 }
 
-function copypath () {
-  echo -n $PWD | pbcopy
-}
-
-# project rvmrc files
-function rvmrc () {
-  if [ $# -lt 1 ]; then
-    echo "Trusting existing .rvmrc file"
-    rvm rvmrc trust && rvm rvmrc load
-  else
-    echo "Creating new .rvmrc file"
-    cmd="rvm --rvmrc --create use $1"
-    echo "running: $cmd"
-    eval $cmd
-  fi
-}
-
-function newest () {
-  if [ $# -lt 1 ]; then
-    ls -1t | head -n 5 | nl
-    echo 'Type `newest #` to open that file.'
-  else
-    open "$(ls -1t | head -n $1 | tail -n 1)"
-  fi
-}
-
 # build html from markdown, optimized for legibility on mobile devices
 function mdbuild () {
   read -d '' head <<"EOF"
@@ -176,30 +56,6 @@ EOF
     markdown $input | smartypants >> $out
     echo $foot >> $out
   done
-}
-
-# convert tabs to spaces
-function tabs2spaces () {
-  if [ $# -lt 1 ]; then
-    echo "No files provided!"
-    return 1
-  fi
-  for file in "$@"; do
-    echo "converting $file"
-    cp $file $file.tmp && expand -t 2 $file > $file.tmp && mv $file.tmp $file
-  done
-}
-
-function sgi {
-sudo gem install $1
-}
-
-function glg { 
-gem list | grep $1
-}
-
-function rrg { 
-rake routes | grep $1
 }
 
 # run a command multiple times
