@@ -25,8 +25,6 @@ fi
 
 if which brew > /dev/null 2>&1
 then
-  echo "homebrew installed"
-  export BREW_BIN="`brew --prefix`/bin:$PATH"
   [[ -f `brew --prefix`/etc/profile.d/z.sh ]] && source `brew --prefix`/etc/profile.d/z.sh
 
   if [[ -d $(brew --prefix)/lib/python2.7/ ]]
