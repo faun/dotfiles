@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 for file in $HOME/.shrc/*.sh; do
   . "$file"
 done
