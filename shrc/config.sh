@@ -44,3 +44,4 @@ if [ -f $HOME/.local.sh ]; then
   source $HOME/.local.sh
 fi
 
+[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
