@@ -27,3 +27,4 @@ tags
 tags-ja
 vim/spell/
 /.coverage.out
+.bitrot/
