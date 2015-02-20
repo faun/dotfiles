@@ -1,3 +1,7 @@
+autoload -U promptinit && promptinit
+setopt prompt_subst
+autoload -U colors && colors
+
 dir=$(dirname $0)
 source ${dir}/../shrc/git-prompt.sh
 record_time "source git-prompt"

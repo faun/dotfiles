@@ -28,9 +28,6 @@ for file in $HOME/.zsh/*.sh; do
   record_time "$file"
 done
 
-autoload -U promptinit && promptinit
-setopt prompt_subst
-autoload -U colors && colors
 source $HOME/.zsh/faunzy.zsh-theme
 record_time "prompt"
 
