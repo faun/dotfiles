@@ -41,14 +41,6 @@ z_script="/usr/local/etc/profile.d/z.sh"
 [[ -f $z_script ]] && source $z_script
 record_time "z"
 
-source ~/.zsh/antigen.zsh
-record_time "antigen"
-
-antigen bundle zsh-users/zsh-syntax-highlighting
-record_time "zsh-syntax-highlight"
-antigen apply
-record_time "antigen apply"
-
 # use .localrc for settings specific to one system
 [[ -f ~/.localrc ]] && .  ~/.localrc
 record_time "localrc"
