@@ -49,4 +49,8 @@ if [ -f $HOME/.local.sh ]; then
   record_time "local.sh"
 fi
 
-[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
+if [[ -n $LOAD_BOXEN ]]
+then
+  [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
+  record_time "boxen load time"
+fi
