@@ -24,17 +24,23 @@ function current_branch() {
 alias ga='git add'
 alias gaa='git add -A .'
 alias gap='git add --patch'
+alias grh='git reset HEAD'
 
 # git clone
 alias gcl='git clone'
 
+# git branches
+alias gco='git checkout'
+
 # git commit
+alias gc='git commit -v'
 alias gcm='git commit -v -m'
 alias gcam='git commit -a -m'
 alias gca='git commit -v --amend'
 alias amend='git commit -v --amend'
 
 # git diff
+alias gd='git diff'
 alias gdc='git diff --cached'
 alias dt='git difftool'
 alias dtc='git difftool --cached'
