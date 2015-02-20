@@ -46,7 +46,6 @@ alias dt='git difftool'
 alias dtc='git difftool --cached'
 alias dth='git difftool HEAD'
 
-
 # git rebase
 alias grc='git rebase --continue'
 alias gri='git fetch && git rebase -i origin/master'
