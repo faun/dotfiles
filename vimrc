@@ -2,9 +2,7 @@
 " Basic settings:
 
 set nocompatible
-let mapleader = "\\"
-" remap ',' as a leader key as well
-nmap , \
+let mapleader = "\<Space>"
 syntax on
 
 " ==========================================
