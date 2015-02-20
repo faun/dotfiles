@@ -57,6 +57,5 @@ preexec () {
   fi
 }
 
-unalias md
 alias help="man zshbuiltins"
 record_time "zsh config"
