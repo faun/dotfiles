@@ -8,7 +8,6 @@ then
   record_time "zsh prompt"
 
   fpath=(~/.zsh/functions $fpath)
-
   autoload -U ~/.zsh/functions/*(:t)
 
   HISTFILE=~/.zsh_history
