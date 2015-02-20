@@ -28,8 +28,6 @@ for file in $HOME/.zsh/*.sh; do
   record_time "$file"
 done
 
-source $HOME/.zsh/faunzy.zsh-theme
-record_time "prompt"
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.base16-shell/base16-tomorrow.dark.sh"
