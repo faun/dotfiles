@@ -28,12 +28,6 @@ for file in $HOME/.zsh/*.sh; do
   record_time "$file"
 done
 
-
-# Base16 Shell
-BASE16_SHELL="$HOME/.base16-shell/base16-tomorrow.dark.sh"
-[[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
-record_time "Base16"
-
 # "z" script
 z_script="/usr/local/etc/profile.d/z.sh"
 [[ -f $z_script ]] && source $z_script
