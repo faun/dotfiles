@@ -5,6 +5,7 @@ then
   else
     export PS1='%3~$(git_info_for_prompt)%# '
   fi
+  record_time "zsh prompt"
 
   fpath=(~/.zsh/functions $fpath)
 
@@ -48,6 +49,7 @@ then
   bindkey '^[^N' newtab
   bindkey '^?' backward-delete-char
   bindkey '^O' clear-screen
+  record_time "bindings"
 
   # Set screen titles to last run command
   setopt extended_glob
@@ -61,3 +63,4 @@ then
   unalias md
   alias help="man zshbuiltins"
 fi
+record_time "zsh config"

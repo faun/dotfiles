@@ -12,6 +12,7 @@ elif [[ $platform == 'Darwin' ]]; then
   alias a='ls -lrthG'
   alias ls='ls -G'
   source "$(dirname $0)/optional/macos.sh"
+  record_time "mac os"
 fi
 
 # enable rvm if it exists
@@ -25,6 +26,7 @@ if [ -d $RVM_ROOT ]; then
   export rvm_path="$RVM_ROOT"
   [[ -s $rvm_path/scripts/rvm ]] && source $rvm_path/scripts/rvm
 fi
+record_time "rvm"
 
 # otherwise use rbenv
 if [[ "x$RBENV_ROOT" == "x" ]]
@@ -35,13 +37,16 @@ fi
 if [ -d $RBENV_ROOT ]; then
   export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
 fi
+record_time "rbenv paths"
 
 if which rbenv > /dev/null; then
   eval "$(rbenv init -)"
 fi
+record_time "rbenv init"
 
 if [ -f $HOME/.local.sh ]; then
   source $HOME/.local.sh
+  record_time "local.sh"
 fi
 
 [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
