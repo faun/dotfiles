@@ -39,11 +39,6 @@ if [ -d $RBENV_ROOT ]; then
 fi
 record_time "rbenv paths"
 
-if which rbenv > /dev/null; then
-  eval "$(rbenv init -)"
-fi
-record_time "rbenv init"
-
 # Base16 Shell
 BASE16_SHELL="$HOME/.base16-shell/base16-tomorrow.dark.sh"
 [[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
