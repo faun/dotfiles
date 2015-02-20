@@ -43,6 +43,7 @@ record_time "z"
 
 source ~/.zsh/antigen.zsh
 record_time "antigen"
+
 antigen bundle zsh-users/zsh-syntax-highlighting
 record_time "zsh-syntax-highlight"
 antigen apply
