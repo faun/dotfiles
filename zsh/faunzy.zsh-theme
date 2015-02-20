@@ -1,3 +1,7 @@
+dir=$(dirname $0)
+source ${dir}/../shrc/git-prompt.sh
+record_time "source git-prompt"
+
 # show current rbenv version if different from rbenv global
 ruby_version_status() {
   if which rbenv > /dev/null; then
@@ -14,6 +18,19 @@ ruby_version_status() {
 }
 record_time "ruby prompt"
 
+function git_prompt_info() {
+  dirty="$(parse_git_dirty)"
+  __git_ps1 "${ZSH_THEME_GIT_PROMPT_PREFIX//\%/%%}%s${dirty//\%/%%}${ZSH_THEME_GIT_PROMPT_SUFFIX//\%/%%}"
+}
+record_time "git prompt info"
+
+parse_git_dirty() {
+  [[ "$(command git rev-parse --is-inside-work-tree 2>/dev/null)" == "true" ]] || return
+  [[ "$PURE_GIT_UNTRACKED_DIRTY" == 0 ]] && local umode="-uno" || local umode="-unormal"
+  command test -n "$(git status --porcelain --ignore-submodules ${umode})"
+  (($? == 0)) && echo $ZSH_THEME_GIT_PROMPT_DIRTY || echo $ZSH_THEME_GIT_PROMPT_CLEAN
+}
+record_time "git dirty checking"
 # Based off the murilasso zsh theme
 
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"

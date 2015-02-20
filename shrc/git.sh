@@ -14,6 +14,12 @@ gpo() {
   git push --set-upstream origin $(git branch | awk '/^\* / { print $2 }') >> /dev/null
 }
 
+function current_branch() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+  echo ${ref#refs/heads/}
+}
+
 # git add
 alias ga='git add'
 alias gaa='git add -A .'
