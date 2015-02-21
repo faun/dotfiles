@@ -28,7 +28,7 @@ if [ -d $RVM_ROOT ]; then
 fi
 record_time "rvm"
 
-# otherwise use rbenv
+# Set RBENV_ROOT to ~/.rbenv unless it exists
 if [[ "x$RBENV_ROOT" == "x" ]]
 then
   export RBENV_ROOT=$HOME/.rbenv
