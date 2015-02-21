@@ -15,7 +15,7 @@ elif [[ $platform == 'Darwin' ]]; then
   record_time "mac os"
 fi
 
-# enable rvm if it exists
+# Enable rvm if it exists
 if [[ "x$RVM_ROOT" == "x" ]]
 then
   export RVM_ROOT="$HOME/.rvm"
