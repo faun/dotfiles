@@ -33,6 +33,10 @@ z_script="/usr/local/etc/profile.d/z.sh"
 [[ -f $z_script ]] && source $z_script
 record_time "z"
 
+# FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+record_time "fzf"
+
 # use .localrc for settings specific to one system
 [[ -f ~/.localrc ]] && .  ~/.localrc
 record_time "localrc"
