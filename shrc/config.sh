@@ -4,11 +4,10 @@ export LC_CTYPE=en_US.UTF-8
 export EDITOR='vim'
 
 # Load optional platform-specific configuration
-platform=`uname`
-if [[ $platform == 'Linux' ]]; then
+if [[ "$OSTYPE" == linux* ]]; then
   alias a='ls -lrth --color'
   alias ls='ls --color=auto'
-elif [[ $platform == 'Darwin' ]]; then
+elif [[ "$OSTYPE" == darwin* ]]; then
   alias a='ls -lrthG'
   alias ls='ls -G'
   source "$(dirname $0)/optional/macos.sh"
