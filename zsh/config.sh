@@ -8,6 +8,9 @@ record_time "zsh prompt"
 fpath=(~/.zsh/functions $fpath)
 autoload -U ~/.zsh/functions/*(:t)
 
+homebrew_zsh_completion=${HOMEBREW_PREFIX}/share/zsh/functions
+fpath=($homebrew_zsh_completion $fpath)
+
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
