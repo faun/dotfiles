@@ -56,6 +56,7 @@ Plugin 'vim-coffee-script'
 Plugin 'vim-ember-script'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'vim-scripts/matchit.zip'
+Plugin 'sjl/vitality.vim'
 
 " Add custom Vundle plugins in ~/.bundles.local.vim
 if filereadable(expand("$HOME/.bundles.local.vim"))
