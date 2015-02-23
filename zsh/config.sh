@@ -107,7 +107,8 @@ bindkey '^[[3~' delete-char
 bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char
 bindkey '^O' clear-screen
-record_time "bindings"
+
+record_time "zsh keybinding"
 
 # Set screen titles to last run command
 setopt extended_glob
