@@ -2,8 +2,9 @@
 " Turbux + Vimux FTW
 
 let g:turbux_runner  = 'vimux'
+
 " Run the current file with rspec
-map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
+nmap <Return> :call VimuxRunCommand("clear; bundle exec rspec " . bufname("%"))<CR>
 
 " Prompt for a command to run
 map <Leader>vp :VimuxPromptCommand<CR>
