@@ -6,16 +6,14 @@ let mapleader = "\<Space>"
 syntax on
 
 " ==========================================
-" Vundle Settings
+" Vim-plug
 
-filetype off "required for Vundle
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-Bundle 'gmarik/vundle'
-
+call plug#begin('~/.vim/plugged')
 source $HOME/.bundles.vim
+if filereadable(expand("$HOME/.bundles.local.vim"))
+  source $HOME/.bundles.local.vim
+endif
+call plug#end()
 
 filetype plugin indent on
 set encoding=utf-8
