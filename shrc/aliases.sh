@@ -46,6 +46,7 @@ alias sha1="openssl sha1"
 alias vim_bundle_install='vim +BundleInstall +qall'
 alias vim_bundle_clean='vim +BundleClean'
 alias v='vim'
+alias vi='vim'
 
 # It's aliases all the way down
 alias local_vim_bundles='$EDITOR $HOME/.bundles.local.vim'
