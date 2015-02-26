@@ -34,3 +34,5 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor\ --column
   set grepformat=%f:%l:%c%m
 endif
+" Press leader-/ to toggle highlighting on/off, and show current value.
+nnoremap <leader>/ :set hlsearch! hlsearch?<CR>
