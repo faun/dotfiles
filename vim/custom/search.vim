@@ -34,5 +34,9 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor\ --column
   set grepformat=%f:%l:%c%m
 endif
+
+" Initiate search with <leader><space>
+nnoremap <leader><space> :Ag<Space>
+
 " Press leader-/ to toggle highlighting on/off, and show current value.
 nnoremap <leader>/ :set hlsearch! hlsearch?<CR>
