@@ -70,10 +70,6 @@ imap <C-l> <Space>=><Space>
 " Make skinny hashrocket with control-k
 imap <C-K> <Space>-><CR>
 
-
-nnoremap <leader>w :call SearchInProject()<CR>
-nnoremap <leader>W :call SearchWordInProject()<CR>
-
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>

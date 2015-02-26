@@ -40,3 +40,7 @@ nnoremap <leader><space> :Ag<Space>
 
 " Press leader-/ to toggle highlighting on/off, and show current value.
 nnoremap <leader>/ :set hlsearch! hlsearch?<CR>
+
+nnoremap <leader>* :call SearchInProject()<CR>
+nnoremap <C-*>:call SearchWordInProject()<CR>
+
