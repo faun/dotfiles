@@ -18,3 +18,7 @@ nmap <leader><down>   :rightbelow new<CR>
 map <leader>e :edit %%
 map <leader>v :view %%
 map <leader>s :split %%
+
+" new window splits gain focus
+nnoremap <C-w>s <C-w>s<C-w>w
+nnoremap <C-w>v <C-w>v<C-w>w
