@@ -1,1 +1,1 @@
-autocmd FileType go setl sw=4 ts=4 noet nolist
+autocmd FileType go source $HOME/.vim/languages/go.vim
