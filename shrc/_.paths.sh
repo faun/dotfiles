@@ -1,6 +1,6 @@
 if [[ -z $TMUX ]]
 then
-  PATH="~/bin:$PATH"
+  PATH="$HOME/bin:$PATH"
   PATH=".git/safe/../../bin:$PATH"
   PATH="/usr/local/heroku/bin:$PATH"
   PATH="/usr/local/bin:/usr/local/sbin:$PATH"
