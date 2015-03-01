@@ -92,7 +92,7 @@ namespace :install do
     files = Dir['*']
 
     files.each do |file|
-      next if %w[Rakefile README LICENSE bin].include? file
+      next if %w[Rakefile README.md LICENSE bin].include? file
       divider if file == files.first
       puts
       replace_file("."+file)
