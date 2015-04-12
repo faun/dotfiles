@@ -42,3 +42,6 @@ compdef _git gcam=git-commit
 
 # git diff
 compdef _git gdc=git-diff
+
+# git branch
+compdef _git gb=git-branch
