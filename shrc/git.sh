@@ -32,6 +32,7 @@ alias gcl='git clone'
 
 # git branches
 alias gco='git checkout'
+alias gb='git branch'
 
 # git commit
 alias gc='git commit -v'
