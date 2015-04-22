@@ -10,4 +10,5 @@ spec/vcr
 *.svg
 vcr_cassettes/*
 *.min.js
+vendor/*
 node_modules/*
