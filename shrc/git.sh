@@ -19,7 +19,7 @@ alias glr='git pull --rebase'
 # git push
 alias gp='git push'
 gpo() {
-  git push --set-upstream origin $(git branch | awk '/^\* / { print $2 }') >> /dev/null
+  git push --set-upstream origin "$(git branch | awk '/^\* / { print $2 }')" >> /dev/null
 }
 
 function merge() {
@@ -80,9 +80,9 @@ alias gri='git fetch && git rebase -i origin/master'
 
 show() {
   # Show a given commit in git difftool
-  args=("$1")
-  if [ "x${args}" != "x" ];then
-    git difftool "${args}~1..${args}"
+  args="$1"
+  if [ "x$args" != "x" ];then
+    git difftool "$args~1..$args"
   else
     echo "Usage: show SHA"
   fi
@@ -101,7 +101,7 @@ divergent () {
   then
     echo "This command cannot be run against the master branch"
   else
-    git log $(echo "$command_opt") master..${current_branch}
+    git log "$command_opt" master.."$current_branch"
   fi
 }
 
@@ -125,10 +125,10 @@ alias gx='gitx --all'
 
 gdv() {
   args=("$@")
-  git diff -w ${args} | view -
+  git diff -w "${args[@]}" | view -
 }
 
 gdvc() {
   args=("$@")
-  git diff --cached -w ${args} | view -
+  git diff --cached -w "${args[@]}" | view -
 }
