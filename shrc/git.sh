@@ -1,3 +1,10 @@
+#!/usr/local/env bash
+function current_branch() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+  echo "${ref#refs/heads/}"
+}
+
 # git
 alias got='git'
 alias get='git'
@@ -15,10 +22,29 @@ gpo() {
   git push --set-upstream origin $(git branch | awk '/^\* / { print $2 }') >> /dev/null
 }
 
-function current_branch() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
-  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
-  echo ${ref#refs/heads/}
+function merge() {
+if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1
+then
+  branch=$(current_branch)
+  if [[ $branch == 'master' ]]
+  then
+    echo "This command cannot be run from the master branch"
+    return 1
+  else
+    git checkout master && \
+    git pull --ff-only && \
+    git checkout "$branch" && \
+    git rebase master && \
+    git checkout master && \
+    git merge - --ff-only && \
+    git checkout "$branch" && \
+    git push origin master:master && \
+    git push origin ":$branch"
+  fi
+else
+  echo "This command must be run within a git repository"
+  return 1
+fi
 }
 
 # git add
