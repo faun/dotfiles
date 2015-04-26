@@ -16,6 +16,10 @@ alias g='git status -sb'
 alias glf='git pull --ff-only'
 alias glr='git pull --rebase'
 
+glo() {
+  git branch --set-upstream-to=refs/remotes/origin/"$(current_branch)" "$(current_branch)" && git pull --ff-only
+}
+
 # git push
 alias gp='git push'
 gpo() {
