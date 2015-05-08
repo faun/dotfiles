@@ -42,8 +42,10 @@ then
     git checkout master && \
     git merge - --ff-only && \
     git checkout "$branch" && \
+    git checkout master && \
     git push origin master:master && \
-    git push origin ":$branch"
+    git push origin ":$branch" && \
+    git branch -d "$branch"
   fi
 else
   echo "This command must be run within a git repository"
