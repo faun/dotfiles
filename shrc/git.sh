@@ -80,6 +80,15 @@ alias dt='git difftool'
 alias dtc='git difftool --cached'
 alias dth='git difftool HEAD'
 
+ds() {
+  args="$1"
+  if [ "x$args" != "x" ];then
+    git diff --stat "$args~1..$args"
+  else
+    echo "Usage: ds SHA"
+  fi
+}
+
 # git rebase
 alias grc='git rebase --continue'
 alias gri='git fetch && git rebase -i origin/master'
