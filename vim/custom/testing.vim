@@ -7,7 +7,7 @@ let g:turbux_command_teaspoon = 'rake spec:javascript'
 let g:turbux_command_prefix = 'bundle exec'
 
 let g:no_turbux_mappings = 1
-nmap <leader>t <Plug>SendTestToTmux
+nmap <leader>\ <Plug>SendTestToTmux
 nmap <leader><CR> <Plug>SendFocusedTestToTmux
 
 " Prompt for a command to run
