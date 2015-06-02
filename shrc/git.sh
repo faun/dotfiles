@@ -38,10 +38,12 @@ then
     git checkout master && \
     git pull --ff-only && \
     git checkout "$branch" && \
+    git diff-index --quiet --cached HEAD && \
     git rebase master && \
+    git diff-index --quiet --cached HEAD && \
+    git push origin "$branch":"$branch" && \
     git checkout master && \
     git merge - --ff-only && \
-    git checkout "$branch" && \
     git checkout master && \
     git push origin master:master && \
     git push origin ":$branch" && \
