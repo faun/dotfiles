@@ -107,18 +107,18 @@ show() {
 
 # Show commits that differ from the master branch
 divergent () {
+  branch="$(current_branch)"
   if [[ "${1}" == "--bare" ]]
   then
-    command_opt='--format=%h'
+    command_opt="--format=%h"
   else
-    command_opt='--left-right --graph --cherry-pick --oneline'
+    command_opt=(--left-right --graph --cherry-pick --oneline)
   fi
-  current_branch="$(git rev-parse --abbrev-ref HEAD)"
-  if [[ "${current_branch}" == "master" ]]
+  if [[ "$branch" == "master" ]]
   then
     echo "This command cannot be run against the master branch"
   else
-    git log "$command_opt" master.."$current_branch"
+    git log ${command_opt} master..$branch
   fi
 }
 
