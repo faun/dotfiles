@@ -4,6 +4,14 @@ require 'irb/completion'
 require 'irb/ext/save-history'
 require 'rubygems'
 
+begin
+  require "pry"
+  Pry.start
+  exit
+rescue LoadError
+  warn "=> Unable to load pry"
+end
+
 AwesomePrint.irb!
 
 IRB.conf[:SAVE_HISTORY] = 1000
