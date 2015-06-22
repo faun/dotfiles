@@ -13,7 +13,6 @@ alias tat='tmux_attach'
 alias t='tmux_attach'
 
 # ruby
-alias irb='irb --readline -r irb/completion'
 alias bi='bundle install'
 alias bu='bundle update'
 alias be='bundle exec'
