@@ -96,6 +96,11 @@ compare_to_master() {
   git diff --stat "master..$branch"
 }
 
+diff_with_master() {
+  branch="$(current_branch)"
+  git difftool "master..$branch"
+}
+
 # git rebase
 alias grc='git rebase --continue'
 alias gri='git fetch && git rebase -i origin/master'
