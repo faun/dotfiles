@@ -128,7 +128,7 @@ divergent () {
   then
     echo "This command cannot be run against the master branch"
   else
-    git log ${command_opt} master..$branch
+    git log "${command_opt[@]}" master..$branch
   fi
 }
 
