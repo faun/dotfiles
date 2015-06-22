@@ -71,8 +71,9 @@
 	interactive = auto
 
 [merge]
-	tool = Kaleidoscope
+	tool = vimdiff
 	stat = true
+	keepBackup = false
 
 [mergetool "mvim"]
 	cmd=mvim -d -g $LOCAL $MERGED $REMOTE
