@@ -41,7 +41,8 @@ then
     git diff-index --quiet --cached HEAD && \
     git rebase master && \
     git diff-index --quiet --cached HEAD && \
-    git push origin "$branch":"$branch" && \
+    git pull --rebase origin "$branch" && \
+    git push origin +"$branch" && \
     git checkout master && \
     git merge - --ff-only && \
     git checkout master && \
