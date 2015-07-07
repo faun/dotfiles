@@ -53,3 +53,11 @@ then
   [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
   record_time "boxen load time"
 fi
+
+if which nodenv > /dev/null
+then
+  NODE_PATH="$NODE_PATH:/opt/boxen/nodenv/versions/$(nodenv version)/lib/node_modules"
+else
+  NODE_PATH="/usr/local/lib/node_modules"
+fi
+export NODE_PATH
