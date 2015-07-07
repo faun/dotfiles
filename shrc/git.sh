@@ -46,20 +46,17 @@ then
     echo "This command cannot be run from the master branch"
     return 1
   else
-    git checkout master && \
-    git pull --ff-only && \
-    git checkout "$branch" && \
-    git diff-index --quiet --cached HEAD && \
-    git rebase master && \
-    git diff-index --quiet --cached HEAD && \
-    git rebase -i origin/"$branch" && \
-    git push origin +"$branch" && \
-    git checkout master && \
-    git merge - --ff-only && \
-    git checkout master && \
-    git push origin master:master && \
-    git push origin ":$branch" && \
-    git branch -d "$branch"
+    git fetch &&\
+      git diff-index --quiet --cached HEAD && \
+      git rebase origin/master && \
+      git push origin +"$branch" --force-with-lease && \
+      git checkout master && \
+      git diff-index --quiet --cached HEAD && \
+      git pull origin master && \
+      git merge - --ff-only && \
+      git push origin master:master && \
+      git push origin ":$branch" && \
+      git branch -d "$branch"
   fi
 else
   echo "This command must be run within a git repository"
