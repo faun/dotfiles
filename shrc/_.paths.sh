@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 if [[ -z $TMUX ]]
 then
   PATH="$HOME/bin:$PATH"
