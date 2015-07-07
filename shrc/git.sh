@@ -26,6 +26,17 @@ gpo() {
   git push --set-upstream origin "$(git branch | awk '/^\* / { print $2 }')" >> /dev/null
 }
 
+gpf() {
+  branch=$(current_branch)
+  if [[ $branch == 'master' ]]
+  then
+    echo "This command cannot be run from the master branch"
+    return 1
+  else
+    git push origin +"$branch" --force-with-lease
+  fi
+}
+
 function merge() {
 if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1
 then
