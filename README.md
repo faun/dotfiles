@@ -4,15 +4,13 @@
 
 These are config files to set up a system the way I like it.
 
-## Installation
-
-#### Prerequisites:
+## Prerequisites:
 
 * Rake
 * Git >= 1.7.10
 * Vim >= 7.4 (brew install vim)
 
-### Installation: Clone the repository with submodules
+## Installation: Clone the repository with submodules
 
     # Make src directory if it doesn't exist
     mkdir -p ~/src/github.com/faun/
