@@ -26,7 +26,7 @@ These are config files to set up a system the way I like it. I primarily use Vim
     rake
 
     # Install vim bundles
-    vim +PlugInstall
+    vim +PlugInstall +qall
 
 ## Configuration
 
