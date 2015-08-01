@@ -10,22 +10,23 @@ These are config files to set up a system the way I like it. I primarily use Vim
 
 * Rake
 * Git >= 1.7.10
+* Vim >= 7.4 (brew install vim)
 
-### Step 1: Clone the repository with submodules
+### Installation: Clone the repository with submodules
 
     # Make src directory if it doesn't exist
-    mkdir -p ~/src
+    mkdir -p ~/src/github.com/faun/
 
     # Clone this repository to your machine & initialize submodules
-    git clone --recursive git://github.com/faun/dotfiles ~/src/dotfiles
-
-### Step 2: Install
+    git clone --recursive git://github.com/faun/dotfiles ~/src/github.com/faun/dotfiles
+    
+    cd ~/src/github.com/faun/dotfiles
 
     # Make symlinks to $HOME
     rake
 
     # Install vim bundles
-    vim +BundleInstall +qall
+    vim +PlugInstall
 
 ## Configuration
 
