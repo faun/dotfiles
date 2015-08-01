@@ -2,7 +2,7 @@
 
 ## About these dotfiles
 
-These are config files to set up a system the way I like it. I primarily use Vim for development. I develop mostly on Mac OS. In Ruby. For the web. With CoffeeScript. If you don't do all of these things on a regular basis, move along. There's not much here that will do you any good.
+These are config files to set up a system the way I like it.
 
 ## Installation
 
