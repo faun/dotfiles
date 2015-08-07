@@ -45,6 +45,7 @@
 	wdiff = diff --color-words
 	prom = pull --rebase origin master
 	pom = push origin master
+	whoami = !echo "$(git config --get user.name) \\<$(git config --get user.email)\\>"
 
 [color "branch"]
 	current = yellow reverse
