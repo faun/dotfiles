@@ -4,6 +4,9 @@ compinit
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
+# ignore completions that begin with an '_'
+zstyle ':completion:*:*:-command-:*:*' ignored-patterns '_*'
+
 # pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
 
