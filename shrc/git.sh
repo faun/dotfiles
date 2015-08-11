@@ -159,6 +159,9 @@ alias gt='gittower'
 alias gk='gitk --all&'
 alias gx='gitx --all'
 
+# rewrite authorship
+alias reauthor='git commit --amend --reset-author --no-edit'
+
 gdv() {
   args=("$@")
   git diff -w "${args[@]}" | view -
