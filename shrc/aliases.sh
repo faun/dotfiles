@@ -43,8 +43,8 @@ alias '$'=' '
 alias py='python'
 alias sha1="openssl sha1"
 
-alias vim_bundle_install='vim +BundleInstall +qall'
-alias vim_bundle_clean='vim +BundleClean'
+alias vim_bundle_install='vim +PlugInstall +qall'
+alias vim_bundle_clean='vim +PlugClean +qall'
 alias v='vim'
 alias vi='vim -u NONE -N'
 
