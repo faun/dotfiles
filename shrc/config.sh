@@ -27,8 +27,8 @@ if [[ "$OSTYPE" == linux* ]]; then
 elif [[ "$OSTYPE" == darwin* ]]; then
   alias a='ls -lrthG'
   alias ls='ls -G'
-  DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-  source $DIR/optional/macos.sh
+  CURRENT_DIR=`dirname $0`
+  source $CURRENT_DIR/optional/macos.sh
   record_time "mac os"
 fi
 
