@@ -13,3 +13,4 @@ vcr_cassettes/*
 vendor/*
 node_modules/*
 *.png
+tmp/
