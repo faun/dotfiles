@@ -38,7 +38,6 @@ alias ducks='du -cksh * | sort -rn|head -11' # Lists folders and files sizes in 
 alias m='more'
 alias df='df -h'
 alias lm='!! | more'
-alias '$'=' '
 
 alias py='python'
 alias sha1="openssl sha1"
