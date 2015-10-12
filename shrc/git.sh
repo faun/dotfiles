@@ -37,6 +37,18 @@ gpf() {
   fi
 }
 
+function wait_for_ci() {
+  if [[ $SKIP_CI_CHECK != 'true' ]]
+  then
+    echo "Waiting for CI to pass"
+    while ! hub ci-status | grep "success" > /dev/null
+    do
+      printf "."
+      sleep 5
+    done
+  fi
+}
+
 function merge() {
 if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1
 then
@@ -48,14 +60,20 @@ then
   else
     git fetch &&\
       git diff-index --quiet --cached HEAD && \
-      git rebase origin/master && \
-      git push origin +"$branch" --force-with-lease && \
       git checkout master && \
       git diff-index --quiet --cached HEAD && \
       git pull origin master && \
-      git merge - --ff-only && \
-      git push origin ":$branch" && \
-      git branch -d "$branch"
+      git checkout "$branch" && \
+      git rebase master && \
+      git push origin +"$branch" --force-with-lease && \
+      wait_for_ci && \
+      git checkout master && \
+      git merge "$branch" --ff-only && \
+      sleep 2 && \
+      git push origin master && \
+      hub browse && \
+      sleep 10 && \
+      git push origin ":$branch"
   fi
 else
   echo "This command must be run within a git repository"
