@@ -30,3 +30,6 @@ vim/spell/
 .bitrot/
 *.dump
 npm-debug.log
+/public/assets/*
+.rspec
+erd.pdf
