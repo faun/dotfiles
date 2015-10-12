@@ -54,7 +54,6 @@ then
       git diff-index --quiet --cached HEAD && \
       git pull origin master && \
       git merge - --ff-only && \
-      git push origin master:master && \
       git push origin ":$branch" && \
       git branch -d "$branch"
   fi
