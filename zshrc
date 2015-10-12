@@ -1,9 +1,6 @@
-record_time "setup"
-
 # Source shell-agnostic config files
 for file in $HOME/.shrc/*.sh; do
   source "$file"
-  record_time "$file"
 done
 
 # Source zsh-specific files
