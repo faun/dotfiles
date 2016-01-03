@@ -33,3 +33,4 @@ npm-debug.log
 /public/assets/*
 .rspec
 erd.pdf
+dump.rdb
