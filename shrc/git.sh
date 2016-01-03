@@ -37,7 +37,7 @@ gpf() {
   fi
 }
 
-function wait_for_ci() {
+wait_for_ci() {
   if [[ $SKIP_CI_CHECK != 'true' ]]
   then
     echo "Waiting for CI to pass"
