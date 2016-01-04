@@ -158,6 +158,23 @@ divergent () {
   fi
 }
 
+# Isolate a single commit to its own branch
+isolate() {
+  if [ "$#" -ne 2 ]
+  then
+    echo "Usage: isolate <sha> <branch-name>"
+    return 1
+  else
+    git diff-index --quiet --cached HEAD && \
+      git checkout master && \
+      git diff-index --quiet --cached HEAD && \
+      git pull origin master && \
+      git diff-index --quiet --cached HEAD && \
+      git checkout -b "$2" &&\
+      git cherry-pick "$1"
+  fi
+}
+
 alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
 
 alias stashpop="git stash && git pull && git stash pop"
