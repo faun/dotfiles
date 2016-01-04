@@ -49,36 +49,36 @@ wait_for_ci() {
   fi
 }
 
-function merge() {
-if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1
-then
-  branch=$(current_branch)
-  if [[ $branch == 'master' ]]
+merge() {
+  if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1
   then
-    echo "This command cannot be run from the master branch"
-    return 1
+    branch=$(current_branch)
+    if [[ $branch == 'master' ]]
+    then
+      echo "This command cannot be run from the master branch"
+      return 1
+    else
+      git fetch &&\
+        git diff-index --quiet --cached HEAD && \
+        git checkout master && \
+        git diff-index --quiet --cached HEAD && \
+        git pull origin master && \
+        git checkout "$branch" && \
+        git rebase master && \
+        git push origin +"$branch" --force-with-lease && \
+        wait_for_ci && \
+        git checkout master && \
+        git merge "$branch" --ff-only && \
+        sleep 2 && \
+        git push origin master && \
+        hub browse && \
+        sleep 10 && \
+        git push origin ":$branch"
+    fi
   else
-    git fetch &&\
-      git diff-index --quiet --cached HEAD && \
-      git checkout master && \
-      git diff-index --quiet --cached HEAD && \
-      git pull origin master && \
-      git checkout "$branch" && \
-      git rebase master && \
-      git push origin +"$branch" --force-with-lease && \
-      wait_for_ci && \
-      git checkout master && \
-      git merge "$branch" --ff-only && \
-      sleep 2 && \
-      git push origin master && \
-      hub browse && \
-      sleep 10 && \
-      git push origin ":$branch"
+    echo "This command must be run within a git repository"
+    return 1
   fi
-else
-  echo "This command must be run within a git repository"
-  return 1
-fi
 }
 
 # git add
