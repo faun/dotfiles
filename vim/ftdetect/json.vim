@@ -1,4 +1,4 @@
-au! BufRead,BufNewFile *.json,.jshintrc,.jscsrc set filetype=json
+au! BufRead,BufNewFile *.json,.jshintrc,.jscsrc,*.tfstate set filetype=json
 augroup json_autocmd
   autocmd!
   autocmd FileType json set autoindent
