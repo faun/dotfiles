@@ -64,12 +64,6 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 " Auto-indent the whole file with ===
 nmap === mzgg=G`z
 
-" Make fat hashrocket with control-l
-imap <C-l> <Space>=><Space>
-
-" Make skinny hashrocket with control-k
-imap <C-K> <Space>-><CR>
-
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
