@@ -1,0 +1,4 @@
+\set QUIET yes
+\set COMP_KEYWORD_CASE preserve-lower
+\x auto
+\unset QUIET
