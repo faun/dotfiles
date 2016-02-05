@@ -49,9 +49,6 @@ set clipboard=unnamed
 " Quickly quit without saving with QQ
 nmap QQ :q!<cr>
 
-" Execute a Ruby file with <leader> rr
-map <leader>rr :w<CR>:!ruby %<CR>
-
 " Force save files that require root permission
 cmap w!! %!sudo tee > /dev/null %
 
