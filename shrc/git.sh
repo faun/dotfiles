@@ -38,7 +38,8 @@ gpf() {
 }
 
 wait_for_ci() {
-  if [[ $SKIP_CI_CHECK != 'true' ]]
+  RUN_TESTS=$([ -e "circle.yml" ] || [ -e ".travis.yml" ] && echo "true" || echo "false" )
+  if [[ $SKIP_CI_CHECK != "true" && $RUN_TESTS != "false" ]]
   then
     echo "Waiting for CI to pass"
     while ! hub ci-status | grep "success" > /dev/null
@@ -46,6 +47,8 @@ wait_for_ci() {
       printf "."
       sleep 5
     done
+  else
+    echo "Skipping CI checks"
   fi
 }
 
