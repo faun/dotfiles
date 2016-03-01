@@ -25,9 +25,15 @@ if [[ "$OSTYPE" == linux* ]]; then
   alias a='ls -lrth --color'
   alias ls='ls --color=auto'
 elif [[ "$OSTYPE" == darwin* ]]; then
+  SHELL_TYPE="$(basename $(echo $SHELL))"
+  if [[ $SHELL_TYPE == 'bash' ]]
+  then
+    CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+  else
+    CURRENT_DIR=`dirname $0`
+  fi
   alias a='ls -lrthG'
   alias ls='ls -G'
-  CURRENT_DIR=`dirname $0`
   source $CURRENT_DIR/optional/macos.sh
   record_time "mac os"
 fi
