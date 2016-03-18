@@ -5,12 +5,15 @@ alias lock="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Res
 alias flushdns="sudo killall -HUP mDNSResponder"
 alias fixopenwith='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
 
-if ps -ax | grep '[b]oot2docker' > /dev/null
+if ps -ax | grep 'docker-machine' > /dev/null
 then
-  if [[ "$(boot2docker status)" == "running" ]]
+  if [[ "$(docker-machine status default)" == "Running" ]]
   then
-    $(boot2docker shellinit 2> /dev/null)
-    export DOCKER_IP=$(boot2docker ip 2>/dev/null)
+    eval $(docker-machine env default)
+  elif [[ "$(docker-machine status default)" == "Stopped" ]]
+  then
+    echo "Starting Docker..."
+    docker-machine start default && eval $(docker-machine env default)
   fi
 fi
 
