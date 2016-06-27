@@ -11,3 +11,6 @@ let g:loaded_netrwPlugin = 1 " Disable netrw
 let g:NERDTreeShowLineNumbers = 0
 let g:NERDTreeMinimalUI = 1 " Disable help message
 let g:NERDTreeDirArrows = 1
+
+" Show current buffer in NERDTree
+map <leader><F6> :NERDTreeFind<cr>
