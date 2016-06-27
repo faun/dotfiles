@@ -74,7 +74,7 @@
 	interactive = auto
 
 [merge]
-	tool = vimdiff
+	tool = Kaleidoscope
 	stat = true
 	keepBackup = false
 
@@ -105,12 +105,16 @@
 	prompt = false
 
 [diff]
-	tool = vimdiff
+	tool = vim
 	renames = copies
 	mnemonicprefix = true
 
 [difftool "mvim"]
 	cmd = mvim -d \"$LOCAL\" \"$REMOTE\"
+
+[difftool "vim"]
+	cmd = vim -d \"$LOCAL\" \"$REMOTE\"
+
 [get]
 	recurseSubmodules = always
 [mergetool]
