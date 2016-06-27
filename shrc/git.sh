@@ -52,6 +52,10 @@ gpf() {
   fi
 }
 
+ci_status_url() {
+  hub ci-status -v | awk '{ print $2 }'
+}
+
 wait_for_ci() {
   RUN_TESTS=$([ -e "circle.yml" ] || [ -e ".travis.yml" ] && echo "true" || echo "false" )
   if [[ $SKIP_CI_CHECK != "true" && $RUN_TESTS != "false" ]]
