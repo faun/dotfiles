@@ -20,6 +20,17 @@ alias g='git status -sb'
 alias glf='git pull --ff-only'
 alias glr='git pull --rebase'
 
+alias gu='git fetch && git update-ref refs/heads/master origin/master'
+
+# git cherry-pick
+alias gcpa="git cherry-pick --abort"
+alias gcpc="git cherry-pick --continue"
+
+# git rebase
+
+alias grc="git rebase --continue"
+alias gra="git rebase --abort"
+
 glo() {
   git branch --set-upstream-to=refs/remotes/origin/"$(current_branch)" "$(current_branch)" && git pull --ff-only
 }
