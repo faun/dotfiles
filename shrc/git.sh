@@ -228,3 +228,14 @@ gdvc() {
   args=("$@")
   git diff --cached -w "${args[@]}" | view -
 }
+
+clean_branches (){
+  git checkout master && \
+    git diff-index --quiet --cached HEAD && \
+    git branch --merged | \
+    grep -v "\*" | \
+    grep -v master | \
+    grep -v dev | \
+    xargs -n 1 git branch -d &&\
+    echo "Done."
+}
