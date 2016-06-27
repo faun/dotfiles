@@ -22,6 +22,9 @@ record_time "fzf"
 [[ -f ~/.localrc ]] && .  ~/.localrc
 record_time "localrc"
 
+[[ -f $HOME/.iterm2_shell_integration.zsh ]] && source $HOME/.iterm2_shell_integration.zsh
+record_time "iterm2 integration"
+
 if [[ -n $DEBUG_STARTUP_TIME ]]
 then
   echo "Started up in $(printf "%d" $(($SECONDS * 1000)))ms"
