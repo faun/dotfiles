@@ -16,6 +16,8 @@ alias t='tmux_attach'
 alias bi='bundle install'
 alias bu='bundle update'
 alias be='bundle exec'
+alias b='bundle exec !!'
+alias r='bundle exec rspec'
 
 # rails
 alias tlog='tail -f log/development.log'
