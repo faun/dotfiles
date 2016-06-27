@@ -6,7 +6,7 @@ HOMEBREW_INSTALL_SCRIPT='http://git.io/pVOl'
 
 # Install Homebrew
 command -v brew >/dev/null 2>&1 ||
-  ruby -e "$(curl -fsSL HOMEBREW_INSTALL_SCRIPT)"
+  ruby -e "$(curl -fsSL $HOMEBREW_INSTALL_SCRIPT)"
 
 # Make the dotfiles folder
 mkdir -p $DESTINATION
