@@ -1,6 +1,5 @@
 augroup AutoWrite
-  autocmd! BufLeave * :update
-  autocmd! FocusLost * :update
-  autocmd! BufEnter * silent! :e % :set syntax=enable
-  autocmd! FocusGained * silent! :e % :set syntax=enable
+  autocmd! BufLeave,FocusLost,WinLeave * :silent! :w
+  autocmd! FocusGained,BufEnter,WinEnter * :silent! !
 augroup END
+:set autoread
