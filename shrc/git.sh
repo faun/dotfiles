@@ -5,6 +5,10 @@ current_branch() {
   echo "${ref#refs/heads/}"
 }
 
+recent_branches() {
+  for k in $(git branch | perl -pe 's/^..(.*?)( ->.*)?$/\1/'); do echo -e "$(git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" "$k" -- | head -n 1)"\\t"$k"; done | sort -r | awk '{ print $7 }'
+}
+
 # git
 alias got='git'
 alias get='git'
