@@ -135,7 +135,7 @@ ds() {
   if [ "x$args" != "x" ];then
     git diff --stat "$args~1..$args"
   else
-    echo "Usage: ds SHA"
+    git diff --stat --cached
   fi
 }
 
