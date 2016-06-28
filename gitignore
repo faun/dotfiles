@@ -34,3 +34,4 @@ npm-debug.log
 .rspec
 erd.pdf
 dump.rdb
+Procfile.local
