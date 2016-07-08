@@ -188,11 +188,8 @@ isolate() {
     return 1
   else
     git diff-index --quiet --cached HEAD && \
-      git checkout master && \
-      git diff-index --quiet --cached HEAD && \
-      git pull origin master && \
-      git diff-index --quiet --cached HEAD && \
-      git checkout -b "$2" &&\
+      git checkout -b "$2" && \
+      git reset --hard origin/master && \
       git cherry-pick "$1"
   fi
 }
