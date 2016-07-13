@@ -58,3 +58,6 @@ then
   echo "Linking nvim"
   ln -s "$HOME/.vim" "$nvimrc"
 fi
+
+mkdir -p "$HOME/.local/share/nvim/"
+mkdir -p "$HOME/.nvim/tmpfiles"
