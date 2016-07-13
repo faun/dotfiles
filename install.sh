@@ -49,3 +49,12 @@ do
     fi
   fi
 done
+
+mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+
+nvimrc="$XDG_CONFIG_HOME/nvim"
+if [[ ! -e "$nvimrc" ]]
+then
+  echo "Linking nvim"
+  ln -s "$HOME/.vim" "$nvimrc"
+fi
