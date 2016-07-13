@@ -1,9 +1,6 @@
 " ==========================================
 " Wildmenu Settings
 
-" Use wildmenu
-set wildmenu
-
 " Set completion style
 set wildmode=longest,list,full
 

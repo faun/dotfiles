@@ -13,9 +13,6 @@ set nowrap
 " Let cursor keys wrap around lines
 set whichwrap+=<,>,h,l,[,]
 
-" Allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
 " Always show line numbers
 set number
 
@@ -24,10 +21,6 @@ set colorcolumn=80
 
 " Highlight the current cursor line
 set cursorline
-
-" When a file has been detected to have been changed outside of Vim
-" and it has not been changed inside of Vim, automatically read it again.
-set autoread
 
 " Set show matching parenthesis
 set showmatch

@@ -14,9 +14,7 @@ if filereadable(expand("$HOME/.bundles.local.vim"))
   source $HOME/.bundles.local.vim
 endif
 call plug#end()
-
-filetype plugin indent on
-set encoding=utf-8
+runtime! plugin/sensible.vim
 
 " ==========================================
 

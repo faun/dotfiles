@@ -1,17 +1,11 @@
 " Set two spaces by default
 set ts=2 sts=2 sw=2 expandtab
 
-" Always set autoindenting on
-set autoindent
-
 " Copy the previous indentation on autoindenting
 set copyindent
 
 " Use multiple of shiftwidth when indenting with '<' and '>'
 set shiftround
-
-" Insert tabs on the start of a line according to shiftwidth, not tabstop
-set smarttab
 
 " ==========================================
 " Quickly switch tab settings
