@@ -42,10 +42,3 @@ set foldnestmax=10
 
 " Don't fold code by default
 set nofoldenable
-
-" ==========================================
-" Color scheme settings
-
-set background=light
-set t_Co=256
-colorscheme solarized
