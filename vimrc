@@ -13,7 +13,6 @@ if filereadable(expand("$HOME/.bundles.local.vim"))
   source $HOME/.bundles.local.vim
 endif
 call plug#end()
-runtime! plugin/sensible.vim
 
 " ==========================================
 
