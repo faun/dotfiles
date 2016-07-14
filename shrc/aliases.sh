@@ -45,7 +45,9 @@ alias py='python'
 alias sha1="openssl sha1"
 
 alias vim_bundle_install='vim +PlugInstall +qall'
+alias vim_bundle_update='vim +PlugUpdate +qall'
 alias vim_bundle_clean='vim +PlugClean +qall'
+alias vim_bundle_maintenance='vim +PlugInstall +PlugUpdate +PlugClean +qall'
 alias v='vim'
 alias vi='vim -u NONE -N'
 
