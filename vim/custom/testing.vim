@@ -1,29 +1,54 @@
 " =========================================
-" Turbux + Vimux FTW
+" Use vim-test and VTR to run tests and initiate REPL
+"
+" https://github.com/janko-m/vim-test
+" https://github.com/christoomey/vim-tmux-runner
 
-let g:turbux_runner  = 'vimux'
-let g:turbux_command_rspec  = 'rspec'
-let g:turbux_command_teaspoon = 'rake spec:javascript'
-let g:turbux_command_prefix = 'bundle exec'
+" Allow VTR to define a set of key mappings to provide easy access to the VTR
+" command set. As a Vim user, I consider my <leader> space to be sacred, so
+" these maps are disabled by default. To allow VTR to set its maps, add the
+" following to your vimrc:
 
-let g:no_turbux_mappings = 1
-nmap <leader>\ <Plug>SendTestToTmux
-nmap <leader><CR> <Plug>SendFocusedTestToTmux
+let g:VtrUseVtrMaps = 1
 
-" Prompt for a command to run
-map <Leader>vp :VimuxPromptCommand<CR>
+" The following normal mode maps are provided when g:VtrUseVtrMaps is set to 1:
 
-" Run last command executed by VimuxRunCommand
-map <Leader>vl :VimuxRunLastCommand<CR>
+"         Mapping      |   Command
+"         -----------------------------
+"         <leader>rr   |   VtrResizeRunner<cr>
+"         <leader>ror  |   VtrReorientRunner<cr>
+"         <leader>sc   |   VtrSendCommandToRunner<cr>
+"         <leader>sl   |   VtrSendLinesToRunner<cr>
+"         <leader>or   |   VtrOpenRunner<cr>
+"         <leader>kr   |   VtrKillRunner<cr>
+"         <leader>fr   |   VtrFocusRunner<cr>
+"         <leader>dr   |   VtrDetachRunner<cr>
+"         <leader>ar   |   VtrReattachRunner<cr>
+"         <leader>cr   |   VtrClearRunner<cr>
+"         <leader>fc   |   VtrFlushCommand<cr>
 
-" Inspect runner pane
-map <Leader>vi :VimuxInspectRunner<CR>
+" In addition, a single visual mode map is provided to send a visually selected
+" region to the runner pane:
 
-" Close vim tmux runner opened by VimuxRunCommand
-map <Leader>vq :VimuxCloseRunner<CR>
+"         Mapping      |   Command
+"         -----------------------------
+"         <leader>sv   |   VtrSendSelectedToRunner<cr>
 
-" Interrupt any command running in the runner pane
-map <Leader>vx :VimuxInterruptRunner<CR>
+" To re-attach to a pane, run the following:
+"
+" :VtrAttachToPane
 
-" Zoom the runner pane (use <bind-key> z to restore runner pane)
-map <Leader>vz :call VimuxZoomRunner()<CR>
+if has("nvim")
+  " change cursor to bar in insert mode
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+  " vim-test maps
+  nmap <silent> <leader><CR> :TestNearest<CR>
+  nmap <silent> <leader>\ :TestFile<CR>
+  nmap <silent> <leader>ts :TestSuite<CR>
+  nmap <silent> <leader>tl :TestLast<CR>
+  nmap <silent> <leader>tv :TestVisit<CR>
+
+  " run tests with :T
+  let test#strategy = "vtr"
+endif
