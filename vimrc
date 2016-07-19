@@ -24,10 +24,13 @@ endfor
 " ==========================================
 " Colors
 
+if has('nvim')
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+end
+
 let base16colorspace=256
+colorscheme base16-tomorrow-night
 set background=dark
-colorscheme base16-tomorrow
-hi NonText ctermfg=18
 
 " ==========================================
 " Custom Vimrc
