@@ -6,25 +6,32 @@ These are config files to set up a system the way I like it.
 
 ## Prerequisites:
 
-* Rake
 * Git >= 1.7.10
 * Vim >= 7.4 (brew install vim)
 
-## Installation: Clone the repository with submodules
+### Recommended tools:
 
-    # Make src directory if it doesn't exist
-    mkdir -p ~/src/github.com/faun/
+* NeoVim
+* Tmux with 24-bit Support:
 
-    # Clone this repository to your machine & initialize submodules
-    git clone --recursive git://github.com/faun/dotfiles ~/src/github.com/faun/dotfiles
-    
-    cd ~/src/github.com/faun/dotfiles
+```
+brew uninstall tmux
+brew install https://raw.githubusercontent.com/choppsv1/homebrew-term24/master/tmux.rb
+```
 
-    # Make symlinks to $HOME
-    rake
+## Installation
 
-    # Install vim bundles
-    vim +PlugInstall +qall
+    export USERNAME="faun";
+    export DESTINATION="$HOME/src/github.com/${USERNAME}/dotfiles";
+
+    url="https://git.io/vKoGI"
+    script_file=$(mktemp)
+    curl -q -L "$url" | tee "$script_file"
+    printf "Do you want to run this script? [yN]"
+    read line
+    case $line in
+      [Yy]|[Yy][Ee][Ss]) sh "$script_file";;
+    esac
 
 ## Configuration
 
