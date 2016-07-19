@@ -4,7 +4,7 @@ shopt -s extglob
 
 DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-excludes=("Rakefile" "LICENSE" "fonts")
+excludes=("LICENSE" "fonts")
 
 excluded_suffixes='@(sh|md)'
 for suffix in ${excluded_suffixes[@]}
