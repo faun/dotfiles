@@ -5,3 +5,5 @@ if !exists('g:airline_symbols')
 endif
 let g:airline_symbols.space = "\ua0"
 let g:bufferline_echo = 0
+
+let g:airline_theme='base16'
