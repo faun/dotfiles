@@ -7,13 +7,12 @@ DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 excludes=("LICENSE" "fonts")
 
 excluded_suffixes='@(sh|md)'
-for suffix in ${excluded_suffixes[@]}
+for suffix in "${excluded_suffixes[@]}"
 do
   excludes+=(*.$suffix)
 done
 
 shouldLinkFile () {
-  local e
   for file in "${excludes[@]}"
   do
     [[ "$file" == "$1" ]] && return 1
@@ -50,7 +49,7 @@ do
   fi
 done
 
-mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+mkdir -p "${XDG_CONFIG_HOME:=$HOME/.config}"
 
 nvimrc="$XDG_CONFIG_HOME/nvim"
 if [[ ! -e "$nvimrc" ]]
