@@ -50,7 +50,6 @@ alias vim_bundle_clean='vim +PlugClean +qall'
 alias vim_bundle_maintenance='vim +PlugInstall +PlugUpdate +PlugClean +qall'
 alias vim='nvim'
 alias v='nvim'
-alias n='nvim'
 alias vi='vim -u NONE -N'
 
 # It's aliases all the way down
