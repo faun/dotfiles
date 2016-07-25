@@ -66,3 +66,6 @@ nnoremap <Down> :echoe "Use j"<CR>
 
 " Redraw the screen with F1
 nmap <F1> :redraw!<CR>
+
+" Open help documents in a new tab
+:cabbrev help tab help
