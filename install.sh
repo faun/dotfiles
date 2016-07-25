@@ -34,9 +34,12 @@ do
   link=$(shouldLinkFile "$name"; echo $?)
   if [[ $link == 0 ]]
   then
-    if [[ -L "$target" || ! -e "$target" ]]
+    if [[ -L "$target" ]]
     then
       rm "$target"
+    fi
+    if [[ ! -e "$target" ]]
+    then
       echo "$target => $name"
       ln -s "$DIR/$name" "$target"
     elif [[ -d "$target" || -f "$target" ]]
