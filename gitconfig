@@ -116,11 +116,13 @@
 
 [get]
 	recurseSubmodules = always
+
 [mergetool]
 	prompt = false
 
 [include]
   path = ~/.gitconfig.local
+
 [rebase]
 	autosquash = true
 
