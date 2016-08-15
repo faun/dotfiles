@@ -33,6 +33,8 @@ _fzf_compgen_path() {
 
 record_time "fzf"
 
+eval "$(fasd --init auto)"
+
 # use .localrc for settings specific to one system
 [[ -f ~/.localrc ]] && .  ~/.localrc
 record_time "localrc"
