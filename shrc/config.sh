@@ -62,11 +62,6 @@ if [ -d $RBENV_ROOT ]; then
 fi
 record_time "rbenv paths"
 
-# Base16 Shell
-BASE16_SHELL="$HOME/.base16-shell/base16-tomorrow.dark.sh"
-[[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
-record_time "Base16"
-
 if [ -f $HOME/.local.sh ]; then
   source $HOME/.local.sh
   record_time "local.sh"
