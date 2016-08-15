@@ -1,8 +1,12 @@
-function tmux_attach () {
-directory_name=$(basename $PWD)
-session_name=${directory_name//\./_}
-`which tmux` attach -t $session_name 2>/dev/null ||
-  `which tmux` new-session -s $session_name -n Editor
+tmux_attach () {
+  directory_name=$(basename $PWD)
+  session_name=${directory_name//\./_}
+  if tmux has-session -t $session_name
+  then
+    tmux attach -t $session_name 2>/dev/null
+  else
+    tmux new-session -s $session_name -n Editor
+  fi
 }
 
 # Override default rvm_prompt_info
