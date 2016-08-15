@@ -112,7 +112,7 @@
 	cmd = mvim -d \"$LOCAL\" \"$REMOTE\"
 
 [difftool "vim"]
-	cmd = vim -d \"$LOCAL\" \"$REMOTE\"
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
 
 [get]
 	recurseSubmodules = always
