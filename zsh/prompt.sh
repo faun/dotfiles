@@ -37,15 +37,15 @@ parse_git_dirty() {
 record_time "git dirty checking"
 # Based off the murilasso zsh theme
 
-local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
-local user_host='%{$terminfo[bold]$fg[green]%}%n@%m%{$reset_color%}'
-local current_dir='%{$fg[blue]%}$(pwd -P)%{$reset_color%}'
-local ruby_version='%{$fg[red]%}$(ruby_version_status)%{$reset_color%}'
-local git_branch='%{$fg[blue]%}$(git_prompt_info)%{$reset_color%}'
+return_code='%(?..%{$fg[red]%}%? ↵%{$reset_color%})'
+user_host='%{$fg[green]%}%n@%m%{$reset_color%}'
+current_dir='%{$fg[blue]%}$(pwd -P)%{$reset_color%}'
+ruby_version='%{$fg[red]%}$(ruby_version_status)%{$reset_color%}'
+git_branch='%{$fg[blue]%}$(git_prompt_info)%{$reset_color%}'
 
-PROMPT="${user_host}:${current_dir} ${ruby_version}
+export PROMPT="${user_host}:${current_dir} ${ruby_version}
 %{$fg[blue]%}${git_branch} %B$%b "
-RPS1="${return_code}"
+export RPS1="${return_code}"
 export SUDO_PS1="$fg[green]\u@\h:$fg[blue]\w
 $fg[red] \\$ $reset_color"
 
@@ -54,4 +54,3 @@ ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}✗%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}✔%{$reset_color%}"
 record_time "setting prompt"
-
