@@ -35,6 +35,8 @@ record_time "fzf"
 
 eval "$(fasd --init auto)"
 
+record_time "fasd"
+
 # use .localrc for settings specific to one system
 [[ -f ~/.localrc ]] && .  ~/.localrc
 record_time "localrc"
