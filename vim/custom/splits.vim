@@ -17,3 +17,5 @@ nmap <leader><down>   :rightbelow new<CR>
 " new window splits gain focus
 nnoremap <C-w>s <C-w>s<C-w>w
 nnoremap <C-w>v <C-w>v<C-w>w
+
+nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
