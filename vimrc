@@ -68,3 +68,6 @@ nmap <F1> :redraw!<CR>
 
 " Open help documents in a new tab
 :cabbrev help tab help
+
+" Reload vimrc with leader-r-v
+nnoremap <leader>rv :source $MYVIMRC<CR>
