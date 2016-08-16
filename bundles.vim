@@ -27,6 +27,7 @@ Plug 'jgdavey/vim-blockle'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/seoul256.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
 Plug 'mattn/emmet-vim'
