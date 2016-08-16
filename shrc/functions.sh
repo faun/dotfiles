@@ -75,7 +75,7 @@ function dotimes () {
   shift
   while [ $i -lt $max ]; do
     i=`expr $i + 1`
-    $@
+    "$@"
     echo -n "\n#### "
     if [[ $? -gt 0 ]]; then
       echo -n "FAILED"
