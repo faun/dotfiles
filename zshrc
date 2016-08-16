@@ -4,7 +4,7 @@ for file in $HOME/.shrc/*.sh; do
 done
 
 # Source zsh-specific files
-for file in $HOME/.zsh/*.sh; do
+for file in $HOME/.zsh/*.{zsh,sh}; do
   source "$file"
   record_time "$file"
 done
