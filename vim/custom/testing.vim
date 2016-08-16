@@ -38,17 +38,31 @@ let g:VtrUseVtrMaps = 1
 "
 " :VtrAttachToPane
 
-if has("nvim")
-  " change cursor to bar in insert mode
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+" change cursor to bar in insert mode
 
-  " vim-test maps
-  nmap <silent> <leader><CR> :TestNearest<CR>
-  nmap <silent> <leader>\ :TestFile<CR>
-  nmap <silent> <leader>ts :TestSuite<CR>
-  nmap <silent> <leader>tl :TestLast<CR>
-  nmap <silent> <leader>tv :TestVisit<CR>
+" vim-test maps
+nmap <silent> <leader><CR> :TestNearest<CR>
+nmap <silent> <leader>\ :TestFile<CR>
+nmap <silent> <leader>ts :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tv :TestVisit<CR>
 
-  " run tests with :T
-  let test#strategy = "vtr"
+
+if exists('$TMUX')
+  let g:test#strategy = 'vtr'
+  if screenrow() <= 40
+    " On a laptop, split the screen horizontally
+    let g:VtrOrientation = 'h'
+    let g:VtrPercentage = 50
+  else
+    " Otherwise, split vertically
+    let g:VtrOrientation = 'v'
+    let g:VtrPercentage = 35
+  endif
+else
+  if has('nvim')
+    let g:test#strategy = 'neovim'
+  else
+    let g:test#strategy = 'basic'
+  endif
 endif
