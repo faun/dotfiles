@@ -17,8 +17,8 @@ call plug#end()
 " ==========================================
 
 " Load all of the vim files in ~/.vim/custom
-for file in split(glob('$HOME/.vim/custom/*.vim'), '\n')
-  exe 'source' file
+for g:file in split(glob('$HOME/.vim/custom/*.vim'), '\n')
+  exe 'source' g:file
 endfor
 
 " ==========================================
@@ -36,7 +36,7 @@ set background=dark
 " Custom Vimrc
 
 " Load a custom vimrc file if it exist
-if filereadable(expand("$HOME/.vimrc.local"))
+if filereadable(expand('$HOME/.vimrc.local'))
   source $HOME/.vimrc.local
 endif
 
