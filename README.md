@@ -12,6 +12,11 @@ These are config files to set up a system the way I like it.
 ### Recommended tools:
 
 * NeoVim
+
+```
+    brew install neovim/neovim/neovim
+```
+
 * Tmux with 24-bit Support:
 
 ```
