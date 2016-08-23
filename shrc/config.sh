@@ -62,6 +62,12 @@ if [ -d $RBENV_ROOT ]; then
 fi
 record_time "rbenv paths"
 
+# Source .profile if it exists
+if [[ -f "$HOME/.profile" ]]
+then
+  source "$HOME/.profile"
+fi
+
 if [ -f $HOME/.local.sh ]; then
   source $HOME/.local.sh
   record_time "local.sh"
