@@ -121,3 +121,4 @@ preexec () {
 
 alias help="man zshbuiltins"
 record_time "zsh config"
+alias reload="reset && source $HOME/.zshrc"
