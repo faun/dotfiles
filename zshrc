@@ -9,11 +9,6 @@ for file in $HOME/.zsh/*.{zsh,sh}; do
   record_time "$file"
 done
 
-# "z" script
-z_script="/usr/local/etc/profile.d/z.sh"
-[[ -f $z_script ]] && source $z_script
-record_time "z"
-
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--bind ctrl-f:page-down,ctrl-b:page-up'
