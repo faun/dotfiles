@@ -1,4 +1,2 @@
-if has("neovim")
-  autocmd! BufWritePost * Neomake
-  autocmd! InsertChange,TextChanged * update | Neomake
-endif
+autocmd! BufEnter,BufWritePost * Neomake
+autocmd! InsertChange,TextChanged * silent! update | Neomake
