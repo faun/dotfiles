@@ -44,10 +44,10 @@ then
   export RVM_ROOT="$HOME/.rvm"
 fi
 
-if [ -d $RVM_ROOT ]; then
-  export PATH=$RVM_ROOT/bin:$PATH
-  export rvm_path="$RVM_ROOT"
-  [[ -s $rvm_path/scripts/rvm ]] && source $rvm_path/scripts/rvm
+if [ -d "$RVM_ROOT" ]; then
+  export PATH="$PATH:$RVM_ROOT/bin"
+  # shellcheck disable=SC1090
+  [[ -s "$RVM_ROOT/scripts/rvm" ]] && source "$RVM_ROOT/scripts/rvm"
 fi
 record_time "rvm"
 
