@@ -74,7 +74,7 @@
 	interactive = auto
 
 [merge]
-	tool = Kaleidoscope
+	tool = vim
 	stat = true
 	keepBackup = false
 
