@@ -26,10 +26,9 @@ brew install https://raw.githubusercontent.com/choppsv1/homebrew-term24/master/t
 
 ## Installation
 
-    export USERNAME="faun";
-    export DESTINATION="$HOME/src/github.com/${USERNAME}/dotfiles";
+    export DESTINATION="$HOME/src/github.com/faun/dotfiles";
 
-    url="https://git.io/vKoGI"
+    url="https://git.io/viGsj"
     script_file=$(mktemp)
     curl -q -L "$url" | tee "$script_file"
     printf "Do you want to run this script? [yN]"
@@ -37,6 +36,10 @@ brew install https://raw.githubusercontent.com/choppsv1/homebrew-term24/master/t
     case $line in
       [Yy]|[Yy][Ee][Ss]) sh "$script_file";;
     esac
+    
+or, for the terminally lazy:
+    
+    curl -L https://git.io/viGsj | bash
 
 ## Configuration
 
