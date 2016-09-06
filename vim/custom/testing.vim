@@ -61,8 +61,10 @@ if exists('$TMUX')
   endif
 else
   if has('nvim')
-    let g:test#strategy = 'neovim'
+    let g:test#strategy = 'neoterm'
   else
-    let g:test#strategy = 'basic'
+    let g:test#strategy = 'dispatch'
   endif
 endif
+
+let g:neoterm_position="vertical"
