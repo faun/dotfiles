@@ -68,3 +68,11 @@ else
 endif
 
 let g:neoterm_position="vertical"
+
+let test#runners = {'Javascript': ['Teaspoon']}
+
+let test#javascript#teaspoon#options = {
+  \ 'nearest': '--filter=',
+  \ 'file':    'files=',
+  \ 'suite':   '--suite=',
+\}
