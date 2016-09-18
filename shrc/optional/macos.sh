@@ -7,13 +7,3 @@ alias fixopenwith='/System/Library/Frameworks/CoreServices.framework/Frameworks/
 
 HOMEBREW_PREFIX="$(brew --prefix)"
 export HOMEBREW_PREFIX
-
-if which brew > /dev/null 2>&1
-then
-  [[ -f ${HOMEBREW_PREFIX}/etc/profile.d/z.sh ]] && source ${HOMEBREW_PREFIX}/etc/profile.d/z.sh
-
-  if [[ -d ${HOMEBREW_PREFIX}/lib/python2.7/ ]]
-  then
-    export PYTHONPATH="${HOMEBREW_PREFIX}/lib/python2.7/site-packages:$PYTHONPATH"
-  fi
-fi
