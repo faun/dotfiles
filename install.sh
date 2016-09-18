@@ -65,6 +65,9 @@ mkdir -p "$HOME/.local/share/nvim/"
 mkdir -p "$HOME/.nvim/tmpfiles"
 touch "$HOME/.vim/spell/en.utf-8.add"
 
+# Install python for Deoplete and Ultisnips
+# https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
+
 if [[ $(which pip2 > /dev/null 2>&1) ]]
 then
   echo "Installing Python2 for Neovim"
