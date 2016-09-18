@@ -64,3 +64,33 @@ fi
 mkdir -p "$HOME/.local/share/nvim/"
 mkdir -p "$HOME/.nvim/tmpfiles"
 touch "$HOME/.vim/spell/en.utf-8.add"
+
+if [[ $(which pip2 > /dev/null 2>&1) ]]
+then
+  echo "Installing Python2 for Neovim"
+  brew install python
+fi
+
+echo "Installing neovim for Python2"
+pip2 install --user --upgrade neovim
+
+if ! [[ $(grep "g:python_host_prog" "$HOME/.vimrc.local") ]]
+then
+  echo "Adding Neovim configuration for Python2"
+  echo "let g:python_host_prog = '$(which python2)'" >> $HOME/.vimrc.local
+fi
+
+if [[ $(which pip3 > /dev/null 2>&1) ]]
+then
+  echo "Installing Python3 for Neovim"
+  brew install python3
+fi
+
+echo "Installing neovim for Python3"
+pip3 install --user --upgrade neovim
+
+if ! [[ $(grep "g:python3_host_prog" "$HOME/.vimrc.local") ]]
+then
+  echo "Adding Neovim configuration for Python3"
+  echo "let g:python3_host_prog = '$(which python3)'" >> $HOME/vimrc.local
+fi
