@@ -24,3 +24,10 @@ function! Smart_TabComplete()
 endfunction
 
 inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" close the preview window when you're not using it
+let g:SuperTabClosePreviewOnPopupClose = 1
+
+" or just disable the preview entirely
+" set completeopt-=preview
