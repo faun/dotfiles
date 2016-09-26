@@ -47,27 +47,11 @@ nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
 
-
 if exists('$TMUX')
-  let g:test#strategy = 'vtr'
-  if screenrow() <= 40
-    " On a laptop, split the screen horizontally
-    let g:VtrOrientation = 'h'
-    let g:VtrPercentage = 50
-  else
-    " Otherwise, split vertically
-    let g:VtrOrientation = 'v'
-    let g:VtrPercentage = 35
-  endif
+  let g:test#strategy = 'vimux'
 else
-  if has('nvim')
-    let g:test#strategy = 'neoterm'
-  else
-    let g:test#strategy = 'dispatch'
-  endif
+  let g:test#strategy = 'dispatch'
 endif
-
-let g:neoterm_position="vertical"
 
 let test#runners = {'Javascript': ['Teaspoon']}
 
