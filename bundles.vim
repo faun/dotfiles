@@ -55,6 +55,7 @@ Plug 'skalnik/vim-vroom'
 Plug 'slim-template/vim-slim'
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install'  }
 Plug 'terryma/vim-expand-region'
+Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
