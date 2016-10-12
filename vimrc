@@ -11,6 +11,7 @@ source $HOME/.bundles.vim
 if filereadable(expand("$HOME/.bundles.local.vim"))
   source $HOME/.bundles.local.vim
 endif
+Plug 'thinca/vim-localrc'
 call plug#end()
 
 " ==========================================
