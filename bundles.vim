@@ -45,6 +45,7 @@ Plug 'othree/html5.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript'
+Plug 'rizzatti/dash.vim'
 Plug 'rodjek/vim-puppet'
 Plug 'scrooloose/nerdtree'
 Plug 'sjl/gundo.vim'
