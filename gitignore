@@ -37,3 +37,4 @@ dump.rdb
 Procfile.local
 Session.vim
 dump.rdb
+.local.vimrc
