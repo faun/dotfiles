@@ -1,5 +1,4 @@
 " General Ruby settings
-autocmd FileType ruby set ft=ruby.rails
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
