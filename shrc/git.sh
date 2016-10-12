@@ -13,6 +13,11 @@ recent() {
   git checkout "$(recent_branches | fzf)"
 }
 
+heroku_remote() {
+app=$(heroku apps --all | awk '/-staging.*/' | awk '{print $1}' | fzf)
+git remote add "$app" "https://git.heroku.com/$app.git"
+}
+
 # git
 alias got='git'
 alias get='git'
