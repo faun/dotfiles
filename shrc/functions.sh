@@ -129,3 +129,7 @@ man() {
 		LESS_TERMCAP_us=$'\e[1;32m' \
 			man "$@"
 }
+
+heroku_apps() {
+  heroku apps --all | awk '{print $1}' | fzf
+}
