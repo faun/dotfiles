@@ -68,11 +68,6 @@ then
   source "$HOME/.profile"
 fi
 
-if [ -f $HOME/.local.sh ]; then
-  source $HOME/.local.sh
-  record_time "local.sh"
-fi
-
 if [[ -n $LOAD_BOXEN ]]
 then
   [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
