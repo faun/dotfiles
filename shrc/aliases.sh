@@ -60,5 +60,3 @@ alias local_gitconfig='$EDITOR $HOME/.gitconfig.local'
 alias local_shell_conf='$EDITOR $HOME/.local.sh'
 alias local_tmux_conf='$EDITOR $HOME/.tmux.local'
 alias local_vimrc='$EDITOR $HOME/.vimrc.local'
-
-alias showdirs="cat $HOME/.dirs | ruby -e \"puts STDIN.read.split.map{|x| x.gsub(/^(.+)=.+$/, '\1')}.join(', ')\""
