@@ -43,6 +43,7 @@
 	uncommit = reset HEAD~1
 	unpushed = !GIT_CURRENT_BRANCH=$(git name-rev --name-only HEAD) && git log origin/$GIT_CURRENT_BRANCH..$GIT_CURRENT_BRANCH --oneline
 	unstage = reset HEAD
+	up = fetch origin master:master
 	update = !git commit --amend --date=\"$(date)\"
 	wdiff = diff --color-words
 	prom = pull --rebase origin master
