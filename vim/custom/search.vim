@@ -22,6 +22,10 @@ function! SearchInProject()
   exec "Ag " . word
 endfunction
 
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 function! SearchWordInProject()
   let word = expand("<cword>")
   let @/='\<' . word . '\>'
