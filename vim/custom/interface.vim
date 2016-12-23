@@ -42,3 +42,6 @@ set foldnestmax=10
 
 " Don't fold code by default
 set nofoldenable
+
+" Set - as keyword so that ctags work correctly with dashed-method-names
+set isk+=-
