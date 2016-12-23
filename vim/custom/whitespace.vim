@@ -17,4 +17,3 @@ match ExtraWhitespace /\s\+$/
 
 " Remove trailing whitespace with F3
 map <silent> <F3> :call TrimWhiteSpace()<CR>``
-
