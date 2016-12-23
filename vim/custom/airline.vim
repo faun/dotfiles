@@ -8,7 +8,7 @@ let g:airline_symbols.space = "\ua0"
 let g:bufferline_echo = 0
 
 let g:airline#extensions#tmuxline#enabled = 0
-let g:airline_theme='base16_twilight'
+let g:airline_theme='gruvbox'
 let g:airline_extensions = ['branch', 'tabline']
 let g:airline#extensions#obsession#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
