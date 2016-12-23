@@ -28,11 +28,6 @@ if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 end
 
-let g:seoul256_background = 236
-let g:seoul256_light_background = 255
-set background=light
-colorscheme seoul256-light
-
 " ==========================================
 " Custom Vimrc
 
