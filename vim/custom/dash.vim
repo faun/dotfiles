@@ -1,1 +1,1 @@
-nmap <silent> <leader>d <Plug>DashSearch
+nmap <silent> <leader>d <Plug>Dash
