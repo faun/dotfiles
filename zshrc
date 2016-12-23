@@ -27,3 +27,11 @@ then
   echo "Started up in $(printf "%d" $(($SECONDS * 1000)))ms"
   print_recorded_times
 fi
+
+PATH="/Users/faun/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/faun/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/faun/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/faun/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/faun/perl5"; export PERL_MM_OPT;
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
