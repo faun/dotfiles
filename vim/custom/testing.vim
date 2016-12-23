@@ -60,3 +60,4 @@ let test#javascript#teaspoon#options = {
   \ 'file':    'files=',
   \ 'suite':   '--suite=',
 \}
+let test#ruby#bundle_exec = 0
