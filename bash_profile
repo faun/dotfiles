@@ -43,3 +43,6 @@ export PS1="→ "
 export PS2='>'   # Secondary prompt
 export PS3='?'   # Prompt 3
 export PS4='+'   # Prompt 4
+
+# RVM really wants this to be here, even though it's defined elsewhere. So let's make RVM happy
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
