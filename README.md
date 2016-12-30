@@ -27,16 +27,18 @@ brew install https://raw.githubusercontent.com/choppsv1/homebrew-term24/master/t
 ## Installation
 
     export DESTINATION="$HOME/src/github.com/faun/dotfiles";
-
     url="https://git.io/viGsj"
     script_file=$(mktemp)
-    curl -q -L "$url" | tee "$script_file"
+    echo "===="
+    curl -s -L "$url" | tee "$script_file"
+    echo ""
+    echo "===="
     printf "Do you want to run this script? [yN]"
     read line
     case $line in
-      [Yy]|[Yy][Ee][Ss]) sh "$script_file";;
+      [Yy]|[Yy][Ee][Ss]) bash "$script_file";;
     esac
-    
+
 or, for the terminally lazy:
     
     export DESTINATION="$HOME/src/github.com/faun/dotfiles"; curl -L curl -L https://git.io/viGsj | bash
