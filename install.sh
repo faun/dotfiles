@@ -68,11 +68,17 @@ touch "$HOME/.vim/spell/en.utf-8.add"
 # Install python for Deoplete and Ultisnips
 # https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
 
-if [[ $(which pip2 > /dev/null 2>&1) ]]
+if ! brew ls --versions | awk '{ print $1 }' | grep 'python$' > /dev/null
 then
   echo "Installing Python2 for Neovim"
-  brew install python
+    brew install python
 fi
+
+if ! command -v pip2 >/dev/null 2>&1
+then
+  pip install --upgrade pip setuptools
+fi
+pip2 install --user --upgrade pip
 
 echo "Installing neovim for Python2"
 pip2 install --user --upgrade neovim
@@ -83,11 +89,13 @@ then
   echo "let g:python_host_prog = '$(which python2)'" >> $HOME/.vimrc.local
 fi
 
-if [[ $(which pip3 > /dev/null 2>&1) ]]
+if ! brew ls --versions | awk '{ print $1 }' | grep 'python3' > /dev/null
 then
   echo "Installing Python3 for Neovim"
   brew install python3
 fi
+
+pip3 install --user --upgrade pip setuptools wheel
 
 echo "Installing neovim for Python3"
 pip3 install --user --upgrade neovim
