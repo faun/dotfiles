@@ -83,10 +83,10 @@ pip2 install --user --upgrade pip
 echo "Installing neovim for Python2"
 pip2 install --user --upgrade neovim
 
-if ! [[ $(grep "g:python_host_prog" "$HOME/.vimrc.local") ]]
+if ! grep "g:python_host_prog" "$HOME/.vimrc.local" > /dev/null
 then
   echo "Adding Neovim configuration for Python2"
-  echo "let g:python_host_prog = '$(which python2)'" >> $HOME/.vimrc.local
+  echo "let g:python_host_prog = '$(which python2)'" >> "$HOME/.vimrc.local"
 fi
 
 if ! brew ls --versions | awk '{ print $1 }' | grep 'python3' > /dev/null
@@ -100,8 +100,8 @@ pip3 install --user --upgrade pip setuptools wheel
 echo "Installing neovim for Python3"
 pip3 install --user --upgrade neovim
 
-if ! [[ $(grep "g:python3_host_prog" "$HOME/.vimrc.local") ]]
+if ! grep "g:python3_host_prog" "$HOME/.vimrc.local" > /dev/null
 then
   echo "Adding Neovim configuration for Python3"
-  echo "let g:python3_host_prog = '$(which python3)'" >> $HOME/vimrc.local
+  echo "let g:python3_host_prog = '$(which python3)'" >> "$HOME/.vimrc.local"
 fi
