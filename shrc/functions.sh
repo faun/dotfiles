@@ -135,3 +135,5 @@ man() {
 heroku_apps() {
   heroku apps --all | awk '{print $1}' | fzf
 }
+
+ppid () { ps -p "${1:-$$}" -o ppid=; }
