@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 tmux_attach () {
   directory_name=$(basename $PWD)
   session_name=${directory_name//\./_}
