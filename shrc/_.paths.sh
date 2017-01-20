@@ -12,7 +12,7 @@ then
   PATH="$PATH:$HOME/.cargo/bin"
   PATH="$PATH:$HOME/Library/Python/2.7/bin"
   PATH="$PATH:$HOME/perl5/bin";
-
+  PATH="$PATH:$(yarn global bin)"
   export PATH
 
   MANPATH="/usr/local/man:$MANPATH"
