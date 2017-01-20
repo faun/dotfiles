@@ -72,7 +72,7 @@ touch "$HOME/.vim/spell/en.utf-8.add"
 
 if ! brew ls --versions | awk '{ print $1 }' | grep 'python$' > /dev/null
 then
-  echo "Installing Python2 for Neovim"
+  echo "Installing Python2"
     brew install python
 fi
 
@@ -80,7 +80,6 @@ if ! command -v pip2 >/dev/null 2>&1
 then
   pip install --upgrade pip setuptools
 fi
-pip2 install --user --upgrade pip
 
 echo "Installing neovim for Python2"
 pip2 install --user --upgrade neovim
@@ -93,14 +92,12 @@ fi
 
 if ! brew ls --versions | awk '{ print $1 }' | grep 'python3' > /dev/null
 then
-  echo "Installing Python3 for Neovim"
+  echo "Installing Python3"
   brew install python3
 fi
 
-pip3 install --user --upgrade pip setuptools wheel
-
-echo "Installing neovim for Python3"
-pip3 install --user --upgrade neovim
+echo "Installing pip and neovim for Python3"
+pip3 install --user --upgrade pip setuptools wheel neovim
 
 if ! grep "g:python3_host_prog" "$HOME/.vimrc.local" > /dev/null
 then
