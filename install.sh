@@ -104,3 +104,14 @@ then
   echo "Adding Neovim configuration for Python3"
   echo "let g:python3_host_prog = '$(which python3)'" >> "$HOME/.vimrc.local"
 fi
+
+echo "Updating and installing vim plugins"
+
+nvim +PlugInstall +qa
+nvim +PlugUpdate +qa
+nvim +PlugClean +qa
+
+echo "Updating remote plugins for deoplete.vim"
+nvim +UpdateRemotePlugins +qa
+
+nvim +CheckHealth
