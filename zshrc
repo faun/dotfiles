@@ -12,6 +12,7 @@ done
 eval "$(fasd --init auto)"
 
 record_time "fasd"
+alias d="z dotfiles && t"
 
 # use .localrc for settings specific to one system
 [[ -f ~/.localrc ]] && .  ~/.localrc
