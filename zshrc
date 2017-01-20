@@ -9,6 +9,10 @@ for file in $HOME/.zsh/*.{zsh,sh}; do
   record_time "$file"
 done
 
+eval "$(fasd --init auto)"
+
+record_time "fasd"
+
 # use .localrc for settings specific to one system
 [[ -f ~/.localrc ]] && .  ~/.localrc
 record_time "localrc"
