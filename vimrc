@@ -11,6 +11,9 @@ source $HOME/.bundles.vim
 if filereadable(expand("$HOME/.bundles.local.vim"))
   source $HOME/.bundles.local.vim
 endif
+if !has('nvim')
+  Plug 'tpope/vim-sensible'
+endif
 Plug 'thinca/vim-localrc'
 call plug#end()
 
