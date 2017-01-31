@@ -1,5 +1,4 @@
-autoload -U compinit
-compinit
+autoload -Uz compinit && compinit -C -d ~/.zcompdump
 
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
