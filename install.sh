@@ -72,6 +72,21 @@ then
   brew install yarn
 fi
 
+npm_packages=(diff-so-fancy tern)
+
+for package in "${npm_packages[@]}"
+do
+  echo "Installing package: $package"
+  npm install -g $package
+done
+
+rubygems_packages=(neovim)
+for gem in "${rubygems_packages[@]}"
+do
+  echo "Installing gem: $gem"
+  rvm "@global do gem install $gem"
+done
+
 # Install python for Deoplete and Ultisnips
 # https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
 
