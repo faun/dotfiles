@@ -45,3 +45,6 @@ set nofoldenable
 
 " Set - as keyword so that ctags work correctly with dashed-method-names
 set isk+=-
+
+" Set : as keyword so that ctags work correctly with ruby namespaced classes
+" set isk+=:
