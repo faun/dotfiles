@@ -246,3 +246,41 @@ clean_branches (){
     xargs -n 1 git branch -d &&\
     echo "Done."
 }
+
+make_or_cd_repo_path () {
+  set -o pipefail
+  path_to_repo=$(echo "$1" | \
+    # strip protocol and/or user
+  sed -E 's/^(http(s)?\:\/\/|git)@?//' | \
+    # remove trailing .git extension
+  sed -E 's/.git$//' | \
+    # replace colons with slashes
+  sed -E 's/:/\//')
+  repo_path="$HOME/src/$path_to_repo"
+  mkdir -p "$repo_path"
+  cd "$repo_path" || return 1
+  pwd
+}
+
+clone () {
+  set -o pipefail
+  if [[ $# -ne 1 ]]
+  then
+    echo "Usage: gcl <git URL>"
+    return 1
+  fi
+  repo_path=$(make_or_cd_repo_path "$1")
+  if [[ $? -ne 0 ]]
+  then
+    return 1
+  fi
+  echo "Cloning $1 into $repo_path"
+  git clone "$1" "$repo_path"
+  if [[ $? = 0 ]]
+  then
+    cd "$repo_path" || exit
+  else
+    rmdir "$repo_path" 2&> /dev/null
+  fi
+
+}
