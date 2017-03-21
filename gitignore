@@ -38,3 +38,4 @@ Procfile.local
 Session.vim
 dump.rdb
 .local.vimrc
+.rake_tasks
