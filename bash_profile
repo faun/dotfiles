@@ -4,8 +4,8 @@ for file in $HOME/.shrc/*.sh; do
 done
 
 # Load in .bashrc
-if [ -f $HOME/.bashrc ]; then
-  . $HOME/.bashrc
+if [ -f "$HOME/.bashrc" ]; then
+  . "$HOME/.bashrc"
 fi
 
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
