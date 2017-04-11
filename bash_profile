@@ -23,10 +23,6 @@ shopt -s checkwinsize
 # Autocorrect mispelled directories
 shopt -s cdspell
 
-# bash completion settings (actually, these are readline settings)
-bind "set completion-ignore-case on" # note: bind used instead of sticking these in .inputrc
-bind "set bell-style none"
-bind "set show-all-if-ambiguous On"
 unset MAILCHECK
 # Turn on advanced bash completion if the file exists (get it here: http://www.caliban.org/bash/index.shtml#completion)
 if [ -f /etc/bash_completion ]; then
