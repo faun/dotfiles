@@ -19,7 +19,6 @@
 	dump = cat-file -p
 	fixup = commit --fixup
 	flog = log --pretty=fuller --decorate
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	ksreview = "!f() { local SHA=${1:-HEAD}; local BRANCH=${2:-master}; if [ $SHA == $BRANCH ]; then SHA=HEAD; fi; git difftool -y -t Kaleidoscope $BRANCH...$SHA; }; f"
 	review = difftool -y -t Kaleidoscope
 	review-cached = difftool --cached -y -t Kaleidoscope
@@ -49,6 +48,7 @@
 	prom = pull --rebase origin master
 	pom = push origin master
 	whoami = !echo "$(git config --get user.name) \\<$(git config --get user.email)\\>"
+	history = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen%cn%Creset %Cblue(%cr)%Creset' --abbrev-commit --date=relative
 
 [color "branch"]
 	current = yellow reverse
