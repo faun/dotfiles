@@ -30,8 +30,11 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 # Disable flow control commands (keeps C-s from freezing everything)
-stty start undef
-stty stop undef
+if [ -t 0 ] && [ -t 1 ]
+then
+  stty start undef
+  stty stop undef
+fi
 
 shopt -s cdable_vars # set the bash option so that no '$' is required when using the above facility
 
