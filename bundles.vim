@@ -11,6 +11,7 @@ Plug 'bkad/CamelCaseMotion'
 Plug 'bling/vim-airline'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'cespare/vim-toml'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
