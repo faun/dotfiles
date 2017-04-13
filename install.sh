@@ -77,7 +77,7 @@ npm_packages=(diff-so-fancy tern)
 for package in "${npm_packages[@]}"
 do
   echo "Installing package: $package"
-  npm install -g $package
+  npm install -g "$package"
 done
 
 rubygems_packages=(neovim)
@@ -131,7 +131,7 @@ nvim +PlugInstall +qa
 nvim +PlugUpdate +qa
 nvim +PlugClean +qa
 
-echo "Updating remote plugins for deoplete.vim"
+echo "Updating remote plugins"
 nvim +UpdateRemotePlugins +qa
 
 nvim +CheckHealth
