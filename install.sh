@@ -72,7 +72,7 @@ then
   brew install yarn
 fi
 
-npm_packages=(diff-so-fancy tern)
+npm_packages=(diff-so-fancy tern csslint stylelint)
 
 for package in "${npm_packages[@]}"
 do
@@ -80,11 +80,11 @@ do
   npm install -g "$package"
 done
 
-rubygems_packages=(neovim)
+rubygems_packages=(neovim scss_lint)
 for gem in "${rubygems_packages[@]}"
 do
   echo "Installing gem: $gem"
-  rvm "@global do gem install $gem"
+  rvm "@global do gem install $gem || gem update $gem"
 done
 
 # Install python for Deoplete and Ultisnips
