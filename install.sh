@@ -77,7 +77,7 @@ npm_packages=(diff-so-fancy tern csslint stylelint)
 for package in "${npm_packages[@]}"
 do
   echo "Installing package: $package"
-  npm install -g "$package"
+  yarn global add "$package"
 done
 
 rubygems_packages=(neovim scss_lint)
