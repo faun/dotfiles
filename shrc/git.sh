@@ -281,5 +281,16 @@ clone () {
   else
     git clone "$1" "$repo_path"
   fi
+}
 
+pr_review () {
+  if [[ $# -ne 1 ]]
+  then
+    echo "Usage: pr_review <pull request ID>"
+    return 1
+  else
+    git diff-index --quiet --cached HEAD && \
+    git fetch origin "pull/$1/head:pr-$1" && \
+    git checkout "pr-$1"
+  fi
 }
