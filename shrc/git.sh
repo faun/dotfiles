@@ -274,13 +274,12 @@ clone () {
   then
     return 1
   fi
-  echo "Cloning $1 into $repo_path"
-  git clone "$1" "$repo_path"
-  if [[ $? = 0 ]]
+  cd "$repo_path" || exit
+  if [[ -d "$repo_path/.git" ]]
   then
-    cd "$repo_path" || exit
+    echo "$repo_path already exists"
   else
-    rmdir "$repo_path" 2&> /dev/null
+    git clone "$1" "$repo_path"
   fi
 
 }
