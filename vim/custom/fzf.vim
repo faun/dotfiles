@@ -6,8 +6,8 @@ nnoremap <silent> <Leader>= :Buffers<CR>
 nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
 nnoremap <silent> <Leader>AG       :Ag <C-R><C-A><CR>
 nnoremap <silent> <Leader>`        :Marks<CR>
-"nnoremap <silent> q: :History:<CR>
-"nnoremap <silent> q/ :History/<CR>
+" nnoremap <silent> q: :History:<CR>
+" nnoremap <silent> q/ :History/<CR>
 
 " Default fzf layout
 " - down / up / left / right
