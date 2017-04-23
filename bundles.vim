@@ -50,6 +50,7 @@ Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript'
 Plug 'rizzatti/dash.vim'
 Plug 'rodjek/vim-puppet'
+Plug 'sbdchd/neoformat'
 Plug 'scrooloose/nerdtree'
 Plug 'sjl/gundo.vim'
 Plug 'sjl/vitality.vim'
