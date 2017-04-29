@@ -53,10 +53,14 @@ alias vim_bundle_maintenance='vim +PlugInstall +PlugUpdate +PlugClean +qall'
 
 if command -v nvim >/dev/null 2>&1
 then
-  alias vim='nvim'
+  VIM_EXE='nvim'
+else
+  VIM_EXE='vim'
 fi
-alias v='vim'
-alias vi='vim -u NONE -N'
+
+export EDITOR="$VIM_EXE"
+alias vim="\$VIM_EXE"
+alias v="\$VIM_EXE"
 
 # It's aliases all the way down
 alias local_vim_bundles='$EDITOR $HOME/.bundles.local.vim'
