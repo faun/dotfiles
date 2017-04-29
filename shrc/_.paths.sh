@@ -22,4 +22,5 @@ then
   export MANPATH
 
   export GOPATH="$HOME"
+  export NVM_DIR="$HOME/.nvm"
 fi
