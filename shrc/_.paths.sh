@@ -13,6 +13,7 @@ then
   PATH="$PATH:$HOME/Library/Python/2.7/bin"
   PATH="$PATH:$HOME/perl5/bin";
   PATH="$PATH:$(yarn global bin)"
+  PATH="$HOME/.yarn/bin:$PATH"
   export PATH
 
   MANPATH="/usr/local/man:$MANPATH"
