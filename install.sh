@@ -84,7 +84,7 @@ rubygems_packages=(neovim scss_lint)
 for gem in "${rubygems_packages[@]}"
 do
   echo "Installing gem: $gem"
-  rvm "@global do gem install $gem || gem update $gem"
+  rvm "@global do gem install $gem" || gem install "$gem"
 done
 
 # Install python for Deoplete and Ultisnips
