@@ -294,3 +294,13 @@ pr_review () {
     git checkout "pr-$1"
   fi
 }
+
+my_issues () {
+  if [[ -z $GITHUB_USERNAME ]]
+  then
+    echo "Please set GITHUB_USERNAME"
+    return 1
+  else
+    hub issue --creator="$GITHUB_USERNAME" --include-pulls
+  fi
+}
