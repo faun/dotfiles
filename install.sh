@@ -72,6 +72,7 @@ then
   brew install yarn
 fi
 
+yarn config set prefix /usr/local
 npm_packages=(diff-so-fancy tern csslint stylelint prettier)
 
 for package in "${npm_packages[@]}"
