@@ -304,3 +304,16 @@ my_issues () {
     hub issue --creator="$GITHUB_USERNAME" --include-pulls
   fi
 }
+
+deploy_current_branch_to_staging () {
+  remote_name="$(git remote | grep -E 'staging' | fzf)"
+  expected_pattern='^staging'
+  if [[ "$remote_name" =~ $expected_pattern ]]
+  then
+    echo Deploying "$(current_branch)" to "$(git remote get-url "$remote_name")"
+    git push "$remote_name" "+$(current_branch):master"
+  else
+    echo "Remote did not match expected pattern"
+    return 1
+  fi
+}
