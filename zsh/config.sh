@@ -12,30 +12,69 @@ homebrew_zsh_completion=${HOMEBREW_PREFIX}/share/zsh/functions
 fpath=($homebrew_zsh_completion $fpath)
 
 HISTFILE=~/.zsh_history
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 
 setopt NO_BG_NICE # don't nice background tasks
 setopt NO_HUP
 setopt NO_LIST_BEEP
 setopt LOCAL_OPTIONS # allow functions to have local options
 setopt LOCAL_TRAPS # allow functions to have local traps
+
+# Whenever the user enters a line with history expansion, don’t execute the
+# line directly; instead, perform history expansion and reload the line into
+# the editing buffer.
 setopt HIST_VERIFY
-setopt SHARE_HISTORY # share history between sessions ???
-setopt EXTENDED_HISTORY # add timestamps to history
+
+# If set, parameter expansion, command substitution and arithmetic expansion
+# are performed in prompts. Substitutions within prompts do not affect the
+# command status.
 setopt PROMPT_SUBST
+
+# setopt CORRECT
+# Try to correct the spelling of commands. Note that, when the HASH_LIST_ALL
+# option is not set or when some directories in the path are not readable, this
+# may falsely report spelling errors the first time some commands are used.
+
+# The shell variable CORRECT_IGNORE may be set to a pattern to match words that
+# will never be offered as corrections.
 setopt CORRECT
+
+# If unset, the cursor is set to the end of the word if completion is started.
+# Otherwise it stays there and completion is done from both ends.
 setopt COMPLETE_IN_WORD
-setopt RMSTARSILENT # don't confirm an rm *
-setopt CDABLE_VARS # set the option so that no '$' is required when using the save function
 
+# Make cd push the old directory onto the directory stack
+setopt AUTO_PUSHD
+
+# Do not print the directory stack after pushd or popd
+setopt PUSHD_SILENT
+
+# Don’t push multiple copies of the same directory onto the directory stack.
+setopt PUSHD_IGNORE_DUPS
+
+# Don't confirm an rm *
+setopt RMSTARSILENT
+
+# set the option so that no '$' is required when using the save function
+setopt CDABLE_VARS
+
+# Command history
 setopt APPEND_HISTORY # adds history
-setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
-setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
-setopt HIST_REDUCE_BLANKS
 
-unsetopt correct_all # don't autocorrect
-unsetopt correct
+# New history lines are added to the $HISTFILE incrementally (as soon as they
+# are entered), rather than waiting until the shell exits
+setopt INC_APPEND_HISTORY
+
+# Add timestamps to history
+setopt EXTENDED_HISTORY
+
+# Don't record duplicate entries in the history file
+setopt HIST_IGNORE_ALL_DUPS
+
+# Remove superfluous blanks from each command line being added to the history
+# list
+setopt HIST_REDUCE_BLANKS
 
 zle -N newtab
 
