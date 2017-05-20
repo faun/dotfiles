@@ -1,4 +1,4 @@
-#!/usr/bin/env bash --login
+#!/usr/bin/env bash
 
 set -e
 shopt -s extglob
@@ -85,7 +85,7 @@ rubygems_packages=(neovim scss_lint)
 for gem in "${rubygems_packages[@]}"
 do
   echo "Installing gem: $gem"
-  rvm "@global do gem install $gem" || gem install "$gem"
+  rvm "@global do gem install $gem" 2> /dev/null || gem install "$gem"
 done
 
 # Install python for Deoplete and Ultisnips
