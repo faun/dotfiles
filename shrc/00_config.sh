@@ -4,6 +4,7 @@
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export EDITOR='nvim'
+[ -z "$TMUX" ] && export TERM=xterm-256color
 
 typeset -F SECONDS
 shell_start=$SECONDS
