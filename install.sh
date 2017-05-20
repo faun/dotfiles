@@ -62,6 +62,18 @@ then
   ln -s "$HOME/.vim" "$nvimrc"
 fi
 
+repos_to_clone=(
+https://github.com/chriskempson/base16-shell.git
+https://github.com/zsh-users/antigen.git
+)
+
+pushd "$HOME/.config"
+for repo in $repos_to_clone
+do
+  git clone "$repo" || echo "Failed to clone repo"
+done
+popd
+
 mkdir -p "$HOME/.local/share/nvim/"
 mkdir -p "$HOME/.nvim/tmpfiles"
 mkdir -p "$HOME/.vim/spell"
