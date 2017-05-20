@@ -147,4 +147,9 @@ nvim +PlugClean +qa
 echo "Updating remote plugins"
 nvim +UpdateRemotePlugins +qa
 
-nvim +CheckHealth
+if [[ -z $SKIP_HEALTH_CHECK ]]
+then
+  nvim +CheckHealth
+  echo export SKIP_HEALTH_CHECK=true >> ~/.local.sh
+  export SKIP_HEALTH_CHECK=true
+fi
