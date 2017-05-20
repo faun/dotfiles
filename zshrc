@@ -9,9 +9,6 @@ for file in $HOME/.zsh/*.{zsh,sh}; do
   record_time "$file"
 done
 
-eval "$(fasd --init auto)"
-
-record_time "fasd"
 alias d="z dotfiles && t"
 
 # use .localrc for settings specific to one system
