@@ -8,4 +8,6 @@ augroup json_autocmd
   autocmd FileType json set softtabstop=2 tabstop=8
   autocmd FileType json set expandtab
   autocmd FileType json set foldmethod=syntax
+  autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
+  autocmd FileType json vnoremap <buffer> <c-f> :call RangeJsonBeautify()<cr>
 augroup END

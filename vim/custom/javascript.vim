@@ -17,3 +17,9 @@ let g:jsx_ext_required = 0
 " JS Prettier options
 nnoremap gp :silent %!prettier --stdin --trailing-comma all --single-quote<CR>
 autocmd FileType javascript set formatprg=prettier\ --stdin\ --parser\ flow\ --single-quote\ --no-bracket-spacing\ --trailing-comma\ none
+
+" JS Beautify Options
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
+autocmd FileType jsx vnoremap <buffer> <c-f> :call RangeJsxBeautify()<cr>
