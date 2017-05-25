@@ -7,7 +7,7 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " JS Automatic formatting
-autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx Neoformat
+autocmd BufWritePre *.js,*.jsx Neoformat
 let g:neoformat_enabled_javascript = ['prettier']
 
 " vim-jsx options
