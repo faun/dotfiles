@@ -36,8 +36,10 @@ do
   then
     target="$HOME/.config/$name"
   fi
-  link=$(shouldLinkFile "$name"; echo $?)
-  if [[ $link == 0 ]]
+
+  should_link=$(shouldLinkFile "$name"; echo $?)
+
+  if [[ $should_link == 0 ]]
   then
     if [[ -L "$target" ]]
     then
@@ -45,7 +47,7 @@ do
     fi
     if [[ ! -e "$target" ]]
     then
-      echo "$target => $name"
+      echo "Linking $name => $target"
       ln -s "$DIR/$name" "$target"
     elif [[ -d "$target" || -f "$target" ]]
     then
