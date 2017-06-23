@@ -23,12 +23,14 @@ record_time() {
   _recorded_times="$_recorded_times\n$line"
 }
 
+record_time "config initialzation"
+
 # Load optional platform-specific configuration
 if [[ "$OSTYPE" == linux* ]]; then
   alias a='ls -lrth --color'
   alias ls='ls --color=auto'
 elif [[ "$OSTYPE" == darwin* ]]; then
-  SHELL_TYPE="$(basename $(echo $SHELL))"
+  SHELL_TYPE="$(basename "$SHELL")"
   if [[ $SHELL_TYPE == 'bash' ]]
   then
     CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
