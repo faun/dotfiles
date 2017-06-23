@@ -16,9 +16,13 @@ done
 shouldLinkFile () {
   for file in "${excludes[@]}"
   do
-    [[ "$file" == "$1" ]] && return 1
+    if [[ "$file" == "$1" ]]
+    then
+      return 1
+    else
+      return 0
+    fi
   done
-  return 0
 }
 
 for name in *
