@@ -85,7 +85,16 @@ then
 fi
 
 yarn config set prefix /usr/local
-npm_packages=(diff-so-fancy tern csslint stylelint prettier)
+npm_packages=(
+diff-so-fancy
+tern
+csslint
+stylelint
+prettier
+eslint
+babel-eslint
+eslint-plugin-react
+)
 
 for package in "${npm_packages[@]}"
 do
