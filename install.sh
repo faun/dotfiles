@@ -68,17 +68,32 @@ then
   ln -s "$HOME/.vim" "$nvimrc"
 fi
 
-repos_to_clone=(
-https://github.com/chriskempson/base16-shell.git
-https://github.com/zsh-users/antigen.git
+REPOS_TO_CLONE=(
+chriskempson/base16-shell
+zsh-users/antigen
 )
 
-pushd "$HOME/.config"
-for repo in $repos_to_clone
+for LINE in "${REPOS_TO_CLONE[@]}"
 do
-  git clone "$repo" || echo "Failed to clone repo"
+  declare -a TOKENS
+  TOKENS=(
+    $(echo "$LINE" | awk 'BEGIN{FS="/"}{for (i=1; i<=NF; i++) print $i}')
+  )
+  NAME=${TOKENS[0]}
+  REPO=${TOKENS[1]}
+  REPO_URL="https://github.com/$NAME/$REPO.git"
+  REPO_DEST="$HOME/.config/$REPO"
+  if [ -d "$REPO_DEST" ]
+  then
+    pushd "$REPO_DEST" > /dev/null
+    echo "Updating $REPO"
+    git pull -q --rebase --autostash &>/dev/null
+    popd > /dev/null
+  else
+    echo "Cloning $REPO_URL to $REPO_DEST"
+    git clone -q "$REPO_URL" "$REPO_DEST"
+  fi
 done
-popd
 
 mkdir -p "$HOME/.local/share/nvim/"
 mkdir -p "$HOME/.nvim/tmpfiles"
