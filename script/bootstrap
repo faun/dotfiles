@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# This script is meant to be the post-installer for strap
+# Run `setup` in the root of this repo instead of running this command directly
+set -e
+
+abort() { echo "!!! $*" >&2; exit 1; }
+log()   { echo "--> $*"; }
+logn()  { printf -- "--> %s " "$*"; }
+logk()  { echo "OK"; }
+
+GITHUB_USERNAME=$(git config --get github.user)
+log "Running dotfiles installer for github user: $GITHUB_USERNAME"
+
+REPOS=(dotfiles personal_dotfiles)
+for REPO in "${REPOS[@]}"; do
+  # Clone dotfiles repo to correct location and run installer
+  if [ -n "$GITHUB_USERNAME" ]; then
+    DOTFILES_URL="https://github.com/$GITHUB_USERNAME/$REPO"
+    DOTFILES_DEST="$HOME/src/github.com/$GITHUB_USERNAME/$REPO"
+
+    if git ls-remote "$DOTFILES_URL" &>/dev/null; then
+      log "Fetching $GITHUB_USERNAME/$REPO from GitHub"
+      if [ ! -d "$DOTFILES_DEST" ]; then
+        logn "Cloning to $DOTFILES_DEST:"
+        git clone -q "$DOTFILES_URL" "$DOTFILES_DEST"
+        logk
+      else
+        (
+        logn "Updating $DOTFILES_DEST:"
+        cd "$DOTFILES_DEST"
+        git pull -q --rebase --autostash &>/dev/null
+        logk
+        )
+      fi
+      (
+      cd "$DOTFILES_DEST"
+      INSTALLERS=$(./install.sh)
+      for INSTALLER in $INSTALLERS; do
+        if [ -f "$INSTALLER" ] && [ -x "$INSTALLER" ]; then
+          logn "Running dotfiles $INSTALLER:"
+          "$INSTALLER" 2>/dev/null
+          logk
+          break
+        fi
+      done
+      )
+    fi
+  fi
+done
+
+log "Done."
