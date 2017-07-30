@@ -147,7 +147,7 @@
 	autosquash = true
 
 [credential]
-	helper = cache --timeout=3600
+	helper = osxkeychain
 
 [mergetool "Kaleidoscope"]
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
