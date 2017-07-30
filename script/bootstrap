@@ -37,9 +37,8 @@ for REPO in "${REPOS[@]}"; do
       INSTALLERS=$(./install.sh)
       for INSTALLER in $INSTALLERS; do
         if [ -f "$INSTALLER" ] && [ -x "$INSTALLER" ]; then
-          logn "Running dotfiles $INSTALLER:"
+          log "Running dotfiles $INSTALLER"
           "$INSTALLER" 2>/dev/null
-          logk
           break
         fi
       done
