@@ -62,10 +62,33 @@ then
   export RBENV_ROOT=$HOME/.rbenv
 fi
 
-if [ -d $RBENV_ROOT ]; then
+if [ -d "$RBENV_ROOT" ]; then
   export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
 fi
 record_time "rbenv paths"
+
+if [ -d "$RBENV_ROOT" ]; then
+  export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
+fi
+record_time "rbenv paths"
+
+# Set PYENV_ROOT to ~/.rbenv unless it exists
+if [[ "x$PYENV_ROOT" == "x" ]]
+then
+  export PYENV_ROOT=$HOME/.pyenv
+fi
+record_time "pyenv paths"
+
+if [ -d "$PYENV_ROOT" ]; then
+  if which pyenv > /dev/null 2>&1
+  then
+    echo "pyenv is installed"
+    eval "$(pyenv init -)"
+  else
+    echo "pyenv is not installed"
+  fi
+fi
+record_time "pyenv initialization"
 
 # Source .profile if it exists
 if [[ -f "$HOME/.profile" ]]
