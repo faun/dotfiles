@@ -9,7 +9,7 @@ logn()  { printf -- "--> %s " "$*"; }
 logk()  { echo "OK"; }
 
 GITHUB_USERNAME=$(git config --get github.user)
-log "Running dotfiles installer for github user: $GITHUB_USERNAME"
+log "Installing dotfiles for github user $GITHUB_USERNAME"
 
 REPOS=(dotfiles personal_dotfiles)
 for REPO in "${REPOS[@]}"; do
@@ -17,6 +17,7 @@ for REPO in "${REPOS[@]}"; do
   if [ -n "$GITHUB_USERNAME" ]; then
     DOTFILES_URL="https://github.com/$GITHUB_USERNAME/$REPO"
     DOTFILES_DEST="$HOME/src/github.com/$GITHUB_USERNAME/$REPO"
+    INSTALLERS=$(./install.sh)
 
     if git ls-remote "$DOTFILES_URL" &>/dev/null; then
       log "Fetching $GITHUB_USERNAME/$REPO from GitHub"
@@ -26,7 +27,7 @@ for REPO in "${REPOS[@]}"; do
         logk
       else
         (
-        logn "Updating $DOTFILES_DEST:"
+        logn "Updating $REPO:"
         cd "$DOTFILES_DEST"
         git pull -q --rebase --autostash &>/dev/null
         logk
@@ -34,10 +35,9 @@ for REPO in "${REPOS[@]}"; do
       fi
       (
       cd "$DOTFILES_DEST"
-      INSTALLERS=$(./install.sh)
       for INSTALLER in $INSTALLERS; do
         if [ -f "$INSTALLER" ] && [ -x "$INSTALLER" ]; then
-          log "Running dotfiles $INSTALLER"
+          log "Running $REPO $INSTALLER"
           "$INSTALLER" 2>/dev/null
           break
         fi
