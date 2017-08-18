@@ -41,7 +41,7 @@ brew install https://raw.githubusercontent.com/choppsv1/homebrew-term24/master/t
 
 or, for the terminally lazy:
     
-    export DESTINATION="$HOME/src/github.com/faun/dotfiles"; curl -L curl -L https://git.io/viGsj | bash
+    export DESTINATION="$HOME/src/github.com/faun/dotfiles"; curl -L https://git.io/viGsj | bash
 
 ## Configuration
 
