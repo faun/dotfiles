@@ -1,11 +1,10 @@
 
 configure_fasd() {
-  [[ "$(command -v fasd > /dev/null)" ]] || return
-  if [[ $SHELL =~ zsh ]]
+  [[ "$(command -v fasd)" ]] || return
+  if [[ -n $ZSH_NAME ]]
   then
     fasd_cache="$HOME/.fasd-init-zsh"
     if [ "$(command -v fasd)" -nt "$fasd_cache" ] || [ ! -s "$fasd_cache" ]; then
-      echo "fasd"
       fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
     fi
 
