@@ -1,5 +1,5 @@
 " Always show the sign column
-let g:gitgutter_sign_column_always = 1
+set signcolumn=yes
 
 " Namespace neomake gutter signs so they don't conflict with quickfixsigns
 let g:quickfixsigns_protect_sign_rx = '^neomake_'
