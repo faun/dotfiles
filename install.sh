@@ -3,6 +3,9 @@
 set -e
 shopt -s extglob
 
+# Accept the XCode license agreement
+sudo xcodebuild -license accept
+
 DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 excludes=("LICENSE" "fonts")
