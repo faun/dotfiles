@@ -34,6 +34,10 @@ au BufNewFile,BufRead Capfile set filetype=ruby
 au BufNewFile,BufRead Gemfile set filetype=ruby.rails.bundler
 autocmd BufEnter Gemfile set ft=ruby.rails.bundler
 
+" Brewfile
+au BufNewFile,BufRead Brewfile,.Brewfile set filetype=ruby
+au BufNewFile,BufRead Brewfile,.Brewfile set filetype=ruby
+
 " Guard
 au BufNewFile,BufRead Guardfile,.Guardfile set filetype=ruby
 
