@@ -5,7 +5,7 @@ tmux_attach () {
   session_name=${directory_name//\./_}
   if tmux has-session -t $session_name
   then
-    tmux attach -t $session_name 2>/dev/null
+    tmux attach -d -t $session_name 2>/dev/null
   else
     tmux new-session -s $session_name -n Editor
   fi
