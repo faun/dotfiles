@@ -6,3 +6,8 @@ augroup rubycomplete
     autocmd! FileType ruby,eruby setl ofu=rubycomplete#Complete
   endif
 augroup END 
+
+augroup fmt
+  autocmd!
+  autocmd BufWritePre *.rb Neoformat
+augroup END
