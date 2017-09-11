@@ -41,3 +41,4 @@ dump.rdb
 .rake_tasks
 .tern-port
 *.zwc
+.vimrc_local.vim

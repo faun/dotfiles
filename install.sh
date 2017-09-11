@@ -141,11 +141,33 @@ done
 # Install python for Deoplete and Ultisnips
 # https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
 
-if ! brew ls --versions | awk '{ print $1 }' | grep 'python$' > /dev/null
+latest_python_2_version=$(
+pyenv install --list | \
+  sed 's/^  //' | \
+  grep '^2\.' | \
+  grep --invert-match 'dev\|a\|b' | \
+  tail -1
+)
+
+latest_python_version=$(
+pyenv install --list | \
+  sed 's/^  //' | \
+  grep '^\d' | \
+  grep --invert-match 'dev\|a\|b' | \
+  tail -1
+)
+
+if ! brew ls --versions | awk '{ print $1 }' | grep 'pyenv$' > /dev/null
 then
-  echo "Installing Python2"
-    brew install python
+  echo "Installing pyenv"
+    brew install pyenv
 fi
+
+echo "Installing Python $latest_python_2_version"
+pyenv install -s "$latest_python_2_version"
+
+echo "Installing Python $latest_python_version"
+pyenv install -s "$latest_python_version"
 
 if ! command -v pip2 >/dev/null 2>&1
 then
