@@ -1,4 +1,4 @@
-let g:neomake_ruby_enabled_makers = ['mri', 'rubocop', 'reek']
+let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 
 augroup rubycomplete
 	if !exists('ruby_completion_loaded')
