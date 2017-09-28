@@ -38,7 +38,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all --no-update-rc' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/seoul256.vim'
-Plug 'justincampbell/vim-eighties'
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
 Plug 'maksimr/vim-jsbeautify'
