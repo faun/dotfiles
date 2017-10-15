@@ -87,7 +87,7 @@ Plug 'vim-coffee-script'
 Plug 'vim-ember-script'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/matchit.zip'
-Plug 'vim-scripts/nginx.vim'
+Plug 'vim-scripts/nginx.vim', { 'for': ['nginx'] }
 Plug 'wincent/ferret'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'zaiste/tmux.vim'
