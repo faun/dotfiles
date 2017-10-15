@@ -8,6 +8,7 @@ Plug 'LucHermitte/local_vimrc'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
+Plug 'avakhov/vim-yaml', { 'for': ['yaml']}
 Plug 'benmills/vimux'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bling/vim-airline'
