@@ -4,7 +4,12 @@ set -e
 shopt -s extglob
 
 # Accept the XCode license agreement
-sudo xcodebuild -license accept
+XCODE_EXIT_CODE=$(xcodebuild > /dev/null 2&>1; echo $?)
+if [[ "$XCODE_EXIT_CODE" = "69" ]]
+then
+  echo "Please accept the xcode license terms:"
+  sudo xcodebuild -license accept
+fi
 
 DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
