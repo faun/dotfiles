@@ -82,7 +82,6 @@ record_time "pyenv paths"
 if [ -d "$PYENV_ROOT" ]; then
   if which pyenv > /dev/null 2>&1
   then
-    echo "pyenv is installed"
     eval "$(pyenv init -)"
   else
     echo "pyenv is not installed"
