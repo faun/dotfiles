@@ -13,6 +13,8 @@ fi
 
 DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
+
 excludes=("LICENSE" "fonts")
 
 excluded_suffixes='@(sh|md)'
@@ -36,10 +38,12 @@ shouldLinkFile () {
 for name in *
 do
   target="$HOME/.$name"
+
   if [[ "$name" == "default-gems" ]]
   then
     target="$HOME/.rbenv/$name"
   fi
+
   if [[ "$name" == "nvim" ]]
   then
     target="$HOME/.config/$name"
