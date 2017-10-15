@@ -26,4 +26,3 @@ function! ToggleGStatus()
     endif
 endfunction
 command! ToggleGStatus :call ToggleGStatus()
-nmap <F1> :ToggleGStatus<CR>
