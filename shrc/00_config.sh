@@ -95,6 +95,15 @@ then
   source "$HOME/.profile"
 fi
 
+# Source .gpg-agent-info if it exists
+if [[ -f "$HOME/.gpg-agent-info" ]]
+then
+  source "$HOME/.gpg-agent-info"
+  export GPG_AGENT_INFO
+  export SSH_AUTH_SOCK
+  export SSH_AGENT_PID
+fi
+
 if [[ -n $LOAD_BOXEN ]]
 then
   [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
