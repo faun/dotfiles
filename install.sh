@@ -49,6 +49,12 @@ do
     target="$HOME/.config/$name"
   fi
 
+  if [[ "$name" == "yamllint" ]]
+  then
+    mkdir -p "$HOME/.config/yamllint/"
+    target="$HOME/.config/yamllint/config"
+  fi
+
   should_link=$(shouldLinkFile "$name"; echo $?)
 
   if [[ $should_link == 0 ]]
