@@ -138,6 +138,7 @@ prettier
 eslint
 babel-eslint
 eslint-plugin-react
+nginxbeautifier
 )
 
 for package in "${npm_packages[@]}"
