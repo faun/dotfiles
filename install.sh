@@ -221,6 +221,9 @@ do
   pip install "$egg"
 done
 
+echo "Installing spelling dictionaries"
+nvim -u .nvimtest +q
+
 echo "Updating and installing vim plugins"
 
 nvim +PlugInstall +qa
