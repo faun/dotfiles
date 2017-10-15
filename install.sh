@@ -214,6 +214,13 @@ then
   echo "let g:python3_host_prog = '$(which python3)'" >> "$HOME/.vimrc.local"
 fi
 
+pip_packages=(yamllint)
+for egg in "${pip_packages[@]}"
+do
+  echo "Installing egg: $egg"
+  pip install "$egg"
+done
+
 echo "Updating and installing vim plugins"
 
 nvim +PlugInstall +qa
