@@ -12,3 +12,7 @@ if defined?(PryDebugger)
   Pry.commands.alias_command 'n', 'next'
   Pry.commands.alias_command 'f', 'finish'
 end
+
+if ENV['VIM']
+  Pry.config.pager = false
+end
