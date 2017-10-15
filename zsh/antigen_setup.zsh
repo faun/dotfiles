@@ -21,6 +21,11 @@ then
   antigen apply
   record_time "antigen apply"
 
+  # Reload completions
+  autoload -U compinit && compinit
+
+  record_time "antigen completions"
+
   bindkey '^[[A' history-substring-search-up
   bindkey '^[[B' history-substring-search-down
 
