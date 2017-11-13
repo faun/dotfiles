@@ -7,16 +7,25 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " JS Automatic formatting
-autocmd BufWritePre *.js,*.jsx Neoformat
+" autocmd BufWritePre *.js,*.jsx Neoformat
+autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx Neoformat
+
 let g:neoformat_enabled_javascript = ['prettier']
 
 " vim-jsx options
 let g:javascript_plugin_flow = 1
 let g:jsx_ext_required = 0
 
+" Use formatprg when available
+let g:neoformat_try_formatprg = 1
+
 " JS Prettier options
-nnoremap gp :silent %!prettier --stdin --trailing-comma none --bracket-spacing --parser flow<CR>
-autocmd FileType javascript set formatprg=prettier\ --stdin\ --parser\ flow\ --bracket-spacing\ --trailing-comma\ none
+autocmd FileType javascript setlocal formatprg=prettier\ --stdin\ --parser\ flow\ --single-quote\ --trailing-comma\ es5
+nnoremap gp :silent %!prettier --stdin --trailing-comma all --single-quote<CR>
+
+autocmd FileType javascript setlocal formatprg=prettier\ --stdin\ --parser\ flow\ --single-quote\ --trailing-comma\ es5
+" Use formatprg when available
+let g:neoformat_try_formatprg = 1
 
 " JS Beautify Options
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
