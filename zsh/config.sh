@@ -79,6 +79,10 @@ then
   # list
   setopt HIST_REDUCE_BLANKS
 
+  # If a pattern for filename generation has no matches, do not print an error,
+  # instead, leave it unchanged in the argument list.
+  unsetopt nomatch
+
   zle -N newtab
 
   # Make sure that the terminal is in application mode when zle is active, since
