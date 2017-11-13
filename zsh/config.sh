@@ -18,6 +18,16 @@ then
   HISTSIZE=10000
   SAVEHIST=10000
 
+  setopt histignorealldups sharehistory
+
+  zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
+      'local-directories named-directories'
+  zstyle ':completion:*' group-name ''
+  zstyle ':completion:*:descriptions' format %d
+
+  zstyle ':completion:*:descriptions' format %B%d%b        # bold
+  zstyle ':completion:*:descriptions' format %F{green}%d%f # green foreground
+
   setopt NO_BG_NICE # don't nice background tasks
   setopt NO_HUP
   setopt NO_LIST_BEEP
