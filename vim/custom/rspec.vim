@@ -14,3 +14,13 @@ function! PromoteToLet()
 endfunction
 command! PromoteToLet :call PromoteToLet()
 map <leader>p :PromoteToLet<cr>
+
+function! AddEmptyLinesBetweenExamples()
+  :%s/\(end\)\n\(\s\+\(it\|context\|describe\)\s\)/\1\r\r\2/g
+endfunction
+command! AddEmptyLinesBetweenExamples :call AddEmptyLinesBetweenExamples()
+
+function! KillRSpecProcesses()
+  silent! execute !ps | grep '[b]undle exec rspec' | awk '{ print $1 }' | xargs kill
+endfunction
+command! KillRSpecProcesses :call KillRSpecProcesses()
