@@ -49,8 +49,6 @@ nmap <silent> <leader>tv :TestVisit<CR>
 
 if exists('$TMUX')
   let g:test#strategy = 'vimux'
-else
-  let g:test#strategy = 'dispatch'
 endif
 
 let test#runners = {'Javascript': ['Teaspoon']}
