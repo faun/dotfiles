@@ -26,3 +26,6 @@ function! ToggleGStatus()
     endif
 endfunction
 command! ToggleGStatus :call ToggleGStatus()
+
+" https://github.com/tpope/vim-fugitive/issues/530
+command! -bar -nargs=1 Browse silent! exe '!open' shellescape(<q-args>, 1)
