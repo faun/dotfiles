@@ -26,7 +26,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'elzr/vim-json'
 Plug 'ervandew/supertab'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': 'vim +:GoInstallBinaries'}
 Plug 'fatih/vim-hclfmt', { 'for': ['hcl', 'terraform', 'nomad'], 'do': 'go get github.com/fatih/hclfmt' }
 Plug 'fishbullet/deoplete-ruby'
 Plug 'gcmt/taboo.vim'

@@ -68,3 +68,7 @@ alias local_gitconfig='$EDITOR $HOME/.gitconfig.local'
 alias local_shell_conf='$EDITOR $HOME/.local.sh'
 alias local_tmux_conf='$EDITOR $HOME/.tmux.local'
 alias local_vimrc='$EDITOR $HOME/.vimrc.local'
+
+kcontext() {
+  kubectl config use-context "$(kubectl config get-contexts -o name | fzf)"
+}
