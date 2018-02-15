@@ -11,7 +11,14 @@ recent_branches() {
 }
 
 recent() {
-  git checkout "$(recent_branches | fzf)"
+  local branch_to_checkout
+  branch_to_checkout="$(recent_branches | fzf || return 1)"
+  if [[ -n $branch_to_checkout ]]
+  then
+    git checkout "$branch_to_checkout"
+  else
+    return 1
+  fi
 }
 
 heroku_remote() {
