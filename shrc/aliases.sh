@@ -72,3 +72,13 @@ alias local_vimrc='$EDITOR $HOME/.vimrc.local'
 kcontext() {
   kubectl config use-context "$(kubectl config get-contexts -o name | fzf)"
 }
+
+migrations() {
+  local migration_name
+  migration_name="$(find ./db/migrate/* | sort -nr | fzf --reverse || exit 1)"
+
+  if [[ -n $migration_name ]]
+  then
+    vim -O "$migration_name"
+  fi
+}
