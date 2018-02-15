@@ -312,6 +312,16 @@ my_issues () {
   fi
 }
 
+my_pull_requests () {
+  if [[ -z $GITHUB_USERNAME ]]
+  then
+    echo "Please set GITHUB_USERNAME"
+    return 1
+  else
+    hub browse -- "pulls/$GITHUB_USERNAME"
+  fi
+}
+
 deploy_current_branch_to_staging () {
   remote_name="$(git remote | grep -E 'staging' | fzf)"
   expected_pattern='^staging'
