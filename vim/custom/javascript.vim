@@ -8,7 +8,7 @@ autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " JS Automatic formatting
 " autocmd BufWritePre *.js,*.jsx Neoformat
-autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx Neoformat
+" autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx Neoformat
 
 let g:neoformat_enabled_javascript = ['prettier']
 
@@ -20,10 +20,9 @@ let g:jsx_ext_required = 0
 let g:neoformat_try_formatprg = 1
 
 " JS Prettier options
-autocmd FileType javascript setlocal formatprg=prettier\ --stdin\ --parser\ flow\ --single-quote\ --trailing-comma\ es5
-nnoremap gp :silent %!prettier --stdin --trailing-comma all --single-quote<CR>
+autocmd FileType javascript setlocal formatprg=prettier\ --stdin
+nnoremap gp :silent %!prettier --stdin<CR>
 
-autocmd FileType javascript setlocal formatprg=prettier\ --stdin\ --parser\ flow\ --single-quote\ --trailing-comma\ es5
 " Use formatprg when available
 let g:neoformat_try_formatprg = 1
 
