@@ -1,3 +1,10 @@
+begin
+  require 'spirit_hands'
+  SpiritHands.hirb = false
+rescue LoadError
+  puts 'Could not load spirit_hands'
+end
+
 Pry.config.editor = 'vim'
 Pry.config.theme = 'pry-classic'
 #
