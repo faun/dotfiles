@@ -21,3 +21,10 @@ if defined?(PryDebugger)
 end
 
 Pry.config.pager = false if ENV['VIM']
+
+begin
+  require 'awesome_print'
+  Pry.config.print = proc { |output, value| output.puts value.ai }
+rescue LoadError
+  puts 'Could not load awesome_print'
+end
