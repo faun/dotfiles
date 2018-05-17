@@ -42,6 +42,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
 Plug 'maksimr/vim-jsbeautify'
 Plug 'mattn/emmet-vim'
 Plug 'michaeljsmith/vim-indent-object'
