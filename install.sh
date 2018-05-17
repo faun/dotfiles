@@ -107,11 +107,11 @@ do
   then
     pushd "$REPO_DEST" > /dev/null
     echo "Updating $REPO"
-    git pull -q --rebase --autostash &>/dev/null
+    git pull -q --rebase --autostash &>/dev/null || true
     popd > /dev/null
   else
     echo "Cloning $REPO_URL to $REPO_DEST"
-    git clone -q "$REPO_URL" "$REPO_DEST"
+    git clone -q "$REPO_URL" "$REPO_DEST" || true
   fi
 done
 
