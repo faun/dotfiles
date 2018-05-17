@@ -163,17 +163,19 @@ latest_python_2_version=$(
 pyenv install --list | \
   sed 's/^  //' | \
   grep '^2\.' | \
-  grep --invert-match 'dev\|a\|b' | \
+  grep --invert-match 'dev\|a\|b\|rc' | \
   tail -1
 )
 
 latest_python_version=$(
 pyenv install --list | \
   sed 's/^  //' | \
-  grep '^\d' | \
-  grep --invert-match 'dev\|a\|b' | \
+  grep '^3\.' | \
+  grep --invert-match 'dev\|a\|b\|rc' | \
   tail -1
 )
+
+pip install --upgrade pip
 
 if ! brew ls --versions | awk '{ print $1 }' | grep 'pyenv$' > /dev/null
 then
@@ -181,19 +183,29 @@ then
     brew install pyenv
 fi
 
+if ! brew ls --versions | awk '{ print $1 }' | grep 'readline' > /dev/null
+then
+  echo "Installing readline"
+  brew install readline
+fi
+
+if ! brew ls --versions | awk '{ print $1 }' | grep 'xz' > /dev/null
+then
+  echo "Installing xz"
+  brew install xz
+fi
+
+if [[ -d "$HOME/.pyenv/plugins/python-build/../.." ]]
+then
+  echo "Updating python-build"
+  cd "$HOME/.pyenv/plugins/python-build/../.." && git pull && cd -
+fi
+
 echo "Installing Python $latest_python_2_version"
 pyenv install -s "$latest_python_2_version"
 
-echo "Installing Python $latest_python_version"
-pyenv install -s "$latest_python_version"
-
-if ! command -v pip2 >/dev/null 2>&1
-then
-  pip install --upgrade pip setuptools
-fi
-
 echo "Installing neovim for Python2"
-pip2 install --user --upgrade neovim
+pip2 install --user --upgrade pip setuptools wheel neovim
 
 if ! grep "g:python_host_prog" "$HOME/.vimrc.local" > /dev/null
 then
@@ -201,19 +213,60 @@ then
   echo "let g:python_host_prog = '$(which python2)'" >> "$HOME/.vimrc.local"
 fi
 
-if ! brew ls --versions | awk '{ print $1 }' | grep 'python3' > /dev/null
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
+# -----------------------------------------------------------------------------
+eval "$(pyenv init -)"
+
+echo "Installing pip and neovim for Python2"
+
+pyenv uninstall --force py2neovim
+pyenv virtualenv "$latest_python_2_version" py2neovim
+
+pyenv activate py2neovim
+PYTHON2_PATH="$(pyenv which python)"
+echo "$PYTHON2_PATH"
+
+pip install --upgrade pip setuptools wheel neovim > /dev/null
+
+if ! grep "g:python_host_prog" "$HOME/.vimrc.local" > /dev/null
 then
-  echo "Installing Python3"
-  brew install python3
+  echo "Adding Neovim configuration for Python2"
+  echo "let g:python_host_prog = '$PYTHON2_PATH'" >> "$HOME/.vimrc.local"
+else
+  echo "Please remove g:python_host_prog from $HOME/.vimrc.local and retry"
 fi
 
-echo "Installing pip and neovim for Python3"
-pip3 install --user --upgrade pip setuptools wheel neovim
+# -----------------------------------------------------------------------------
 
 if ! grep "g:python3_host_prog" "$HOME/.vimrc.local" > /dev/null
 then
   echo "Adding Neovim configuration for Python3"
-  echo "let g:python3_host_prog = '$(which python3)'" >> "$HOME/.vimrc.local"
+  echo "let g:python3_host_prog = '$PYTHON3_PATH'" >> "$HOME/.vimrc.local"
+fi
+
+echo "Installing Python $latest_python_version"
+pyenv install -s "$latest_python_version"
+
+echo "Installing pip and neovim for Python3"
+
+pyenv uninstall --force py3neovim
+pyenv virtualenv "$latest_python_version" py3neovim
+
+PYTHON3_PATH="$(
+eval "$(pyenv init -)"
+pyenv activate "$latest_python_version/envs/py3neovim"
+pyenv which python
+pip3 install --upgrade pip setuptools wheel neovim
+)"
+echo "$PYTHON3_PATH"
+
+if ! grep "g:python3_host_prog" "$HOME/.vimrc.local" > /dev/null
+then
+  echo "Adding Neovim configuration for Python3"
+  echo "let g:python3_host_prog = '$PYTHON3_PATH'" >> "$HOME/.vimrc.local"
+else
+  echo "Please remove g:python3_host_prog from $HOME/.vimrc.local and retry"
 fi
 
 pip_packages=(yamllint)
