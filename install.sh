@@ -11,6 +11,8 @@ then
   sudo xcodebuild -license accept
 fi
 
+xcode-select --install > /dev/null 2>&1 || true
+
 DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
