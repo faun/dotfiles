@@ -46,6 +46,9 @@ alias sane='stty sane'
 alias py='python'
 alias sha1="openssl sha1"
 
+# JavaScript
+alias nombom='npm cache verify && bower cache clean && rm -rf node_modules bower_components && npm install && bower install'
+
 alias vim_bundle_install='vim +PlugInstall'
 alias vim_bundle_update='vim +PlugUpdate +qall'
 alias vim_bundle_clean='vim +PlugClean +qall'
