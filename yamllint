@@ -7,4 +7,4 @@ rules:
     max-spaces-inside: 1
   indentation:
     spaces: consistent
-    indent-sequences: false
+    indent-sequences: true
