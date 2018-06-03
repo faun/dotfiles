@@ -193,22 +193,6 @@ done
 # Install python for Deoplete and Ultisnips
 # https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
 
-latest_python_2_version=$(
-pyenv install --list | \
-  sed 's/^  //' | \
-  grep '^2\.' | \
-  grep --invert-match 'dev\|a\|b\|rc' | \
-  tail -1
-)
-
-latest_python_version=$(
-pyenv install --list | \
-  sed 's/^  //' | \
-  grep '^3\.' | \
-  grep --invert-match 'dev\|a\|b\|rc' | \
-  tail -1
-)
-
 pip install --upgrade pip
 
 if ! brew ls --versions | awk '{ print $1 }' | grep 'pyenv$' > /dev/null
@@ -234,6 +218,22 @@ then
   echo "Updating python-build"
   cd "$HOME/.pyenv/plugins/python-build/../.." && git pull && cd -
 fi
+
+latest_python_2_version=$(
+pyenv install --list | \
+  sed 's/^  //' | \
+  grep '^2\.' | \
+  grep --invert-match 'dev\|a\|b\|rc' | \
+  tail -1
+)
+
+latest_python_version=$(
+pyenv install --list | \
+  sed 's/^  //' | \
+  grep '^3\.' | \
+  grep --invert-match 'dev\|a\|b\|rc' | \
+  tail -1
+)
 
 echo "Installing Python $latest_python_2_version"
 pyenv install -s "$latest_python_2_version"
