@@ -6,6 +6,9 @@ syntax on
 " ==========================================
 " Vim-plug
 
+" Define orange for nvim
+hi def Orange ctermfg=202 guifg=#ff5f00
+
 call plug#begin('~/.vim/plugged')
 source $HOME/.bundles.vim
 if filereadable(expand("$HOME/.bundles.local.vim"))
