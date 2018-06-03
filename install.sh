@@ -3,6 +3,8 @@
 set -e
 shopt -s extglob
 
+# -----------------------------------------------------------------------------
+
 # Accept the XCode license agreement
 XCODE_EXIT_CODE=$(xcodebuild > /dev/null 2>&1; echo $?)
 if [[ "$XCODE_EXIT_CODE" = "69" ]]
@@ -12,6 +14,8 @@ then
 fi
 
 xcode-select --install > /dev/null 2>&1 || true
+
+# -----------------------------------------------------------------------------
 
 DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
@@ -88,6 +92,8 @@ then
   ln -s "$HOME/.vim" "$nvimrc"
 fi
 
+# -----------------------------------------------------------------------------
+
 REPOS_TO_CLONE=(
 chriskempson/base16-shell
 zsh-users/antigen
@@ -115,10 +121,14 @@ do
   fi
 done
 
+# -----------------------------------------------------------------------------
+
 mkdir -p "$HOME/.local/share/nvim/"
 mkdir -p "$HOME/.nvim/tmpfiles"
 mkdir -p "$HOME/.vim/spell"
 touch "$HOME/.vim/spell/en.utf-8.add"
+
+# -----------------------------------------------------------------------------
 
 if ! brew ls --versions | awk '{ print $1 }' | grep 'neovim$' > /dev/null
 then
@@ -149,6 +159,8 @@ do
   yarn global add "$package" --silent --no-progress --no-emoji 2> /dev/null
 done
 
+# -----------------------------------------------------------------------------
+
 rubygems_packages=(neovim scss_lint)
 for gem in "${rubygems_packages[@]}"
 do
@@ -156,6 +168,7 @@ do
   rvm "@global do gem install $gem" 2> /dev/null || gem install "$gem"
 done
 
+# -----------------------------------------------------------------------------
 # Install python for Deoplete and Ultisnips
 # https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
 
@@ -216,6 +229,7 @@ fi
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # -----------------------------------------------------------------------------
+
 eval "$(pyenv init -)"
 
 echo "Installing pip and neovim for Python2"
@@ -276,8 +290,12 @@ do
   pip install "$egg"
 done
 
+# -----------------------------------------------------------------------------
+
 echo "Installing spelling dictionaries"
 nvim -u .nvimtest +q
+
+# -----------------------------------------------------------------------------
 
 echo "Updating and installing vim plugins"
 
@@ -285,8 +303,12 @@ nvim +PlugInstall +qa
 nvim +PlugUpdate +qa
 nvim +PlugClean +qa
 
+# -----------------------------------------------------------------------------
+
 echo "Updating remote plugins"
 nvim +UpdateRemotePlugins +qa
+
+# -----------------------------------------------------------------------------
 
 if [[ -z $SKIP_HEALTH_CHECK ]]
 then
