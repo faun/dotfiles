@@ -132,7 +132,7 @@ touch "$HOME/.vim/spell/en.utf-8.add"
 
 if ! brew ls --versions | awk '{ print $1 }' | grep 'neovim$' > /dev/null
 then
-  brew install neovim/neovim/neovim
+  brew install neovim
 fi
 
 # -----------------------------------------------------------------------------
