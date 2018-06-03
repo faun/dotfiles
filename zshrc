@@ -10,6 +10,10 @@ for file in $HOME/.zsh/*.{zsh,sh}; do
   record_time "$file"
 done
 
+# load nvm
+record_time "nvm reload"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+
 alias d="z dotfiles && t"
 
 # use .localrc for settings specific to one system

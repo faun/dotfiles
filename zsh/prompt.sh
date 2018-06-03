@@ -35,6 +35,16 @@ parse_git_dirty() {
   (($? == 0)) && echo $ZSH_THEME_GIT_PROMPT_DIRTY || echo $ZSH_THEME_GIT_PROMPT_CLEAN
 }
 record_time "git dirty checking"
+
+nvm_version_prompt() {
+  if type nvm_ls > /dev/null
+  then
+    echo "[$(nvm_ls 'current')]"
+  fi
+}
+
+record_time "nvm prompt"
+
 # Based off the murilasso zsh theme
 
 return_code='%(?..%{$fg[red]%}%? ↵%{$reset_color%})'
@@ -42,8 +52,9 @@ user_host='%{$fg[green]%}%n@%m%{$reset_color%}'
 current_dir='%{$fg[blue]%}$(pwd -P)%{$reset_color%}'
 ruby_version='%{$fg[red]%}$(ruby_version_status)%{$reset_color%}'
 git_branch='%{$fg[blue]%}$(git_prompt_info)%{$reset_color%}'
+nvm_version='%{$fg[blue]%}$(nvm_version_prompt)%{$reset_color%}'
 
-export PROMPT="${user_host}:${current_dir} ${ruby_version}
+export PROMPT="${user_host}:${current_dir} ${ruby_version} ${nvm_version}
 %{$fg[blue]%}${git_branch} %B$%b "
 export RPS1="${return_code}"
 export SUDO_PS1="$fg[green]\u@\h:$fg[blue]\w
