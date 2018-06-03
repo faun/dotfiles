@@ -44,3 +44,4 @@ dump.rdb
 .vimrc_local.vim
 ctags
 tags
+.byebug_history
