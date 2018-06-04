@@ -255,6 +255,11 @@ eval "$(pyenv init -)"
 echo "Installing pip and neovim for Python2"
 
 pyenv uninstall --force py2neovim
+if ! which virtualenv > /dev/null
+then
+  virtualenv_destination="$(pyenv root)/plugins/pyenv-virtualenv"
+  git clone https://github.com/pyenv/pyenv-virtualenv.git "$virtualenv_destination"
+fi
 pyenv virtualenv "$latest_python_2_version" py2neovim
 
 pyenv activate py2neovim
