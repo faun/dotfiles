@@ -106,6 +106,7 @@ fi
 REPOS_TO_CLONE=(
 chriskempson/base16-shell
 zsh-users/antigen
+jonmosco/kube-tmux
 )
 
 for LINE in "${REPOS_TO_CLONE[@]}"
