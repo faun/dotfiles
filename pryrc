@@ -5,7 +5,7 @@ rescue LoadError
   puts 'Could not load spirit_hands'
 end
 
-Pry.config.editor = 'vim'
+Pry.config.editor = proc { |file, line| "vim #{file}+#{line}" }
 Pry.config.theme = 'pry-classic'
 #
 # Hit Enter to repeat last command
@@ -28,3 +28,4 @@ begin
 rescue LoadError
   puts 'Could not load awesome_print'
 end
+
