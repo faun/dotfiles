@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
 
 tmux_attach () {
-  directory_name=$(basename $PWD)
-  session_name=${directory_name//\./_}
-  if tmux has-session -t $session_name
+  if [[ $# -eq 0 ]]
   then
-    tmux attach -d -t $session_name 2>/dev/null
+    directory_name=$(basename "$PWD")
+    session_name=${directory_name//\./_}
+    if \tmux has-session -t "$session_name" > /dev/null 2>&1
+    then
+      \tmux attach -d -t "$session_name" > /dev/null 2>&1
+    else
+      \tmux new-session -s "$session_name"
+    fi
   else
-    tmux new-session -s $session_name -n Editor
+    \tmux "$@"
   fi
 }
 

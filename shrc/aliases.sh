@@ -11,6 +11,7 @@ alias q='exit'
 # tmux
 alias tat='tmux_attach'
 alias t='tmux_attach'
+alias tmux='tmux_attach'
 
 # ruby
 alias bi='bundle install'
@@ -85,3 +86,109 @@ migrations() {
     vim -O "$migration_name"
   fi
 }
+
+current_namespace() {
+  local cur_ctx
+  cur_ctx="$(current_context)"
+  ns="$(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${cur_ctx}\")].context.namespace}")"
+  if [[ -z "${ns}" ]]; then
+    echo "default"
+  else
+    echo "${ns}"
+  fi
+}
+
+current_context() {
+  kubectl config view -o=jsonpath='{.current-context}'
+}
+
+alias k="kubectl"
+complete -o default -F __start_kubectl k
+
+alias kctx='kubectx'
+
+namespace_options() {
+  kubens | strip-ansi | fzf || current_namespace
+}
+
+context_options() {
+  kubectx | strip-ansi | fzf || current_context
+}
+
+alias kns='kubens "$(namespace_options)"'
+alias ktx='kubectx "$(context_options)"'
+
+kcapp() {
+  if [[ $# -ne 1 ]]
+  then
+    echo "Usage kcapp <app_label>"
+    return 1
+  fi
+
+  kubectl get pod -l app="$1" \
+    --sort-by=.status.startTime \
+    --field-selector=status.phase=Running \
+    -o=jsonpath='{.items[-1:].metadata.name}' | \
+    tail -1
+}
+
+kcin() {
+  if [[ $# -ne 1 ]]
+  then
+    echo "Usage kcin <istio_label>"
+    return 1
+  fi
+
+  kubectl get -n istio-next pod -l istio="$1" \
+    -o=jsonpath='{.items[-1:].metadata.name}'
+}
+
+kcimt() {
+  if [[ $# -ne 1 ]]
+  then
+    echo "Usage kcimt <istio-mixer-type>"
+    return 1
+  fi
+
+  kubectl get -n istio-next pod -l istio-mixer-type="$1" \
+    -o=jsonpath='{.items[-1:].metadata.name}'
+}
+
+alias kcistio=kcin
+
+kcrelease() {
+  if [[ $# -ne 1 ]]
+  then
+    echo "Usage kcrelease <release_label>"
+    return 1
+  fi
+
+  kubectl get pods -l release="$1" \
+    --sort-by=.status.startTime \
+    --field-selector=status.phase=Running \
+    -o=jsonpath='{.items[-1:].metadata.name}' | \
+    tail -1
+}
+
+kcrun() {
+  if [[ $# -ne 1 ]]
+  then
+    echo "Usage krun <run_label>"
+    return 1
+  fi
+
+  kubectl get pod -l run="$1" \
+    -o=jsonpath='{.items[-1:].metadata.name}' | \
+    tail -1
+}
+
+kcx() {
+  if [[ $# -lt 3 ]]
+  then
+    echo "Usage kcx <pod> <container> [commands]"
+    return 1
+  fi
+
+  kubectl exec -it "$1" -c "$2" -- "${@:3}"
+}
+

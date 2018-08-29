@@ -257,15 +257,12 @@ clean_branches (){
 make_or_cd_repo_path () {
   set -o pipefail
   path_to_repo=$(echo "$1" | \
-    # strip protocol and/or user
   sed -E 's/^(http(s)?\:\/\/|git)@?//' | \
-    # remove trailing .git extension
   sed -E 's/.git$//' | \
-    # replace colons with slashes
   sed -E 's/:/\//')
   repo_path="$HOME/src/$path_to_repo"
   mkdir -p "$repo_path"
-  cd "$repo_path" || return 1
+  cd "$repo_path" || return
   pwd
 }
 
@@ -277,11 +274,7 @@ clone () {
     return 1
   fi
   repo_path=$(make_or_cd_repo_path "$1")
-  if [[ $? -ne 0 ]]
-  then
-    return 1
-  fi
-  cd "$repo_path" || exit
+  cd "$repo_path" || return
   if [[ -d "$repo_path/.git" ]]
   then
     echo "$repo_path already exists"
