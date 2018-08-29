@@ -2,6 +2,9 @@
 " Basic settings:
 
 syntax on
+set nocompatible
+set ttyfast
+set lazyredraw
 
 " ==========================================
 " Vim-plug
