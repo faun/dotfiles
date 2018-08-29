@@ -14,7 +14,7 @@ then
 
   for package in $antigen_packages
   do
-    antigen bundle "$package"
+    antigen bundle "$package" > /dev/null
     record_time "$package"
   done
 
