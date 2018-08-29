@@ -26,6 +26,9 @@ autocmd FileType javascript setlocal formatprg=prettier\ --config\ .prettierrc.j
 " Use formatprg when available
 let g:neoformat_try_formatprg = 1
 
+" Enable eslint for neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
+
 " JS Beautify Options
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
