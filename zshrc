@@ -10,10 +10,6 @@ for file in $HOME/.zsh/*.{zsh,sh}; do
   record_time "$file"
 done
 
-# load nvm
-record_time "nvm reload"
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-
 alias d="z dotfiles && t"
 
 # use .localrc for settings specific to one system
@@ -25,7 +21,6 @@ record_time "iterm2 integration"
 
 if [[ -d "$HOME/n" ]]
 then
-  export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
   record_time "n node version manager"
 fi
 
@@ -36,3 +31,5 @@ then
 fi
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
