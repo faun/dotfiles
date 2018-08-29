@@ -170,9 +170,12 @@ csslint
 stylelint
 prettier
 eslint
+eslint-plugin-prettier
+eslint-config-prettier
 babel-eslint
 eslint-plugin-react
 nginxbeautifier
+strip-ansi-cli
 )
 
 for package in "${npm_packages[@]}"
