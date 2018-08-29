@@ -13,7 +13,7 @@ function! PromoteToLet()
   :normal ==
 endfunction
 command! PromoteToLet :call PromoteToLet()
-map <leader>p :PromoteToLet<cr>
+map <leader>pl :PromoteToLet<cr>
 
 function! AddEmptyLinesBetweenExamples()
   :%s/\(end\)\n\(\s\+\(it\|context\|describe\)\s\)/\1\r\r\2/g
