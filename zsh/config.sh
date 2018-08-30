@@ -11,8 +11,11 @@ then
   fpath=(~/.zsh/functions $fpath)
   autoload -U ~/.zsh/functions/*(:t)
 
-  homebrew_zsh_completion=${HOMEBREW_PREFIX}/share/zsh/functions
-  fpath=($homebrew_zsh_completion $fpath)
+  if command -v brew 1>/dev/null 2>&1
+  then
+    homebrew_zsh_completion=$(brew --prefix)/share/zsh/functions
+    fpath=($homebrew_zsh_completion $fpath)
+  fi
 
   HISTFILE=~/.zsh_history
   HISTSIZE=10000
