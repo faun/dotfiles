@@ -47,6 +47,8 @@ nmap <silent> <leader>tv :TestVisit<CR>
 
 if exists('$TMUX')
   let g:test#strategy = 'vimux'
+  let g:VtrOrientation = "h"
+  let g:VtrPercentage = 35
 endif
 
 let test#runners = {'Javascript': ['Teaspoon']}
