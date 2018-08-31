@@ -45,3 +45,4 @@ dump.rdb
 ctags
 tags
 .byebug_history
+.ignore
