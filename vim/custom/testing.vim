@@ -38,8 +38,6 @@ let g:VtrUseVtrMaps = 1
 "
 " :VtrAttachToPane
 
-" change cursor to bar in insert mode
-
 " vim-test maps
 nmap <silent> <leader><CR> :TestNearest<CR>
 nmap <silent> <leader>\ :TestFile<CR>
