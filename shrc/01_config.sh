@@ -53,7 +53,7 @@ if [ -d "$RBENV_ROOT" ]; then
 fi
 record_time "rbenv paths"
 
-# Set PYENV_ROOT to ~/.rbenv unless it exists
+# Set PYENV_ROOT to ~/.pyenv unless it exists
 if [[ "x$PYENV_ROOT" == "x" ]]
 then
   export PYENV_ROOT=$HOME/.pyenv
