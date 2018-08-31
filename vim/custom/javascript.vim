@@ -20,7 +20,7 @@ let g:jsx_ext_required = 0
 let g:neoformat_try_formatprg = 1
 
 " JS Prettier options
-nnoremap gp :silent %!prettier --config .prettierrc.js --stdin<CR>
+nnoremap gp ma:silent %!prettier --config .prettierrc.js --stdin<CR>`a
 autocmd FileType javascript setlocal formatprg=prettier\ --config\ .prettierrc.js\ --stdin
 
 " Use formatprg when available
