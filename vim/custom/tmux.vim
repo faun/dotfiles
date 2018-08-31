@@ -23,7 +23,7 @@ if has('mouse')
   set mouse=a
 endif
 
-set ttimeoutlen=10
+set ttimeoutlen=0
 
 if &term =~ "xterm" || &term =~ "screen"
   let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
