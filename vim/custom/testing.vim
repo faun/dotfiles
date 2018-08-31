@@ -51,8 +51,6 @@ if exists('$TMUX')
   let g:VtrPercentage = 35
 endif
 
-let test#runners = {'Javascript': ['Teaspoon']}
-
 let test#javascript#teaspoon#options = {
   \ 'nearest': '--filter=',
   \ 'file':    'files=',
