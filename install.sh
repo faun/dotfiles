@@ -3,6 +3,11 @@
 set -e
 shopt -s extglob
 
+if [[ -n $DEBUG ]]
+then
+  set -x
+fi
+
 # -----------------------------------------------------------------------------
 
 # Accept the XCode license agreement
