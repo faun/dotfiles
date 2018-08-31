@@ -44,4 +44,5 @@ nnoremap <leader>/ :set hlsearch! hlsearch?<CR>
 
 nnoremap <leader>* :call SearchInProject()<CR>
 nnoremap <C-*>:call SearchWordInProject()<CR>
-
+nnoremap <leader>' mb"+ya':Ag <C-r>"<CR>
+nnoremap <leader>" mb"+ya":Ag <C-r>"<CR>
