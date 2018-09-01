@@ -161,6 +161,8 @@ fi
 if ! [[ -d "$N_PREFIX/n/.repo" ]]
 then
   curl -sL https://git.io/n-install | bash -s -- -q
+else
+  n-update -y
 fi
 
 # -----------------------------------------------------------------------------
