@@ -358,3 +358,5 @@ then
   echo export SKIP_HEALTH_CHECK=true >> ~/.local.sh
   export SKIP_HEALTH_CHECK=true
 fi
+
+echo "Done."
