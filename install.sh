@@ -156,14 +156,12 @@ fi
 
 # -----------------------------------------------------------------------------
 
-# Install nvm
+# Install n from GitHub
 
-# shellcheck source=./../../../../.nvm/nvm.sh
-export NVM_DIR="$HOME/.nvm" && (
-  git clone https://github.com/creationix/nvm.git "$NVM_DIR" > /dev/null 2>&1
-  cd "$NVM_DIR"
-  git checkout "$(git describe --abbrev=0 --tags --match "v[0-9]*" "$(git rev-list --tags --max-count=1)")"
-) && source "$NVM_DIR/nvm.sh"
+if ! [[ -d "$N_PREFIX/n/.repo" ]]
+then
+  curl -sL https://git.io/n-install | bash -s -- -q
+fi
 
 # -----------------------------------------------------------------------------
 
