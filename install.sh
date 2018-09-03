@@ -39,7 +39,13 @@ xcode-select --install > /dev/null 2>&1 || true
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
 
-excludes=("LICENSE" "fonts")
+excludes=(
+LICENSE
+fonts
+install.sh
+install
+mac_os_defaults
+)
 
 excluded_suffixes='@(sh|md)'
 for suffix in "${excluded_suffixes[@]}"
