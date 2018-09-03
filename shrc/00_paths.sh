@@ -11,6 +11,7 @@ then
   PATH="$PATH:$HOME/Library/Python/2.7/bin"
   PATH="$PATH:$HOME/perl5/bin";
   PATH="$HOME/.yarn/bin:$PATH"
+  PATH="$HOME/.config/kubectx:$PATH"
   # PATH=".git/safe/../../bin:$PATH"
   # PATH=".git/safe/../../node_modules/.bin:$PATH"
   export PATH
