@@ -118,33 +118,8 @@ fi
 
 # -----------------------------------------------------------------------------
 
-REPOS_TO_CLONE=(
-chriskempson/base16-shell
-zsh-users/antigen
-jonmosco/kube-tmux
-)
 
-for LINE in "${REPOS_TO_CLONE[@]}"
-do
-  declare -a TOKENS
-  TOKENS=(
-    $(echo "$LINE" | awk 'BEGIN{FS="/"}{for (i=1; i<=NF; i++) print $i}')
-  )
-  NAME=${TOKENS[0]}
-  REPO=${TOKENS[1]}
-  REPO_URL="https://github.com/$NAME/$REPO.git"
-  REPO_DEST="$HOME/.config/$REPO"
-  if [ -d "$REPO_DEST" ]
-  then
-    pushd "$REPO_DEST" > /dev/null
-    echo "Updating $REPO"
-    git pull -q --rebase --autostash &>/dev/null || true
-    popd > /dev/null
-  else
-    echo "Cloning $REPO_URL to $REPO_DEST"
-    git clone -q "$REPO_URL" "$REPO_DEST" || true
-  fi
-done
+"$DIR/install/link_vendored_scripts.sh"
 
 # -----------------------------------------------------------------------------
 
