@@ -9,6 +9,7 @@ then
   PATH="$PATH:/usr/local/git/bin"
   PATH="$PATH:$HOME/.cargo/bin"
   PATH="$PATH:$HOME/Library/Python/2.7/bin"
+  PATH="$PATH:$HOME/.local/bin"
   PATH="$PATH:$HOME/perl5/bin";
   PATH="$HOME/.yarn/bin:$PATH"
   PATH="$HOME/.config/kubectx:$PATH"
