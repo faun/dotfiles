@@ -124,7 +124,7 @@
 	prompt = false
 
 [diff]
-	tool = Kaleidoscope
+	tool = vim
 	renames = copies
 	mnemonicprefix = true
 
