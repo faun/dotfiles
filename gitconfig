@@ -122,6 +122,7 @@
 
 [difftool]
 	prompt = false
+	trustExitCode = true
 
 [diff]
 	tool = vim
