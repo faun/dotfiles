@@ -151,7 +151,7 @@ fi
 
 # -----------------------------------------------------------------------------
 
-if ! which yarn > /dev/null
+if ! command -v yarn > /dev/null
 then
   npm install -g yarn
 fi
