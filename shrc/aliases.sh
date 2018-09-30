@@ -102,10 +102,6 @@ current_context() {
   kubectl config view -o=jsonpath='{.current-context}'
 }
 
-alias k="kubectl"
-complete -o default -F __start_kubectl k
-
-alias kctx='kubectx'
 
 namespace_options() {
   kubens | strip-ansi | fzf || current_namespace
@@ -115,6 +111,14 @@ context_options() {
   kubectx | strip-ansi | fzf || current_context
 }
 
+
+if which kubectl > /dev/null 2>&1
+then
+  alias k="kubectl"
+  complete -o default -F __start_kubectl k
+fi
+
+alias kctx='kubectx'
 alias kns='kubens "$(namespace_options)"'
 alias ktx='kubectx "$(context_options)"'
 
