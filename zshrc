@@ -1,6 +1,5 @@
 # Enable bash completion script compatibility mode
-autoload bashcompinit
-bashcompinit
+autoload -Uz bashcompinit; bashcompinit
 
 # Source shell-agnostic config files
 for file in $HOME/.shrc/*.sh; do
