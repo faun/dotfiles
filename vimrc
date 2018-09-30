@@ -51,6 +51,14 @@ endif
 " Quickly quit without saving with QQ
 nmap QQ :q!<cr>
 
+if &diff
+  " In diff mode, close diff with Q
+
+  nmap <CR> :qa!<cr>
+  " And quit the diff with QQ
+  nmap QQ :cq!<cr>
+endif
+
 " Force save files that require root permission
 cmap w!! %!sudo tee > /dev/null %
 
