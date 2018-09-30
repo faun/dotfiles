@@ -4,19 +4,6 @@
 
 These are config files to set up a system the way I like it.
 
-## Prerequisites:
-
-* Git >= 1.7.10
-* Vim >= 7.4 (brew install vim)
-
-### Recommended tools:
-
-* NeoVim
-
-```
-    brew install neovim/neovim/neovim
-```
-
 * Tmux with 24-bit Support:
 
 ```
