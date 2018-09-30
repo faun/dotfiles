@@ -1,5 +1,9 @@
-autocmd! BufEnter,BufWritePost * silent! Neomake
-autocmd! InsertChange,TextChanged * silent! update | Neomake
+" Disable neomake in diff mode
+if &diff != 1
+  autocmd! BufEnter,BufWritePost * silent! Neomake
+  autocmd! InsertChange,TextChanged * silent! update | Neomake
+endif
+
 let g:neomake_verbose=0
 
 nmap <Leader>o :lopen<CR>      " open location window
