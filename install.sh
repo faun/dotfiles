@@ -130,6 +130,20 @@ touch "$HOME/.vim/spell/en.utf-8.add"
 
 # -----------------------------------------------------------------------------
 
+# Install n from GitHub
+
+N_PREFIX="${N_PREFIX:-$HOME/n}"
+echo "N_PREFIX: $N_PREFIX"
+if ! [[ -d "$N_PREFIX/n" ]]
+then
+  curl -sL https://git.io/n-install | bash -s -- -q
+else
+  export N_PREFIX
+  "$N_PREFIX/bin/n-update" -y
+fi
+
+# -----------------------------------------------------------------------------
+
 if ! brew ls --versions | awk '{ print $1 }' | grep 'neovim$' > /dev/null
 then
   brew install neovim
@@ -137,20 +151,9 @@ fi
 
 # -----------------------------------------------------------------------------
 
-# Install n from GitHub
-
-if ! [[ -d "$N_PREFIX/n/.repo" ]]
+if ! which yarn > /dev/null
 then
-  curl -sL https://git.io/n-install | bash -s -- -q
-else
-  n-update -y
-fi
-
-# -----------------------------------------------------------------------------
-
-if ! brew ls --versions | awk '{ print $1 }' | grep 'yarn$' > /dev/null
-then
-  brew install yarn
+  npm install -g yarn
 fi
 
 npm_packages=(
