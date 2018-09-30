@@ -4,13 +4,6 @@
 
 These are config files to set up a system the way I like it.
 
-* Tmux with 24-bit Support:
-
-```
-brew uninstall tmux
-brew install https://raw.githubusercontent.com/choppsv1/homebrew-term24/master/tmux.rb
-```
-
 ## Installation
 
     export DESTINATION="$HOME/src/github.com/faun/dotfiles";
