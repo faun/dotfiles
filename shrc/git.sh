@@ -135,7 +135,7 @@ alias gb='git branch'
 
 # git commit
 alias gc='git commit -v'
-alias gcm='git commit -v -m'
+alias gcm='git commit -v -n -m'
 alias gcam='git commit -a -m'
 alias gca='git commit -v --amend'
 alias amend='git commit -v --amend'
