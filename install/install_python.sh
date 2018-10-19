@@ -44,7 +44,7 @@ echo "Installing Python $latest_python_2_version"
 pyenv install -s "$latest_python_2_version"
 
 echo "Installing neovim for Python2"
-pip2 install --user --upgrade pip setuptools wheel neovim
+pip2 install --upgrade --force-reinstall pip setuptools wheel neovim
 
 if ! grep "g:python_host_prog" "$HOME/.vimrc.local" > /dev/null
 then
@@ -75,7 +75,7 @@ pyenv activate py2neovim
 PYTHON2_PATH="$(pyenv which python)"
 echo "$PYTHON2_PATH"
 
-pip install --upgrade pip setuptools wheel neovim > /dev/null
+pip install --upgrade --force-reinstall pip setuptools wheel neovim > /dev/null
 
 if ! grep "g:python_host_prog" "$HOME/.vimrc.local" > /dev/null
 then
