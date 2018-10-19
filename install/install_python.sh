@@ -120,14 +120,6 @@ else
   echo "Please remove g:python3_host_prog from $HOME/.vimrc.local and retry"
 fi
 
-if ! grep "g:python3_host_prog" "$HOME/.vimrc.local" > /dev/null
-then
-  echo "Adding Neovim configuration for Python3"
-  echo "let g:python3_host_prog='$PYTHON3_PATH'" >> "$HOME/.vimrc.local"
-else
-  echo "Please remove g:python3_host_prog from $HOME/.vimrc.local and retry"
-fi
-
 pip_packages=(yamllint)
 for egg in "${pip_packages[@]}"
 do
