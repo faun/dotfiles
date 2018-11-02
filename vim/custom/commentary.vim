@@ -9,3 +9,4 @@ autocmd FileType dockerfile set commentstring=#\ %s
 autocmd FileType nginx set commentstring=#\ %s
 autocmd FileType gitcommit set commentstring=#\ %s
 autocmd FileType squid set commentstring=#\ %s
+autocmd FileType cfg set commentstring=#\ %s
