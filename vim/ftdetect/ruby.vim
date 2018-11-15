@@ -73,4 +73,7 @@ au BufNewFile,BufRead [Bb]uildfile set filetype=ruby
 " Appraisal
 au BufNewFile,BufRead Appraisals set filetype=ruby
 
+" RSpec
+au BufNewFile,BufRead *_spec.rb set filetype=ruby.rpsec
+
 " vim: nowrap sw=2 sts=2 ts=8 noet:
