@@ -211,13 +211,26 @@ isolate() {
   fi
 }
 
+gg() {
+  if [[ "$(current_branch)" != "master" ]]
+  then
+    git fetch origin master:master
+  fi
+  git log \
+    --graph \
+    --pretty=format:'%Cred%h%Creset %aN: %s %Cgreen(%cr)%Creset' \
+    --abbrev-commit \
+    --date=relative \
+    "$(current_branch)" \
+    --not "$(git for-each-ref --format='%(refname)' refs/remotes/ | grep 'origin/master')"
+}
+
 alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
 
 alias stashpop="git stash && git pull && git stash pop"
 alias grm='git status --porcelain | ruby -e "puts STDIN.read.scan(/^\\s+D\\s+(.+)\$/).join(\"\\n\")" | xargs git rm'
 
 alias log="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %aN: %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
-alias gg="git log --graph --pretty=format:'%Cred%h%Creset %aN: %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative \$(current_branch) --not \$(git for-each-ref --format='%(refname)' refs/heads/ | grep -v \"refs/heads/\$(current_branch)\")"
 alias ggg="git log --graph --pretty=format:'%C(yellow)%h %Creset(%cr)%nAuthor: %C(green)%aN <%aE>%Creset%n%n    %Cblue%s%Creset%n'"
 alias gggg="git log --pretty=format:'%C(yellow)%h %Creset(%cr) %C(green)%aN <%aE>%Creset%n%Cblue%s%Creset%n ' --numstat"
 alias gitmine="git log --author='\$(git config --get user.name)' --pretty=format:'%Cgreen%ad%Creset %s%C(yellow)%d%Creset %Cred(%h)%Creset' --date=short"
