@@ -14,6 +14,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'ecomba/vim-ruby-refactoring', { 'for': ['ruby'] }
 Plug 'editorconfig/editorconfig-vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'gcmt/taboo.vim'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
