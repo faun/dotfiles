@@ -13,8 +13,9 @@ then
   PATH="$PATH:$HOME/perl5/bin";
   PATH="$HOME/.yarn/bin:$PATH"
   PATH="$HOME/.config/kubectx:$PATH"
-  # PATH=".git/safe/../../bin:$PATH"
-  # PATH=".git/safe/../../node_modules/.bin:$PATH"
+  PATH=".git/safe/../../bin:$PATH"
+  PATH=".git/safe/../../node_modules/.bin:$PATH"
+  PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
   export PATH
 
   MANPATH="/usr/local/man:$MANPATH"
