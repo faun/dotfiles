@@ -57,3 +57,9 @@ let test#javascript#teaspoon#options = {
   \ 'suite':   '--suite=',
 \}
 let test#ruby#bundle_exec = 0
+
+let test#go#gotest#options = {
+  \ 'nearest': '-v',
+  \ 'file':    '-v',
+  \ 'suite':   '-v',
+\}
