@@ -23,6 +23,6 @@ then
   MANPATH="/usr/local/git/man:$MANPATH"
   export MANPATH
 
-  export GOPATH="$HOME"
+  export GOPATH="$HOME/src"
   export NVM_DIR="$HOME/.nvm"
 fi
