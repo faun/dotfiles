@@ -168,7 +168,7 @@ diff_with_master() {
 
 # git rebase
 alias grc='git rebase --continue'
-alias gri='git fetch && git rebase -i origin/master'
+alias gri='git fetch origin master:master && git rebase -i origin/master'
 
 show() {
   # Show a given commit in git difftool
