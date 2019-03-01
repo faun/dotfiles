@@ -5,14 +5,14 @@ tmux_attach () {
   then
     directory_name=$(basename "$PWD")
     session_name=${directory_name//\./_}
-    if \tmux has-session -t "$session_name" > /dev/null 2>&1
+    if \tmux -2 has-session -t "$session_name" > /dev/null 2>&1
     then
-      \tmux attach -d -t "$session_name" > /dev/null 2>&1
+      \tmux -2 attach -d -t "$session_name" > /dev/null 2>&1
     else
-      \tmux new-session -s "$session_name"
+      \tmux -2 new-session -s "$session_name"
     fi
   else
-    \tmux "$@"
+    \tmux -2 "$@"
   fi
 }
 
