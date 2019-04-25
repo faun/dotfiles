@@ -48,3 +48,4 @@ tags
 .ignore
 .projections.json
 .vimrc.local
+.ruby-version
