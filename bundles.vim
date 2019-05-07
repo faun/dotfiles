@@ -1,7 +1,5 @@
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'AndrewRadev/switch.vim'
-Plug 'LucHermitte/lh-vim-lib'
-Plug 'LucHermitte/local_vimrc'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
@@ -14,6 +12,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'ecomba/vim-ruby-refactoring', { 'for': ['ruby'] }
 Plug 'editorconfig/editorconfig-vim'
+Plug 'embear/vim-localvimrc'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'gcmt/taboo.vim'
 Plug 'godlygeek/tabular'
