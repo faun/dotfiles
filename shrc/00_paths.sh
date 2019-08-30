@@ -7,7 +7,6 @@ then
   PATH="$PATH:$HOME/bin"
   PATH="$PATH:/usr/local/heroku/bin"
   PATH="$PATH:/usr/local/bin:/usr/local/sbin"
-  PATH="$PATH:/opt/boxen/bin:/opt/boxen/homebrew/sbin:/opt/boxen/homebrew/bin"
   PATH="$PATH:/usr/local/mysql/bin"
   PATH="$PATH:/usr/local/git/bin"
   PATH="$PATH:$HOME/.cargo/bin"
