@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 if [[ -z $TMUX ]]
 then
+  export NVM_DIR="$HOME/.nvm"
+  export GOPATH="$HOME/src"
+
   PATH="$PATH:$HOME/bin"
   PATH="$PATH:/usr/local/heroku/bin"
   PATH="$PATH:/usr/local/bin:/usr/local/sbin"
@@ -13,16 +16,14 @@ then
   PATH="$PATH:$HOME/perl5/bin";
   PATH="$HOME/.yarn/bin:$PATH"
   PATH="$HOME/.config/kubectx:$PATH"
+  PATH="/usr/local/go/bin:$GOPATH/bin:$PATH"
   PATH=".git/safe/../../bin:$PATH"
   PATH=".git/safe/../../node_modules/.bin:$PATH"
-  PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
-  export PATH
 
   MANPATH="/usr/local/man:$MANPATH"
   MANPATH="/usr/local/mysql/man:$MANPATH"
   MANPATH="/usr/local/git/man:$MANPATH"
-  export MANPATH
 
-  export GOPATH="$HOME/src"
-  export NVM_DIR="$HOME/.nvm"
+  export PATH
+  export MANPATH
 fi
