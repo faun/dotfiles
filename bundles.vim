@@ -39,7 +39,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'sjl/gundo.vim'
 Plug 'sjl/vitality.vim'
 Plug 'skalnik/vim-vroom'
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install'  }
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install  ~/.vim/plugged/tern_for_vim/' }
 Plug 'terryma/vim-expand-region'
 Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-abolish'
