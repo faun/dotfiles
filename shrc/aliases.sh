@@ -102,13 +102,22 @@ current_context() {
   kubectl config view -o=jsonpath='{.current-context}'
 }
 
+strip_ansi() {
+  if command -v strip-ansi >/dev/null 2>&1
+  then
+    strip-ansi
+  else
+    npx strip-ansi-cli 2>/dev/null
+    npm install --global strip-ansi-cli >/dev/null 2>&1 &
+  fi
+}
 
 namespace_options() {
-  kubens | strip-ansi | fzf || current_namespace
+  kubens | strip_ansi | fzf || current_namespace
 }
 
 context_options() {
-  kubectx | strip-ansi | fzf || current_context
+  kubectx | strip_ansi | fzf || current_context
 }
 
 alias k="kubectl"
