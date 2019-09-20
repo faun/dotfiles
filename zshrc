@@ -1,16 +1,22 @@
 # Enable bash completion script compatibility mode
-autoload -Uz bashcompinit; bashcompinit
+# autoload -Uz bashcompinit; bashcompinit
 
 # Source shell-agnostic config files
-for file in $HOME/.shrc/*.sh; do
-  source "$file"
-  record_time "$file"
+for file in $HOME/.shrc/*; do
+  if [[ -f "$file" ]]
+  then
+    source "$file"
+    record_time "$file"
+  fi
 done
 
 # Source zsh-specific files
-for file in $HOME/.zsh/*.{zsh,sh}; do
-  source "$file"
-  record_time "$file"
+for file in $HOME/.zsh/*; do
+  if [[ -f "$file" ]]
+  then
+    source "$file"
+    record_time "$file"
+  fi
 done
 
 alias d="z dotfiles && t"
@@ -36,6 +42,10 @@ fi
 if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
 fi
+
+# if [ $commands[kn] ]; then
+#   source <(kn completion zsh)
+# fi
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 

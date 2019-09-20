@@ -1,6 +1,9 @@
-autoload -Uz compinit && compinit -C -d ~/.zcompdump
+fpath=("$HOME/.zsh/functions/completions" $fpath)
+fpath=("/usr/share/zsh/5.3/functions" $fpath)
+fpath=("/usr/share/zsh/$ZSH_VERSION/functions/" $fpath)
 
-fpath=($HOME/.zsh/functions/completions $fpath)
+autoload -Uz compinit
+compinit
 
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'

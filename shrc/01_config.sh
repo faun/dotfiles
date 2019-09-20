@@ -53,21 +53,6 @@ if [ -d "$RBENV_ROOT" ]; then
 fi
 record_time "rbenv paths"
 
-# Set PYENV_ROOT to ~/.pyenv unless it exists
-if [[ "x$PYENV_ROOT" == "x" ]]
-then
-  export PYENV_ROOT=$HOME/.pyenv
-fi
-record_time "pyenv paths"
-
-if [ -d "$PYENV_ROOT" ]; then
-  if which pyenv > /dev/null 2>&1
-  then
-    eval "$(pyenv init -)"
-  fi
-fi
-record_time "pyenv initialization"
-
 # Source .profile if it exists
 if [[ -f "$HOME/.profile" ]]
 then
