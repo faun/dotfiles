@@ -98,6 +98,17 @@ current_namespace() {
   fi
 }
 
+confirm() {
+  echo "${1:-Are you sure? [y/N]}"
+  read -r answer
+  if echo "$answer" | grep -iq "^y" ;then
+    return 0
+  else
+    return 1
+  fi
+
+}
+
 current_context() {
   kubectl config view -o=jsonpath='{.current-context}'
 }
