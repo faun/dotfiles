@@ -78,7 +78,7 @@
 	diff = auto
 	status = auto
 	branch = auto
-	ui = auto
+	ui = true
 	interactive = auto
 
 [merge]
@@ -161,3 +161,5 @@
 
 [advice]
 	statusHints = false
+[diff-so-fancy]
+	first-run = false
