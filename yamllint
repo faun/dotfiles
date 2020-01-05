@@ -8,4 +8,5 @@ rules:
   indentation:
     spaces: consistent
     indent-sequences: whatever
+    indent-comments: whatever
   document-start: disable
