@@ -49,3 +49,4 @@ tags
 .projections.json
 .vimrc.local
 .ruby-version
+.rspec-local
