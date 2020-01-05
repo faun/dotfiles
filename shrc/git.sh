@@ -1,8 +1,8 @@
 #!/usr/local/env bash
 
 current_branch() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
-    ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+  ref=$(git symbolic-ref HEAD 2>/dev/null) ||
+    ref=$(git rev-parse --short HEAD 2>/dev/null) || return
   echo "${ref#refs/heads/}"
 }
 
@@ -13,8 +13,7 @@ recent_branches() {
 recent() {
   local branch_to_checkout
   branch_to_checkout="$(recent_branches | fzf || return 1)"
-  if [[ -n $branch_to_checkout ]]
-  then
+  if [[ -n $branch_to_checkout ]]; then
     git checkout "$branch_to_checkout"
   else
     return 1
@@ -22,8 +21,8 @@ recent() {
 }
 
 heroku_remote() {
-app=$(heroku apps --all | awk '/-staging.*/' | awk '{print $1}' | fzf)
-git remote add "$app" "https://git.heroku.com/$app.git"
+  app=$(heroku apps --all | awk '/-staging.*/' | awk '{print $1}' | fzf)
+  git remote add "$app" "https://git.heroku.com/$app.git"
 }
 
 # git
@@ -55,13 +54,12 @@ glo() {
 # git push
 alias gp='git push'
 gpo() {
-  git push --set-upstream origin "$(git branch | awk '/^\* / { print $2 }')" >> /dev/null
+  git push --set-upstream origin "$(git branch | awk '/^\* / { print $2 }')" >>/dev/null
 }
 
 gpf() {
   branch=$(current_branch)
-  if [[ $branch == 'master' ]]
-  then
+  if [[ $branch == 'master' ]]; then
     echo "This command cannot be run from the master branch"
     return 1
   else
@@ -74,12 +72,10 @@ ci_status_url() {
 }
 
 wait_for_ci() {
-  RUN_TESTS=$([ -e "circle.yml" ] || [ -e ".travis.yml" ] && echo "true" || echo "false" )
-  if [[ $SKIP_CI_CHECK != "true" && $RUN_TESTS != "false" ]]
-  then
+  RUN_TESTS=$([ -e "circle.yml" ] || [ -e ".travis.yml" ] && echo "true" || echo "false")
+  if [[ $SKIP_CI_CHECK != "true" && $RUN_TESTS != "false" ]]; then
     echo "Waiting for CI to pass"
-    while ! hub ci-status | grep "success" > /dev/null
-    do
+    while ! hub ci-status | grep "success" >/dev/null; do
       printf "."
       sleep 5
     done
@@ -89,29 +85,27 @@ wait_for_ci() {
 }
 
 merge() {
-  if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1
-  then
+  if [ -d .git ] || git rev-parse --git-dir >/dev/null 2>&1; then
     branch=$(current_branch)
-    if [[ $branch == 'master' ]]
-    then
+    if [[ $branch == 'master' ]]; then
       echo "This command cannot be run from the master branch"
       return 1
     else
-      git fetch &&\
-        git diff-index --quiet --cached HEAD && \
-        git checkout master && \
-        git diff-index --quiet --cached HEAD && \
-        git pull origin master && \
-        git checkout "$branch" && \
-        git rebase master && \
-        git push origin +"$branch" --force-with-lease && \
-        wait_for_ci && \
-        git checkout master && \
-        git merge "$branch" --ff-only && \
-        sleep 2 && \
-        git push origin master && \
-        hub browse && \
-        sleep 10 && \
+      git fetch &&
+        git diff-index --quiet --cached HEAD &&
+        git checkout master &&
+        git diff-index --quiet --cached HEAD &&
+        git pull origin master &&
+        git checkout "$branch" &&
+        git rebase master &&
+        git push origin +"$branch" --force-with-lease &&
+        wait_for_ci &&
+        git checkout master &&
+        git merge "$branch" --ff-only &&
+        sleep 2 &&
+        git push origin master &&
+        hub browse &&
+        sleep 10 &&
         git push origin ":$branch"
     fi
   else
@@ -150,7 +144,7 @@ alias dth='git difftool HEAD'
 
 ds() {
   args="$1"
-  if [ "x$args" != "x" ];then
+  if [ "x$args" != "x" ]; then
     git diff --stat "$args~1..$args"
   else
     git diff --stat --cached
@@ -174,7 +168,7 @@ alias gri='git fetch origin master:master && git rebase -i origin/master'
 show() {
   # Show a given commit in git difftool
   args="$1"
-  if [ "x$args" != "x" ];then
+  if [ "x$args" != "x" ]; then
     git difftool "$args~1..$args"
   else
     echo "Usage: show SHA"
@@ -182,16 +176,14 @@ show() {
 }
 
 # Show commits that differ from the master branch
-divergent () {
+divergent() {
   branch="$(current_branch)"
-  if [[ "${1}" == "--bare" ]]
-  then
+  if [[ "${1}" == "--bare" ]]; then
     command_opt="--format=%h"
   else
     command_opt=(--left-right --graph --cherry-pick --oneline)
   fi
-  if [[ "$branch" == "master" ]]
-  then
+  if [[ "$branch" == "master" ]]; then
     echo "This command cannot be run against the master branch"
   else
     git log "${command_opt[@]}" master.."$branch"
@@ -200,21 +192,19 @@ divergent () {
 
 # Isolate a single commit to its own branch
 isolate() {
-  if [ "$#" -ne 2 ]
-  then
+  if [ "$#" -ne 2 ]; then
     echo "Usage: isolate <sha> <branch-name>"
     return 1
   else
-    git diff-index --quiet --cached HEAD && \
-      git checkout -b "$2" && \
-      git reset --hard origin/master && \
+    git diff-index --quiet --cached HEAD &&
+      git checkout -b "$2" &&
+      git reset --hard origin/master &&
       git cherry-pick "$1"
   fi
 }
 
 gg() {
-  if [[ "$(current_branch)" != "master" ]]
-  then
+  if [[ "$(current_branch)" != "master" ]]; then
     git fetch origin master:master
   fi
   git log \
@@ -223,7 +213,7 @@ gg() {
     --abbrev-commit \
     --date=relative \
     "$(current_branch)" \
-    --not "$(git for-each-ref --format='%(refname)' refs/remotes/ | grep 'origin/master')"
+    --not "refs/remotes/origin/master"
 }
 
 alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
@@ -257,61 +247,57 @@ gdvc() {
   git diff --cached -w "${args[@]}" | view -
 }
 
-clean_branches (){
-  git checkout master && \
-    git diff-index --quiet --cached HEAD && \
-    git branch --merged | \
-    grep -v "\*" | \
-    grep -v master | \
-    grep -v dev | \
-    xargs -n 1 git branch -d &&\
+clean_branches() {
+  git checkout master &&
+    git diff-index --quiet --cached HEAD &&
+    git branch --merged |
+    grep -v "\*" |
+    grep -v master |
+    grep -v dev |
+    xargs -n 1 git branch -d &&
     echo "Done."
 }
 
-make_or_cd_repo_path () {
+make_or_cd_repo_path() {
   set -o pipefail
-  path_to_repo=$(echo "$1" | \
-  sed -E 's/^(http(s)?\:\/\/|git)@?//' | \
-  sed -E 's/.git$//' | \
-  sed -E 's/:/\//')
+  path_to_repo=$(echo "$1" |
+    sed -E 's/^(http(s)?\:\/\/|git)@?//' |
+    sed -E 's/.git$//' |
+    sed -E 's/:/\//')
   repo_path="$HOME/src/$path_to_repo"
   mkdir -p "$repo_path"
   cd "$repo_path" || return
   pwd
 }
 
-clone () {
+clone() {
   set -o pipefail
-  if [[ $# -ne 1 ]]
-  then
+  if [[ $# -ne 1 ]]; then
     echo "Usage: gcl <git URL>"
     return 1
   fi
   repo_path=$(make_or_cd_repo_path "$1")
   cd "$repo_path" || return
-  if [[ -d "$repo_path/.git" ]]
-  then
+  if [[ -d "$repo_path/.git" ]]; then
     echo "$repo_path already exists"
   else
     git clone "$1" "$repo_path"
   fi
 }
 
-pr_review () {
-  if [[ $# -ne 1 ]]
-  then
+pr_review() {
+  if [[ $# -ne 1 ]]; then
     echo "Usage: pr_review <pull request ID>"
     return 1
   else
-    git diff-index --quiet --cached HEAD && \
-    git fetch origin "pull/$1/head:pr-$1" && \
-    git checkout "pr-$1"
+    git diff-index --quiet --cached HEAD &&
+      git fetch origin "pull/$1/head:pr-$1" &&
+      git checkout "pr-$1"
   fi
 }
 
-my_issues () {
-  if [[ -z $GITHUB_USERNAME ]]
-  then
+my_issues() {
+  if [[ -z $GITHUB_USERNAME ]]; then
     echo "Please set GITHUB_USERNAME"
     return 1
   else
@@ -319,9 +305,8 @@ my_issues () {
   fi
 }
 
-my_pull_requests () {
-  if [[ -z $GITHUB_USERNAME ]]
-  then
+my_pull_requests() {
+  if [[ -z $GITHUB_USERNAME ]]; then
     echo "Please set GITHUB_USERNAME"
     return 1
   else
@@ -329,11 +314,10 @@ my_pull_requests () {
   fi
 }
 
-deploy_current_branch_to_staging () {
+deploy_current_branch_to_staging() {
   remote_name="$(git remote | grep -E 'staging' | fzf)"
   expected_pattern='^staging'
-  if [[ "$remote_name" =~ $expected_pattern ]]
-  then
+  if [[ "$remote_name" =~ $expected_pattern ]]; then
     echo Deploying "$(current_branch)" to "$(git remote get-url "$remote_name")"
     git push "$remote_name" "+$(current_branch):master"
   else
