@@ -14,7 +14,7 @@ record_time "source git prompt"
 
 # show current rbenv version if different from rbenv global
 ruby_version_status() {
-  if which rbenv > /dev/null; then
+  if which rbenv >/dev/null; then
     local ver=$(rbenv version-name)
     if [ "$(rbenv global)" != "$ver" ]; then
       echo "[$ver]"
@@ -43,8 +43,7 @@ parse_git_dirty() {
 record_time "git dirty checking"
 
 nvm_version_prompt() {
-  if type nvm_ls > /dev/null
-  then
+  if type nvm_ls >/dev/null; then
     echo "[$(nvm_ls 'current')]"
   fi
 }
