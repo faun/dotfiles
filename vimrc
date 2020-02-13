@@ -85,3 +85,10 @@ nmap <F1> :redraw!<CR>
 
 " Reload vimrc with leader-r-v
 nnoremap <leader>rv :source $MYVIMRC<CR>
+
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL
