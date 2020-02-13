@@ -26,5 +26,12 @@ autocmd FileType javascript setlocal formatprg=prettier\ --config\ .prettierrc.j
 " Use formatprg when available
 let g:neoformat_try_formatprg = 1
 
-" Enable eslint for neomake
-let g:neomake_javascript_enabled_makers = ['eslint']
+" Enable eslint for ale
+" let b:ale_linters = ['eslint']
+let g:ale_pattern_options = {
+\ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
+\ '\.min\.css$': {'ale_linters': [], 'ale_fixers': []},
+\}
+let g:ale_pattern_options_enabled = 1
+
+let b:ale_fixers = ['prettier', 'eslint', 'prettier-eslint']
