@@ -2,9 +2,15 @@ autoload -U promptinit && promptinit
 setopt prompt_subst
 autoload -U colors && colors
 
-dir=$(dirname $0)
-source ${dir}/../shrc/git-prompt.sh
-record_time "source git-prompt"
+record_time "autoload prompt"
+
+HOMEBREW_PATH="${HOMEBREW_PATH:-/usr/local}"
+if [ -r "${HOMEBREW_PATH}/etc/bash_completion.d/git-prompt.sh" ]; then
+  # shellcheck source=/usr/local/etc/bash_completion.d/git-prompt.sh
+  source "${HOMEBREW_PATH}/etc/bash_completion.d/git-prompt.sh"
+fi
+
+record_time "source git prompt"
 
 # show current rbenv version if different from rbenv global
 ruby_version_status() {
