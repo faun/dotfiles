@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-if [[ -z $TMUX ]]
-then
+if [[ -z $TMUX ]]; then
   export NVM_DIR="$HOME/.nvm"
   export GOPATH="$HOME/src"
   export GOBIN="$HOME/bin"
@@ -13,7 +12,7 @@ then
   PATH="$PATH:$HOME/.cargo/bin"
   PATH="$PATH:$HOME/Library/Python/2.7/bin"
   PATH="$PATH:$HOME/.local/bin"
-  PATH="$PATH:$HOME/perl5/bin";
+  PATH="$PATH:$HOME/perl5/bin"
   PATH="$HOME/.yarn/bin:$PATH"
   PATH="$HOME/.config/kubectx:$PATH"
   PATH="/usr/local/go/bin:$GOPATH/bin:$PATH"
