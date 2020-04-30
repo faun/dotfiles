@@ -15,6 +15,7 @@
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'AndrewRadev/switch.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'benmills/vimux'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bling/vim-airline'
@@ -25,7 +26,7 @@ Plug 'dense-analysis/ale'
 Plug 'ecomba/vim-ruby-refactoring', { 'for': ['ruby'] }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
-Plug 'fatih/vim-go' ", { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', {  'tag': 'v1.22', 'do': ':GoUpdateBinaries' }
 Plug 'gcmt/taboo.vim'
 Plug 'godlygeek/tabular'
 Plug 'janko-m/vim-test'
@@ -36,6 +37,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby'] }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rizzatti/dash.vim'
 Plug 'romainl/vim-qf'
 Plug 'ruanyl/vim-gh-line'
