@@ -216,6 +216,17 @@ gg() {
     --not "refs/remotes/origin/master"
 }
 
+gs() {
+  if [[ "$(current_branch)" != "master" ]]; then
+    git fetch origin master:master
+  fi
+  git log \
+    --stat \
+    "$(current_branch)" \
+    --not "refs/remotes/origin/master" \
+    "$@"
+}
+
 alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
 
 alias stashpop="git stash && git pull && git stash pop"
