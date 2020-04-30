@@ -3,6 +3,7 @@ if [[ -z $TMUX ]]
 then
   export NVM_DIR="$HOME/.nvm"
   export GOPATH="$HOME/src"
+  export GOBIN="$HOME/bin"
 
   PATH="$PATH:$HOME/bin"
   PATH="$PATH:/usr/local/heroku/bin"
