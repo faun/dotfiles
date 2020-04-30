@@ -1,11 +1,13 @@
 fpath=("$HOME/.zsh/functions/completions" $fpath)
 fpath=("/usr/share/zsh/5.3/functions" $fpath)
 fpath=("/usr/share/zsh/$ZSH_VERSION/functions/" $fpath)
-fpath=("/usr/local/share/zsh-completions" $fpath)
 fpath=("/usr/local/share/zsh/site-functions" $fpath)
+fpath=("/usr/local/share/zsh-completions" $fpath)
 
 autoload -Uz compinit
 compinit
+
+autoload -U +X bashcompinit && bashcompinit
 
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
