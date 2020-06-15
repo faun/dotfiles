@@ -41,7 +41,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rizzatti/dash.vim'
 Plug 'romainl/vim-qf'
 Plug 'ruanyl/vim-gh-line'
-Plug 'sbdchd/neoformat'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sheerun/vim-polyglot'
 Plug 'sjl/gundo.vim'
