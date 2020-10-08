@@ -18,7 +18,6 @@ fi
 
 "$DIR/install/dotfiles.sh"
 
-
 # -----------------------------------------------------------------------------
 
 "$DIR/install/link_vendored_scripts.sh"
