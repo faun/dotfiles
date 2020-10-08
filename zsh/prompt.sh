@@ -29,8 +29,11 @@ ruby_version_status() {
 record_time "ruby prompt"
 
 function git_prompt_info() {
-  dirty="$(parse_git_dirty)"
-  __git_ps1 "${ZSH_THEME_GIT_PROMPT_PREFIX//\%/%%}%s${dirty//\%/%%}${ZSH_THEME_GIT_PROMPT_SUFFIX//\%/%%}"
+  if command -v __git_ps1 >/dev/null 2>&1
+  then
+    dirty="$(parse_git_dirty)"
+    __git_ps1 "${ZSH_THEME_GIT_PROMPT_PREFIX//\%/%%}%s${dirty//\%/%%}${ZSH_THEME_GIT_PROMPT_SUFFIX//\%/%%}"
+  fi
 }
 record_time "git prompt info"
 
