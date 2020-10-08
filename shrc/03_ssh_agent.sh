@@ -9,13 +9,16 @@ function start_agent {
   ssh-add -A &> /dev/null
 }
 
-# Source SSH settings, if applicable
+if [[ -d "$HOME/.ssh" ]]
+then
+  # Source SSH settings, if applicable
 
-if [ -f "${SSH_ENV}" ]; then
-  source "${SSH_ENV}" > /dev/null
-  ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-  start_agent;
-}
-else
-  start_agent;
+  if [ -f "${SSH_ENV}" ]; then
+    source "${SSH_ENV}" > /dev/null
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+    start_agent;
+  }
+  else
+    start_agent;
+  fi
 fi
