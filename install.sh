@@ -39,6 +39,13 @@ xcode-select --install > /dev/null 2>&1 || true
 
 # -----------------------------------------------------------------------------
 
+if ! command -v brew > /dev/null 2>&1
+then
+ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+fi
+
+# -----------------------------------------------------------------------------
+
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
 
 excludes=(
