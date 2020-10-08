@@ -142,10 +142,7 @@ fi
 
 # -----------------------------------------------------------------------------
 
-if ! brew ls --versions | awk '{ print $1 }' | grep 'neovim$' > /dev/null
-then
-  brew install neovim
-fi
+"$DIR/install/homebrew_packages.sh"
 
 # -----------------------------------------------------------------------------
 
