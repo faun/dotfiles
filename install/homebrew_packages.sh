@@ -5,6 +5,9 @@ set -e
 homebrew_dependencies=(
   the_silver_searcher
   neovim
+  fasd
+  tmux
+  fzf
 )
 
 for brew_package in "${homebrew_dependencies[@]}"; do
