@@ -7,7 +7,7 @@ homebrew_dependencies=(
   neovim
   fasd
   tmux
-  fzf
+  shfmt
 )
 
 for brew_package in "${homebrew_dependencies[@]}"; do
