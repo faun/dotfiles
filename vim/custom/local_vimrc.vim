@@ -1,3 +1,3 @@
 augroup AutoLocalVimrc
-  autocmd! FocusGained,BufEnter,WinEnter,VimResume * :silent! so .vimrc_local.vim
+  silent! autocmd! FocusGained,BufEnter,WinEnter,VimResume * :silent! so .vimrc_local.vim
 augroup END
