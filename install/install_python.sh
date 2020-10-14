@@ -27,6 +27,8 @@ if ! brew ls --versions | awk '{ print $1 }' | grep 'xz' >/dev/null; then
   brew install xz
 fi
 
+# -----------------------------------------------------------------------------
+
 if [[ -d "$HOME/.pyenv/plugins/python-build/../.." ]]; then
   echo "Updating python-build"
   cd "$HOME/.pyenv/plugins/python-build/../.." && git pull && cd -
