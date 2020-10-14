@@ -45,6 +45,11 @@ latest_python_2_version=$(
 echo "Installing Python $latest_python_2_version"
 pyenv install -s "$latest_python_2_version"
 
+pyenv global "$latest_python_2_version"
+
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+eval "$(pyenv init -)"
+
 echo "Installing neovim for Python2"
 pip2 install --upgrade --force-reinstall pip setuptools wheel neovim
 
@@ -53,11 +58,7 @@ if ! grep "g:python_host_prog" "$HOME/.vimrc.local" >/dev/null; then
   echo "let g:python_host_prog = '$(which python2)'" >>"$HOME/.vimrc.local"
 fi
 
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-
 # -----------------------------------------------------------------------------
-
-eval "$(pyenv init -)"
 
 echo "Installing pip and neovim for Python2"
 
@@ -69,6 +70,7 @@ if ! [[ -d "$virtualenv_destination" ]]; then
 else
   (cd "$virtualenv_destination" && git reset --hard origin/master)
 fi
+
 pyenv virtualenv "$latest_python_2_version" py2neovim
 
 pyenv activate py2neovim
@@ -96,6 +98,8 @@ latest_python_version=$(
 
 echo "Installing Python $latest_python_version"
 pyenv install -s "$latest_python_version"
+
+pyenv global "$latest_python_version" "$latest_python_2_version"
 
 echo "Installing pip and neovim for Python3"
 
