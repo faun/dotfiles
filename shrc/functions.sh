@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 tmux_attach () {
   if [[ $# -eq 0 ]]
   then

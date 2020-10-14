@@ -1,4 +1,3 @@
-
 configure_fasd() {
   [[ "$(command -v fasd)" ]] || return
   if [[ -n $ZSH_NAME ]]
