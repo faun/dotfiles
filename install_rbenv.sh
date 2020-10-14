@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -eou pipefail
 
 RBENV_ROOT=${RBENV_ROOT:-$HOME/.rbenv}
