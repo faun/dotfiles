@@ -7,7 +7,10 @@ DIR="$(pwd)"
 # Install python for Deoplete and Ultisnips
 # https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
 
-pip install --upgrade pip
+if command -v pip >/dev/null 2>&1
+then
+  pip install --upgrade pip
+fi
 
 if ! brew ls --versions | awk '{ print $1 }' | grep 'pyenv$' >/dev/null; then
   echo "Installing pyenv"
