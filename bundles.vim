@@ -22,7 +22,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'dense-analysis/ale'
-Plug 'ecomba/vim-ruby-refactoring', { 'for': ['ruby'] }
+Plug 'ecomba/vim-ruby-refactoring', { 'for': ['ruby'], 'branch': 'main' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'fatih/vim-go', {  'tag': 'v1.22', 'do': ':GoUpdateBinaries' }
