@@ -16,7 +16,10 @@ if [[ -z $TMUX ]]; then
   PATH="$HOME/.yarn/bin:$PATH"
   PATH="$HOME/.config/kubectx:$PATH"
   PATH="/usr/local/go/bin:$GOPATH/bin:$PATH"
-  export PATH="$HOME/.rbenv/bin:$PATH"
+  RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
+  if [ -d "$RBENV_ROOT" ]; then
+    PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
+  fi
   PATH=".git/safe/../../bin:$PATH"
   PATH=".git/safe/../../node_modules/.bin:$PATH"
 
@@ -25,5 +28,6 @@ if [[ -z $TMUX ]]; then
   MANPATH="/usr/local/git/man:$MANPATH"
 
   export PATH
+  export RBENV_ROOT
   export MANPATH
 fi

@@ -22,22 +22,6 @@ elif [[ "$OSTYPE" == darwin* ]]; then
   record_time "mac os"
 fi
 
-# Set RBENV_ROOT to ~/.rbenv unless it exists
-if [[ "x$RBENV_ROOT" == "x" ]]
-then
-  export RBENV_ROOT=$HOME/.rbenv
-fi
-
-if [ -d "$RBENV_ROOT" ]; then
-  export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
-fi
-record_time "rbenv paths"
-
-if [ -d "$RBENV_ROOT" ]; then
-  export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
-fi
-record_time "rbenv paths"
-
 # Source .profile if it exists
 if [[ -f "$HOME/.profile" ]]
 then
