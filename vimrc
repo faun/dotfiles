@@ -9,9 +9,6 @@ set lazyredraw
 " ==========================================
 " Vim-plug
 
-" Define orange for nvim
-hi def Orange ctermfg=202 guifg=#ff5f00
-
 call plug#begin('~/.vim/plugged')
 source $HOME/.bundles.vim
 if filereadable(expand("$HOME/.bundles.local.vim"))
@@ -33,9 +30,6 @@ endfor
 " ==========================================
 " Colors
 
-if has('nvim')
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-end
 
 " ==========================================
 " Custom Vimrc
