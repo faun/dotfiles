@@ -7,19 +7,14 @@ RBENV_PLUGIN_DIR="$RBENV_ROOT/plugins"
 
 install_rbenv () {
   # Clone the rbenv repo and install plugins
-  if ! [[ -d "$HOME/.rbenv/.git" ]]
-  then
-    echo "Installing rbenv and ruby-build"
-    git clone https://github.com/rbenv/rbenv.git "$RBENV_ROOT"
-    mkdir -p "$RBENV_PLUGIN_DIR"
-    git clone https://github.com/rbenv/ruby-build.git "$RBENV_PLUGIN_DIR/ruby-build"
-    git clone git://github.com/jf/rbenv-gemset.git "$RBENV_PLUGIN_DIR/rbenv-gemset"
-    git clone https://github.com/rkh/rbenv-whatis.git "$RBENV_PLUGIN_DIR/rbenv-whatis"
-    git clone https://github.com/rkh/rbenv-use.git "$RBENV_PLUGIN_DIR/rbenv-use"
-    git clone https://github.com/rbenv/rbenv-each.git "$RBENV_PLUGIN_DIR/rbenv-each"
-  else
-    echo "Rbenv is already installed"
-  fi
+  echo "Installing rbenv and ruby-build"
+  git clone https://github.com/rbenv/rbenv.git "$RBENV_ROOT" || true
+  mkdir -p "$RBENV_PLUGIN_DIR"
+  git clone https://github.com/rbenv/ruby-build.git "$RBENV_PLUGIN_DIR/ruby-build" || true
+  git clone git://github.com/jf/rbenv-gemset.git "$RBENV_PLUGIN_DIR/rbenv-gemset" || true
+  git clone https://github.com/rkh/rbenv-whatis.git "$RBENV_PLUGIN_DIR/rbenv-whatis" || true
+  git clone https://github.com/rkh/rbenv-use.git "$RBENV_PLUGIN_DIR/rbenv-use" || true
+  git clone https://github.com/rbenv/rbenv-each.git "$RBENV_PLUGIN_DIR/rbenv-each" || true
 
   # Compile optional bash extensions
   cd ~/.rbenv && src/configure && make -C src > /dev/null
