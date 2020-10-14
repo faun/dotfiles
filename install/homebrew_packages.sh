@@ -8,6 +8,8 @@ homebrew_dependencies=(
   fasd
   tmux
   shfmt
+  zsh-autosuggestions
+  ctags
 )
 
 for brew_package in "${homebrew_dependencies[@]}"; do
