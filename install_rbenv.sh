@@ -18,58 +18,6 @@ install_rbenv () {
 
   # Compile optional bash extensions
   cd ~/.rbenv && src/configure && make -C src > /dev/null
-
-  # Determine the current shell
-  shell="$(ps -p "$PPID" -o 'args=' 2>/dev/null || true)"
-  shell="${shell%% *}"
-  shell="${shell##-}"
-  shell="${shell:-$SHELL}"
-  shell="${shell##*/}"
-
-  # Determine the correct file to add the path modification
-  case "$shell" in
-  bash )
-    if [ -f "${HOME}/.bashrc" ] && [ ! -f "${HOME}/.bash_profile" ]; then
-      profile="$HOME/.bashrc"
-    else
-      profile="$HOME/.bash_profile"
-    fi
-    ;;
-  zsh )
-    profile="$HOME/.zshrc"
-    ;;
-  ksh )
-    profile="$HOME/.profile"
-    ;;
-  fish )
-    # shellcheck disable=SC2088
-    profile="$HOME/.config/fish/config.fish"
-    ;;
-  esac
-
-  # Istall PATH modification and rbenv inititialization to shell init files
-  if ! echo "$PATH" | grep "$RBENV_ROOT/bin" > /dev/null
-  then
-    # Add rbenv PATH to shell profile
-    # shellcheck disable=SC2016
-    if [[ -z ${profile+x} ]]
-    then
-      echo "Add rbenv PATH to your shell profile and run this command again:"
-      echo "export PATH=\"$RBENV_ROOT/bin:\$PATH\""
-      exit 1
-    else
-      echo "export PATH=\"$RBENV_ROOT/bin:\$PATH\"" >> "$profile"
-      # Add auto initialization to shell profile
-      # shellcheck disable=SC2016
-      echo 'eval "$(rbenv init -)"' >> "$profile"
-      # Evaluate rbenv initialization so we can use it right away
-      export PATH="$RBENV_ROOT/bin:$PATH"
-      eval "$(rbenv init -)"
-    fi
- else
-    echo "Your PATH is correctly configured for rbenv"
-  fi
-
 }
 
 install_rbenv
