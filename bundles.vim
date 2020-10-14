@@ -6,7 +6,6 @@
 " Plug 'junegunn/goyo.vim'
 " Plug 'junegunn/seoul256.vim'
 " Plug 'kassio/neoterm'
-" Plug 'morhetz/gruvbox'
 " Plug 'neomake/neomake'
 " Plug 'sebdah/vim-delve'
 " Plug 'sjl/vitality.vim'
