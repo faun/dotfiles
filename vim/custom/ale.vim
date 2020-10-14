@@ -15,7 +15,7 @@ let g:ale_pattern_options_enabled = 1
 let g:ale_open_list = 1
 let g:ale_list_window_size = 5
 let g:ale_fixers = {
-\  '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'vim': ['vint'],
 \   'javascript': ['eslint'],
 \   'sh': ['shfmt'],
