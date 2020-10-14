@@ -30,6 +30,7 @@ endfor
 " ==========================================
 " Colors
 
+colorscheme base16-twilight
 
 " ==========================================
 " Custom Vimrc
