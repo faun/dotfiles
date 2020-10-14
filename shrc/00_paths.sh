@@ -16,6 +16,7 @@ if [[ -z $TMUX ]]; then
   PATH="$HOME/.yarn/bin:$PATH"
   PATH="$HOME/.config/kubectx:$PATH"
   PATH="/usr/local/go/bin:$GOPATH/bin:$PATH"
+  export PATH="$HOME/.rbenv/bin:$PATH"
   PATH=".git/safe/../../bin:$PATH"
   PATH=".git/safe/../../node_modules/.bin:$PATH"
 
