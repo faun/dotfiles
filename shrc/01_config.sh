@@ -24,19 +24,6 @@ elif [[ "$OSTYPE" == darwin* ]]; then
   record_time "mac os"
 fi
 
-# Enable rvm if it exists
-if [[ "x$RVM_ROOT" == "x" ]]
-then
-  export RVM_ROOT="$HOME/.rvm"
-fi
-
-if [ -d "$RVM_ROOT" ]; then
-  export PATH="$PATH:$RVM_ROOT/bin"
-  # shellcheck disable=SC1090
-  [[ -s "$RVM_ROOT/scripts/rvm" ]] && source "$RVM_ROOT/scripts/rvm"
-fi
-record_time "rvm"
-
 # Set RBENV_ROOT to ~/.rbenv unless it exists
 if [[ "x$RBENV_ROOT" == "x" ]]
 then
@@ -67,11 +54,3 @@ then
   export SSH_AUTH_SOCK
   export SSH_AGENT_PID
 fi
-
-if which nodenv > /dev/null
-then
-  NODE_PATH="$NODE_PATH:/opt/boxen/nodenv/versions/$(nodenv version)/lib/node_modules"
-else
-  NODE_PATH="/usr/local/lib/node_modules"
-fi
-export NODE_PATH
