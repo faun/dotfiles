@@ -4,7 +4,6 @@ if [[ -z $TMUX ]]; then
   export GOPATH="$HOME/src"
   export GOBIN="$HOME/bin"
 
-  PATH="$PATH:$HOME/bin"
   PATH="$PATH:/usr/local/heroku/bin"
   PATH="$PATH:/usr/local/bin:/usr/local/sbin"
   PATH="$PATH:/usr/local/mysql/bin"
@@ -22,6 +21,7 @@ if [[ -z $TMUX ]]; then
   fi
   PATH=".git/safe/../../bin:$PATH"
   PATH=".git/safe/../../node_modules/.bin:$PATH"
+  PATH="$HOME/bin:$PATH"
 
   MANPATH="/usr/local/man:$MANPATH"
   MANPATH="/usr/local/mysql/man:$MANPATH"
