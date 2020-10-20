@@ -10,6 +10,7 @@ homebrew_dependencies=(
   shfmt
   zsh-autosuggestions
   ctags
+  mas
 )
 
 for brew_package in "${homebrew_dependencies[@]}"; do
