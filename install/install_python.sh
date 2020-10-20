@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-set -e
+set -eou pipefail
 
 cd "$(dirname "$0")" || exit 1
-DIR="$(pwd)"
+# DIR="$(pwd)"
 
 # Install python for Deoplete and Ultisnips
 # https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
