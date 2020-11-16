@@ -66,4 +66,5 @@ Plug 'tsiemens/vim-aftercolors'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-ruby/vim-ruby', {'for': ['ruby']}
 Plug 'vim-scripts/matchit.zip'
+Plug 'wincent/terminus'
 Plug 'xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
