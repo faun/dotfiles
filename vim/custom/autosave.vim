@@ -1,5 +1,6 @@
 set autoread
 augroup AutoWrite
-  autocmd! BufLeave,FocusLost,WinLeave * :silent! :w
-  autocmd! FocusGained,BufEnter,WinEnter * :silent! e!
+  autocmd! FocusLost,BufLeave,WinLeave * :silent! noautocmd w
+  autocmd! FocusGained,BufEnter,WinEnter * :checktime
+  autocmd! CursorHold,CursorHoldI * checktime
 augroup END
