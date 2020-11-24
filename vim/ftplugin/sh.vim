@@ -1,1 +1,1 @@
-let b:ale_fixers = ['shfmt', 'trim_whitespace']
+let b:ale_fixers = ['shfmt', 'trim_whitespace', 'remove_trailing_lines']

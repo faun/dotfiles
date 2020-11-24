@@ -17,15 +17,8 @@ let g:ale_open_list = 1
 let g:ale_list_window_size = 5
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'vim': ['vint'],
-\   'javascript': ['eslint'],
-\   'sh': ['shfmt'],
-\}
-let g:ale_linters = {
-\  'go': ['gofmt'],
 \}
 
-" Enable eslint for ale
 let g:ale_pattern_options = {
 \ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
 \ '\.min\.css$': {'ale_linters': [], 'ale_fixers': []},
