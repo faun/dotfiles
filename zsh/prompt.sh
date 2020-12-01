@@ -54,11 +54,14 @@ nvm_version_prompt() {
 record_time "nvm prompt"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 pyenv_virtualenv_version() {
+    if command -v pyenv >/dev/null 2>&1
+    then
     [ -z "$PYENV_VIRTUALENV_GLOBAL_NAME" ] && export PYENV_VIRTUALENV_GLOBAL_NAME="$(pyenv global)"
-    VENV_NAME="$(pyenv version-name)"
-    VENV_NAME="${VENV_NAME##*/}"
+      VENV_NAME="$(pyenv version-name)"
+      VENV_NAME="${VENV_NAME##*/}"
 
-    echo -e "$VENV_NAME"
+      echo -e "($VENV_NAME)"
+    fi
 }
 pyenv_version="$(pyenv_virtualenv_version)"
 record_time "pyenv_virtualenv prompt"
@@ -72,7 +75,7 @@ ruby_version='%{$fg[red]%}$(ruby_version_status)%{$reset_color%}'
 git_branch='%{$fg[blue]%}$(git_prompt_info)%{$reset_color%}'
 nvm_version='%{$fg[blue]%}$(nvm_version_prompt)%{$reset_color%}'
 
-export PROMPT="${user_host}:${current_dir} ${ruby_version} ${nvm_version} %{$fg[yellow]%}(${pyenv_version})%{${reset_color}%}
+export PROMPT="${user_host}:${current_dir} ${ruby_version} ${nvm_version} %{$fg[yellow]%}${pyenv_version}%{${reset_color}%}
 %{$fg[blue]%}${git_branch} %B$%b "
 export RPS1="${return_code}"
 export SUDO_PS1="$fg[green]\u@\h:$fg[blue]\w
