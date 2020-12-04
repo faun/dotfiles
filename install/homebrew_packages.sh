@@ -11,6 +11,7 @@ homebrew_dependencies=(
   zsh-autosuggestions
   ctags
   mas
+  pyenv-virtualenv
 )
 
 for brew_package in "${homebrew_dependencies[@]}"; do
