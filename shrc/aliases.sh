@@ -55,8 +55,7 @@ alias vim_bundle_update='vim +PlugUpdate +qall'
 alias vim_bundle_clean='vim +PlugClean +qall'
 alias vim_bundle_maintenance='vim +PlugInstall +PlugUpdate +PlugClean +qall'
 
-if command -v nvim >/dev/null 2>&1
-then
+if command -v nvim >/dev/null 2>&1; then
   VIM_EXE='nvim'
 else
   VIM_EXE='vim'
@@ -81,8 +80,7 @@ migrations() {
   local migration_name
   migration_name="$(find ./db/migrate/* | sort -nr | fzf --reverse || exit 1)"
 
-  if [[ -n $migration_name ]]
-  then
+  if [[ -n $migration_name ]]; then
     vim -O "$migration_name"
   fi
 }
@@ -101,7 +99,7 @@ current_namespace() {
 confirm() {
   echo "${1:-Are you sure? [y/N]}"
   read -r answer
-  if echo "$answer" | grep -iq "^y" ;then
+  if echo "$answer" | grep -iq "^y"; then
     return 0
   else
     return 1
@@ -114,8 +112,7 @@ current_context() {
 }
 
 strip_ansi() {
-  if command -v strip-ansi >/dev/null 2>&1
-  then
+  if command -v strip-ansi >/dev/null 2>&1; then
     strip-ansi
   else
     npx strip-ansi-cli 2>/dev/null
@@ -138,8 +135,7 @@ alias ktx='kubectx "$(context_options)"'
 alias ktxd='CONTEXT="$(context_options)"; confirm "Delete context $CONTEXT?" && kubectl config unset "contexts.$CONTEXT"'
 
 kcapp() {
-  if [[ $# -ne 1 ]]
-  then
+  if [[ $# -ne 1 ]]; then
     echo "Usage kcapp <app_label>"
     return 1
   fi
@@ -147,37 +143,34 @@ kcapp() {
   kubectl get pod -l app="$1" \
     --sort-by=.status.startTime \
     --field-selector=status.phase=Running \
-    -o=jsonpath='{.items[-1:].metadata.name}' | \
+    -o=jsonpath='{.items[-1:].metadata.name}' |
     tail -1
 }
 
 kcin() {
-  if [[ $# -ne 1 ]]
-  then
+  if [[ $# -ne 1 ]]; then
     echo "Usage kcin <istio_label>"
     return 1
   fi
 
-  kubectl get -n istio-next pod -l istio="$1" \
+  kubectl get -n istio-system pod -l istio="$1" \
     -o=jsonpath='{.items[-1:].metadata.name}'
 }
 
 kcimt() {
-  if [[ $# -ne 1 ]]
-  then
+  if [[ $# -ne 1 ]]; then
     echo "Usage kcimt <istio-mixer-type>"
     return 1
   fi
 
-  kubectl get -n istio-next pod -l istio-mixer-type="$1" \
+  kubectl get -n istio-system pod -l istio-mixer-type="$1" \
     -o=jsonpath='{.items[-1:].metadata.name}'
 }
 
 alias kcistio=kcin
 
 kcrelease() {
-  if [[ $# -ne 1 ]]
-  then
+  if [[ $# -ne 1 ]]; then
     echo "Usage kcrelease <release_label>"
     return 1
   fi
@@ -185,25 +178,23 @@ kcrelease() {
   kubectl get pods -l release="$1" \
     --sort-by=.status.startTime \
     --field-selector=status.phase=Running \
-    -o=jsonpath='{.items[-1:].metadata.name}' | \
+    -o=jsonpath='{.items[-1:].metadata.name}' |
     tail -1
 }
 
 kcrun() {
-  if [[ $# -ne 1 ]]
-  then
+  if [[ $# -ne 1 ]]; then
     echo "Usage krun <run_label>"
     return 1
   fi
 
   kubectl get pod -l run="$1" \
-    -o=jsonpath='{.items[-1:].metadata.name}' | \
+    -o=jsonpath='{.items[-1:].metadata.name}' |
     tail -1
 }
 
 kcx() {
-  if [[ $# -lt 3 ]]
-  then
+  if [[ $# -lt 3 ]]; then
     echo "Usage kcx <pod> <container> [commands]"
     return 1
   fi
