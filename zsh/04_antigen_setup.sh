@@ -1,5 +1,4 @@
-if [[ -s $HOME/.config/antigen/antigen.zsh ]]
-then
+if [[ -s $HOME/.config/antigen/antigen.zsh ]]; then
   autoload -Uz antigeninit
   record_time "antigen autoload"
 
@@ -13,9 +12,8 @@ then
     lukechilds/zsh-better-npm-completion
   )
 
-  for package in $antigen_packages
-  do
-    antigen bundle "$package" > /dev/null
+  for package in $antigen_packages; do
+    antigen bundle "$package" >/dev/null
     record_time "$package"
   done
 
