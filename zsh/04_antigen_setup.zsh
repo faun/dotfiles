@@ -10,6 +10,7 @@ then
     zsh-users/zsh-syntax-highlighting
     zsh-users/zsh-completions
     zsh-users/zsh-history-substring-search
+    lukechilds/zsh-better-npm-completion
   )
 
   for package in $antigen_packages
