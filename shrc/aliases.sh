@@ -62,8 +62,8 @@ else
 fi
 
 export EDITOR="$VIM_EXE"
-alias vim="\$VIM_EXE"
-alias v="\$VIM_EXE"
+alias vim="\$VIM_EXE -O"
+alias v="\$VIM_EXE -O"
 
 # It's aliases all the way down
 alias local_vim_bundles='$EDITOR $HOME/.bundles.local.vim'
