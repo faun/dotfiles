@@ -1,22 +1,9 @@
 
-" Plug 'SirVer/ultisnips'
-" Plug 'airblade/vim-rooter'
-" Plug 'altercation/vim-colors-solarized'
-" Plug 'honza/vim-snippets'
-" Plug 'junegunn/goyo.vim'
-" Plug 'junegunn/seoul256.vim'
-" Plug 'kassio/neoterm'
-" Plug 'neomake/neomake'
-" Plug 'sebdah/vim-delve'
-" Plug 'sjl/vitality.vim'
-" Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install  ~/.vim/plugged/tern_for_vim/' }
-" Plug 'tomtom/quickfixsigns_vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'AndrewRadev/switch.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'benmills/vimux'
-Plug 'bkad/CamelCaseMotion'
 Plug 'bling/vim-airline'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
