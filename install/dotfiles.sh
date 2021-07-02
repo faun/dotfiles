@@ -7,6 +7,7 @@ cd .. || exit 1
 DIR="$(pwd)"
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
+mkdir -p "${XDG_CONFIG_HOME}"
 
 excludes=(
   LICENSE
@@ -67,7 +68,5 @@ for name in *; do
     fi
   fi
 done
-
-mkdir -p "${XDG_CONFIG_HOME:=$HOME/.config}"
 
 nvimrc="$XDG_CONFIG_HOME/nvim"
