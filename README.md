@@ -5,23 +5,12 @@
 These are config files to set up a system the way I like it.
 
 ## Installation
-
-    export DESTINATION="$HOME/src/github.com/faun/dotfiles";
-    url="https://git.io/viGsj"
-    script_file=$(mktemp)
-    echo "===="
-    curl -s -L "$url" | tee "$script_file"
-    echo ""
-    echo "===="
-    printf "Do you want to run this script? [yN]"
-    read line
-    case $line in
-      [Yy]|[Yy][Ee][Ss]) bash "$script_file";;
-    esac
-
-or, for the terminally lazy:
     
-    export DESTINATION="$HOME/src/github.com/faun/dotfiles"; curl -L https://git.io/viGsj | bash
+    export DESTINATION="$HOME/src/github.com/faun/dotfiles"
+    export INSTALL_SCRIPT_URL="https://gist.githubusercontent.com/faun/67fadc3f1525399da236589562cb4583/raw/install_dotfiles.sh?$(date +%s)"
+    curl -sSL -o dotfiles_installer.sh "$INSTALL_SCRIPT_URL"
+    chmod +x ./dotfiles_installer.sh
+    ./dotfiles_installer.sh
 
 ## Configuration
 
