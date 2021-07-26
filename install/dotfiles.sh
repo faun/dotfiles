@@ -18,11 +18,6 @@ excludes=(
   mac_os_defaults
 )
 
-excluded_suffixes='@(sh|md)'
-for suffix in "${excluded_suffixes[@]}"; do
-  excludes+=(*.$suffix)
-done
-
 shouldLinkFile() {
   for file in "${excludes[@]}"; do
     if [[ "$file" == "$1" ]]; then
