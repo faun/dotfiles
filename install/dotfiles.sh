@@ -10,6 +10,7 @@ XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
 mkdir -p "${XDG_CONFIG_HOME}"
 
 excludes=(
+  README.md
   LICENSE
   fonts
   install.sh
