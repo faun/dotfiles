@@ -35,8 +35,8 @@ for name in *; do
     target="$HOME/.rbenv/$name"
   fi
 
-  if [[ "$name" == "nvim" ]]; then
-    target="$HOME/.config/$name"
+  if [[ "$name" == "vim" ]]; then
+    target="${XDG_CONFIG_HOME}/vim"
   fi
 
   if [[ "$name" == "yamllint" ]]; then
