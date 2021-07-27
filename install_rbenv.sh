@@ -32,4 +32,7 @@ do
   rbenv install -s "$ruby_version"
 done
 
+echo "Setting global Ruby version to: $ruby_version"
+rbenv global "$ruby_version"
+
 echo "Done."
