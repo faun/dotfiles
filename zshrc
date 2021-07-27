@@ -43,8 +43,11 @@ fi
 #   source <(kn completion zsh)
 # fi
 
-export N_PREFIX="$HOME/n"
-[[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin" # Added by n-install (see http://git.io/n-install-repo).
+# if which n >/dev/null 2>&1
+# then
+#   N_PREFIX="$HOME/n"
+#   [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin" # Added by n-install (see http://git.io/n-install-repo).
+# fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
