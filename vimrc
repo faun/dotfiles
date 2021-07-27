@@ -30,7 +30,12 @@ endfor
 " ==========================================
 " Colors
 
-colorscheme base16-twilight
+try
+  colorscheme base16-twilight
+catch /^Vim\%((\a\+)\)\=:E185/
+  colorscheme default
+  set background=dark
+endtry
 
 " ==========================================
 " Custom Vimrc
