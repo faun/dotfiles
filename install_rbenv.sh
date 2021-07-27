@@ -22,6 +22,8 @@ install_rbenv () {
 
 install_rbenv
 
+PATH="$PATH:${RBENV_ROOT}/bin"
+
 INSTALL_RUBY_VERSIONS=${RUBY_VERSIONS_TO_INSTALL:-1}
 echo "Installing the latest $INSTALL_RUBY_VERSIONS versions of MRI Ruby"
 for ruby_version in $(rbenv install -l | grep -v - | tail "-$INSTALL_RUBY_VERSIONS")
