@@ -36,3 +36,10 @@ then
   export SSH_AUTH_SOCK
   export SSH_AGENT_PID
 fi
+
+if [[ -f "$HOME/.git-prompt.sh" ]]
+then
+  source "$HOME/.git-prompt.sh"
+else
+  curl -sSL 'https://git.io/v5oou' -o "$HOME/.git-prompt.sh" || true
+fi
