@@ -35,8 +35,9 @@ for name in *; do
     target="$HOME/.rbenv/$name"
   fi
 
-  if [[ "$name" == "vim" ]]; then
-    target="${XDG_CONFIG_HOME}/vim"
+  if [[ "$name" == "init.vim" ]]; then
+    mkdir -p "${XDG_CONFIG_HOME}/nvim"
+    target="${XDG_CONFIG_HOME}/nvim/init.vim"
   fi
 
   if [[ "$name" == "yamllint" ]]; then
