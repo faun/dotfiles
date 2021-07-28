@@ -1,4 +1,3 @@
-
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'AndrewRadev/switch.vim'
 Plug 'airblade/vim-gitgutter'
