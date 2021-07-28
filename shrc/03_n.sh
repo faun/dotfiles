@@ -1,6 +1,6 @@
-if which n >/dev/null 2>&1
+N_PREFIX="${N_PREFIX:-$HOME/n}"
+if [[ -d "$N_PREFIX" ]]
 then
-  export N_PREFIX="$HOME/n"
-  [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin" # Added by n-install (see http://git.io/n-install-repo).
+  export N_PREFIX
+  [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
 fi
-
