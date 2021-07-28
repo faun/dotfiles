@@ -69,6 +69,10 @@ n install lts
 
 # -----------------------------------------------------------------------------
 
+"$DIR/install/install_cargo.sh"
+
+# -----------------------------------------------------------------------------
+
 echo "Installing spelling dictionaries"
 nvim -u .nvimtest +q
 
