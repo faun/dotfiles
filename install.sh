@@ -25,7 +25,6 @@ fi
 # -----------------------------------------------------------------------------
 
 mkdir -p "$HOME/.local/share/nvim/"
-mkdir -p "$HOME/.nvim/tmpfiles"
 mkdir -p "$HOME/.vim/spell"
 touch "$HOME/.vim/spell/en.utf-8.add"
 
