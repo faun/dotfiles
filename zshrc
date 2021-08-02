@@ -19,10 +19,6 @@ done
 
 alias d="z dotfiles && t"
 
-# use .localrc for settings specific to one system
-[[ -f ~/.localrc ]] && . ~/.localrc
-record_time "localrc"
-
 [[ -f $HOME/.iterm2_shell_integration.zsh ]] && source $HOME/.iterm2_shell_integration.zsh
 record_time "iterm2 integration"
 
@@ -50,3 +46,7 @@ then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# use .localrc for settings specific to one system
+[[ -f ~/.localrc ]] && . ~/.localrc
+record_time "localrc"
