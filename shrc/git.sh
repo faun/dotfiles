@@ -23,6 +23,10 @@ heroku_remote() {
   git remote add "$app" "https://git.heroku.com/$app.git"
 }
 
+git_remote_mainline_ref() {
+  git rev-parse --abbrev-ref origin/HEAD | cut -c8-
+}
+
 # git
 alias got='git'
 alias get='git'
@@ -33,8 +37,6 @@ alias g='git status -sb'
 # git pull
 alias glf='git pull --ff-only'
 alias glr='git pull --rebase'
-
-alias gu='git fetch && git update-ref refs/heads/master origin/master'
 
 # git cherry-pick
 alias gcpa="git cherry-pick --abort"
@@ -57,8 +59,8 @@ gpo() {
 
 gpf() {
   branch=$(current_branch)
-  if [[ $branch == 'master' ]]; then
-    echo "This command cannot be run from the master branch"
+  if [[ $branch == git_remote_mainline_ref ]]; then
+    echo "This command cannot be run from the $(git_remote_mainline_ref) branch"
     return 1
   else
     git push origin +"$branch" --force-with-lease
@@ -85,23 +87,23 @@ wait_for_ci() {
 merge() {
   if [ -d .git ] || git rev-parse --git-dir >/dev/null 2>&1; then
     branch=$(current_branch)
-    if [[ $branch == 'master' ]]; then
-      echo "This command cannot be run from the master branch"
+    if [[ $branch == git_remote_mainline_ref ]]; then
+      echo "This command cannot be run from the $(git_remote_mainline_ref) branch"
       return 1
     else
       git fetch &&
         git diff-index --quiet --cached HEAD &&
-        git checkout master &&
+        git checkout git_remote_mainline_ref &&
         git diff-index --quiet --cached HEAD &&
-        git pull origin master &&
+        git pull origin git_remote_mainline_ref &&
         git checkout "$branch" &&
-        git rebase master &&
+        git rebase git_remote_mainline_ref &&
         git push origin +"$branch" --force-with-lease &&
         wait_for_ci &&
-        git checkout master &&
+        git checkout git_remote_mainline_ref &&
         git merge "$branch" --ff-only &&
         sleep 2 &&
-        git push origin master &&
+        git push origin git_remote_mainline_ref &&
         hub browse &&
         sleep 10 &&
         git push origin ":$branch"
@@ -149,19 +151,19 @@ ds() {
   fi
 }
 
-compare_to_master() {
+compare_to_mainline() {
   branch="$(current_branch)"
-  git diff --stat "master..$branch"
+  git diff --stat "$(git_remote_mainline_ref)..$branch"
 }
 
-diff_with_master() {
+diff_with_mainline() {
   branch="$(current_branch)"
-  git difftool "master..$branch"
+  git difftool "$(git_remote_mainline_ref)..$branch"
 }
 
 # git rebase
 alias grc='git rebase --continue'
-alias gri='git fetch origin master:master && git rebase -i origin/master'
+alias gri="git fetch origin \$(git_remote_mainline_ref):\$(git_remote_mainline_ref) && git rebase -i origin/\$(git_remote_mainline_ref)"
 
 show() {
   # Show a given commit in git difftool
@@ -202,8 +204,8 @@ isolate() {
 }
 
 gg() {
-  if [[ "$(current_branch)" != "master" ]]; then
-    git fetch origin master:master
+  if [[ "$(current_branch)" != git_remote_mainline_ref ]]; then
+    git fetch origin "$(git_remote_mainline_ref):$(git_remote_mainline_ref)"
   fi
   git log \
     --graph \
@@ -211,17 +213,17 @@ gg() {
     --abbrev-commit \
     --date=relative \
     "$(current_branch)" \
-    --not "refs/remotes/origin/master"
+    --not "refs/remotes/origin/$(git_remote_mainline_ref)"
 }
 
 gs() {
-  if [[ "$(current_branch)" != "master" ]]; then
-    git fetch origin master:master
+  if [[ "$(current_branch)" != git_remote_mainline_ref ]]; then
+    git fetch origin "$(git_remote_mainline_ref):$(git_remote_mainline_ref)"
   fi
   git log \
     --stat \
     "$(current_branch)" \
-    --not "refs/remotes/origin/master" \
+    --not "refs/remotes/origin/$(git_remote_mainline_ref)" \
     "$@"
 }
 
