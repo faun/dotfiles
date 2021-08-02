@@ -1,9 +1,12 @@
 fpath=("$HOME/.zsh/functions/completions" $fpath)
 fpath=("/usr/share/zsh/5.3/functions" $fpath)
 fpath=("/usr/share/zsh/$ZSH_VERSION/functions/" $fpath)
-fpath=("/usr/local/share/zsh/site-functions" $fpath)
-fpath=("/usr/local/share/zsh-completions" $fpath)
 fpath=("$HOME/.zfunc" $fpath)
+
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+fi
 
 autoload -Uz compinit
 compinit
