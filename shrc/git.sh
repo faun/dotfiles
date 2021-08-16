@@ -198,14 +198,14 @@ isolate() {
   else
     git diff-index --quiet --cached HEAD &&
       git checkout -b "$2" &&
-      git reset --hard origin/master &&
+      git reset --hard "origin/$(git_remote_mainline_ref)" &&
       git cherry-pick "$1"
   fi
 }
 
 gg() {
   if [[ "$(current_branch)" != git_remote_mainline_ref ]]; then
-    git fetch origin "$(git_remote_mainline_ref):$(git_remote_mainline_ref)"
+    git fetch origin "$(git_remote_mainline_ref)"
   fi
   git log \
     --graph \
@@ -218,7 +218,7 @@ gg() {
 
 gs() {
   if [[ "$(current_branch)" != git_remote_mainline_ref ]]; then
-    git fetch origin "$(git_remote_mainline_ref):$(git_remote_mainline_ref)"
+    git fetch origin "$(git_remote_mainline_ref)"
   fi
   git log \
     --stat \
@@ -259,12 +259,11 @@ gdvc() {
 }
 
 clean_branches() {
-  git checkout master &&
+  git checkout "$(git_remote_mainline_ref)" &&
     git diff-index --quiet --cached HEAD &&
     git branch --merged |
     grep -v "\*" |
-    grep -v master |
-    grep -v dev |
+    grep -v "$(git_remote_mainline_ref)" |
     xargs -n 1 git branch -d &&
     echo "Done."
 }
