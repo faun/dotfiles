@@ -4,7 +4,6 @@ if [[ -z $TMUX ]]; then
   export GOPATH="$HOME/src"
   export GOBIN="$HOME/bin"
 
-  PATH="$PATH:/usr/local/bin:/usr/local/sbin"
   PATH="$PATH:/usr/local/mysql/bin"
   PATH="$PATH:/usr/local/git/bin"
   PATH="$PATH:$HOME/.cargo/bin"
@@ -23,6 +22,7 @@ if [[ -z $TMUX ]]; then
   MANPATH="/usr/local/man:$MANPATH"
   MANPATH="/usr/local/mysql/man:$MANPATH"
   MANPATH="/usr/local/git/man:$MANPATH"
+  PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
   export PATH
   export RBENV_ROOT
