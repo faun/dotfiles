@@ -30,6 +30,7 @@ for ruby_version in $(rbenv install -l | grep -v - | tail "-$INSTALL_RUBY_VERSIO
 do
   echo "Installing $ruby_version"
   rbenv install -s "$ruby_version"
+  rbenv global "$ruby_version"
 done
 
 echo "Setting global Ruby version to: $ruby_version"
