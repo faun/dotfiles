@@ -117,6 +117,8 @@ echo "$PYTHON3_PATH"
 pyenv activate py3neovim
 pip3 install --upgrade pip setuptools wheel neovim >/dev/null
 
+$PYTHON3_PATH -m pip install pynvim
+
 if ! grep "g:python3_host_prog" "$HOME/.vimrc.local" >/dev/null; then
   echo "Adding Neovim configuration for Python3"
   echo "let g:python3_host_prog = '$PYTHON3_PATH'" >>"$HOME/.vimrc.local"
