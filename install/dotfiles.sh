@@ -22,10 +22,9 @@ shouldLinkFile() {
   for file in "${excludes[@]}"; do
     if [[ "$file" == "$1" ]]; then
       return 1
-    else
-      return 0
     fi
   done
+  return 0
 }
 
 for name in *; do
@@ -40,6 +39,10 @@ for name in *; do
     target="${XDG_CONFIG_HOME}/nvim/init.vim"
   fi
 
+  if [[ "$name" == "init.vim" ]]; then
+    target="${XDG_CONFIG_HOME}/nvim/init.vim"
+  fi
+
   if [[ "$name" == "yamllint" ]]; then
     mkdir -p "$HOME/.config/yamllint/"
     target="$HOME/.config/yamllint/config"
@@ -51,6 +54,7 @@ for name in *; do
   )
 
   if [[ $should_link == 0 ]]; then
+    echo "Linking $target"
     if [[ -L "$target" ]]; then
       rm "$target"
     fi
@@ -63,6 +67,8 @@ for name in *; do
     else
       echo "Unknown file type: $target"
     fi
+  else
+    echo "Not linking $target"
   fi
 done
 
