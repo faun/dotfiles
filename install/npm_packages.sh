@@ -10,18 +10,19 @@ if ! command -v yarn >/dev/null; then
 fi
 
 npm_packages=(
-  diff-so-fancy
-  tern
-  csslint
-  stylelint
-  prettier
-  eslint
-  eslint-plugin-prettier
-  eslint-config-prettier
   babel-eslint
+  csslint
+  diff-so-fancy
+  eslint
+  eslint-config-prettier
+  eslint-plugin-prettier
   eslint-plugin-react
+  neovim
   nginxbeautifier
+  prettier
   strip-ansi-cli
+  stylelint
+  tern
 )
 
 for package in "${npm_packages[@]}"; do
