@@ -15,6 +15,7 @@ if [[ -z $TMUX ]]; then
   if [ -d "$RBENV_ROOT" ]; then
     PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
   fi
+  PATH="$HOME/.pyenv/shims:$PATH"
   PATH=".git/safe/../../bin:$PATH"
   PATH=".git/safe/../../node_modules/.bin:$PATH"
   PATH="$HOME/bin:$PATH"
