@@ -17,7 +17,7 @@ install_rbenv () {
   git clone https://github.com/rbenv/rbenv-each.git "$RBENV_PLUGIN_DIR/rbenv-each" || true
 
   # Compile optional bash extensions
-  cd ~/.rbenv && src/configure && make -C src > /dev/null
+  cd "$RBENV_ROOT" && src/configure && make -C src > /dev/null
 }
 
 install_rbenv
