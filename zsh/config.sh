@@ -92,6 +92,10 @@ then
   # list
   setopt HIST_REDUCE_BLANKS
 
+  # Prevent a command from being recorded into history by preceding it with at
+  # least one space.
+  setopt hist_ignore_space
+
   # If a pattern for filename generation has no matches, do not print an error,
   # instead, leave it unchanged in the argument list.
   unsetopt nomatch
