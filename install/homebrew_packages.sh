@@ -13,6 +13,8 @@ homebrew_dependencies=(
   ctags
   mas
   pyenv-virtualenv
+  bat
+  fzf
 )
 
 for brew_package in "${homebrew_dependencies[@]}"; do
