@@ -11,7 +11,6 @@ Plug 'dense-analysis/ale'
 Plug 'ecomba/vim-ruby-refactoring', { 'for': ['ruby'], 'branch': 'main' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
-Plug 'fatih/vim-go', { 'tag': 'v1.22', 'do': ':GoUpdateBinaries' }
 Plug 'gcmt/taboo.vim'
 Plug 'godlygeek/tabular'
 Plug 'janko-m/vim-test'
@@ -21,7 +20,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-user'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'mustache/vim-mustache-handlebars'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby'] }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rizzatti/dash.vim'
@@ -39,8 +37,6 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
-Plug 'tpope/vim-haml'
-Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-ragtag'
@@ -51,7 +47,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tsiemens/vim-aftercolors'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-ruby/vim-ruby', {'for': ['ruby']}
 Plug 'vim-scripts/matchit.zip'
 Plug 'wincent/terminus'
 Plug 'xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
