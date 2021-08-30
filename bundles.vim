@@ -1,6 +1,7 @@
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'AndrewRadev/switch.vim'
+Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
