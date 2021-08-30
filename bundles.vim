@@ -11,6 +11,7 @@ Plug 'dense-analysis/ale'
 Plug 'ecomba/vim-ruby-refactoring', { 'for': ['ruby'], 'branch': 'main' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'gcmt/taboo.vim'
 Plug 'godlygeek/tabular'
 Plug 'janko-m/vim-test'
