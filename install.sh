@@ -24,12 +24,6 @@ fi
 
 # -----------------------------------------------------------------------------
 
-mkdir -p "$HOME/.local/share/nvim/"
-mkdir -p "$HOME/.vim/spell"
-touch "$HOME/.vim/spell/en.utf-8.add"
-
-# -----------------------------------------------------------------------------
-
 "$DIR/install/node_version_manager.sh"
 
 # -----------------------------------------------------------------------------
@@ -50,15 +44,22 @@ touch "$HOME/.vim/spell/en.utf-8.add"
 
 # -----------------------------------------------------------------------------
 
-"$DIR/install/install_python.sh"
+"$DIR/install/python2.sh"
+"$DIR/install/python3.sh"
 
 # -----------------------------------------------------------------------------
 
+"$DIR/install/antigen.sh"
+
+# -----------------------------------------------------------------------------
 "$DIR/install/install_cargo.sh"
 
 # -----------------------------------------------------------------------------
 
 echo "Installing spelling dictionaries"
+mkdir -p "$HOME/.local/share/nvim/"
+mkdir -p "$HOME/.vim/spell"
+touch "$HOME/.vim/spell/en.utf-8.add"
 nvim -u .nvimtest +q
 
 # -----------------------------------------------------------------------------
