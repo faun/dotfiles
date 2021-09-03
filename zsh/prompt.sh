@@ -4,10 +4,9 @@ autoload -U colors && colors
 
 record_time "autoload prompt"
 
-HOMEBREW_PATH="${HOMEBREW_PATH:-/usr/local}"
-if [ -r "${HOMEBREW_PATH}/etc/bash_completion.d/git-prompt.sh" ]; then
+if [ -r "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh" ]; then
   # shellcheck source=/usr/local/etc/bash_completion.d/git-prompt.sh
-  source "${HOMEBREW_PATH}/etc/bash_completion.d/git-prompt.sh"
+  source "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh"
 fi
 
 record_time "source git prompt"
