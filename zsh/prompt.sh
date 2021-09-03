@@ -28,8 +28,7 @@ ruby_version_status() {
 record_time "ruby prompt"
 
 function git_prompt_info() {
-  if command -v __git_ps1 >/dev/null 2>&1
-  then
+  if command -v __git_ps1 >/dev/null 2>&1; then
     dirty="$(parse_git_dirty)"
     __git_ps1 "${ZSH_THEME_GIT_PROMPT_PREFIX//\%/%%}%s${dirty//\%/%%}${ZSH_THEME_GIT_PROMPT_SUFFIX//\%/%%}"
   fi
@@ -53,14 +52,13 @@ nvm_version_prompt() {
 record_time "nvm prompt"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 pyenv_virtualenv_version() {
-    if command -v pyenv >/dev/null 2>&1
-    then
+  if command -v pyenv >/dev/null 2>&1; then
     [ -z "$PYENV_VIRTUALENV_GLOBAL_NAME" ] && export PYENV_VIRTUALENV_GLOBAL_NAME="$(pyenv global)"
-      VENV_NAME="$(pyenv version-name)"
-      VENV_NAME="${VENV_NAME##*/}"
+    VENV_NAME="$(pyenv version-name)"
+    VENV_NAME="${VENV_NAME##*/}"
 
-      echo -e "($VENV_NAME)"
-    fi
+    echo -e "($VENV_NAME)"
+  fi
 }
 pyenv_version="$(pyenv_virtualenv_version)"
 record_time "pyenv_virtualenv prompt"
