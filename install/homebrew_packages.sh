@@ -3,6 +3,7 @@
 set -e
 
 homebrew_dependencies=(
+  antibody
   the_silver_searcher
   neovim
   fasd
