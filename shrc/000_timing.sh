@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 typeset -F SECONDS
 shell_start=$SECONDS
 
