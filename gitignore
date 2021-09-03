@@ -50,4 +50,4 @@ tags
 .vimrc.local
 .ruby-version
 .rspec-local
-.env.development
+/.env.*

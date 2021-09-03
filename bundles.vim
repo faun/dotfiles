@@ -28,7 +28,6 @@ Plug 'rizzatti/dash.vim'
 Plug 'romainl/vim-qf'
 Plug 'ruanyl/vim-gh-line'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'sheerun/vim-polyglot'
 Plug 'sjl/gundo.vim'
 Plug 'skalnik/vim-vroom'
 Plug 'terryma/vim-expand-region'
