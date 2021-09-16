@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export COLORTERM="truecolor"
+
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=${HOME}/.config}"
 
 BASE16_SHELL_PATH="${XDG_CONFIG_HOME}/base16-shell"
