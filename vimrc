@@ -28,15 +28,6 @@ for g:file in split(glob('$HOME/.vim/custom/*.vim'), '\n')
   exe 'source' g:file
 endfor
 
-" ==========================================
-" Colors
-
-try
-  colorscheme base16-twilight
-catch /^Vim\%((\a\+)\)\=:E185/
-  colorscheme default
-  set background=dark
-endtry
 
 " ==========================================
 " Custom Vimrc
