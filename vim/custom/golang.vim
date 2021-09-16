@@ -45,6 +45,4 @@ let g:projectionist_heuristics = {
       \   },
       \ }}
 
-" autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-"
-let b:ale_linters = ['gofmt']
+let b:ale_linters = []
