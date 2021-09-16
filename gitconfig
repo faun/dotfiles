@@ -3,7 +3,6 @@
 	blog = log origin/master... --left-right
 	br = branch
 	branches = branch -a -vv
-	ci = commit -v
 	cleanup = !git remote prune origin && git gc && git clean -df && git stash clear
 	clone = clone --recursive
 	co = checkout
