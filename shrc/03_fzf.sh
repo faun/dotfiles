@@ -1,4 +1,7 @@
+#!/usr/bin/env bash
+
 # FZF
+# shellcheck disable=1090
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_OPTS='--bind ctrl-f:page-down,ctrl-b:page-up'
@@ -7,6 +10,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Options to fzf command
 export FZF_COMPLETION_OPTS='+c -x'
+export FZF_PREVIEW_COMMAND="bat --style=numbers --color=always {}"
 
 # Use ag instead of the default find command for listing candidates.
 # - The first argument to the function is the base path to start traversal
