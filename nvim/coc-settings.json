@@ -1,0 +1,78 @@
+{
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "typescript",
+    "html",
+    "css",
+    "json"
+  ],
+  "diagnostic.displayByAle": true,
+  "diagnostic-languageserver.filetypes": {
+    "sh": "shellcheck"
+  },
+  "diagnostic-languageserver.formatFiletypes": {
+    "sh": "shfmt"
+  },
+  "diagnostic-languageserver.formatters": {
+    "shfmt": {
+      "command": "shfmt",
+      "args": [
+        "-i",
+        "2",
+        "-bn",
+        "-ci",
+        "-sr"
+      ]
+    }
+  },
+  "eslint.autoFixOnSave": true,
+  "eslint.format.enable": true,
+  "go.goplsOptions": {
+    "experimentalPostfixCompletions": true,
+    "semanticTokens": true,
+    "linksInHover": false,
+    "usePlaceholders": true,
+    "staticcheck": true
+  },
+  "languageserver": {
+    "bash": {
+      "command": "bash-language-server",
+      "args": [
+        "start"
+      ],
+      "filetypes": [
+        "sh"
+      ],
+      "ignoredRootPaths": [
+        "~"
+      ]
+    },
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": [
+        "go.mod",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "disableWorkspaceFolders": true,
+      "filetypes": [
+        "go"
+      ],
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
+    }
+  },
+  "snippets.ultisnips.enable": false,
+  "snippets.ultisnips.usePythonx": false,
+  "snippets.extends": {
+    "javascriptreact": [
+      "javascript"
+    ],
+    "typescript": [
+      "javascript"
+    ]
+  }
+}

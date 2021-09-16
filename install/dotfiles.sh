@@ -6,7 +6,7 @@ cd "$(dirname "$0")" || exit 1
 cd .. || exit 1
 DIR="$(pwd)"
 
-XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=${HOME}/.config}"
 mkdir -p "${XDG_CONFIG_HOME}"
 
 excludes=(
@@ -34,13 +34,8 @@ for name in *; do
     target="$HOME/.rbenv/$name"
   fi
 
-  if [[ "$name" == "init.vim" ]]; then
-    mkdir -p "${XDG_CONFIG_HOME}/nvim"
-    target="${XDG_CONFIG_HOME}/nvim/init.vim"
-  fi
-
-  if [[ "$name" == "init.vim" ]]; then
-    target="${XDG_CONFIG_HOME}/nvim/init.vim"
+  if [[ "$name" == "nvim" ]]; then
+    target="${XDG_CONFIG_HOME}/nvim"
   fi
 
   if [[ "$name" == "yamllint" ]]; then
