@@ -51,3 +51,5 @@ tags
 .ruby-version
 .rspec-local
 /.env.*
+/.vim/
+/.scratch/
