@@ -29,6 +29,18 @@ git_remote_mainline_ref() {
   git rev-parse --abbrev-ref origin/HEAD | cut -c8-
 }
 
+untracked_files() {
+  git ls-files --exclude-standard --others 2>/dev/null | wc -l | awk '{ print $1 }'
+}
+
+clean_index() {
+  if git diff-index --quiet HEAD -- 2>/dev/null; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 # git
 alias got='git'
 alias get='git'
@@ -198,10 +210,14 @@ isolate() {
     echo "Usage: isolate <sha> <branch-name>"
     return 1
   else
-    git diff-index --quiet --cached HEAD &&
+    if [[ "$(clean_index)" != 0 ]] || [[ "$(untracked_files)" -gt 0 ]]; then
+      echo "Please stash or commit your changes first"
+      return 1
+    else
       git checkout -b "$2" &&
-      git reset --hard "origin/$(git_remote_mainline_ref)" &&
-      git cherry-pick "$1"
+        git reset --hard "origin/$(git_remote_mainline_ref)" &&
+        git cherry-pick "$1"
+    fi
   fi
 }
 
