@@ -139,4 +139,6 @@ if exists("g:coc_enabled")
   nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
   " Resume latest coc list.
   nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+  let g:coc_global_extensions = ['coc-solargraph']
 endif

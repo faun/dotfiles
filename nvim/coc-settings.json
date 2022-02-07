@@ -14,6 +14,18 @@
   "diagnostic-languageserver.formatFiletypes": {
     "sh": "shfmt"
   },
+  "diagnostic-languageserver.mergeConfig": true,
+  "diagnostic-languageserver.linters": {
+    "shellcheck": {
+      "command": "shellcheck",
+      "args": [
+        "-x",
+        "--format",
+        "json1",
+        "-"
+      ]
+    }
+  },
   "diagnostic-languageserver.formatters": {
     "shfmt": {
       "command": "shfmt",
@@ -74,5 +86,7 @@
     "typescript": [
       "javascript"
     ]
-  }
+  },
+  "solargraph.formatting": true,
+  "solargraph.diagnostics": true
 }
