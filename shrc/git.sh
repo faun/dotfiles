@@ -33,7 +33,7 @@ untracked_files() {
   git ls-files --exclude-standard --others 2>/dev/null | wc -l | awk '{ print $1 }'
 }
 
-clean_index() {
+is_index_clean() {
   if git diff-index --quiet HEAD -- 2>/dev/null; then
     return 0
   else
@@ -210,7 +210,7 @@ isolate() {
     echo "Usage: isolate <sha> <branch-name>"
     return 1
   else
-    if [[ "$(clean_index)" != 0 ]] || [[ "$(untracked_files)" -gt 0 ]]; then
+    if [[ "$(is_index_clean)" -gt 0 ]] || [[ "$(untracked_files)" -gt 0 ]]; then
       echo "Please stash or commit your changes first"
       return 1
     else
@@ -281,8 +281,8 @@ clean_branches() {
     git diff-index --quiet --cached HEAD &&
     git branch --merged |
     grep -v "\*" |
-    grep -v "$(git_remote_mainline_ref)" |
-    xargs -n 1 git branch -d &&
+      grep -v "$(git_remote_mainline_ref)" |
+      xargs -n 1 git branch -d &&
     echo "Done."
 }
 
