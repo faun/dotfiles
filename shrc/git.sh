@@ -61,6 +61,11 @@ alias gcpc="git cherry-pick --continue"
 alias grc="git rebase --continue"
 alias gra="git rebase --abort"
 
+# Open the current branch in GitHub
+
+alias branch="gh browse -b \$(current_branch)"
+alias pr="gh pr view --web"
+
 glo() {
   git branch --set-upstream-to=refs/remotes/origin/"$(current_branch)" "$(current_branch)" && git pull --ff-only
 }
