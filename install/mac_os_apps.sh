@@ -21,7 +21,7 @@ for app_id in "${apps[@]}"; do
       echo ---
     fi
   else
-    echo "Cask $APP_NAME already installed"
+    echo "App $APP_NAME already installed"
   fi
 done
 echo "Agreeing to the Xcode license"
