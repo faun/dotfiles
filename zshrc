@@ -35,15 +35,15 @@ fi
 #   source <(kn completion zsh)
 # fi
 
-if which n >/dev/null 2>&1
-then
-  N_PREFIX="$HOME/n"
-  [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin" # Added by n-install (see http://git.io/n-install-repo).
-  record_time "n node version manager"
-fi
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # use .localrc for settings specific to one system
 [[ -f ~/.localrc ]] && . ~/.localrc
 record_time "localrc"
+
+function get_cluster_short() {
+  echo "$1" | sed "s/planetscale-[[:digit:]]*-Planeteer-\(.*\)/\1/"
+}
+
+KUBE_PS1_CLUSTER_FUNCTION=get_cluster_short
+KUBE_PS1_SYMBOL_ENABLE=false

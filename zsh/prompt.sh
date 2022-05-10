@@ -63,6 +63,19 @@ pyenv_virtualenv_version() {
 pyenv_version="$(pyenv_virtualenv_version)"
 record_time "pyenv_virtualenv prompt"
 
+KUBE_PS1_SCRIPT_PATH="${HOMEBREW_PREFIX}/opt/kube-ps1/share/kube-ps1.sh"
+
+if [[ -s "$KUBE_PS1_SCRIPT_PATH" ]]; then
+  # shellcheck disable=SC1090
+  source "$KUBE_PS1_SCRIPT_PATH"
+  # shellcheck disable=SC2016
+  kubeps1=' $(kube_ps1)'
+else
+  kubeps1=""
+fi
+
+record_time "kube-ps1 prompt"
+
 # Based off the murilasso zsh theme
 
 return_code='%(?..%{$fg[red]%}%? ↵%{$reset_color%})'
@@ -70,11 +83,14 @@ user_host='%{$fg[green]%}%n@%m%{$reset_color%}'
 current_dir='%{$fg[blue]%}$(pwd -P)%{$reset_color%}'
 ruby_version='%{$fg[red]%}$(ruby_version_status)%{$reset_color%}'
 git_branch='%{$fg[blue]%}$(git_prompt_info)%{$reset_color%}'
-nvm_version='%{$fg[blue]%}$(nvm_version_prompt)%{$reset_color%}'
+node_version=' %{$fg[blue]%}$(node_version_prompt)%{$reset_color%}'
+py_version=' %{$fg[yellow]%}${pyenv_version}%{${reset_color}%}'
 
-export PROMPT="${user_host}:${current_dir} ${ruby_version} ${nvm_version} %{$fg[yellow]%}${pyenv_version}%{${reset_color}%}
+# shellcheck disable=1087
+export PROMPT="${user_host}:${current_dir} ${ruby_version}${node_version}${py_version}${kubeps1}
 %{$fg[blue]%}${git_branch} %B$%b "
 export RPS1="${return_code}"
+# shellcheck disable=1087
 export SUDO_PS1="$fg[green]\u@\h:$fg[blue]\w
 $fg[red] \\$ $reset_color"
 
