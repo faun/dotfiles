@@ -43,9 +43,9 @@ parse_git_dirty() {
 }
 record_time "git dirty checking"
 
-nvm_version_prompt() {
-  if type nvm_ls >/dev/null; then
-    echo "[$(nvm_ls 'current')]"
+node_version_prompt() {
+  if type node >/dev/null; then
+    echo "[$(node -v | sed 's/^v//')]"
   fi
 }
 
