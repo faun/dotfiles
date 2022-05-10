@@ -13,3 +13,4 @@ else
   echo "GVM is already installed, updating"
   gvm update
 fi
+gvm listall | grep -E "   go" | grep -vE "beta|rc" | tail -n 20 | fzf --header-first --tac --no-sort --header="Select a Go version to install" | xargs gvm install
