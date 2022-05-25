@@ -20,10 +20,12 @@ if [[ -z $TMUX ]]; then
   PATH=".git/safe/../../node_modules/.bin:$PATH"
   PATH="$HOME/bin:$PATH"
 
-  MANPATH="/usr/local/man:$MANPATH"
-  MANPATH="/usr/local/mysql/man:$MANPATH"
-  MANPATH="/usr/local/git/man:$MANPATH"
-  PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+  if [[ -d /usr/local ]]; then
+    MANPATH="/usr/local/man:$MANPATH"
+    MANPATH="/usr/local/mysql/man:$MANPATH"
+    MANPATH="/usr/local/git/man:$MANPATH"
+    PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+  fi
 
   export PATH
   export RBENV_ROOT
