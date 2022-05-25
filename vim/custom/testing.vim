@@ -44,6 +44,7 @@ nmap <silent> <leader>\ :TestFile<CR>
 nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
+nmap <silent> <leader>tb :GoToggleBreakpoint<CR>
 
 if exists('$TMUX')
   let g:test#strategy = 'vimux'
