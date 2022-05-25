@@ -28,7 +28,7 @@ if [[ -n $DEBUG_STARTUP_TIME ]]; then
 fi
 
 if [ $commands[kubectl] ]; then
-  source <(kubectl completion zsh)
+  source <(zsh kubectl completion zsh 2>/dev/null)
 fi
 
 # if [ $commands[kn] ]; then
