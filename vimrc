@@ -5,11 +5,25 @@ syntax on
 set nocompatible
 set ttyfast
 set lazyredraw
+set encoding=utf-8
 
 " ==========================================
 " Vim-plug
 
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --go-completer
+  endif
+endfunction
+
 call plug#begin('~/.vim/plugged')
+
+Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
+
 let g:polyglot_disabled = ['go']
 source $HOME/.bundles.vim
 if filereadable(expand("$HOME/.bundles.local.vim"))
