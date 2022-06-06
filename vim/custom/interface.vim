@@ -1,6 +1,9 @@
 " Hide the vim splash screen
 set shortmess+=I
 
+" Don't suppress error messages
+set shortmess-=F
+
 " Set terminal title bar
 set title
 
