@@ -38,4 +38,5 @@ let g:ale_linters = {
 let g:ale_pattern_options = {
 \ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
 \ '\.min\.css$': {'ale_linters': [], 'ale_fixers': []},
+\ '\.vim$': {'ale_linters': [], 'ale_fixers': []},
 \}
