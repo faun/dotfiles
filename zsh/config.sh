@@ -18,7 +18,7 @@ then
   fi
 
   HISTFILE=~/.zsh_history
-  HISTSIZE=100000
+  HISTSIZE=1000000
   SAVEHIST=$HISTSIZE
 
   setopt histignorealldups sharehistory
