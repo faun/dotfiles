@@ -4,12 +4,13 @@ set -eou pipefail
 cd "$(dirname "$0")" || exit 1
 # DIR="$(pwd)"
 
-if ! command -v yarn >/dev/null; then
+if ! command -v yarn > /dev/null; then
   npm install -g yarn
 fi
 
 npm_packages=(
   babel-eslint
+  bash-language-server
   csslint
   diff-so-fancy
   eslint
@@ -22,10 +23,10 @@ npm_packages=(
   strip-ansi-cli
   stylelint
   tern
-  bash-language-server
+  vim-language-server
 )
 
 for package in "${npm_packages[@]}"; do
   echo "Installing package: $package"
-  yarn global add "$package" --silent --no-progress --no-emoji 2>/dev/null || true
+  yarn global add "$package" --silent --no-progress --no-emoji 2> /dev/null || true
 done
