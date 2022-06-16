@@ -1,92 +1,80 @@
 {
+  "coc.preferences.useQuickfixForLocations": true,
   "coc.preferences.extensionUpdateCheck": "daily",
+  "coc.preferences.floatActions": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "typescript",
     "html",
     "css",
-    "json"
+    "json",
+    "go",
+    "sh"
   ],
   "diagnostic.displayByAle": true,
-  "diagnostic-languageserver.filetypes": {
-    "sh": "shellcheck"
-  },
-  "diagnostic-languageserver.formatFiletypes": {
-    "sh": "shfmt"
-  },
-  "diagnostic-languageserver.mergeConfig": true,
-  "diagnostic-languageserver.linters": {
-    "shellcheck": {
-      "command": "shellcheck",
-      "args": [
-        "-x",
-        "--format",
-        "json1",
-        "-"
-      ]
-    }
-  },
-  "diagnostic-languageserver.formatters": {
-    "shfmt": {
-      "command": "shfmt",
-      "args": [
-        "-i",
-        "2",
-        "-bn",
-        "-ci",
-        "-sr"
-      ]
-    }
-  },
-  "eslint.autoFixOnSave": true,
-  "eslint.format.enable": true,
   "go.goplsOptions": {
     "experimentalPostfixCompletions": true,
     "semanticTokens": true,
+    "completeUnimported": true,
     "linksInHover": false,
     "usePlaceholders": true,
     "staticcheck": true
   },
+  "go.goplsUseDaemon": true,
   "languageserver": {
+    "dls": {
+      "command": "diagnostic-languageserver",
+      "args": ["--stdio", "--log-level", "2"],
+      "filetypes": ["sh"],
+      "initializationOptions": {
+        "linters": {
+          "shellcheck": {
+            "command": "shellcheck",
+            "args": ["-x", "--format", "json1", "-"]
+          }
+        },
+        "filetypes": {
+          "sh": "shfmt"
+        },
+        "formatters": {
+          "shfmt": {
+            "command": "shfmt",
+            "args": ["-i", "2", "-bn", "-ci", "-sr"]
+          }
+        },
+        "formatFiletypes": {
+          "sh": "shfmt"
+        }
+      }
+    },
+
     "bash": {
       "command": "bash-language-server",
-      "args": [
-        "start"
-      ],
-      "filetypes": [
-        "sh"
-      ],
-      "ignoredRootPaths": [
-        "~"
-      ]
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
     },
     "golang": {
       "command": "gopls",
-      "rootPatterns": [
-        "go.mod",
-        ".vim/",
-        ".git/",
-        ".hg/"
-      ],
-      "disableWorkspaceFolders": true,
-      "filetypes": [
-        "go"
-      ],
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"],
       "initializationOptions": {
         "usePlaceholders": true
       }
+    },
+    "vimls": {
+      "module": "vim-language-server",
+      "args": ["--node-ipc"],
+      "initializationOptions": {
+        "isNeovim": true,
+        "diagnostic": {
+          "enable": true
+        },
+        "suggest": {
+          "fromVimruntime": true
+        }
+      },
+      "filetypes": ["vim"]
     }
-  },
-  "snippets.ultisnips.enable": false,
-  "snippets.ultisnips.usePythonx": false,
-  "snippets.extends": {
-    "javascriptreact": [
-      "javascript"
-    ],
-    "typescript": [
-      "javascript"
-    ]
-  },
-  "solargraph.formatting": true,
-  "solargraph.diagnostics": true
+  }
 }
