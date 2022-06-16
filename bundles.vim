@@ -53,4 +53,3 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/matchit.zip'
 Plug 'wincent/terminus'
 Plug 'xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
-Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
