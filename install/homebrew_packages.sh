@@ -10,7 +10,7 @@ homebrew_dependencies=(
   tmux
   shfmt
   zsh-autosuggestions
-  ctags
+  universal-ctags
   mas
   pyenv-virtualenv
   bat
