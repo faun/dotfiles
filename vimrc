@@ -1,5 +1,6 @@
 " ==========================================
-" Basic settings:
+" Basic settings
+" {{{
 
 syntax on
 set nocompatible
@@ -13,8 +14,11 @@ let mapleader = "\<Space>"
 " Use the system clipboard by default
 set clipboard=unnamed
 
+" }}}
+
 " ==========================================
 " Vim-plug
+"  {{{
 
 call plug#begin('~/.vim/plugged')
 let g:polyglot_disabled = ['go']
@@ -28,15 +32,22 @@ endif
 Plug 'thinca/vim-localrc'
 call plug#end()
 
+"  }}}
+"
 " ==========================================
+" Custom file loading
+" {{{
 
 " Load all of the vim files in ~/.vim/custom
 for g:file in split(glob('$HOME/.vim/custom/*.vim'), '\n')
   exe 'source' g:file
 endfor
 
+"  }}}
+"
 " ==========================================
-" Remapped keys:
+" Remapped keys
+" {{{
 
 " Quickly quit without saving with QQ
 nmap QQ :q!<cr>
@@ -69,19 +80,33 @@ nmap === mzgg=G`z
 
 " Redraw the screen with F1
 nmap <F1> :redraw!<CR>
+"
+
+" Reload vimrc with leader-r-v
+nnoremap <leader>rv :source $MYVIMRC<CR>
+"
+" }}}
+
+" ==========================================
+" Help documents
+" {{{
 
 " Open help documents in a new tab
 :cabbrev help tab help
 
-" Reload vimrc with leader-r-v
-nnoremap <leader>rv :source $MYVIMRC<CR>
-
 " Load all plugins now.
 " Plugins need to be added to runtimepath before helptags can be generated.
 packloadall
+
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
 silent! helptags ALL
+
+" }}}
+
+" ==========================================
+" Interface changes
+" {{{
 
 " Hide the vim splash screen
 set shortmess+=I
@@ -115,19 +140,7 @@ set showmatch
 
 " Limit completion popup menu height
 set pumheight =15
-
-" ==========================================
-" Code folding
-
-" Fold based on indent
-set foldmethod=indent
-
-" Set the deepest fold is 10 levels
-set foldnestmax=10
-
-" Don't fold code by default
-set nofoldenable
-
+"
 " Set - as keyword so that ctags work correctly with dashed-method-names
 set isk+=-
 
@@ -146,7 +159,26 @@ set copyindent
 " Use multiple of shiftwidth when indenting with '<' and '>'
 set shiftround
 
+" }}}
+
 " ==========================================
+" Code folding
+" {{{
+"
+" Fold based on indent
+set foldmethod=indent
+
+" Set the deepest fold is 10 levels
+set foldnestmax=10
+
+" Don't fold code by default
+set nofoldenable
+
+" }}}
+
+" ==========================================
+" Tab settings
+" {{{
 " Quickly switch tab settings
 " http://vimcasts.org/episodes/tabs-and-spaces/
 
@@ -188,9 +220,12 @@ function! SummarizeTabs()
     echohl None
   endtry
 endfunction
+" }}}
 
 " ==========================================
 " Colorscheme settings
+" {{{
+
 let g:base16colorspace=256
 
 try
@@ -199,9 +234,12 @@ catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
 endtry
 
+" }}}
 
 " ==========================================
 " Tab navigation
+" {{{
+
 map <leader>tn :tabnew<CR>
 map <leader>to :tabonly<CR>
 map <leader>tc :tabclose<CR>
@@ -213,8 +251,11 @@ nnoremap <A-left> <Esc>:tabprevious<CR>
 nnoremap <A-right> <Esc>:tabnext<CR>
 nnoremap <A-down> <Esc>:tabnew<CR>
 
+" }}}
+
 " ==========================================
 " Create missing directory before writing buffer
+"  {{{
 augroup Mkdir
   autocmd!
   autocmd BufWritePre *
@@ -222,9 +263,11 @@ augroup Mkdir
         \ call mkdir(expand("<afile>:p:h"), "p") |
         \ endif
 augroup END
+"  }}}
 
 " ==========================================
 " Local vimrc_local settings
+" {{{
 augroup AutoLocalVimrc
   if exists('##VimSuspend')
     autocmd! FocusGained,BufEnter,WinEnter,VimResume * :silent! so .vimrc_local.vim
@@ -232,9 +275,11 @@ augroup AutoLocalVimrc
     autocmd! FocusGained,BufEnter,WinEnter * :silent! so .vimrc_local.vim
   end
 augroup END
-
+" }}}
+"
 " ==========================================
 " Whitespace settings
+" {{{
 
 function! TrimWhiteSpace()
   %s/\s\+$//e
@@ -252,9 +297,11 @@ match ExtraWhitespace /\s\+$/
 
 " Remove trailing whitespace with F3
 map <silent> <F3> :call TrimWhiteSpace()<CR>``
+" }}}
 
 " ==========================================
 " Search
+" {{{
 
 " Ignore case if search pattern is all lowercase, case-sensitive otherwise
 set smartcase
@@ -303,9 +350,11 @@ nnoremap <leader>* :call SearchInProject()<CR>
 nnoremap <C-*>:call SearchWordInProject()<CR>
 nnoremap <leader>' mb"+ya':Ag <C-r>"<CR>
 nnoremap <leader>" mb"+ya":Ag <C-r>"<CR>
+" }}}
 
 " ==========================================
 " Window split key bindings
+"  {{{
 " See http://technotales.wordpress.com/2010/04/29/vim-splits-a-guide-to-doing-exactly-what-you-want/
 
 " window
@@ -325,25 +374,35 @@ nnoremap <C-w>s <C-w>s<C-w>w
 nnoremap <C-w>v <C-w>v<C-w>w
 
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+"  }}}
 
 " ==========================================
 " Undo
+" {{{
+
 set undodir=~/.config/vim_undo
 set undofile
 
+" }}}
+"
 " ==========================================
 " Ctags
+" {{{
 
 noremap <leader>pt :!ctags -V --languages=ruby -f .gems.tags `gem env gemdir` && ctags -f .tags -RV . <cr>
 
 set tags=tags,./tags,./.tags,./.gems.tags
 
+" }}}
+
 " ==========================================
 " Custom Vimrc
+" {{{
 
 " Load a custom vimrc file if it exist
 if filereadable(expand('$HOME/.vimrc.local'))
   source $HOME/.vimrc.local
 endif
+" }}}
 
-" vim:ft=vim fdm=marker
+" vim:ft=vim fdm=marker foldenable
