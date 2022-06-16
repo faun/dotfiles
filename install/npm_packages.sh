@@ -23,6 +23,7 @@ npm_packages=(
   strip-ansi-cli
   stylelint
   tern
+  bash-language-server
 )
 
 for package in "${npm_packages[@]}"; do
