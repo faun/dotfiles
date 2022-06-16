@@ -51,3 +51,6 @@ set isk+=-
 
 " Set : as keyword so that ctags work correctly with ruby namespaced classes
 " set isk+=:
+
+" Don't show invisible characters by default
+set nolist
