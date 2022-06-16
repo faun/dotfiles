@@ -63,15 +63,12 @@
       }
     },
     "vimls": {
-      "module": "vim-language-server",
-      "args": ["--node-ipc"],
+      "command": "vim-language-server",
+      "args": ["--stdio"],
       "initializationOptions": {
         "isNeovim": true,
         "diagnostic": {
           "enable": true
-        },
-        "suggest": {
-          "fromVimruntime": true
         }
       },
       "filetypes": ["vim"]
