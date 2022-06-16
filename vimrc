@@ -345,3 +345,5 @@ set tags=tags,./tags,./.tags,./.gems.tags
 if filereadable(expand('$HOME/.vimrc.local'))
   source $HOME/.vimrc.local
 endif
+
+" vim:ft=vim fdm=marker
