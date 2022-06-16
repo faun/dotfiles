@@ -15,6 +15,7 @@ homebrew_dependencies=(
   pyenv-virtualenv
   bat
   fzf
+  watchman
 )
 
 for brew_package in "${homebrew_dependencies[@]}"; do
