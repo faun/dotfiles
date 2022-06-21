@@ -28,6 +28,7 @@
       "args": ["--stdio", "--log-level", "2"],
       "filetypes": ["sh"],
       "initializationOptions": {
+        "mergeConfig": true, // https://github.com/iamcco/coc-diagnostic#config
         "linters": {
           "shellcheck": {
             "command": "shellcheck",
