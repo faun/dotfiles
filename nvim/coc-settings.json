@@ -33,6 +33,37 @@
           "shellcheck": {
             "command": "shellcheck",
             "args": ["-x", "--format", "json1", "-"]
+          },
+          "rubocop": {
+            "command": "bundle",
+            "sourceName": "rubocop",
+            "debounce": 100,
+            "args": [
+              "exec",
+              "rubocop",
+              "--format",
+              "json",
+              "--force-exclusion",
+              "--stdin",
+              "%filepath"
+            ],
+            "parseJson": {
+              "errorsRoot": "files[0].offenses",
+              "line": "location.start_line",
+              "endLine": "location.last_line",
+              "column": "location.start_column",
+              "endColumn": "location.end_column",
+              "message": "[${cop_name}] ${message}",
+              "security": "severity"
+            },
+            "securities": {
+              "fatal": "error",
+              "error": "error",
+              "warning": "warning",
+              "convention": "info",
+              "refactor": "info",
+              "info": "info"
+            }
           }
         },
         "filetypes": {
@@ -45,11 +76,11 @@
           }
         },
         "formatFiletypes": {
+          "ruby": "rubocop",
           "sh": "shfmt"
         }
       }
     },
-
     "bash": {
       "command": "bash-language-server",
       "args": ["start"],
