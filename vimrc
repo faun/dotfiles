@@ -16,6 +16,9 @@ set clipboard=unnamed
 
 " }}}
 
+" Tell ALE to display LSP diagnostics, including completion
+let g:ale_disable_lsp = 1
+
 " ==========================================
 " Vim-plug
 "  {{{
