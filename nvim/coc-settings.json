@@ -67,7 +67,10 @@
           }
         },
         "filetypes": {
-          "sh": "shfmt"
+          "sh": ["shfmt", "shellcheck"],
+          "yaml": ["yamllint"],
+          "ruby": ["rubocop"],
+          "vim": "vint"
         },
         "formatters": {
           "shfmt": {
