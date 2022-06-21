@@ -2,6 +2,7 @@
   "coc.preferences.useQuickfixForLocations": true,
   "coc.preferences.extensionUpdateCheck": "daily",
   "coc.preferences.floatActions": true,
+  "pairs.enableBackspace": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "typescript",
