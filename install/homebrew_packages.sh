@@ -16,6 +16,7 @@ homebrew_dependencies=(
   bat
   fzf
   watchman
+  yoheimuta/protolint/protolint
 )
 
 for brew_package in "${homebrew_dependencies[@]}"; do
