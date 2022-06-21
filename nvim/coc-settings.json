@@ -108,6 +108,28 @@
         }
       },
       "filetypes": ["vim"]
+    },
+    "yaml": {
+      "command": "yaml-language-server",
+      "args": ["--stdio"],
+      "initializationOptions": {
+        "yaml": {
+          "enable": true,
+          "validate": true,
+          "format": {
+            "enable": false,
+            "singleQuote": false
+          },
+          "schemas": {
+            "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": "docker-*.yml",
+            "https://json.schemastore.org/github-action.json": "/.github/actions/*.yml",
+            "https://json.schemastore.org/github-workflow.json": "/.github/workflows/*.yml"
+          },
+          "schemaStore.enable": true,
+          "trace.server": "verbose"
+        }
+      },
+      "filetypes": ["yaml", "yml", "docker-*.yml"]
     }
   }
 }
