@@ -24,6 +24,7 @@ npm_packages=(
   stylelint
   tern
   vim-language-server
+  yaml-language-server
 )
 
 for package in "${npm_packages[@]}"; do
