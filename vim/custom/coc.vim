@@ -187,15 +187,16 @@ call SetupCommandAbbrs('C', 'CocConfig')
 " ---------- Coc extensions ----------
 "  {{{
 let g:coc_global_extensions = [
-  \ 'coc-snippets',
-  \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-tag',
   \ 'coc-go',
-  \ 'coc-prettier',
   \ 'coc-json',
+  \ 'coc-pairs',
+  \ 'coc-prettier',
   \ 'coc-sh',
+  \ 'coc-snippets',
+  \ 'coc-tag',
+  \ 'coc-tsserver',
   \ 'coc-vimlsp',
+  \ 'coc-yaml',
   \ ]
 "  }}}
 
