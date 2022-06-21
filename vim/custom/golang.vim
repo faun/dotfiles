@@ -13,13 +13,13 @@ let g:go_fmt_fail_silently = 1
 let g:go_autodetect_gopath = 1
 
 let g:go_test_show_name = 1
-let g:go_gopls_enabled = 0
+let g:go_gopls_enabled = 1
 let g:go_gopls_gofumpt = 1
 let g:go_gopls_complete_unimported = 0
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_imports_mode='gopls'
-let g:go_def_mapping_enabled = 0
+let g:go_def_mapping_enabled = 1
 
 let g:go_diagnostics_enabled = 0
 
