@@ -1,4 +1,4 @@
-let g:ale_enabled = 0
+let g:ale_enabled = 1
 let g:ale_close_preview_on_insert = 1
 let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
@@ -21,33 +21,17 @@ let g:ale_lint_on_text_changed = 'never'
 
 let g:ale_open_list = 1
 let g:ale_list_window_size = 5
-let g:ale_fixers = {
-      \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \}
-
-" let g:ale_fixers = {
-"       \   'sh': ['shfmt'],
-"       \   'go': ['gofumpt', 'goimports', 'remove_trailing_lines', 'trim_whitespace'],
-"       \}
-
 let g:ale_floating_preview = 1
 let g:ale_hover_to_floating_preview = 1
 let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─']
 
-" let g:ale_fixers = {
-"       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-"       \   'sh': ['shfmt'],
-"       \   'proto': ['ale#fixers#protolint#Fix'],
-"       \}
-
-let g:ale_linters = {
-      \   'ruby': ['rubocop'],
-      \   'proto': ['protolint', 'protoc-gen-protolint'],
+let g:ale_fixers = {
+      \   'proto': ['protolint'],
       \}
 
-" let g:ale_linters = {
-"       \   'go': ['gobuild', 'golangci-lint', 'gopls', 'staticcheck', 'errcheck'],
-"       \}
+let g:ale_linters = {
+      \   'proto': ['protolint', 'protoc-gen-protolint'],
+      \}
 
 let g:ale_pattern_options = {
 \ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
