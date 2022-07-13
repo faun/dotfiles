@@ -19,12 +19,13 @@
   "diagnostic.checkCurrentLine": true,
   "diagnostic.format": "%message",
   "go.goplsOptions": {
-    "experimentalPostfixCompletions": true,
-    "semanticTokens": true,
     "completeUnimported": true,
-    "linksInHover": false,
-    "usePlaceholders": true,
-    "staticcheck": true
+    "experimentalPostfixCompletions": true,
+    "gofumpt": true,
+    "linksInHover": true,
+    "semanticTokens": true,
+    "staticcheck": true,
+    "usePlaceholders": true
   },
   "go.goplsUseDaemon": true,
   "languageserver": {
