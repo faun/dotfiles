@@ -2,6 +2,7 @@
   "coc.preferences.useQuickfixForLocations": true,
   "coc.preferences.extensionUpdateCheck": "daily",
   "coc.preferences.floatActions": true,
+  "coc.preferences.messageLevel": "error",
   "pairs.enableBackspace": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
@@ -13,6 +14,10 @@
     "sh"
   ],
   "diagnostic.displayByAle": true,
+  "diagnostic.level": "warning",
+  "diagnostic.messageDelay": 0,
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.format": "%message",
   "go.goplsOptions": {
     "experimentalPostfixCompletions": true,
     "semanticTokens": true,
