@@ -80,8 +80,7 @@
         },
         "formatters": {
           "shfmt": {
-            "command": "shfmt",
-            "args": ["-i", "2", "-bn", "-ci", "-sr"]
+            "command": "shfmt"
           }
         },
         "formatFiletypes": {
