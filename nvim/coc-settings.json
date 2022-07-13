@@ -103,6 +103,20 @@
         "usePlaceholders": true
       }
     },
+    "golangci-lint-languageserver": {
+      "command": "golangci-lint-langserver",
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "command": [
+          "golangci-lint",
+          "run",
+          "--config",
+          ".golangci.yml",
+          "--out-format",
+          "json"
+        ]
+      }
+    },
     "vimls": {
       "command": "vim-language-server",
       "args": ["--stdio"],
