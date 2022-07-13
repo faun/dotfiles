@@ -129,6 +129,7 @@
       "filetypes": ["vim"]
     },
     "yaml": {
+      "enable": true,
       "command": "yaml-language-server",
       "args": ["--stdio"],
       "initializationOptions": {
