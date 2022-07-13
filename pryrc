@@ -2,7 +2,20 @@ begin
   require 'spirit_hands'
   SpiritHands.hirb = false
 rescue LoadError
-  puts 'Could not load spirit_hands'
+  # Do nothing
+end
+
+begin
+  require 'jazz_fingers'
+  if defined?(JazzFingers)
+    JazzFingers.configure do |config|
+      config.colored_prompt = true
+      config.amazing_print = true
+      config.coolline = true if defined?(PryCoolline)
+    end
+  end
+rescue LoadError
+  # Do nothing
 end
 
 Pry.config.editor = proc { |file, line| "vim #{file}+#{line}" }
@@ -26,6 +39,5 @@ begin
   require 'awesome_print'
   Pry.config.print = proc { |output, value| output.puts value.ai }
 rescue LoadError
-  puts 'Could not load awesome_print'
+  # Do nothing
 end
-
