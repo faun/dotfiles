@@ -1,4 +1,3 @@
-
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'AndrewRadev/switch.vim'
 Plug 'SirVer/ultisnips'
@@ -33,6 +32,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'sebdah/vim-delve', { 'for': ['go'] }
 Plug 'sjl/gundo.vim'
 Plug 'skalnik/vim-vroom'
+Plug 'stephpy/vim-yaml'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
