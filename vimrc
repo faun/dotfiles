@@ -14,6 +14,9 @@ let mapleader = "\<Space>"
 " Use the system clipboard by default
 set clipboard=unnamed
 
+" Explicitly set the shell to bash
+set shell=/bin/bash
+
 " }}}
 
 " Tell ALE to display LSP diagnostics, including completion
