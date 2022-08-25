@@ -3,6 +3,14 @@
   "coc.preferences.extensionUpdateCheck": "daily",
   "coc.preferences.floatActions": true,
   "coc.preferences.messageLevel": "error",
+  "sql.database": "mysql",
+  "sql.lintOnSave": true,
+  "sql.lintOnOpen": true,
+  "sql.formatOptions": {
+    "language": "mysql",
+    "keywordCase": "upper",
+    "denseOperators": false
+  },
   "pairs.enableBackspace": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
