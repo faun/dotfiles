@@ -38,7 +38,6 @@ alias spec='/usr/bin/time bundle exec rspec'
 # misc
 alias retag='ctags -R --exclude=.svn --exclude=.git --exclude=log *'
 alias f='find . -iname'
-alias v='vim $(fzf)'
 alias ducks='du -cksh * | sort -rn|head -11' # Lists folders and files sizes in the current folder
 alias m='more'
 alias df='df -h'
