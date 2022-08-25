@@ -22,6 +22,7 @@ record_time "iterm2 integration"
 if [[ -n $DEBUG_STARTUP_TIME ]]; then
   echo "Started up in $(printf "%d" $(($SECONDS * 1000)))ms"
   print_recorded_times
+  clear
 fi
 
 if [ $commands[kubectl] ]; then
