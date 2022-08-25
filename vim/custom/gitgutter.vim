@@ -9,3 +9,5 @@ nmap [h <Plug>(GitGutterPrevHunk)
 " Stage/unstage one section of code at a time
 nmap <Leader>ha <Plug>GitGutterStageHunk
 nmap <Leader>hr <Plug>GitGutterUndoHunk
+
+let g:gitgutter_enabled = 0
