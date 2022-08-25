@@ -1,6 +1,3 @@
-# Enable bash completion script compatibility mode
-# autoload -Uz bashcompinit; bashcompinit
-
 # Source shell-agnostic config files
 for file in $HOME/.shrc/*; do
   if [[ -f "$file" ]]; then
