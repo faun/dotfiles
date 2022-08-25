@@ -56,9 +56,9 @@ alias vim_bundle_clean='vim +PlugClean +qall'
 alias vim_bundle_maintenance='vim +PlugInstall +PlugUpdate +PlugClean +qall'
 
 if command -v nvim >/dev/null 2>&1; then
-  VIM_EXE='nvim'
+	VIM_EXE='nvim'
 else
-  VIM_EXE='vim'
+	VIM_EXE='vim'
 fi
 
 export EDITOR="$VIM_EXE"
@@ -73,59 +73,59 @@ alias local_tmux_conf='$EDITOR $HOME/.tmux.local'
 alias local_vimrc='$EDITOR $HOME/.vimrc.local'
 
 kcontext() {
-  kubectl config use-context "$(kubectl config get-contexts -o name | fzf)"
+	kubectl config use-context "$(kubectl config get-contexts -o name | fzf)"
 }
 
 migrations() {
-  local migration_name
-  migration_name="$(find ./db/migrate/* | sort -nr | fzf --reverse || exit 1)"
+	local migration_name
+	migration_name="$(find ./db/migrate/* | sort -nr | fzf --reverse || exit 1)"
 
-  if [[ -n $migration_name ]]; then
-    vim -O "$migration_name"
-  fi
+	if [[ -n $migration_name ]]; then
+		vim -O "$migration_name"
+	fi
 }
 
 current_namespace() {
-  local cur_ctx
-  cur_ctx="$(current_context)"
-  ns="$(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${cur_ctx}\")].context.namespace}")"
-  if [[ -z "${ns}" ]]; then
-    echo "default"
-  else
-    echo "${ns}"
-  fi
+	local cur_ctx
+	cur_ctx="$(current_context)"
+	ns="$(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${cur_ctx}\")].context.namespace}")"
+	if [[ -z "${ns}" ]]; then
+		echo "default"
+	else
+		echo "${ns}"
+	fi
 }
 
 confirm() {
-  echo "${1:-Are you sure? [y/N]}"
-  read -r answer
-  if echo "$answer" | grep -iq "^y"; then
-    return 0
-  else
-    return 1
-  fi
+	echo "${1:-Are you sure? [y/N]}"
+	read -r answer
+	if echo "$answer" | grep -iq "^y"; then
+		return 0
+	else
+		return 1
+	fi
 
 }
 
 current_context() {
-  kubectl config view -o=jsonpath='{.current-context}'
+	kubectl config view -o=jsonpath='{.current-context}'
 }
 
 strip_ansi() {
-  if command -v strip-ansi >/dev/null 2>&1; then
-    strip-ansi
-  else
-    npx strip-ansi-cli 2>/dev/null
-    npm install --global strip-ansi-cli >/dev/null 2>&1 &
-  fi
+	if command -v strip-ansi >/dev/null 2>&1; then
+		strip-ansi
+	else
+		npx strip-ansi-cli 2>/dev/null
+		npm install --global strip-ansi-cli >/dev/null 2>&1 &
+	fi
 }
 
 namespace_options() {
-  kubens | strip_ansi | fzf || current_namespace
+	kubens | strip_ansi | fzf || current_namespace
 }
 
 context_options() {
-  kubectx | strip_ansi | fzf || current_context
+	kubectx | strip_ansi | fzf || current_context
 }
 
 alias k="kubectl"
@@ -135,69 +135,69 @@ alias ktx='kubectx "$(context_options)"'
 alias ktxd='CONTEXT="$(context_options)"; confirm "Delete context $CONTEXT?" && kubectl config unset "contexts.$CONTEXT"'
 
 kcapp() {
-  if [[ $# -ne 1 ]]; then
-    echo "Usage kcapp <app_label>"
-    return 1
-  fi
+	if [[ $# -ne 1 ]]; then
+		echo "Usage kcapp <app_label>"
+		return 1
+	fi
 
-  kubectl get pod -l app="$1" \
-    --sort-by=.status.startTime \
-    --field-selector=status.phase=Running \
-    -o=jsonpath='{.items[-1:].metadata.name}' |
-    tail -1
+	kubectl get pod -l app="$1" \
+		--sort-by=.status.startTime \
+		--field-selector=status.phase=Running \
+		-o=jsonpath='{.items[-1:].metadata.name}' |
+		tail -1
 }
 
 kcin() {
-  if [[ $# -ne 1 ]]; then
-    echo "Usage kcin <istio_label>"
-    return 1
-  fi
+	if [[ $# -ne 1 ]]; then
+		echo "Usage kcin <istio_label>"
+		return 1
+	fi
 
-  kubectl get -n istio-system pod -l istio="$1" \
-    -o=jsonpath='{.items[-1:].metadata.name}'
+	kubectl get -n istio-system pod -l istio="$1" \
+		-o=jsonpath='{.items[-1:].metadata.name}'
 }
 
 kcimt() {
-  if [[ $# -ne 1 ]]; then
-    echo "Usage kcimt <istio-mixer-type>"
-    return 1
-  fi
+	if [[ $# -ne 1 ]]; then
+		echo "Usage kcimt <istio-mixer-type>"
+		return 1
+	fi
 
-  kubectl get -n istio-system pod -l istio-mixer-type="$1" \
-    -o=jsonpath='{.items[-1:].metadata.name}'
+	kubectl get -n istio-system pod -l istio-mixer-type="$1" \
+		-o=jsonpath='{.items[-1:].metadata.name}'
 }
 
 alias kcistio=kcin
 
 kcrelease() {
-  if [[ $# -ne 1 ]]; then
-    echo "Usage kcrelease <release_label>"
-    return 1
-  fi
+	if [[ $# -ne 1 ]]; then
+		echo "Usage kcrelease <release_label>"
+		return 1
+	fi
 
-  kubectl get pods -l release="$1" \
-    --sort-by=.status.startTime \
-    --field-selector=status.phase=Running \
-    -o=jsonpath='{.items[-1:].metadata.name}' |
-    tail -1
+	kubectl get pods -l release="$1" \
+		--sort-by=.status.startTime \
+		--field-selector=status.phase=Running \
+		-o=jsonpath='{.items[-1:].metadata.name}' |
+		tail -1
 }
 
 kcrun() {
-  if [[ $# -ne 1 ]]; then
-    echo "Usage krun <run_label>"
-    return 1
-  fi
+	if [[ $# -ne 1 ]]; then
+		echo "Usage krun <run_label>"
+		return 1
+	fi
 
-  kubectl get pod -l run="$1" \
-    -o=jsonpath='{.items[-1:].metadata.name}' |
-    tail -1
+	kubectl get pod -l run="$1" \
+		-o=jsonpath='{.items[-1:].metadata.name}' |
+		tail -1
 }
 
 kcx() {
-  if [[ $# -lt 3 ]]; then
-    echo "Usage kcx <pod> <container> [commands]"
-    return 1
-  fi
+	if [[ $# -lt 3 ]]; then
+		echo "Usage kcx <pod> <container> [commands]"
+		return 1
+	fi
 
-  kubectl exec -it "$1" -c "$2" -- "${@:3}"
+	kubectl exec -it "$1" -c "$2" -- "${@:3}"
 }
