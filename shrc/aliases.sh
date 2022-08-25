@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # directory listing & navigation
 alias l="ls -lAh"
 alias ll='ls -hl'
