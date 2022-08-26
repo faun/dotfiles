@@ -2,6 +2,7 @@
 
 set -e
 
+if [ "$(uname)" == "Darwin" ]; then
 homebrew_casks=(
   google-cloud-sdk
 )
@@ -13,7 +14,7 @@ for cask in "${homebrew_casks[@]}"; do
     echo "Installing cask: $cask"
     brew install "$cask" 2>/tmp/cask_error || true
     status=$?
-    if [[ status != 0 ]]; then
+    if [[ $status != 0 ]]; then
       echo "Cask $cask failed to install!"
       echo ---
       cat /tmp/cask_error
@@ -23,3 +24,11 @@ for cask in "${homebrew_casks[@]}"; do
     echo "Cask $cask already installed"
   fi
 done
+elif [ "$(expr substr "$(uname -s)" 1 5)" == "Linux" ]; then
+  curl -sSL -o /tmp/gcp_install.sh https://sdk.cloud.google.com
+  bash /tmp/gcp_install.sh --disable-prompts || true
+else
+  echo "Installing casks not supported"
+fi
+gcloud config unset disable_usage_reporting || true
+gcloud config set survey/disable_prompts True || true
