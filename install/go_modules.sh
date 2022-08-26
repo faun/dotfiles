@@ -9,7 +9,7 @@ go_modules=(
 for module in "${go_modules[@]}"; do
 	echo "Installing module: $module"
 	set +e
-	go get "$module" 2>/tmp/go_module_error
+	go install "$module"@latest 2>/tmp/go_module_error
 	status=$?
 	set -e
 	if [[ $status != 0 ]]; then
