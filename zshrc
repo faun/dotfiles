@@ -19,29 +19,26 @@ alias d="z dotfiles && t"
 [[ -f $HOME/.iterm2_shell_integration.zsh ]] && source $HOME/.iterm2_shell_integration.zsh
 record_time "iterm2 integration"
 
-if [[ -n $DEBUG_STARTUP_TIME ]]; then
-  echo "Started up in $(printf "%d" $(($SECONDS * 1000)))ms"
-  print_recorded_times
-  clear
-fi
-
-if [ $commands[kubectl] ]; then
-  source <(zsh kubectl completion zsh 2>/dev/null)
-fi
-
-# if [ $commands[kn] ]; then
-#   source <(kn completion zsh)
-# fi
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+record_time "fzf integration"
 
 # use .localrc for settings specific to one system
 [[ -f ~/.localrc ]] && . ~/.localrc
 record_time "localrc"
 
-function get_cluster_short() {
-  echo "$1" | sed "s/planetscale-[[:digit:]]*-Planeteer-\(.*\)/\1/"
-}
+if [ $commands[kubectl] ]; then
+  source <(kubectl completion zsh)
+  zstyle ':completion:*:*:kubectl:*' list-grouped false
+fi
+record_time "kubectl completion"
 
-KUBE_PS1_CLUSTER_FUNCTION=get_cluster_short
-KUBE_PS1_SYMBOL_ENABLE=false
+if [ $commands[kn] ]; then
+  source <(kn completion zsh)
+fi
+record_time "kubectl completion"
+
+if [[ -n $DEBUG_STARTUP_TIME ]]; then
+  echo "Started up in $(printf "%d" $(($SECONDS * 1000)))ms"
+  print_recorded_times
+  clear
+fi
