@@ -6,4 +6,3 @@ if [[ -d "$N_PREFIX" ]]; then
   PATH="$N_PREFIX/bin:$PATH"
   export PATH
 fi
-record_time "n node version manager"
