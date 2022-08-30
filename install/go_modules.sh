@@ -4,6 +4,7 @@ set -e
 
 go_modules=(
 	github.com/nametake/golangci-lint-langserver
+	mvdan.cc/sh/v3/cmd/shfmt
 )
 
 for module in "${go_modules[@]}"; do
