@@ -12,6 +12,7 @@ npm_packages=(
   babel-eslint
   bash-language-server
   csslint
+  diagnostic-languageserver
   diff-so-fancy
   eslint
   eslint-config-prettier
