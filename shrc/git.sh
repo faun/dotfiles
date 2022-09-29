@@ -170,9 +170,14 @@ ds() {
   fi
 }
 
-compare_to_mainline() {
-  branch="$(current_branch)"
-  git diff --stat "$(git_remote_mainline_ref)..$branch"
+changed_from_mainline() {
+	branch="$(current_branch)"
+	git diff --stat --name-only "$(git_remote_mainline_ref)..$branch"
+}
+
+diffstat_with_mainline() {
+	branch="$(current_branch)"
+	git diff --stat "$(git_remote_mainline_ref)..$branch"
 }
 
 diff_with_mainline() {
