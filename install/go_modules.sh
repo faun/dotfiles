@@ -4,6 +4,7 @@ set -e
 
 go_modules=(
 	github.com/nametake/golangci-lint-langserver
+	golang.org/x/tools/gopls
 	mvdan.cc/sh/v3/cmd/shfmt
 )
 
