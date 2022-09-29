@@ -1,44 +1,44 @@
 #!/usr/bin/env bash
 
 current_branch() {
-  ref=$(git symbolic-ref HEAD 2>/dev/null) ||
-    ref=$(git rev-parse --short HEAD 2>/dev/null) || return
-  echo "${ref#refs/heads/}"
+	ref=$(git symbolic-ref HEAD 2>/dev/null) ||
+		ref=$(git rev-parse --short HEAD 2>/dev/null) || return
+	echo "${ref#refs/heads/}"
 }
 
 recent_branches() {
-  for k in $(git branch | perl -pe 's/^..(.*?)( ->.*)?$/\1/'); do echo -e "$(git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" "$k" -- | head -n 1)"\\t"$k"; done | sort -r | awk '{ print $7 }'
+	for k in $(git branch | perl -pe 's/^..(.*?)( ->.*)?$/\1/'); do echo -e "$(git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" "$k" -- | head -n 1)"\\t"$k"; done | sort -r | awk '{ print $7 }'
 }
 
 recent() {
-  local branch_to_checkout
-  branch_to_checkout="$(recent_branches | fzf || return 1)"
-  if [[ -n $branch_to_checkout ]]; then
-    git checkout "$branch_to_checkout"
-  else
-    return 1
-  fi
+	local branch_to_checkout
+	branch_to_checkout="$(recent_branches | fzf || return 1)"
+	if [[ -n $branch_to_checkout ]]; then
+		git checkout "$branch_to_checkout"
+	else
+		return 1
+	fi
 }
 
 heroku_remote() {
-  app=$(heroku apps --all | awk '/-staging.*/' | awk '{print $1}' | fzf)
-  git remote add "$app" "https://git.heroku.com/$app.git"
+	app=$(heroku apps --all | awk '/-staging.*/' | awk '{print $1}' | fzf)
+	git remote add "$app" "https://git.heroku.com/$app.git"
 }
 
 git_remote_mainline_ref() {
-  git rev-parse --abbrev-ref origin/HEAD | cut -c8-
+	git rev-parse --abbrev-ref origin/HEAD | cut -c8-
 }
 
 untracked_files() {
-  git ls-files --exclude-standard --others 2>/dev/null | wc -l | awk '{ print $1 }'
+	git ls-files --exclude-standard --others 2>/dev/null | wc -l | awk '{ print $1 }'
 }
 
 is_index_clean() {
-  if git diff-index --quiet HEAD -- 2>/dev/null; then
-    return 0
-  else
-    return 1
-  fi
+	if git diff-index --quiet HEAD -- 2>/dev/null; then
+		return 0
+	else
+		return 1
+	fi
 }
 
 # git
@@ -67,70 +67,70 @@ alias branch="gh browse -b \$(current_branch)"
 alias pr="gh pr view --web"
 
 glo() {
-  git branch --set-upstream-to=refs/remotes/origin/"$(current_branch)" "$(current_branch)" && git pull --ff-only
+	git branch --set-upstream-to=refs/remotes/origin/"$(current_branch)" "$(current_branch)" && git pull --ff-only
 }
 
 # git push
 alias gp='git push'
 gpo() {
-  git push --set-upstream origin "$(git branch | awk '/^\* / { print $2 }')" >>/dev/null
+	git push --set-upstream origin "$(git branch | awk '/^\* / { print $2 }')" >>/dev/null
 }
 
 gpf() {
-  branch=$(current_branch)
-  if [[ $branch == git_remote_mainline_ref ]]; then
-    echo "This command cannot be run from the $(git_remote_mainline_ref) branch"
-    return 1
-  else
-    git push origin +"$branch" --force-with-lease
-  fi
+	branch=$(current_branch)
+	if [[ $branch == git_remote_mainline_ref ]]; then
+		echo "This command cannot be run from the $(git_remote_mainline_ref) branch"
+		return 1
+	else
+		git push origin +"$branch" --force-with-lease
+	fi
 }
 
 ci_status_url() {
-  hub ci-status -v | awk '{ print $2 }'
+	hub ci-status -v | awk '{ print $2 }'
 }
 
 wait_for_ci() {
-  RUN_TESTS=$([ -e "circle.yml" ] || [ -e ".travis.yml" ] && echo "true" || echo "false")
-  if [[ $SKIP_CI_CHECK != "true" && $RUN_TESTS != "false" ]]; then
-    echo "Waiting for CI to pass"
-    while ! hub ci-status | grep "success" >/dev/null; do
-      printf "."
-      sleep 5
-    done
-  else
-    echo "Skipping CI checks"
-  fi
+	RUN_TESTS=$([ -e "circle.yml" ] || [ -e ".travis.yml" ] && echo "true" || echo "false")
+	if [[ $SKIP_CI_CHECK != "true" && $RUN_TESTS != "false" ]]; then
+		echo "Waiting for CI to pass"
+		while ! hub ci-status | grep "success" >/dev/null; do
+			printf "."
+			sleep 5
+		done
+	else
+		echo "Skipping CI checks"
+	fi
 }
 
 merge() {
-  if [ -d .git ] || git rev-parse --git-dir >/dev/null 2>&1; then
-    branch=$(current_branch)
-    if [[ $branch == git_remote_mainline_ref ]]; then
-      echo "This command cannot be run from the $(git_remote_mainline_ref) branch"
-      return 1
-    else
-      git fetch &&
-        git diff-index --quiet --cached HEAD &&
-        git checkout git_remote_mainline_ref &&
-        git diff-index --quiet --cached HEAD &&
-        git pull origin git_remote_mainline_ref &&
-        git checkout "$branch" &&
-        git rebase git_remote_mainline_ref &&
-        git push origin +"$branch" --force-with-lease &&
-        wait_for_ci &&
-        git checkout git_remote_mainline_ref &&
-        git merge "$branch" --ff-only &&
-        sleep 2 &&
-        git push origin git_remote_mainline_ref &&
-        hub browse &&
-        sleep 10 &&
-        git push origin ":$branch"
-    fi
-  else
-    echo "This command must be run within a git repository"
-    return 1
-  fi
+	if [ -d .git ] || git rev-parse --git-dir >/dev/null 2>&1; then
+		branch=$(current_branch)
+		if [[ $branch == git_remote_mainline_ref ]]; then
+			echo "This command cannot be run from the $(git_remote_mainline_ref) branch"
+			return 1
+		else
+			git fetch &&
+				git diff-index --quiet --cached HEAD &&
+				git checkout git_remote_mainline_ref &&
+				git diff-index --quiet --cached HEAD &&
+				git pull origin git_remote_mainline_ref &&
+				git checkout "$branch" &&
+				git rebase git_remote_mainline_ref &&
+				git push origin +"$branch" --force-with-lease &&
+				wait_for_ci &&
+				git checkout git_remote_mainline_ref &&
+				git merge "$branch" --ff-only &&
+				sleep 2 &&
+				git push origin git_remote_mainline_ref &&
+				hub browse &&
+				sleep 10 &&
+				git push origin ":$branch"
+		fi
+	else
+		echo "This command must be run within a git repository"
+		return 1
+	fi
 }
 
 # git add
@@ -162,12 +162,12 @@ alias dtc='git difftool --cached'
 alias dth='git difftool HEAD'
 
 ds() {
-  args="$1"
-  if [ "x$args" != "x" ]; then
-    git diff --stat "$args~1..$args"
-  else
-    git diff --stat --cached
-  fi
+	args="$1"
+	if [ "x$args" != "x" ]; then
+		git diff --stat "$args~1..$args"
+	else
+		git diff --stat --cached
+	fi
 }
 
 changed_from_mainline() {
@@ -181,8 +181,8 @@ diffstat_with_mainline() {
 }
 
 diff_with_mainline() {
-  branch="$(current_branch)"
-  git difftool "$(git_remote_mainline_ref)..$branch"
+	branch="$(current_branch)"
+	git difftool "$(git_remote_mainline_ref)..$branch"
 }
 
 # git rebase
@@ -190,69 +190,71 @@ alias grc='git rebase --continue'
 alias gri="git fetch origin \$(git_remote_mainline_ref):\$(git_remote_mainline_ref) && git rebase -i origin/\$(git_remote_mainline_ref)"
 
 show() {
-  # Show a given commit in git difftool
-  args="$1"
-  if [ "x$args" != "x" ]; then
-    git difftool "$args~1..$args"
-  else
-    echo "Usage: show SHA"
-  fi
+	# Show a given commit in git difftool
+	args="$1"
+	if [ "x$args" != "x" ]; then
+		git difftool "$args~1..$args"
+	else
+		echo "Usage: show SHA"
+	fi
 }
 
-# Show commits that differ from the master branch
+# Show commits that differ from the mainline branch
 divergent() {
-  branch="$(current_branch)"
-  if [[ "${1}" == "--bare" ]]; then
-    command_opt="--format=%h"
-  else
-    command_opt=(--left-right --graph --cherry-pick --oneline)
-  fi
-  if [[ "$branch" == "master" ]]; then
-    echo "This command cannot be run against the master branch"
-  else
-    git log "${command_opt[@]}" master.."$branch"
-  fi
+	branch="$(current_branch)"
+	if [[ "${1}" == "--bare" ]]; then
+		command_opt="--format=%h"
+	else
+		command_opt=(--left-right --graph --cherry-pick --oneline)
+	fi
+	if [[ "$branch" == "$(git_remote_mainline_ref)" ]]; then
+		echo "This command cannot be run against the $(git_remote_mainline_ref) branch"
+	else
+		set -x
+		git log "${command_opt[@]}" "$(git_remote_mainline_ref)".."$branch"
+		set +x
+	fi
 }
 
 # Isolate a single commit to its own branch
 isolate() {
-  if [ "$#" -ne 2 ]; then
-    echo "Usage: isolate <sha> <branch-name>"
-    return 1
-  else
-    if [[ "$(is_index_clean)" -gt 0 ]] || [[ "$(untracked_files)" -gt 0 ]]; then
-      echo "Please stash or commit your changes first"
-      return 1
-    else
-      git checkout -b "$2" &&
-        git reset --hard "origin/$(git_remote_mainline_ref)" &&
-        git cherry-pick "$1"
-    fi
-  fi
+	if [ "$#" -ne 2 ]; then
+		echo "Usage: isolate <sha> <branch-name>"
+		return 1
+	else
+		if [[ "$(is_index_clean)" -gt 0 ]] || [[ "$(untracked_files)" -gt 0 ]]; then
+			echo "Please stash or commit your changes first"
+			return 1
+		else
+			git checkout -b "$2" &&
+				git reset --hard "origin/$(git_remote_mainline_ref)" &&
+				git cherry-pick "$1"
+		fi
+	fi
 }
 
 gg() {
-  if [[ "$(current_branch)" != git_remote_mainline_ref ]]; then
-    git fetch origin "$(git_remote_mainline_ref)"
-  fi
-  git log \
-    --graph \
-    --pretty=format:'%Cred%h%Creset %aN: %s %Cgreen(%cr)%Creset' \
-    --abbrev-commit \
-    --date=relative \
-    "$(current_branch)" \
-    --not "refs/remotes/origin/$(git_remote_mainline_ref)"
+	if [[ "$(current_branch)" != git_remote_mainline_ref ]]; then
+		git fetch origin "$(git_remote_mainline_ref)"
+	fi
+	git log \
+		--graph \
+		--pretty=format:'%Cred%h%Creset %aN: %s %Cgreen(%cr)%Creset' \
+		--abbrev-commit \
+		--date=relative \
+		"$(current_branch)" \
+		--not "refs/remotes/origin/$(git_remote_mainline_ref)"
 }
 
 gs() {
-  if [[ "$(current_branch)" != git_remote_mainline_ref ]]; then
-    git fetch origin "$(git_remote_mainline_ref)"
-  fi
-  git log \
-    --stat \
-    "$(current_branch)" \
-    --not "refs/remotes/origin/$(git_remote_mainline_ref)" \
-    "$@"
+	if [[ "$(current_branch)" != git_remote_mainline_ref ]]; then
+		git fetch origin "$(git_remote_mainline_ref)"
+	fi
+	git log \
+		--stat \
+		"$(current_branch)" \
+		--not "refs/remotes/origin/$(git_remote_mainline_ref)" \
+		"$@"
 }
 
 alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
@@ -277,89 +279,89 @@ alias gx='gitx --all'
 alias reauthor='git commit --amend --reset-author --no-edit'
 
 gdv() {
-  args=("$@")
-  git diff -w "${args[@]}" | view -
+	args=("$@")
+	git diff -w "${args[@]}" | view -
 }
 
 gdvc() {
-  args=("$@")
-  git diff --cached -w "${args[@]}" | view -
+	args=("$@")
+	git diff --cached -w "${args[@]}" | view -
 }
 
 clean_branches() {
-  git checkout "$(git_remote_mainline_ref)" &&
-    git diff-index --quiet --cached HEAD &&
-    git branch --merged |
-    grep -v "\*" |
-      grep -v "$(git_remote_mainline_ref)" |
-      xargs -n 1 git branch -d &&
-    echo "Done."
+	git checkout "$(git_remote_mainline_ref)" &&
+		git diff-index --quiet --cached HEAD &&
+		git branch --merged |
+		grep -v "\*" |
+			grep -v "$(git_remote_mainline_ref)" |
+			xargs -n 1 git branch -d &&
+		echo "Done."
 }
 
 make_or_cd_repo_path() {
-  set -o pipefail
-  path_to_repo=$(echo "$1" |
-    sed -E 's/^(http(s)?\:\/\/|git)@?//' |
-    sed -E 's/.git$//' |
-    sed -E 's/:/\//')
-  repo_path="$HOME/src/$path_to_repo"
-  mkdir -p "$repo_path"
-  cd "$repo_path" || return
-  pwd
+	set -o pipefail
+	path_to_repo=$(echo "$1" |
+		sed -E 's/^(http(s)?\:\/\/|git)@?//' |
+		sed -E 's/.git$//' |
+		sed -E 's/:/\//')
+	repo_path="$HOME/src/$path_to_repo"
+	mkdir -p "$repo_path"
+	cd "$repo_path" || return
+	pwd
 }
 
 clone() {
-  set -o pipefail
-  if [[ $# -ne 1 ]]; then
-    echo "Usage: gcl <git URL>"
-    return 1
-  fi
-  repo_path=$(make_or_cd_repo_path "$1")
-  cd "$repo_path" || return
-  if [[ -d "$repo_path/.git" ]]; then
-    echo "$repo_path already exists"
-  else
-    git clone "$1" "$repo_path"
-  fi
+	set -o pipefail
+	if [[ $# -ne 1 ]]; then
+		echo "Usage: gcl <git URL>"
+		return 1
+	fi
+	repo_path=$(make_or_cd_repo_path "$1")
+	cd "$repo_path" || return
+	if [[ -d "$repo_path/.git" ]]; then
+		echo "$repo_path already exists"
+	else
+		git clone "$1" "$repo_path"
+	fi
 }
 
 pr_review() {
-  if [[ $# -ne 1 ]]; then
-    echo "Usage: pr_review <pull request ID>"
-    return 1
-  else
-    git diff-index --quiet --cached HEAD &&
-      git fetch origin "pull/$1/head:pr-$1" &&
-      git checkout "pr-$1"
-  fi
+	if [[ $# -ne 1 ]]; then
+		echo "Usage: pr_review <pull request ID>"
+		return 1
+	else
+		git diff-index --quiet --cached HEAD &&
+			git fetch origin "pull/$1/head:pr-$1" &&
+			git checkout "pr-$1"
+	fi
 }
 
 my_issues() {
-  if [[ -z $GITHUB_USERNAME ]]; then
-    echo "Please set GITHUB_USERNAME"
-    return 1
-  else
-    hub issue --creator="$GITHUB_USERNAME" --include-pulls
-  fi
+	if [[ -z $GITHUB_USERNAME ]]; then
+		echo "Please set GITHUB_USERNAME"
+		return 1
+	else
+		hub issue --creator="$GITHUB_USERNAME" --include-pulls
+	fi
 }
 
 my_pull_requests() {
-  if [[ -z $GITHUB_USERNAME ]]; then
-    echo "Please set GITHUB_USERNAME"
-    return 1
-  else
-    hub browse -- "pulls/$GITHUB_USERNAME"
-  fi
+	if [[ -z $GITHUB_USERNAME ]]; then
+		echo "Please set GITHUB_USERNAME"
+		return 1
+	else
+		hub browse -- "pulls/$GITHUB_USERNAME"
+	fi
 }
 
 deploy_current_branch_to_staging() {
-  remote_name="$(git remote | grep -E 'staging' | fzf)"
-  expected_pattern='^staging'
-  if [[ "$remote_name" =~ $expected_pattern ]]; then
-    echo Deploying "$(current_branch)" to "$(git remote get-url "$remote_name")"
-    git push "$remote_name" "+$(current_branch):master"
-  else
-    echo "Remote did not match expected pattern"
-    return 1
-  fi
+	remote_name="$(git remote | grep -E 'staging' | fzf)"
+	expected_pattern='^staging'
+	if [[ "$remote_name" =~ $expected_pattern ]]; then
+		echo Deploying "$(current_branch)" to "$(git remote get-url "$remote_name")"
+		git push "$remote_name" "+$(current_branch):master"
+	else
+		echo "Remote did not match expected pattern"
+		return 1
+	fi
 }
