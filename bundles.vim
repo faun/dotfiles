@@ -49,6 +49,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tsiemens/vim-aftercolors'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-scripts/matchit.zip'
+Plug 'chrisbra/matchit'
 Plug 'wincent/terminus'
 Plug 'xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
