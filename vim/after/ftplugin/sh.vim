@@ -14,3 +14,4 @@ call textobj#user#plugin('bash', {
         \   'select-a': [ 'aV'],
         \  },
         \ })
+
