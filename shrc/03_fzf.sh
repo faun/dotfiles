@@ -17,7 +17,7 @@ export FZF_PREVIEW_COMMAND="bat --style=numbers --color=always {}"
 # - Note that ag only lists files not directories
 # - See the source code (completion.{bash,zsh}) for the details.
 _fzf_compgen_path() {
-  ag -g "" "$1"
+	ag -g "" "$1"
 }
 
 record_time "fzf"
