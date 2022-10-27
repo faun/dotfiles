@@ -21,11 +21,14 @@
     "go",
     "sh"
   ],
-  "diagnostic.displayByAle": true,
+  "diagnostic.displayByAle": false,
   "diagnostic.level": "warning",
   "diagnostic.messageDelay": 0,
   "diagnostic.checkCurrentLine": true,
   "diagnostic.format": "%message",
+  "diagnostic.virtualText": true,
+  "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.autoRefresh": true,
   "go.goplsOptions": {
     "completeUnimported": true,
     "experimentalPostfixCompletions": true,
