@@ -29,6 +29,8 @@
   "diagnostic.virtualText": true,
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.autoRefresh": true,
+  "go.enable": true,
+  "go.checkForUpdates": "install",
   "go.goplsOptions": {
     "completeUnimported": true,
     "experimentalPostfixCompletions": true,
