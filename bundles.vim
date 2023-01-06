@@ -52,3 +52,4 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'chrisbra/matchit'
 Plug 'wincent/terminus'
 Plug 'xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
