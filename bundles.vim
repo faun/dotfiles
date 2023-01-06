@@ -3,6 +3,7 @@ Plug 'AndrewRadev/switch.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
+Plug 'chrisbra/matchit'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
@@ -13,6 +14,7 @@ Plug 'embear/vim-localvimrc'
 Plug 'fatih/vim-go', { 'for': ['go'], 'do': ':GoUpdateBinaries' }
 Plug 'gcmt/taboo.vim'
 Plug 'godlygeek/tabular'
+Plug 'honza/vim-snippets'
 Plug 'janko-m/vim-test'
 Plug 'jez/vim-github-hub'
 Plug 'jgdavey/vim-blockle'
@@ -24,6 +26,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby'] }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'rizzatti/dash.vim'
 Plug 'romainl/vim-qf'
 Plug 'ruanyl/vim-gh-line'
@@ -49,7 +52,5 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tsiemens/vim-aftercolors'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'chrisbra/matchit'
 Plug 'wincent/terminus'
 Plug 'xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
