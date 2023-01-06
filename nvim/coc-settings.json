@@ -31,15 +31,6 @@
     "denseOperators": false
   },
   "pairs.enableBackspace": true,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "javascript",
-    "typescript",
-    "html",
-    "css",
-    "json",
-    "go",
-    "sh"
-  ],
   "diagnostic.displayByAle": false,
   "diagnostic.level": "warning",
   "diagnostic.messageDelay": 0,
@@ -60,6 +51,10 @@
     "usePlaceholders": true
   },
   "go.goplsUseDaemon": true,
+  "diagnostic-languageserver.formatFiletypes": {
+    "ruby": ["rubocop"],
+    "go": ["gofumpt"]
+  },
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
@@ -70,7 +65,7 @@
     "dls": {
       "command": "diagnostic-languageserver",
       "args": ["--stdio", "--log-level", "2"],
-      "filetypes": ["sh"],
+      "filetypes": ["ruby", "sh"],
       "initializationOptions": {
         "mergeConfig": true, // https://github.com/iamcco/coc-diagnostic#config
         "linters": {
@@ -119,10 +114,17 @@
         "formatters": {
           "shfmt": {
             "command": "shfmt"
+          },
+          "rubocop": {
+            "command": "bundle",
+            "sourceName": "rubocop",
+            "debounce": 100,
+            "args": ["exec", "rubocop", "-x", "--stdin", "%filepath"]
           }
         },
         "formatFiletypes": {
           "ruby": "rubocop",
+          "eruby": "rubocop",
           "sh": "shfmt"
         }
       }
