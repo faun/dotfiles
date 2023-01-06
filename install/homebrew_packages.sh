@@ -17,6 +17,7 @@ homebrew_dependencies=(
 	fzf
 	watchman
 	yoheimuta/protolint/protolint
+	hashicorp/tap/terraform-ls
 )
 
 for brew_package in "${homebrew_dependencies[@]}"; do

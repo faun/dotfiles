@@ -42,6 +42,12 @@
   },
   "go.goplsUseDaemon": true,
   "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {}
+    },
     "dls": {
       "command": "diagnostic-languageserver",
       "args": ["--stdio", "--log-level", "2"],
