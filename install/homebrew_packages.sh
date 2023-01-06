@@ -3,21 +3,22 @@
 set -e
 
 homebrew_dependencies=(
-	antibody
-	the_silver_searcher
-	neovim
-	fasd
-	tmux
-	shfmt
-	zsh-autosuggestions
-	universal-ctags
-	mas
-	pyenv-virtualenv
-	bat
-	fzf
-	watchman
-	yoheimuta/protolint/protolint
-	hashicorp/tap/terraform-ls
+  antibody
+  bat
+  fasd
+  fzf
+  hashicorp/tap/terraform-ls
+  mas
+  neovim
+  pyenv-virtualenv
+  shfmt
+  the_silver_searcher
+  tmux
+  tree-sitter
+  universal-ctags
+  watchman
+  yoheimuta/protolint/protolint
+  zsh-autosuggestions
 )
 
 for brew_package in "${homebrew_dependencies[@]}"; do
