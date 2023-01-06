@@ -65,6 +65,9 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+nnoremap <buffer> === :CocCommand editor.action.formatDocument<CR>
+
+
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 

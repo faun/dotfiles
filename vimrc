@@ -75,9 +75,6 @@ vnoremap . :norm.<CR>
 " Edit or view files in same directory as current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
-" Auto-indent the whole file with ===
-nmap === mzgg=G`z
-
 " Get off my lawn
 " nnoremap <Left> :echoe "Use h"<CR>
 " nnoremap <Right> :echoe "Use l"<CR>
