@@ -11,4 +11,5 @@ autocmd FileType nginx set commentstring=#\ %s
 autocmd FileType gitcommit set commentstring=#\ %s
 autocmd FileType squid set commentstring=#\ %s
 autocmd FileType cfg set commentstring=#\ %s
+autocmd FileType lua set commentstring=-- %s
 autocmd FileType terraform,hcl,nomad setlocal commentstring=#\ %s
