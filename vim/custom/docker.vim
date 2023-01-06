@@ -1,1 +1,2 @@
-autocmd BufEnter Dockerfile.* set ft=dockerfile
+autocmd BufEnter Dockerfile* set ft=dockerfile
+
