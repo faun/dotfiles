@@ -10,8 +10,8 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 if !has('ruby')
-    call s:ErrMsg( "Error: Rubycomplete requires vim compiled with +ruby" )
-    call s:ErrMsg( "Error: falling back to syntax completion" )
+    echoerr( "Error: Rubycomplete requires vim compiled with +ruby" )
+    echoerr( "Error: falling back to syntax completion" )
     " lets fall back to syntax completion
     setlocal omnifunc=syntaxcomplete#Complete
     finish
