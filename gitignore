@@ -53,3 +53,4 @@ tags
 /.env.*
 /.vim/
 /.scratch/
+/.env
