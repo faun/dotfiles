@@ -6,6 +6,7 @@ go_modules=(
 	github.com/nametake/golangci-lint-langserver
 	golang.org/x/tools/gopls
 	mvdan.cc/sh/v3/cmd/shfmt
+	github.com/golangci/golangci-lint/cmd/golangci-lint
 )
 
 for module in "${go_modules[@]}"; do
