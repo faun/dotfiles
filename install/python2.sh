@@ -5,6 +5,12 @@ cd "$(dirname "$0")" || exit 1
 DIR="$(pwd)"
 
 "${DIR}/python_dependencies.sh"
+set +u
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+set -u
+
 # -----------------------------------------------------------------------------
 
 installed_python2_version="$(python2 --version 2>/dev/null | sed 's/Python //')"

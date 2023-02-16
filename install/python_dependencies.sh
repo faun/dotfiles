@@ -31,9 +31,3 @@ if ! brew ls --versions | awk '{ print $1 }' | grep 'xz' >/dev/null; then
   brew install xz
 fi
 
-set +u
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-set -u
-
