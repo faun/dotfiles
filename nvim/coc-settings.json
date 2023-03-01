@@ -18,6 +18,17 @@
     "highlight": "CocFloating",
     "focusable": true,
   },
+  "go.checkForUpdates": "install",
+  "go.goplsUseDaemon": true,
+  "go.goplsOptions": {
+    "gofumpt": true,
+    "staticcheck": true,
+    "analyses": {
+      "unsafeptr": true,
+      "assign": true,
+      "fillstruct": true
+    }
+  },
   "suggest.noselect": false,
   "suggest.virtualText": false,
   "suggest.detailField": "preview",
@@ -53,17 +64,6 @@
     "denseOperators": false
   },
   "pairs.enableBackspace": true,
-  "go.checkForUpdates": "install",
-  "go.goplsUseDaemon": true,
-  "go.goplsOptions": {
-    "gofumpt": true,
-    "staticcheck": true,
-    "analyses": {
-      "unsafeptr": true,
-      "assign": true,
-      "fillstruct": true
-    }
-  },
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
