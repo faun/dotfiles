@@ -6,12 +6,33 @@
   "coc.preferences.formatOnSave": true,
   "coc.preferences.formatOnType": true,
   "codeLens.enable": true,
+  "diagnostic.enableSign": true,
+  "diagnostic.displayByAle": false,
+  "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.autoRefresh": true,
+  "diagnostic.messageDelay": 200,
+  "diagnostic.floatConfig": {
+    "border": true,
+    "rounded": true,
+    "highlight": "CocFloating",
+    "focusable": true,
+  },
   "suggest.noselect": false,
-  "suggest.virtualText": true,
+  "suggest.virtualText": false,
   "suggest.detailField": "preview",
   "suggest.enablePreselect": true,
   "suggest.selection": "recentlyUsed",
-  "snippet.highlight": false,
+  "suggest.filterGraceful": true,
+  "suggest.localityBonus": true,
+  "suggest.insertMode": "insert",
+  "suggest.languageSourcePriority": 99,
+  "suggest.enableFloat": true,
+  "suggest.floatConfig": {
+    "border": true,
+    "rounded": true,
+  },
+  "snippet.highlight": true,
   "snippets.autoTrigger": true,
   "snippets.ultisnips.pythonPrompt": false,
   "solargraph.diagnostics": true,
@@ -32,47 +53,74 @@
     "denseOperators": false
   },
   "pairs.enableBackspace": true,
-  "diagnostic.displayByAle": false,
-  "diagnostic.level": "warning",
-  "diagnostic.messageDelay": 0,
-  "diagnostic.checkCurrentLine": true,
-  "diagnostic.format": "%message",
-  "diagnostic.virtualText": true,
-  "diagnostic.refreshOnInsertMode": true,
-  "diagnostic.autoRefresh": true,
-  "go.enable": true,
   "go.checkForUpdates": "install",
-  "go.goplsOptions": {
-    "completeUnimported": true,
-    "experimentalPostfixCompletions": true,
-    "gofumpt": true,
-    "linksInHover": true,
-    "semanticTokens": true,
-    "staticcheck": true,
-    "usePlaceholders": true
-  },
   "go.goplsUseDaemon": true,
-  "diagnostic-languageserver.formatFiletypes": {
-    "ruby": ["rubocop"],
-    "go": ["gofumpt"]
+  "go.goplsOptions": {
+    "gofumpt": true,
+    "staticcheck": true,
+    "analyses": {
+      "unsafeptr": true,
+      "assign": true,
+      "fillstruct": true
+    }
   },
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
-      "args": ["serve"],
-      "filetypes": ["terraform", "tf"],
+      "args": [
+        "serve"
+      ],
+      "filetypes": [
+        "terraform",
+        "tf"
+      ],
       "initializationOptions": {}
     },
     "dls": {
       "command": "diagnostic-languageserver",
-      "args": ["--stdio", "--log-level", "2"],
-      "filetypes": ["ruby", "sh"],
+      "args": [
+        "--stdio",
+        "--log-level",
+        "2"
+      ],
+      "filetypes": [
+        "ruby",
+        "sh",
+        "go",
+      ],
       "initializationOptions": {
         "mergeConfig": true, // https://github.com/iamcco/coc-diagnostic#config
         "linters": {
+          "golangci-lint": {
+            "command": "golangci-lint",
+            "rootPatterns": [
+              ".git",
+              "go.mod"
+            ],
+            "debounce": 100,
+            "args": [
+              "run",
+              "--out-format",
+              "json"
+            ],
+            "sourceName": "golangci-lint",
+            "parseJson": {
+              "sourceName": "Pos.Filename",
+              "sourceNameFilter": true,
+              "errorsRoot": "Issues",
+              "line": "Pos.Line",
+              "column": "Pos.Column",
+              "message": "${Text} [${FromLinter}]",
+            }
+          },
           "shellcheck": {
             "command": "shellcheck",
-            "args": ["-x", "--format", "json1", "-"]
+            "args": [
+              "-x",
+              "--format",
+              "json1",
+              "-"
+            ]
           },
           "rubocop": {
             "command": "bundle",
@@ -107,10 +155,20 @@
           }
         },
         "filetypes": {
-          "sh": ["shfmt", "shellcheck"],
-          "yaml": ["yamllint"],
-          "ruby": ["rubocop"],
-          "vim": "vint"
+          "sh": [
+            "shfmt",
+            "shellcheck"
+          ],
+          "yaml": [
+            "yamllint"
+          ],
+          "ruby": [
+            "rubocop"
+          ],
+          "vim": "vint",
+          "go": [
+            "golangci-lint",
+          ]
         },
         "formatters": {
           "shfmt": {
@@ -120,7 +178,13 @@
             "command": "bundle",
             "sourceName": "rubocop",
             "debounce": 100,
-            "args": ["exec", "rubocop", "-x", "--stdin", "%filepath"]
+            "args": [
+              "exec",
+              "rubocop",
+              "-x",
+              "--stdin",
+              "%filepath"
+            ]
           }
         },
         "formatFiletypes": {
@@ -132,47 +196,37 @@
     },
     "bash": {
       "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
-    },
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"],
-      "initializationOptions": {
-        "usePlaceholders": true
-      }
-    },
-    "golangci-lint-languageserver": {
-      "command": "golangci-lint-langserver",
-      "filetypes": ["go"],
-      "initializationOptions": {
-        "command": [
-          "golangci-lint",
-          "run",
-          "--config",
-          ".golangci.yml",
-          "--out-format",
-          "json"
-        ]
-      }
+      "args": [
+        "start"
+      ],
+      "filetypes": [
+        "sh"
+      ],
+      "ignoredRootPaths": [
+        "~"
+      ]
     },
     "vimls": {
       "command": "vim-language-server",
-      "args": ["--stdio"],
+      "args": [
+        "--stdio"
+      ],
       "initializationOptions": {
         "isNeovim": true,
         "diagnostic": {
           "enable": true
         }
       },
-      "filetypes": ["vim"]
+      "filetypes": [
+        "vim"
+      ]
     },
     "yaml": {
       "enable": true,
       "command": "yaml-language-server",
-      "args": ["--stdio"],
+      "args": [
+        "--stdio"
+      ],
       "initializationOptions": {
         "yaml": {
           "enable": true,
@@ -190,7 +244,11 @@
           "trace.server": "verbose"
         }
       },
-      "filetypes": ["yaml", "yml", "docker-*.yml"]
+      "filetypes": [
+        "yaml",
+        "yml",
+        "docker-*.yml"
+      ]
     }
   }
 }
