@@ -11,6 +11,7 @@ set updatetime=300
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 set signcolumn=yes
+
 " }}}
 
 let g:coc_node_path = system('echo -n $HOME/n/bin/node')
