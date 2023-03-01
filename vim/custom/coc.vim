@@ -13,6 +13,7 @@ set updatetime=300
 set signcolumn=yes
 " }}}
 
+let g:coc_node_path = system('echo -n $HOME/n/bin/node')
 
 " ---------- Coc coc-snippets configuration ----------
 " {{{
