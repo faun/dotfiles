@@ -223,6 +223,7 @@ call SetupCommandAbbrs('C', 'CocConfig')
 "  {{{
 let g:coc_global_extensions = [
       \ 'coc-go',
+      \ 'coc-git',
       \ 'coc-diagnostic',
       \ 'coc-json',
       \ 'coc-pairs',
