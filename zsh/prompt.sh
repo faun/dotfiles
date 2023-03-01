@@ -77,8 +77,6 @@ fi
 record_time "kube-ps1 prompt"
 
 # Based off the murilasso zsh theme
-
-return_code='%(?..%{$fg[red]%}%? ↵%{$reset_color%})'
 user_host='%{$fg[green]%}%n@%m%{$reset_color%}'
 current_dir='%{$fg[blue]%}$(pwd -P)%{$reset_color%}'
 ruby_version='%{$fg[red]%}$(ruby_version_status)%{$reset_color%}'
@@ -89,7 +87,6 @@ py_version=' %{$fg[yellow]%}${pyenv_version}%{${reset_color}%}'
 # shellcheck disable=1087
 export PROMPT="${user_host}:${current_dir}${git_branch} ${ruby_version}${node_version}${py_version}${kubeps1}
 ❯ "
-export RPS1="${return_code}"
 # shellcheck disable=1087
 export SUDO_PS1="$fg[green]\u@\h:$fg[blue]\w
 $fg[red] \\$ $reset_color"
