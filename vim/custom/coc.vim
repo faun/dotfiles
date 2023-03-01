@@ -216,23 +216,23 @@ endfunction
 
 " Use C to open coc config
 call SetupCommandAbbrs('C', 'CocConfig')
+
 "  }}}
 
 " ---------- Coc extensions ----------
 "  {{{
 let g:coc_global_extensions = [
-  \ 'coc-go',
-  \ 'coc-json',
-  \ 'coc-pairs',
-  \ 'coc-prettier',
-  \ 'coc-sh',
-  \ 'coc-snippets',
-  \ 'coc-tag',
-  \ 'coc-tsserver',
-  \ 'coc-vimlsp',
-  \ 'coc-yaml',
-  \ 'coc-solargraph',
-  \ ]
+      \ 'coc-go',
+      \ 'coc-diagnostic',
+      \ 'coc-json',
+      \ 'coc-pairs',
+      \ 'coc-sh',
+      \ 'coc-snippets',
+      \ 'coc-solargraph',
+      \ 'coc-sql',
+      \ 'coc-tsserver',
+      \ 'coc-yaml',
+      \ ]
 "  }}}
 
 " vim: ft=vim fdm=marker
