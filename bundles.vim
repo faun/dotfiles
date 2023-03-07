@@ -11,6 +11,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'embear/vim-localvimrc'
 Plug 'fatih/vim-go', { 'for': ['go'], 'do': ':GoUpdateBinaries' }
 Plug 'gcmt/taboo.vim'
+Plug 'github/copilot.vim'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
 Plug 'janko-m/vim-test'
