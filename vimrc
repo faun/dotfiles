@@ -27,7 +27,6 @@ let g:ale_disable_lsp = 1
 "  {{{
 
 call plug#begin('~/.vim/plugged')
-let g:polyglot_disabled = ['go']
 source $HOME/.bundles.vim
 if filereadable(expand("$HOME/.bundles.local.vim"))
   source $HOME/.bundles.local.vim
