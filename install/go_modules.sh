@@ -7,6 +7,7 @@ go_modules=(
 	golang.org/x/tools/gopls
 	mvdan.cc/sh/v3/cmd/shfmt
 	github.com/golangci/golangci-lint/cmd/golangci-lint
+	mvdan.cc/gofumpt
 )
 
 for module in "${go_modules[@]}"; do
