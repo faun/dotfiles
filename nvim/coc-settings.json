@@ -19,7 +19,7 @@
     "focusable": true,
   },
   "go.checkForUpdates": "install",
-  "go.goplsUseDaemon": true,
+  "go.goplsUseDaemon": false,
   "go.goplsOptions": {
     "gofumpt": true,
     "staticcheck": true,
