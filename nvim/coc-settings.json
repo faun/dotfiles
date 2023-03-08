@@ -191,7 +191,7 @@
         "formatFiletypes": {
           "ruby": "rubocop",
           "eruby": "rubocop",
-          "sh": "shfmt"
+          "sh": "shfmt",
         }
       }
     },
