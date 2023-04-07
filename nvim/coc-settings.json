@@ -31,7 +31,8 @@
       "unsafeptr": true,
       "assign": true,
       "fillstruct": true
-    }
+    },
+    "gofumpt": false
   },
   "git.conflict.enabled": true,
   "git.showCommitInFloating": true,
