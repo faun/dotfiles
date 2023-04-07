@@ -1,7 +1,7 @@
 " Autosave settings for vim-go
 let g:go_asmfmt_autosave = 0
-let g:go_fmt_autosave = 0
-let g:go_imports_autosave = 0
+let g:go_fmt_autosave = 1
+let g:go_imports_autosave = 1
 let g:go_metalinter_autosave = 0
 let g:go_mod_fmt_autosave = 0
 
@@ -18,11 +18,11 @@ let g:go_diagnostics_level = 2 " 2 is for errors and warnings
 let g:go_doc_balloon = 1
 let g:go_doc_popup_window = 1
 let g:go_fmt_command = 'gofumpt'
-let g:go_fmt_fail_silently = 1
+let g:go_fmt_fail_silently = 0
 let g:go_fold_enable = []
-let g:go_gopls_complete_unimported = 0
-let g:go_gopls_enabled = 0
-let g:go_gopls_gofumpt = 0
+let g:go_gopls_complete_unimported = 1
+let g:go_gopls_enabled = 1
+let g:go_gopls_gofumpt = 1
 let g:go_gopls_options=['-remote=auto']
 let g:go_gopls_staticcheck = 0
 let g:go_highlight_build_constraints = 1
@@ -75,4 +75,4 @@ let g:projectionist_heuristics = {
       \       'type': 'test'
       \   },
       \ }}
-autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+" autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
