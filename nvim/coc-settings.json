@@ -20,10 +20,12 @@
     "focusable": true
   },
   "go.checkForUpdates": "install",
-  "go.goplsUseDaemon": false,
+  "go.goplsUseDaemon": true,
   "go.goplsOptions": {
+    "env": {
+      "CGO_ENABLED": "0"
+    },
     "usePlaceholders": true,
-    "gofumpt": true,
     "staticcheck": true,
     "analyses": {
       "unsafeptr": true,
