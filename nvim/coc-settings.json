@@ -3,7 +3,7 @@
   "coc.preferences.extensionUpdateCheck": "daily",
   "coc.preferences.floatActions": true,
   "coc.preferences.messageLevel": "error",
-  "coc.preferences.formatOnSave": true,
+  "coc.preferences.formatOnSave": false,
   "coc.preferences.formatOnType": true,
   "codeLens.enable": true,
   "diagnostic.enableSign": true,
