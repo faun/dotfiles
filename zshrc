@@ -37,6 +37,11 @@ if [ $commands[kn] ]; then
 fi
 record_time "kubectl completion"
 
+if [ -f $HOME/.local.sh ]; then
+  source $HOME/.local.sh
+  record_time "local.sh"
+fi
+
 if [[ -n $DEBUG_STARTUP_TIME ]]; then
   echo "Started up in $(printf "%d" $(($SECONDS * 1000)))ms"
   print_recorded_times
