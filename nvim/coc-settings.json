@@ -12,11 +12,12 @@
   "diagnostic.checkCurrentLine": true,
   "diagnostic.autoRefresh": true,
   "diagnostic.messageDelay": 200,
-  "diagnostic.floatConfig": {
+  "diagnostic.messageTarget": "float",
+  "floatFactory.floatConfig": {
     "border": true,
     "rounded": true,
     "highlight": "CocFloating",
-    "focusable": true,
+    "focusable": true
   },
   "go.checkForUpdates": "install",
   "go.goplsUseDaemon": false,
