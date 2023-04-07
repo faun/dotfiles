@@ -62,7 +62,7 @@
   "solargraph.completion": true,
   "solargraph.references": true,
   "solargraph.symbols": true,
-  "solargraph.formatting": false,
+  "solargraph.formatting": true,
   "sql.database": "mysql",
   "sql.lintOnSave": true,
   "sql.lintOnOpen": true,
