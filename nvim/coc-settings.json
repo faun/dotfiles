@@ -49,7 +49,7 @@
   "suggest.enableFloat": true,
   "suggest.floatConfig": {
     "border": true,
-    "rounded": true,
+    "rounded": true
   },
   "snippet.highlight": true,
   "snippets.autoTrigger": true,
