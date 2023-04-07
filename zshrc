@@ -29,13 +29,13 @@ record_time "localrc"
 if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
   zstyle ':completion:*:*:kubectl:*' list-grouped false
+  record_time "kubectl completion"
 fi
-record_time "kubectl completion"
 
 if [ $commands[kn] ]; then
   source <(kn completion zsh)
+  record_time "kn completion"
 fi
-record_time "kubectl completion"
 
 if [ -f $HOME/.local.sh ]; then
   source $HOME/.local.sh
