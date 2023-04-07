@@ -33,6 +33,10 @@
       "fillstruct": true
     }
   },
+  "git.conflict.enabled": true,
+  "git.showCommitInFloating": true,
+  "git.addGBlameToBufferVar": true,
+  "git.enableGlobalStatus": true,
   "suggest.noselect": false,
   "suggest.virtualText": false,
   "suggest.detailField": "preview",
