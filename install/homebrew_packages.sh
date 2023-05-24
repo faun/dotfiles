@@ -3,7 +3,6 @@
 set -e
 
 homebrew_dependencies=(
-  antibody
   bat
   fasd
   fzf
