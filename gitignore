@@ -54,3 +54,4 @@ tags
 /.vim/
 /.scratch/
 /.env
+.envrc
