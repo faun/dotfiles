@@ -7,4 +7,4 @@
 /vim/spell
 /node_modules
 /zsh/functions/completions
-/zsh/functions/_*
+/zsh/functions/*
