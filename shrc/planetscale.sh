@@ -12,8 +12,16 @@ planetscale_database() {
   echo "${PLANETSCALE_DATABASE:-planetscale}"
 }
 
+planetscale_branch_create_migrate_and_deploy_request () {
+  planetscale_branch_create_and_migrate && planetscale_branch_deploy_request && planetscale_branch_deploy_request_open
+}
+
+planetscale_branch_migrate() {
+  rails psdb:migrate:primary
+}
+
 planetscale_branch_create_and_migrate() {
-  planetscale_branch_create_sync && rails psdb:migrate:primary && planetscale_branch_deploy_request && planetscale_branch_deploy_request_open
+  planetscale_branch_create_sync && planetscale_branch_migrate && planetscale_branch_open
 }
 
 planetscale_branch_create() {
@@ -25,12 +33,12 @@ planetscale_branch_create_sync() {
 }
 
 planetscale_branch_wait_for_ready() {
-  echo -n "Waiting for branch $(planetscale_branch) to be ready";
+  echo -e "\n\nWaiting for branch $(planetscale_branch) to be ready"
   while [[ "$(pscale branch --org "$(planetscale_organization)" show "$(planetscale_database)" "$(planetscale_branch)" --format json | jq '.ready')" != "true" ]]; do echo -n "."; sleep 1; done; echo; echo "Branch is ready"
 }
 
 planetscale_branch_status() {
-  pscale branch show --org "$(planetscale_organization)" --database "$(planetscale_database)" "$(planetscale_branch)" --format json | jq
+  pscale branch show --org "$(planetscale_organization)" "$(planetscale_database)" "$(planetscale_branch)" --format json | jq
 }
 
 planetscale_branch_switch() {
@@ -38,11 +46,19 @@ planetscale_branch_switch() {
 }
 
 planetscale_branch_list() {
-  pscale branch list --database planetscale --database "$(planetscale_database)"
+  pscale branch list --org planetscale "$(planetscale_database)" "$(planetscale_branch)"
 }
 
 planetscale_branch_show() {
-  pscale branch show --database planetscale --database "$(planetscale_database)" "$(planetscale_branch)"
+  pscale branch show --org planetscale "$(planetscale_database)" "$(planetscale_branch)"
+}
+
+planetscale_branch_connect() {
+  pscale connect --org planetscale "$(planetscale_database)" "$(planetscale_branch)"
+}
+
+planetscale_branch_shell() {
+  pscale shell --org planetscale "$(planetscale_database)" "$(planetscale_branch)"
 }
 
 planetscale_branch_open() {
