@@ -260,5 +260,6 @@
         "docker-*.yml"
       ]
     }
-  }
+  },
+  "git.enableGutters": false
 }
