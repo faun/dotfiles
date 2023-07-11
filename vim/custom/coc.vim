@@ -236,4 +236,14 @@ let g:coc_global_extensions = [
       \ ]
 "  }}}
 
+" ---------- coc-git config ----------
+"  {{{
+"" navigate chunks of current buffer
+nmap [h <Plug>(coc-git-prevchunk)
+nmap ]h <Plug>(coc-git-nextchunk)
+" navigate conflicts of current buffer
+nmap [c <Plug>(coc-git-prevconflict)
+nmap ]c <Plug>(coc-git-nextconflict)
+"  }}}
+
 " vim: ft=vim fdm=marker
