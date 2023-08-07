@@ -5,6 +5,7 @@
   "coc.preferences.messageLevel": "error",
   "coc.preferences.formatOnSave": true,
   "coc.preferences.formatOnType": true,
+  "coc.preferences.silentAutoupdate": true,
   "tsserver.maxTsServerMemory": 6144,
   "codeLens.enable": true,
   "diagnostic.enableSign": true,
