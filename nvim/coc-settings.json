@@ -3,7 +3,7 @@
   "coc.preferences.extensionUpdateCheck": "daily",
   "coc.preferences.floatActions": true,
   "coc.preferences.messageLevel": "error",
-  "coc.preferences.formatOnSave": false,
+  "coc.preferences.formatOnSave": true,
   "coc.preferences.formatOnType": true,
   "tsserver.maxTsServerMemory": 6144,
   "codeLens.enable": true,
