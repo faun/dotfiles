@@ -81,44 +81,54 @@
   },
   "pairs.enableBackspace": true,
   "languageserver": {
+    "rubocop": {
+      "command": "rubocop",
+      "args": ["--lsp"],
+      "filetypes": ["ruby"],
+      "enable": true,
+      "detached": false
+    },
+    "ruby-lsp": {
+      "command": "ruby-lsp",
+      "initializationOptions": {
+        "experimentalFeaturesEnabled": false,
+        "enabledFeatures": [
+          "codeActions",
+          "diagnostics",
+          "documentHighlights",
+          "documentLink",
+          "documentSymbols",
+          "foldingRanges",
+          "formatting",
+          "hover",
+          "inlayHint",
+          "onTypeFormatting",
+          "selectionRanges",
+          "semanticHighlighting",
+          "completion"
+        ],
+        "formatter": "auto"
+      },
+      "filetypes": ["ruby"]
+    },
     "terraform": {
       "command": "terraform-ls",
-      "args": [
-        "serve"
-      ],
-      "filetypes": [
-        "terraform",
-        "tf"
-      ],
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
       "initializationOptions": {}
     },
     "dls": {
       "command": "diagnostic-languageserver",
-      "args": [
-        "--stdio",
-        "--log-level",
-        "2"
-      ],
-      "filetypes": [
-        "ruby",
-        "sh",
-        "go",
-      ],
+      "args": ["--stdio", "--log-level", "2"],
+      "filetypes": ["ruby", "sh", "go"],
       "initializationOptions": {
         "mergeConfig": true, // https://github.com/iamcco/coc-diagnostic#config
         "linters": {
           "golangci-lint": {
             "command": "golangci-lint",
-            "rootPatterns": [
-              ".git",
-              "go.mod"
-            ],
+            "rootPatterns": [".git", "go.mod"],
             "debounce": 100,
-            "args": [
-              "run",
-              "--out-format",
-              "json"
-            ],
+            "args": ["run", "--out-format", "json"],
             "sourceName": "golangci-lint",
             "parseJson": {
               "sourceName": "Pos.Filename",
@@ -126,127 +136,65 @@
               "errorsRoot": "Issues",
               "line": "Pos.Line",
               "column": "Pos.Column",
-              "message": "${Text} [${FromLinter}]",
+              "message": "${Text} [${FromLinter}]"
             }
           },
           "shellcheck": {
             "command": "shellcheck",
-            "args": [
-              "-x",
-              "--format",
-              "json1",
-              "-"
-            ]
-          },
-          "rubocop": {
-            "command": "bundle",
-            "sourceName": "rubocop",
-            "debounce": 100,
-            "args": [
-              "exec",
-              "rubocop",
-              "--format",
-              "json",
-              "--force-exclusion",
-              "--stdin",
-              "%filepath"
-            ],
-            "parseJson": {
-              "errorsRoot": "files[0].offenses",
-              "line": "location.start_line",
-              "endLine": "location.last_line",
-              "column": "location.start_column",
-              "endColumn": "location.end_column",
-              "message": "[${cop_name}] ${message}",
-              "security": "severity"
-            },
-            "securities": {
-              "fatal": "error",
-              "error": "error",
-              "warning": "warning",
-              "convention": "info",
-              "refactor": "info",
-              "info": "info"
-            }
+            "args": ["-x", "--format", "json1", "-"]
           }
         },
         "filetypes": {
-          "sh": [
-            "shfmt",
-            "shellcheck"
-          ],
-          "yaml": [
-            "yamllint"
-          ],
-          "ruby": [
-            "rubocop"
-          ],
+          "sh": ["shfmt", "shellcheck"],
+          "yaml": ["yamllint"],
+          "ruby": ["rubocop"],
           "vim": "vint",
-          "go": [
-            "golangci-lint",
-          ]
+          "go": ["golangci-lint"]
         },
         "formatters": {
           "shfmt": {
             "command": "shfmt"
           },
           "rubocop": {
-            "command": "bundle",
+            "command": "rubocop",
             "sourceName": "rubocop",
             "debounce": 100,
-            "args": [
-              "exec",
-              "rubocop",
-              "-x",
-              "--stdin",
-              "%filepath"
-            ]
+            "args": ["-x", "--stdin", "%filepath"]
           }
         },
         "formatFiletypes": {
-          "ruby": "rubocop",
-          "eruby": "rubocop",
-          "sh": "shfmt",
+          "ruby": ["rubocop"],
+          "sh": ["shfmt"],
+          "eruby": ["rubocop"]
         }
       }
     },
     "bash": {
       "command": "bash-language-server",
-      "args": [
-        "start"
-      ],
-      "filetypes": [
-        "sh"
-      ],
-      "ignoredRootPaths": [
-        "~"
-      ]
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
     },
     "vimls": {
       "command": "vim-language-server",
-      "args": [
-        "--stdio"
-      ],
+      "args": ["--stdio"],
       "initializationOptions": {
         "isNeovim": true,
         "diagnostic": {
           "enable": true
         }
       },
-      "filetypes": [
-        "vim"
-      ]
+      "filetypes": ["vim"]
     },
     "yaml": {
       "enable": true,
       "command": "yaml-language-server",
-      "args": [
-        "--stdio"
-      ],
+      "args": ["--stdio"],
       "initializationOptions": {
         "yaml": {
           "enable": true,
           "validate": true,
+          "hover": true,
           "format": {
             "enable": false,
             "singleQuote": false
@@ -260,11 +208,7 @@
           "trace.server": "verbose"
         }
       },
-      "filetypes": [
-        "yaml",
-        "yml",
-        "docker-*.yml"
-      ]
+      "filetypes": ["yaml", "yml", "docker-*.yml"]
     }
   },
   "git.enableGutters": false
