@@ -11,8 +11,6 @@ map <leader>gjs :CtrlP spec/javascripts/<cr>
 map <leader>gs :CtrlP app/assets/stylesheets<cr>
 map <leader>gl :CtrlP lib<cr>
 map <leader>gf :CtrlP features<cr>
-map <leader>f :CtrlP<cr>
-map <leader>F :CtrlP %%<cr>
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_max_height = 20
 
@@ -24,4 +22,3 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
-

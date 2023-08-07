@@ -115,15 +115,12 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-nnoremap <buffer> === :CocCommand editor.action.formatDocument<CR>
-
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
+" Format code with leader f for selected region.
+" Format the entire file if there's no visual selection with ===
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+vmap <leader>f <Plug>(coc-format-selected)
+nnoremap ===  :CocCommand editor.action.formatDocument<CR>
 
 augroup mygroup
   autocmd!
@@ -132,6 +129,9 @@ augroup mygroup
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
