@@ -200,9 +200,10 @@
             "singleQuote": false
           },
           "schemas": {
-            "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": "docker-*.yml",
-            "https://json.schemastore.org/github-action.json": ".github/actions/*.yml",
-            "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.yml"
+            "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": "docker-*.y*ml",
+            "https://json.schemastore.org/github-action.json": ".github/actions/*.y*ml",
+            "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.y*ml",
+            "https://json.schemastore.org/kustomization.json": "kustomization.y*ml"
           },
           "schemaStore.enable": true,
           "trace.server": "verbose"
