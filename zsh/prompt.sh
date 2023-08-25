@@ -27,6 +27,9 @@ ruby_version_status() {
 }
 record_time "ruby prompt"
 
+ZSH_THEME_GIT_PROMPT_PREFIX=" ("
+ZSH_THEME_GIT_PROMPT_SUFFIX=")"
+
 function git_prompt_info() {
 	if command -v __git_ps1 >/dev/null 2>&1; then
 		dirty="$(parse_git_dirty)"
@@ -34,6 +37,9 @@ function git_prompt_info() {
 	fi
 }
 record_time "git prompt info"
+ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}✗%{${reset_color}%}"
+ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}✔%{${reset_color}%}"
+PURE_GIT_UNTRACKED_DIRTY=0
 
 parse_git_dirty() {
 	[[ "$(command git rev-parse --is-inside-work-tree 2>/dev/null)" == "true" ]] || return
@@ -91,8 +97,4 @@ export PROMPT="${user_host}:${current_dir}${git_branch} ${ruby_version}${node_ve
 export SUDO_PS1="$fg[green]\u@\h:$fg[blue]\w
 $fg[red] \\$ $reset_color"
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" ("
-ZSH_THEME_GIT_PROMPT_SUFFIX=")"
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}✗%{${reset_color}%}"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}✔%{${reset_color}%}"
 record_time "setting prompt"
