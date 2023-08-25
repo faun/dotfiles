@@ -2,14 +2,17 @@
 
 set -e
 
-if ! [[ -f "$HOME/.ssh/id_rsa" ]]; then
-  echo "Enter your email to generate an ssh key:"
-  read -r SSH_KEY_EMAIL
-  if [[ -n $SSH_KEY_EMAIL ]]; then
-    ssh-keygen -t rsa -b 4096 -C "$SSH_KEY_EMAIL" -f "$HOME/.ssh/id_rsa"
-    ssh-add -K "$HOME/.ssh/id_rsa"
-    cat ~/.ssh/id_rsa.pub | pbcopy || true
-  fi
-else
-  cat ~/.ssh/id_rsa.pub | tee >(pbcopy) || true
+PRIVATE_KEY="$HOME/.ssh/id_ed25519"
+if ! [[ -f "${PRIVATE_KEY:?}" ]]; then
+	echo "Enter your email to generate an ssh key:"
+	read -r SSH_KEY_EMAIL
+	if [[ -n $SSH_KEY_EMAIL ]]; then
+
+		ssh-keygen -t ed25519 -C "$SSH_KEY_EMAIL" -f "${PRIVATE_KEY:?}"
+		if [[ "$OSTYPE" == darwin* ]]; then
+			ssh-add --apple-use-keychain "${PRIVATE_KEY:?}"
+		else
+			ssh-add "${PRIVATE_KEY:?}"
+		fi
+	fi
 fi
