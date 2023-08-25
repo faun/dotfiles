@@ -7,6 +7,4 @@ rules:
     max-spaces-inside: 1
   indentation:
     spaces: consistent
-    indent-sequences: whatever
-    indent-comments: whatever
   document-start: disable
