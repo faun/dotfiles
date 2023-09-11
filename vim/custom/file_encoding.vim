@@ -5,4 +5,5 @@ if has("multi_byte")
   endif
   set encoding=utf-8                     " better default than latin1
   setglobal fileencoding=utf-8           " change default file encoding when writing new files
+  set fileencodings=utf-8
 endif

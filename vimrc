@@ -6,7 +6,6 @@ syntax on
 set nocompatible
 set ttyfast
 set lazyredraw
-set encoding=utf-8
 
 " Use spacebar as leader key
 let mapleader = "\<Space>"
