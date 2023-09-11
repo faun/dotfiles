@@ -55,3 +55,4 @@ tags
 /.scratch/
 /.env
 .envrc
+/logs/*
