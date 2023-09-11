@@ -11,7 +11,13 @@ set lazyredraw
 let mapleader = "\<Space>"
 
 " Use the system clipboard by default
-set clipboard=unnamed
+if has('clipboard')
+  set clipboard=unnamed
+endif
+
+if has('unnamedplus')
+  set clipboard=unnamedplus
+endif
 
 " Explicitly set the shell to bash
 set shell=/bin/bash
