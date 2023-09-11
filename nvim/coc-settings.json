@@ -214,3 +214,4 @@
   },
   "git.enableGutters": false
 }
+// yaml-language-server: $schema https://raw.githubusercontent.com/neoclide/coc.nvim/master/data/schema.json
