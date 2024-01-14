@@ -27,4 +27,3 @@ elif [[ "$OSTYPE" == linux* ]]; then
 
   install_homebrew_if_needed
 fi
-
