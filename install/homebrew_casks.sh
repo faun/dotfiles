@@ -3,9 +3,7 @@
 set -e
 
 if [ "$(uname)" == "Darwin" ]; then
-homebrew_casks=(
-  google-cloud-sdk
-)
+homebrew_casks=()
 
 INSTALLED_CASKS="$(brew list --cask --versions)"
 
