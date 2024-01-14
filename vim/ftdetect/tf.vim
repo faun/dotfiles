@@ -1,4 +1,5 @@
 augroup terrform_ft
   au!
-  :TSBufEnable highlight
+  autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform
+  autocmd BufRead,BufNewFile *.tf,*.tfvars :TSBufEnable highlight
 augroup END
