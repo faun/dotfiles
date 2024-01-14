@@ -7,11 +7,23 @@ DIR="$(pwd)"
 # Install n from GitHub
 
 N_PREFIX="${N_PREFIX:-$HOME/n}"
+export N_PREFIX
+
 if ! [[ -d "$N_PREFIX" ]]; then
-  curl -sL https://git.io/n-install | N_PREFIX=$N_PREFIX bash -s -- -q -y
+  curl -o ./n-install -sSL https://raw.githubusercontent.com/mklement0/n-install/stable/bin/n-install
+  chmod u+x ./n-install
+  ./n-install -q -y
 else
-  export N_PREFIX
   "$N_PREFIX/bin/n-update" -y
+fi
+
+PATH="$PATH:${N_PREFIX}/bin"
+export PATH
+
+if ! command -v n
+then
+  echo "Failed to install node package manager" >&2
+  exit 1
 fi
 
 n install lts
