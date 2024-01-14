@@ -1,3 +1,5 @@
+if has_key(plugs, "coc.nvim")
+"
 " ---------- Coc Default configuration ----------
 " {{{
   " Some servers have issues with backup files, see #649.
@@ -246,4 +248,5 @@ nmap [c <Plug>(coc-git-prevconflict)
 nmap ]c <Plug>(coc-git-nextconflict)
 "  }}}
 
+endif
 " vim: ft=vim fdm=marker
