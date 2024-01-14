@@ -13,7 +13,7 @@ hi Comment guifg=light3 ctermfg=darkred
 lua <<EOF
 require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all"
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'cmake', 'ruby' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'cmake', 'ruby' },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
