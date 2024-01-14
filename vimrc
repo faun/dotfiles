@@ -233,6 +233,7 @@ endfunction
 " Colorscheme settings
 " {{{
 
+set t_Co=256
 let g:base16colorspace=256
 
 try
