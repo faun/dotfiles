@@ -4,6 +4,13 @@
   "coc.preferences.floatActions": true,
   "coc.preferences.messageLevel": "error",
   "coc.preferences.formatOnSave": true,
+  "coc.preferences.willSaveHandlerTimeout": 500,
+  "coc.preferences.formatOnSaveTimeout": 500,
+  "diagnostic-languageserver.filetypes": {
+    "sh": "shellcheck",
+    "ruby": "rubocop",
+    "go": "golangci-lint"
+  },
   "coc.preferences.formatOnType": true,
   "coc.preferences.silentAutoupdate": true,
   "tsserver.maxTsServerMemory": 6144,
@@ -22,11 +29,13 @@
     "focusable": true
   },
   "go.checkForUpdates": "install",
+  "go.enable": true,
   "go.goplsUseDaemon": true,
   "go.goplsOptions": {
     "env": {
       "CGO_ENABLED": "0"
     },
+    "completeUnimported": true,
     "usePlaceholders": true,
     "staticcheck": true,
     "analyses": {
@@ -34,7 +43,24 @@
       "assign": true,
       "fillstruct": true
     },
-    "gofumpt": false
+    "gofumpt": true
+  },
+  "go.disable": {
+    "go-outline": false,
+    "gocode": false,
+    "godef": false,
+    "godoctor": false,
+    "gogetdoc": false,
+    "golint": false,
+    "gomodifytags": false,
+    "gopkgs": false,
+    "goplay": false,
+    "gopls": false,
+    "gorename": false,
+    "goreturns": false,
+    "gotests": false,
+    "guru": false,
+    "impl": false
   },
   "git.conflict.enabled": true,
   "git.showCommitInFloating": true,
@@ -54,9 +80,6 @@
     "border": true,
     "rounded": true
   },
-  "snippet.highlight": true,
-  "snippets.autoTrigger": true,
-  "snippets.ultisnips.pythonPrompt": false,
   "solargraph.diagnostics": true,
   "solargraph.definitions": true,
   "solargraph.promptDownload": false,
@@ -117,7 +140,7 @@
       "filetypes": ["terraform", "tf"],
       "initializationOptions": {}
     },
-    "dls": {
+    "diagnostic-languageserver": {
       "command": "diagnostic-languageserver",
       "args": ["--stdio", "--log-level", "2"],
       "filetypes": ["ruby", "sh", "go"],
@@ -146,10 +169,9 @@
         },
         "filetypes": {
           "sh": ["shfmt", "shellcheck"],
-          "yaml": ["yamllint"],
           "ruby": ["rubocop"],
           "vim": "vint",
-          "go": ["golangci-lint"]
+          "go": ["golangci-lint", "gopls", "goimports", "gofumpt"]
         },
         "formatters": {
           "shfmt": {
@@ -192,12 +214,14 @@
       "args": ["--stdio"],
       "initializationOptions": {
         "yaml": {
-          "enable": true,
+          "enable": false,
           "validate": true,
           "hover": true,
           "format": {
             "enable": false,
-            "singleQuote": false
+            "singleQuote": true,
+            "finalNewline": true,
+            "bracketSpacing": true
           },
           "schemas": {
             "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": "docker-*.y*ml",
