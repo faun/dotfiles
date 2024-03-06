@@ -177,3 +177,5 @@
 
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
+[format]
+	signOff = Signed-off-by: Faun <git@faun.me>
