@@ -56,3 +56,5 @@ tags
 /.env
 .envrc
 /logs/*
+go.work
+go.work.sum
