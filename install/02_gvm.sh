@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -eou pipefail
 
+
+if ! command -v go >/dev/null 2>&1;
+then
+	brew install go || true
+fi
+
 GVM_HOME="${GVM_HOME:-$HOME/.gvm}"
 if ! [[ -d "$GVM_HOME" ]]; then
 	xcode-select --install >/dev/null 2>&1 || true
@@ -8,9 +14,9 @@ if ! [[ -d "$GVM_HOME" ]]; then
 	brew install mercurial || true
 
 	bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-	gvm use system --default
+	gvm use system --default || true
 else
 	echo "GVM is already installed, updating"
-	gvm update
+	gvm update || true
 fi
 gvm listall | grep -E "   go" | grep -vE "beta|rc" | tail -n 20 | fzf --header-first --tac --no-sort --header="Select a Go version to install" | xargs gvm install

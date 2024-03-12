@@ -28,5 +28,3 @@ elif [ "$(expr substr "$(uname -s)" 1 5)" == "Linux" ]; then
 else
   echo "Installing casks not supported"
 fi
-gcloud config unset disable_usage_reporting || true
-gcloud config set survey/disable_prompts True || true

@@ -4,7 +4,6 @@ set -e
 
 homebrew_dependencies=(
   bat
-  fasd
   fzf
   direnv
   hashicorp/tap/terraform-ls
