@@ -9,6 +9,7 @@ REPOS_TO_CLONE=(
 	jonmosco/kube-tmux
 	ahmetb/kubectx
 	rupa/z
+	tmux-plugins/tpm
 )
 
 for LINE in "${REPOS_TO_CLONE[@]}"; do
