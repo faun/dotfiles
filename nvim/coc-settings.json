@@ -236,6 +236,7 @@
       "filetypes": ["yaml", "yml", "docker-*.yml"]
     }
   },
-  "git.enableGutters": false
+  "git.enableGutters": false,
+  "snippets.ultisnips.pythonPrompt": false
 }
 // yaml-language-server: $schema https://raw.githubusercontent.com/neoclide/coc.nvim/master/data/schema.json
