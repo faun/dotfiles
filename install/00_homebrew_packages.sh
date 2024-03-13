@@ -7,7 +7,10 @@ homebrew_dependencies=(
 	direnv
 	fd
 	fzf
+	gnu-sed
 	hashicorp/tap/terraform-ls
+	jesseduffield/lazygit/lazygit
+	lndir
 	mas
 	neovim
 	pyenv-virtualenv
@@ -15,10 +18,12 @@ homebrew_dependencies=(
 	shfmt
 	the_silver_searcher
 	tmux
+	tree
 	tree-sitter
 	universal-ctags
 	watchman
-	yoheimuta/protolint/protolint
+	wget
+	yoveimuta/protolint/protolint
 	zsh-autosuggestions
 )
 
