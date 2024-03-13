@@ -25,9 +25,6 @@ set shell=/bin/bash
 
 " }}}
 
-" Tell ALE not to display LSP diagnostics or completion
-let g:ale_disable_lsp = 1
-
 " ==========================================
 " Vim-plug
 "  {{{
