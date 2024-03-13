@@ -6,6 +6,7 @@ syntax on
 set nocompatible
 set ttyfast
 set lazyredraw
+set termguicolors
 
 " Use spacebar as leader key
 let mapleader = "\<Space>"
