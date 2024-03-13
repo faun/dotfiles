@@ -23,10 +23,14 @@ Plug 'junegunn/fzf.vim'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-user'
 Plug 'machakann/vim-sandwich'
+Plug 'mattn/vim-lsp-settings'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby'] }
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/vim-lsp'
 Plug 'rizzatti/dash.vim'
 Plug 'romainl/vim-qf'
 Plug 'ruanyl/vim-gh-line'

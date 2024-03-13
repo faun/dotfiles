@@ -26,6 +26,7 @@ let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '�
 
 let g:ale_fixers = {
       \   'proto': ['protolint'],
+      \    'sh': ['shfmt'],
       \}
 
 let g:ale_linters = {
