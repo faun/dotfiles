@@ -9,23 +9,24 @@ if ! command -v yarn > /dev/null; then
 fi
 
 npm_packages=(
-  babel-eslint
-  bash-language-server
-  csslint
-  diagnostic-languageserver
-  diff-so-fancy
-  eslint
-  eslint-config-prettier
-  eslint-plugin-prettier
-  eslint-plugin-react
-  neovim
-  nginxbeautifier
-  prettier
-  strip-ansi-cli
-  stylelint
-  tern
-  vim-language-server
-  yaml-language-server
+	babel-eslint
+	bash-language-server
+	csslint
+	diagnostic-languageserver
+	diff-so-fancy
+	eslint
+	eslint-config-prettier
+	eslint-plugin-prettier
+	eslint-plugin-react
+	neovim
+	nginxbeautifier
+	prettier
+	strip-ansi-cli
+	stylelint
+	tern
+	vim-language-server
+	vscode-langservers-extracted
+	yaml-language-server
 )
 
 for package in "${npm_packages[@]}"; do
