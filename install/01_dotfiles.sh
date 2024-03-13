@@ -6,9 +6,11 @@ cd "$(dirname "$0")" || exit 1
 cd .. || exit 1
 DIR="$(pwd)"
 
-if ! command -v gcp >/dev/null 2>&1; then
-	echo "GNU cp is not installed"
+if ! command -v lndir >/dev/null 2>&1; then
+	echo "lndir is not installed"
+  exit 1
 fi
+
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=${HOME}/.config}"
 mkdir -p "${XDG_CONFIG_HOME}"
@@ -53,7 +55,11 @@ linkFile() {
 			rm "$target"
 		fi
 		echo "Linking $source => $target"
-		gcp -rsf "${source:?}" "$target"
+		if [[ -d "${source:?}" ]]
+		then
+      lndir "${source:?}" "$target"
+    fi
+    cp -asf "${source:?}" "$target"
 	else
 		echo "Skipping ignored file ${source}"
 	fi
