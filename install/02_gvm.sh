@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 set -eou pipefail
 
-
-if ! command -v go >/dev/null 2>&1;
-then
+if ! command -v go >/dev/null 2>&1; then
 	brew install go || true
 fi
 
