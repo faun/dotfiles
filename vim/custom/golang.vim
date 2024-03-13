@@ -1,9 +1,9 @@
 " Autosave settings for vim-go
-let g:go_asmfmt_autosave = 0
+let g:go_asmfmt_autosave = 1
 let g:go_fmt_autosave = 1
 let g:go_imports_autosave = 1
-let g:go_metalinter_autosave = 0
-let g:go_mod_fmt_autosave = 0
+let g:go_metalinter_autosave = 1
+let g:go_mod_fmt_autosave = 1
 
 " General settings for vim-go
 let g:delve_use_vimux = 1
