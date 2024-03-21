@@ -1,3 +1,6 @@
+import = [
+  "~/.config/alacritty-theme/themes/nord.toml"
+]
 live_config_reload = true
 
 [bell]
