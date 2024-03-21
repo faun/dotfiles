@@ -21,17 +21,17 @@ TERM = "xterm-256color"
 size = 14.0
 
 [font.bold]
-family = "Inconsolata-dz for Powerline"
+family = "InconsolataDz Nerd Font"
 
 [font.glyph_offset]
 x = 0
 y = 2
 
 [font.italic]
-family = "Inconsolata-dz for Powerline"
+family = "InconsolataDz Nerd Font"
 
 [font.normal]
-family = "Inconsolata-dz for Powerline"
+family = "InconsolataDz Nerd Font"
 
 [font.offset]
 x = 0
