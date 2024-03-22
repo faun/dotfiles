@@ -57,6 +57,7 @@ linkFile() {
 		echo "Linking $source => $target"
 		if [[ -d "${source:?}" ]]
 		then
+		  mkdir -p "$target"
       lndir "${source:?}" "$target"
     fi
     cp -asf "${source:?}" "$target"
