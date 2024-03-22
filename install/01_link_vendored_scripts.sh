@@ -4,7 +4,6 @@ cd "$(dirname "$0")" || exit 1
 DIR="$(pwd)"
 
 REPOS_TO_CLONE=(
-	chriskempson/base16-shell
 	zsh-users/antigen
 	jonmosco/kube-tmux
 	ahmetb/kubectx
