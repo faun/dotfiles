@@ -10,6 +10,7 @@ REPOS_TO_CLONE=(
 	ahmetb/kubectx
 	rupa/z
 	tmux-plugins/tpm
+	alacritty/alacritty-theme
 )
 
 for LINE in "${REPOS_TO_CLONE[@]}"; do

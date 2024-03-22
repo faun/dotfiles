@@ -68,6 +68,7 @@ fi
 pip_packages=(
 	yamllint
 	pynvim
+	djlint
 )
 for egg in "${pip_packages[@]}"; do
 	echo "Installing egg: $egg"

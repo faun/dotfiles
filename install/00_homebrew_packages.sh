@@ -6,6 +6,7 @@ homebrew_dependencies=(
 	bat
 	direnv
 	fd
+	fish
 	fzf
 	gnu-sed
 	hashicorp/tap/terraform-ls
@@ -15,15 +16,16 @@ homebrew_dependencies=(
 	neovim
 	pyenv-virtualenv
 	ripgrep
+	rubyfmt
 	shfmt
 	the_silver_searcher
 	tmux
 	tree
 	tree-sitter
 	universal-ctags
+	terraform
 	watchman
 	wget
-	yoveimuta/protolint/protolint
 	zsh-autosuggestions
 )
 
