@@ -1,21 +1,74 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  -- bootstrap lazy.nvim
-  -- stylua: ignore
-  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
-end
-vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
-
 require("lazy").setup({
   spec = {
+    {
+      "nvimdev/dashboard-nvim",
+      enabled = false,
+    },
     -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    {
+      "LazyVim/LazyVim",
+      import = "lazyvim.plugins",
+      opts = {
+        colorscheme = "catppuccin-latte",
+      },
+    },
+    { "folke/neodev.nvim", opts = {} },
+    -- add onenord colorscheme
+    { "rmehri01/onenord.nvim" },
+    { "tpope/vim-eunuch" },
+    { "embear/vim-localvimrc" },
+    {
+      "nvim-neotest/neotest",
+      lazy = true,
+      dependencies = {
+        "antoinemadec/FixCursorHold.nvim",
+        "nvim-lua/plenary.nvim",
+        "nvim-neotest/neotest-go",
+        "nvim-neotest/neotest-plenary",
+        "nvim-neotest/nvim-nio",
+        "nvim-treesitter/nvim-treesitter",
+        "olimorris/neotest-rspec",
+      },
+      config = function()
+        require("neotest").setup({
+          adapters = {
+            require("neotest-go")({
+              experimental = {
+                test_table = true,
+              },
+              args = { "-count=1", "-timeout=60s" },
+            }),
+            require("neotest-rspec"),
+            require("neotest-plenary"),
+            require("neotest-vim-test")({
+              ignore_file_types = { "vim", "lua" },
+            }),
+          },
+        })
+        require("neodev").setup({
+          library = { plugins = { "neotest" }, types = true },
+        })
+      end,
+    },
+    {
+      "nvim-telescope/telescope-frecency.nvim",
+      config = function()
+        require("telescope").load_extension("frecency")
+      end,
+    },
+    { "folke/neodev.nvim", opts = {} },
+    { "vim-test/vim-test" },
+    { "preservim/vimux" },
+    { "codota/tabnine-nvim", build = "./dl_binaries.sh" },
     -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.lang.typescript" },
-    -- { import = "lazyvim.plugins.extras.lang.json" },
-    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    -- import/override with your plugins
-    { import = "plugins" },
+    { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "lazyvim.plugins.extras.formatting.prettier" },
+    { import = "lazyvim.plugins.extras.lang.ruby" },
+    { import = "lazyvim.plugins.extras.lang.markdown" },
+    { import = "lazyvim.plugins.extras.lang.go" },
+    { import = "lazyvim.plugins.extras.lang.terraform" },
+    { import = "lazyvim.plugins.extras.lang.tailwind" },
+    { import = "lazyvim.plugins.extras.lang.json" },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
@@ -26,21 +79,30 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "tokyonight", "habamax" } },
   checker = { enabled = true }, -- automatically check for plugin updates
   performance = {
     rtp = {
       -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",
         "zipPlugin",
       },
     },
+  },
+})
+
+require("onenord").setup({
+  theme = "dark",
+})
+
+require("lualine").setup({
+  options = {
+    theme = "onenord",
   },
 })
