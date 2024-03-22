@@ -8,6 +8,8 @@ set ttyfast
 set lazyredraw
 set termguicolors
 
+let g:loaded_perl_provider = 0
+
 " Use spacebar as leader key
 let mapleader = "\<Space>"
 
