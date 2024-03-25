@@ -59,7 +59,6 @@ require("lazy").setup({
     { "folke/neodev.nvim", opts = {} },
     { "vim-test/vim-test" },
     { "preservim/vimux" },
-    { "codota/tabnine-nvim", build = "./dl_binaries.sh" },
     -- import any extras modules here
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },

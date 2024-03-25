@@ -17,7 +17,3 @@ vim.api.nvim_set_keymap("n", "<leader>ts", ":TestSuite<CR>", { silent = true, no
 vim.api.nvim_set_keymap("n", "<leader>tl", ":TestLast<CR>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>tv", ":TestVisit<CR>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>tb", ":GoToggleBreakpoint<CR>", { silent = true, noremap = true })
-
-vim.api.nvim_set_keymap("x", "<leader>q", "", { noremap = true, callback = require("tabnine.chat").open })
-vim.api.nvim_set_keymap("i", "<leader>q", "", { noremap = true, callback = require("tabnine.chat").open })
-vim.api.nvim_set_keymap("n", "<leader>q", "", { noremap = true, callback = require("tabnine.chat").open })
