@@ -85,11 +85,6 @@ end
 vim.g.VimuxHeight = "40"
 vim.g.VimuxOrientation = "h"
 
-vim.g["test#javascript#teaspoon#options"] = {
-  nearest = "--filter=",
-  file = "files=",
-  suite = "--suite=",
-}
 vim.g["test#ruby#bundle_exec"] = 0
 
 require("tabnine").setup({
