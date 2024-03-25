@@ -4,7 +4,6 @@ require("lazy").setup({
       "nvimdev/dashboard-nvim",
       enabled = false,
     },
-    -- add LazyVim and import its plugins
     {
       "LazyVim/LazyVim",
       import = "lazyvim.plugins",
