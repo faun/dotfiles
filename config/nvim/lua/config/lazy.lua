@@ -8,9 +8,6 @@ require("lazy").setup({
     {
       "LazyVim/LazyVim",
       import = "lazyvim.plugins",
-      opts = {
-        colorscheme = "catppuccin-latte",
-      },
     },
     { "folke/neodev.nvim", opts = {} },
     -- add onenord colorscheme
