@@ -59,6 +59,14 @@ require("lazy").setup({
     { "folke/neodev.nvim", opts = {} },
     { "vim-test/vim-test" },
     { "preservim/vimux" },
+    {
+      "sourcegraph/sg.nvim",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim",
+      },
+      build = "nvim -l build/init.lua",
+    },
     -- import any extras modules here
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },
@@ -103,5 +111,19 @@ require("onenord").setup({
 require("lualine").setup({
   options = {
     theme = "onenord",
+  },
+})
+
+require("sg").setup({
+  enable_cody = true,
+  accept_tos = true,
+  diagnostics = {
+    enable = true,
+    severity = {
+      error = "Error",
+      warning = "Warning",
+      hint = "Hint",
+      information = "Information",
+    },
   },
 })

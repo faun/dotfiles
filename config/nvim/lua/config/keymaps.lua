@@ -17,3 +17,10 @@ vim.api.nvim_set_keymap("n", "<leader>ts", ":TestSuite<CR>", { silent = true, no
 vim.api.nvim_set_keymap("n", "<leader>tl", ":TestLast<CR>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>tv", ":TestVisit<CR>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>tb", ":GoToggleBreakpoint<CR>", { silent = true, noremap = true })
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<space>ss",
+  "<cmd>lua require('sg.extensions.telescope').fuzzy_search_results()<CR>",
+  { noremap = true, silent = true }
+)
