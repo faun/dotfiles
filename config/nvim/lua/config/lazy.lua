@@ -26,6 +26,7 @@ require("lazy").setup({
     },
     { "folke/neodev.nvim", opts = {} },
     { "tpope/vim-eunuch" },
+    { "tpope/vim-fugitive" },
     { "embear/vim-localvimrc" },
     {
       "nvim-neotest/neotest",
