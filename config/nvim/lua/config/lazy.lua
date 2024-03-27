@@ -173,3 +173,27 @@ require("copilot").setup({
   copilot_node_command = "node", -- Node.js version must be > 18.x
   server_opts_overrides = {},
 })
+
+-- then setup your lsp server as usual
+local lspconfig = require("lspconfig")
+
+local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
+lspconfig.lua_ls.setup({
+  capabilities = lsp_capabilities,
+  settings = {
+    Lua = {
+      completion = {
+        callSnippet = "Replace",
+      },
+      diagnostics = {
+        globals = {
+          "vim",
+        },
+      },
+      telemetry = { enable = false },
+      hint = { enable = true },
+    },
+  },
+})
