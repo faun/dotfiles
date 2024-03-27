@@ -5,12 +5,26 @@ require("lazy").setup({
       enabled = false,
     },
     {
+      "catppuccin/nvim",
+      enabled = false,
+    },
+    {
+      "rmehri01/onenord.nvim",
+      lazy = false,
+      priority = 1000,
+    },
+    {
       "LazyVim/LazyVim",
       import = "lazyvim.plugins",
+      opts = {
+        colorscheme = function()
+          require("onenord").setup({
+            theme = "dark",
+          })
+        end,
+      },
     },
     { "folke/neodev.nvim", opts = {} },
-    -- add onenord colorscheme
-    { "rmehri01/onenord.nvim" },
     { "tpope/vim-eunuch" },
     { "embear/vim-localvimrc" },
     {
@@ -118,10 +132,6 @@ require("lazy").setup({
       },
     },
   },
-})
-
-require("onenord").setup({
-  theme = "dark",
 })
 
 require("lualine").setup({
