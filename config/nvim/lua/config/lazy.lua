@@ -29,6 +29,14 @@ require("lazy").setup({
     { "tpope/vim-fugitive" },
     { "embear/vim-localvimrc" },
     {
+      "kylechui/nvim-surround",
+      version = "*", -- Use for stability; omit to use `main` branch for the latest features
+      event = "VeryLazy",
+      config = function()
+        require("nvim-surround").setup()
+      end,
+    },
+    {
       "nvim-telescope/telescope-frecency.nvim",
       config = function()
         require("telescope").load_extension("frecency")
