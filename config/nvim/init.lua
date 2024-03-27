@@ -69,13 +69,15 @@ vim.opt.copyindent = true
 vim.opt.shiftround = true
 
 vim.opt.fillchars = {
-  horiz = "━",
-  horizup = "┻",
-  horizdown = "┳",
-  vert = "┃",
-  vertleft = "┫",
-  vertright = "┣",
-  verthoriz = "╋",
+  foldopen = "",
+  foldclose = "",
+  vert = "│",
+  horiz = "─",
+  -- fold = "⸱",
+  fold = " ",
+  foldsep = " ",
+  diff = "╱",
+  eob = " ",
 }
 
 if vim.fn.exists("$TMUX") == 1 then
