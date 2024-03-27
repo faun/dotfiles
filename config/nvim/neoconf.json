@@ -9,6 +9,7 @@
     "plugins": {
       "lua_ls": {
         "enabled": true
+        enabled_for_neovim_config = true,
       }
     }
   }
