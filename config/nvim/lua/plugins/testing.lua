@@ -29,14 +29,5 @@ return {
     require("neodev").setup({
       library = { plugins = { "neotest" }, types = true },
     })
-
-    if vim.fn.exists("$TMUX") == 1 then
-      vim.g["test#strategy"] = "vimux"
-    end
-
-    vim.g.VimuxHeight = "40"
-    vim.g.VimuxOrientation = "h"
-
-    vim.g["test#ruby#bundle_exec"] = 0
   end,
 }

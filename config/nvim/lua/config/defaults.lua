@@ -78,3 +78,12 @@ vim.opt.directory = { "~/.vim-tmp", "~/.tmp", "~/tmp", "/var/tmp", "/tmp" }
 
 -- No swap files
 vim.opt.swapfile = false
+
+if vim.fn.exists("$TMUX") == 1 then
+  vim.g["test#strategy"] = "vimux"
+end
+
+vim.g.VimuxHeight = "40"
+vim.g.VimuxOrientation = "h"
+
+vim.g["test#ruby#bundle_exec"] = 0
