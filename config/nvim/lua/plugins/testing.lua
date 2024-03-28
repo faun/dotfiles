@@ -9,6 +9,8 @@ return {
     "nvim-neotest/nvim-nio",
     "nvim-treesitter/nvim-treesitter",
     "olimorris/neotest-rspec",
+    "preservim/vimux",
+    "vim-test/vim-test",
   },
   config = function()
     require("neotest").setup({

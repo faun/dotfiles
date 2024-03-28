@@ -43,8 +43,6 @@ require("lazy").setup({
       end,
     },
     { "folke/neodev.nvim", opts = {} },
-    { "vim-test/vim-test" },
-    { "preservim/vimux" },
     {
       "sourcegraph/sg.nvim",
       dependencies = {
