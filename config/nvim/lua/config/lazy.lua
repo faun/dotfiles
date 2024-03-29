@@ -43,6 +43,18 @@ require("lazy").setup({
       end,
     },
     {
+      "folke/neodev.nvim",
+      dependencies = {
+        "nvim-neotest/neotest-go",
+      },
+      lazy = true,
+      config = function()
+        require("neodev").setup({
+          library = { plugins = { "neotest" }, types = true },
+        })
+      end,
+    },
+    {
       "nvim-telescope/telescope-frecency.nvim",
       config = function()
         require("telescope").load_extension("frecency")
