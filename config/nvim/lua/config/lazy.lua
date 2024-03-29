@@ -31,7 +31,6 @@ require("lazy").setup({
         end,
       },
     },
-    { "folke/neodev.nvim", opts = {} },
     { "tpope/vim-eunuch" },
     { "tpope/vim-fugitive" },
     { "embear/vim-localvimrc" },
@@ -49,7 +48,6 @@ require("lazy").setup({
         require("telescope").load_extension("frecency")
       end,
     },
-    { "folke/neodev.nvim", opts = {} },
     {
       "sourcegraph/sg.nvim",
       dependencies = {
