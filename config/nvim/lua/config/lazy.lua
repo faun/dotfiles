@@ -14,6 +14,13 @@ require("lazy").setup({
       priority = 1000,
     },
     {
+      "nvim-lualine/lualine.nvim",
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+      opts = {
+        theme = "onenord",
+      },
+    },
+    {
       "LazyVim/LazyVim",
       import = "lazyvim.plugins",
       opts = {
@@ -87,12 +94,6 @@ require("lazy").setup({
         "zipPlugin",
       },
     },
-  },
-})
-
-require("lualine").setup({
-  options = {
-    theme = "onenord",
   },
 })
 
