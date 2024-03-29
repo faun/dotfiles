@@ -43,6 +43,34 @@ require("lazy").setup({
       end,
     },
     {
+      "sourcegraph/sg.nvim",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim",
+      },
+      build = "nvim -l build/init.lua",
+      keys = {
+        {
+          "<leader>sf",
+          "<cmd>lua require('sg.extensions.telescope').fuzzy_search_results()<CR>",
+          desc = "Sourcegraph fuzzy search results",
+        },
+      },
+      opts = {
+        enable_cody = true,
+        accept_tos = true,
+        diagnostics = {
+          enable = true,
+          severity = {
+            error = "Error",
+            warning = "Warning",
+            hint = "Hint",
+            information = "Information",
+          },
+        },
+      },
+    },
+    {
       "folke/neodev.nvim",
       dependencies = {
         "nvim-neotest/neotest-go",
