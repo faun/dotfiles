@@ -78,7 +78,15 @@ require("lazy").setup({
       lazy = true,
       config = function()
         require("neodev").setup({
-          library = { plugins = { "neotest" }, types = true },
+          library = {
+            plugins = {
+              "neotest",
+              "nvim-treesitter",
+              "plenary.nvim",
+              "telescope.nvim",
+            },
+            types = true,
+          },
         })
       end,
     },
