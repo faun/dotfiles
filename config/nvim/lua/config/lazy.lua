@@ -55,21 +55,6 @@ require("lazy").setup({
       end,
     },
     {
-      "nvim-telescope/telescope-frecency.nvim",
-      dependencies = { "nvim-telescope/telescope.nvim" },
-      keys = {
-        {
-          "n",
-          "<leader>ff",
-          "<cmd>Telescope frecency<CR>",
-          { noremap = true, silent = true },
-        },
-      },
-      config = function()
-        require("telescope").load_extension("frecency")
-      end,
-    },
-    {
       "sourcegraph/sg.nvim",
       dependencies = {
         "nvim-lua/plenary.nvim",
