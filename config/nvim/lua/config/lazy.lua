@@ -93,35 +93,6 @@ require("lazy").setup({
         },
       },
     },
-    {
-      "folke/neodev.nvim",
-      dependencies = {
-        "nvim-neotest/neotest-go",
-      },
-      lazy = true,
-      config = function()
-        require("neodev").setup({
-          library = {
-            plugins = {
-              "neotest",
-              "nvim-treesitter",
-              "plenary.nvim",
-              "telescope.nvim",
-            },
-            types = true,
-          },
-        })
-      end,
-    },
-    {
-      "sourcegraph/sg.nvim",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope.nvim",
-      },
-      build = "nvim -l build/init.lua",
-    },
-    -- import any extras modules here
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },
     { import = "lazyvim.plugins.extras.lang.ruby" },
