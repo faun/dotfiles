@@ -58,3 +58,4 @@ tags
 /logs/*
 go.work
 go.work.sum
+.neoconf.json
