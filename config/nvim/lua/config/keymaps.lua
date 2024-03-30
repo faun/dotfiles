@@ -3,9 +3,6 @@
 -- Add any additional keymaps here
 --
 
--- vim-go mappings
-vim.api.nvim_set_keymap("n", "<leader>tb", ":GoToggleBreakpoint<CR>", { silent = true, noremap = true })
-
 -- Buffer
 vim.api.nvim_set_keymap("n", "<leader><left>", ":leftabove vnew<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader><right>", ":rightbelow vnew<CR>", { noremap = true })
