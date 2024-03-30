@@ -35,6 +35,25 @@ require("lazy").setup({
     { "tpope/vim-fugitive" },
     { "embear/vim-localvimrc" },
     {
+      "nvim-telescope/telescope.nvim",
+      keys = {
+        {
+          "<C-P>",
+          function()
+            require("telescope.builtin").find_files({ hidden = true })
+          end,
+          desc = "Find Files",
+        },
+        {
+          "<C-F>",
+          function()
+            require("telescope.builtin").live_grep()
+          end,
+          desc = "Find Word",
+        },
+      },
+    },
+    {
       "kylechui/nvim-surround",
       version = "*", -- Use for stability; omit to use `main` branch for the latest features
       event = "VeryLazy",
