@@ -114,30 +114,51 @@ require("lazy").setup({
     },
     {
       "nvim-neotest/neotest",
+      lazy = true,
       dependencies = {
         "nvim-lua/plenary.nvim",
         "antoinemadec/FixCursorHold.nvim",
+        "nvim-treesitter/nvim-treesitter",
         "vim-test/vim-test",
         "preservim/vimux",
         "nvim-neotest/neotest-vim-test",
         "nvim-neotest/neotest-go",
         "olimorris/neotest-rspec",
       },
-      opts = {
-        adapters = function()
-          local neotest_go = require("neotest-go")
-          local neotest_rspec = require("neotest-rspec")
-          local neotest_vim_test = require("neotest-vim-test")
-
-          return {
-            neotest_go,
-            neotest_rspec,
-            neotest_vim_test({
+      config = function()
+        require("neotest").setup({
+          adapters = {
+            require("neotest-rspec")({
+              -- Optionally your function can take a position_type which is one of:
+              -- - "file"
+              -- - "test"
+              -- - "dir"
+              rspec_cmd = function(position_type)
+                if position_type == "test" then
+                  return vim.tbl_flatten({
+                    "bundle",
+                    "exec",
+                    "rspec",
+                    "--format",
+                    "documentation",
+                    "--fail-fast",
+                  })
+                else
+                  return vim.tbl_flatten({
+                    "bundle",
+                    "exec",
+                    "rspec",
+                  })
+                end
+              end,
+            }),
+            require("neotest-go"),
+            require("neotest-vim-test")({
               ignore_filetypes = {},
             }),
-          }
-        end,
-      },
+          },
+        })
+      end,
     },
     {
       "vim-test/vim-test",
