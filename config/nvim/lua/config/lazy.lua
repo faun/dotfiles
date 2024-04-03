@@ -183,6 +183,59 @@ require("lazy").setup({
         end
       end,
     },
+    {
+      "stevearc/conform.nvim",
+      optional = true,
+      opts = {
+        formatters = {
+          shfmt = {
+            prepend_args = { "-i", "2" },
+          },
+        },
+        formatters_by_ft = {
+          bash = { "shfmt" },
+          c = { "clang_format" },
+          cmake = { "cmake_format" },
+          cpp = { "clang_format" },
+          css = { "prettier" },
+          eruby = { "erb-formatter" },
+          fish = { "fish_indent" },
+          go = { "gofumpt", "goimports" },
+          html = { "prettier" },
+          javascript = { { "prettierd", "prettier" } },
+          javascriptreact = { "prettier" },
+          json = { "prettier" },
+          jsonc = { "prettier" },
+          less = { "prettier" },
+          lua = { "stylua" },
+          markdown = { "prettier" },
+          python = { "isort", "black" },
+          ruby = { "ruby_fmt" },
+          rust = { "rustfmt" },
+          scss = { "prettier" },
+          sh = { "shfmt" },
+          terraform = { "terraform_fmt" },
+          tf = { "terraform_fmt" },
+          typescript = { "prettier" },
+          typescriptreact = { "prettier" },
+          vue = { "prettier" },
+          xhtml = { "prettier" },
+          xml = { "prettier" },
+          yaml = { "prettier" },
+        },
+      },
+      keys = {
+        {
+          -- Customize or remove this keymap to your liking
+          "<leader>==",
+          function()
+            require("conform").format({ async = true, lsp_fallback = true })
+          end,
+          mode = "",
+          desc = "Format buffer",
+        },
+      },
+    },
     { import = "lazyvim.plugins.extras.coding.copilot" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },
     { import = "lazyvim.plugins.extras.lang.go" },
