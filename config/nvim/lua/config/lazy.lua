@@ -153,6 +153,9 @@ require("lazy").setup({
       },
     },
     {
+      "folke/neoconf.nvim",
+    },
+    {
       "nvim-neotest/neotest",
       lazy = true,
       dependencies = {
