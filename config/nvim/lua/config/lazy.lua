@@ -168,7 +168,7 @@ require("lazy").setup({
         "nvim-neotest/neotest-go",
         "olimorris/neotest-rspec",
       },
-      config = function()
+      opts = function()
         require("neotest").setup({
           adapters = {
             require("neotest-rspec")({
@@ -239,7 +239,6 @@ require("lazy").setup({
         },
         {
           "leoluz/nvim-dap-go",
-          config = true,
         },
       },
     },
