@@ -17,3 +17,8 @@ vim.g.maplocalleader = "\\" -- Same for `maplocalleader`
 
 require("config.lazy")
 require("config.defaults")
+
+local init_lua_path = vim.fn.stdpath("config") .. "/local.lua"
+if vim.fn.filereadable(init_lua_path) == 1 then
+  dofile(init_lua_path)
+end
