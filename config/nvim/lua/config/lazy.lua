@@ -35,6 +35,23 @@ require("lazy").setup({
     { "tpope/vim-fugitive" },
     { "embear/vim-localvimrc" },
     {
+      "williamboman/mason.nvim",
+      opts = {
+        ensure_installed = {
+          "black",
+          "erb-formatter",
+          "gofumpt",
+          "goimports",
+          "isort",
+          "prettier",
+          "rubyfmt",
+          "rustfmt",
+          "shfmt",
+          "stylua",
+        },
+      },
+    },
+    {
       "nvim-telescope/telescope.nvim",
       keys = {
         {
