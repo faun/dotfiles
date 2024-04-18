@@ -119,34 +119,10 @@ require("lazy").setup({
     },
     {
       "kylechui/nvim-surround",
-      version = "*", -- Use for stability; omit to use `main` branch for the latest features
       event = "VeryLazy",
-      config = function()
-        require("nvim-surround").setup()
-      end,
     },
     {
       "folke/neodev.nvim",
-      dependencies = {
-        "nvim-neotest/neotest",
-        "nvim-lua/plenary.nvim",
-        "nvim-treesitter/nvim-treesitter",
-        "nvim-telescope/telescope.nvim",
-      },
-      lazy = true,
-      config = function()
-        require("neodev").setup({
-          library = {
-            plugins = {
-              "neotest",
-              "nvim-treesitter",
-              "plenary.nvim",
-              "telescope.nvim",
-            },
-            types = true,
-          },
-        })
-      end,
     },
     {
       "sourcegraph/sg.nvim",
