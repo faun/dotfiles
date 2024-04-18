@@ -18,6 +18,7 @@ npm_packages=(
 	eslint-config-prettier
 	eslint-plugin-prettier
 	eslint-plugin-react
+	htmlhint
 	neovim
 	nginxbeautifier
 	prettier
