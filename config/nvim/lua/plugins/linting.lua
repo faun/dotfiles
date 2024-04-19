@@ -11,7 +11,6 @@ return {
         html = { "htmlhint" },
         json = { "jsonlint" },
         less = { "stylelint" },
-        lua = { "luacheck" },
         markdown = { "markdownlint" },
         python = { "flake8" },
         ruby = { "ruby", "rubocop" },
