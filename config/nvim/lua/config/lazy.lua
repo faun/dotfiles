@@ -51,23 +51,6 @@ require("lazy").setup({
     { "tpope/vim-fugitive" },
     { "embear/vim-localvimrc" },
     {
-      "williamboman/mason.nvim",
-      opts = {
-        ensure_installed = {
-          "black",
-          "erb-formatter",
-          "gofumpt",
-          "goimports",
-          "isort",
-          "prettier",
-          "rubyfmt",
-          "rustfmt",
-          "shfmt",
-          "stylua",
-        },
-      },
-    },
-    {
       "folke/flash.nvim",
       event = "VeryLazy",
       opts = {},
@@ -138,9 +121,6 @@ require("lazy").setup({
       event = "VeryLazy",
     },
     {
-      "folke/neodev.nvim",
-    },
-    {
       "sourcegraph/sg.nvim",
       dependencies = {
         "nvim-lua/plenary.nvim",
@@ -167,9 +147,6 @@ require("lazy").setup({
           },
         },
       },
-    },
-    {
-      "folke/neoconf.nvim",
     },
     {
       "nvim-neotest/neotest",
