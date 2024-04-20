@@ -12,18 +12,20 @@ homebrew_dependencies=(
 	hashicorp/tap/terraform-ls
 	jesseduffield/lazygit/lazygit
 	lndir
+	lua
+	luarocks
 	mas
 	neovim
 	pyenv-virtualenv
 	ripgrep
 	rubyfmt
 	shfmt
+	terraform
 	the_silver_searcher
 	tmux
 	tree
 	tree-sitter
 	universal-ctags
-	terraform
 	watchman
 	wget
 	zsh-autosuggestions
