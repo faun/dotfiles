@@ -108,4 +108,120 @@ return {
   { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
   { "folke/neodev.nvim", opts = {} },
   { "williamboman/mason-lspconfig.nvim" },
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-emoji",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lua",
+      "neovim/nvim-lspconfig",
+      "ray-x/cmp-treesitter",
+      {
+        "saadparwaiz1/cmp_luasnip",
+        dependencies = "L3MON4D3/LuaSnip",
+      },
+      {
+        "Exafunction/codeium.nvim",
+        cmd = "Codeium",
+        build = ":Codeium Auth",
+        opts = {},
+      },
+      {
+        "zbirenbaum/copilot-cmp",
+        dependencies = "copilot.lua",
+        opts = {},
+        config = function(_, opts)
+          local copilot_cmp = require("copilot_cmp")
+          copilot_cmp.setup(opts)
+          -- attach cmp source whenever copilot attaches
+          -- fixes lazy-loading issues with the copilot cmp source
+          LazyVim.lsp.on_attach(function(client)
+            if client.name == "copilot" then
+              copilot_cmp._on_insert_enter({})
+            end
+          end)
+        end,
+      },
+    },
+    init = function()
+      local has_words_before = function()
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      end
+
+      local cmp = require("cmp")
+
+      cmp.setup({
+        mapping = {
+          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+            end
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function()
+            if cmp.visible() then
+              cmp.select_prev_item()
+            end
+          end, { "i", "s" }),
+        },
+        sources = cmp.config.sources({
+          { name = "luasnip" },
+          { name = "nvim_lsp" },
+          { name = "treesitter" },
+          { name = "emoji" },
+          { name = "nvim_lua" },
+          {
+            name = "copilot",
+            option = {
+              group_index = 1,
+              priority = 100,
+            },
+          },
+          {
+            name = "codeium",
+            option = {
+              group_index = 1,
+              priority = 100,
+            },
+          },
+        }),
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end,
+        },
+        window = {
+          -- documentation = cmp.config.window.bordered(),
+          completion = cmp.config.window.bordered(),
+        },
+      })
+
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local nvim_lsp = require("lspconfig")
+
+      -- Setup lspconfig fo gopls
+      nvim_lsp["gopls"].setup({
+        cmd = { "gopls" },
+        capabilities = capabilities,
+        settings = {
+          gopls = {
+            experimentalPostfixCompletions = true,
+            analyses = {
+              unusedparams = true,
+              shadow = true,
+            },
+            staticcheck = true,
+          },
+        },
+        init_options = {
+          usePlaceholders = true,
+        },
+      })
+    end,
+  },
 }
