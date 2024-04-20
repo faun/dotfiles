@@ -218,6 +218,8 @@ require("lazy").setup({
           vim.g.VimuxOrientation = "v"
           vim.g.VimuxHeight = "40"
         end
+        -- Add -v to golang tests
+        vim.g["test#go#gotest#options"] = "-v"
       end,
     },
     {
