@@ -14,6 +14,7 @@ homebrew_dependencies=(
 	jsonlint
 	lndir
 	lua
+	lua-language-server
 	luarocks
 	mas
 	neovim
