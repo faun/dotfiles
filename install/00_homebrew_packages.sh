@@ -11,6 +11,7 @@ homebrew_dependencies=(
 	gnu-sed
 	hashicorp/tap/terraform-ls
 	jesseduffield/lazygit/lazygit
+	jsonlint
 	lndir
 	lua
 	luarocks
