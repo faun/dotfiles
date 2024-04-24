@@ -1,4 +1,6 @@
 return {
+  { "folke/neodev.nvim", opts = {} },
+  { "folke/neoconf.nvim", cmd = "Neoconf", config = false },
   {
     "williamboman/mason.nvim",
     opts = {
@@ -105,8 +107,6 @@ return {
       },
     },
   },
-  { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-  { "folke/neodev.nvim", opts = {} },
   { "williamboman/mason-lspconfig.nvim" },
   {
     "hrsh7th/nvim-cmp",
