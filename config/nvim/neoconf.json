@@ -2,7 +2,15 @@
   "neodev": {
     "library": {
       "enabled": true,
-      "plugins": ["neoconf.nvim", "nvim-lspconfig"]
+      "types": true,
+      "plugins": [
+        "neoconf.nvim",
+        "nvim-lspconfig",
+        "nvim-treesitter",
+        "nvim-lua-plugins",
+        "nvim-lspkind",
+        "neotest"
+      ]
     }
   },
   "neoconf": {
