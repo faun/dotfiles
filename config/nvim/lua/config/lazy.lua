@@ -162,40 +162,36 @@ require("lazy").setup({
         "nvim-neotest/neotest-go",
         "olimorris/neotest-rspec",
       },
-      opts = function()
-        require("neotest").setup({
-          adapters = {
-            require("neotest-rspec")({
-              -- Optionally your function can take a position_type which is one of:
-              -- - "file"
-              -- - "test"
-              -- - "dir"
-              rspec_cmd = function(position_type)
-                if position_type == "test" then
-                  return vim.tbl_flatten({
-                    "bundle",
-                    "exec",
-                    "rspec",
-                    "--format",
-                    "documentation",
-                    "--fail-fast",
-                  })
-                else
-                  return vim.tbl_flatten({
-                    "bundle",
-                    "exec",
-                    "rspec",
-                  })
-                end
-              end,
-            }),
-            require("neotest-go"),
-            require("neotest-vim-test")({
-              ignore_filetypes = {},
-            }),
+      opts = {
+        adapters = {
+          ["neotest-go"] = {
+            experimental = {
+              test_table = true,
+            },
+            args = { "-v", "-count=1", "-timeout=60s" },
           },
-        })
-      end,
+          ["neotest-vim-test"] = {
+            ignore_filetypes = {},
+          },
+          ["neotest-rspec"] = {},
+        },
+      },
+      keys = {
+        {
+          "<leader>tl",
+          function()
+            require("neotest").run.run_last()
+          end,
+          desc = "Run Last Test",
+        },
+        {
+          "<leader>tL",
+          function()
+            require("neotest").run.run_last({ strategy = "dap" })
+          end,
+          desc = "Debug Last Test",
+        },
+      },
     },
     {
       "vim-test/vim-test",
