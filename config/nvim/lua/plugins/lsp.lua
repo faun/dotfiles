@@ -42,17 +42,29 @@ return {
     },
     config = function()
       local lspconfig = require("lspconfig")
-      local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      --From: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jsonls
       --Enable (broadcasting) snippet capability for completion
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-      require("lspconfig").jsonls.setup({
+      -- Configure bashls
+      lspconfig.bashls.setup({})
+
+      -- Configure golangci_lint_ls
+      lspconfig.golangci_lint_ls.setup({})
+
+      -- Configure jsonls
+      lspconfig.jsonls.setup({
         capabilities = capabilities,
       })
 
+      -- Configure rubocop
+      lspconfig.rubocop.setup({})
+
+      -- Configure ruby_lsp
+      lspconfig.ruby_lsp.setup({})
+
+      -- Configure lua_ls
       local lua_settings = {
         Lua = {
           completion = {
@@ -70,6 +82,7 @@ return {
       }
 
       -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
+      local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
       lspconfig.lua_ls.setup({
         capabilities = lsp_capabilities,
         settings = lua_settings,
