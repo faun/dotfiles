@@ -116,6 +116,7 @@ return {
       "hrsh7th/cmp-nvim-lua",
       "neovim/nvim-lspconfig",
       "ray-x/cmp-treesitter",
+      "onsails/lspkind.nvim",
       {
         "saadparwaiz1/cmp_luasnip",
         dependencies = "L3MON4D3/LuaSnip",
@@ -130,7 +131,12 @@ return {
         "zbirenbaum/copilot-cmp",
         dependencies = "copilot.lua",
         opts = {},
-        config = function(_, opts)
+        init = function(_, opts)
+          require("copilot").setup({
+            suggestion = { enabled = false },
+            panel = { enabled = false },
+          })
+
           local copilot_cmp = require("copilot_cmp")
           copilot_cmp.setup(opts)
           -- attach cmp source whenever copilot attaches
@@ -150,7 +156,6 @@ return {
       end
 
       local cmp = require("cmp")
-
       cmp.setup({
         mapping = {
           ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
@@ -170,25 +175,13 @@ return {
           end, { "i", "s" }),
         },
         sources = cmp.config.sources({
-          { name = "luasnip" },
-          { name = "nvim_lsp" },
-          { name = "treesitter" },
-          { name = "emoji" },
-          { name = "nvim_lua" },
-          {
-            name = "copilot",
-            option = {
-              group_index = 1,
-              priority = 100,
-            },
-          },
-          {
-            name = "codeium",
-            option = {
-              group_index = 1,
-              priority = 100,
-            },
-          },
+          { name = "luasnip", group_index = 1 },
+          { name = "treesitter", group_index = 1 },
+          { name = "emoji", group_index = 1 },
+          { name = "nvim_lua", group_index = 1 },
+          { name = "nvim_lsp", group_index = 2 },
+          { name = "copilot", group_index = 2 },
+          { name = "codeium", group_index = 2 },
         }),
         snippet = {
           expand = function(args)
@@ -198,6 +191,24 @@ return {
         window = {
           -- documentation = cmp.config.window.bordered(),
           completion = cmp.config.window.bordered(),
+        },
+        sorting = {
+          priority_weight = 2,
+          comparators = {
+            cmp.config.compare.exact,
+            require("copilot_cmp.comparators").prioritize,
+
+            -- Below is the default comparitor list and order for nvim-cmp
+            cmp.config.compare.offset,
+            -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+            cmp.config.compare.score,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.locality,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+          },
         },
       })
 
@@ -222,6 +233,15 @@ return {
           usePlaceholders = true,
         },
       })
+
+      local lspkind = require("lspkind")
+      lspkind.init({
+        mode = "symbol_text",
+        symbol_map = {
+          Copilot = "",
+        },
+      })
+      vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
     end,
   },
 }
