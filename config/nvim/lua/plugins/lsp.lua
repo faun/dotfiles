@@ -61,6 +61,7 @@ return {
           diagnostics = {
             globals = {
               "vim",
+              "LazyVim",
             },
           },
           telemetry = { enable = false },
