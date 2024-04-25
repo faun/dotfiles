@@ -58,6 +58,16 @@ return {
         capabilities = capabilities,
       })
 
+      -- Configure html-ls
+      lspconfig.html.setup({
+        capabilities = capabilities,
+      })
+
+      -- Configure css-ls
+      lspconfig.cssls.setup({
+        capabilities = capabilities,
+      })
+
       -- Configure rubocop
       lspconfig.rubocop.setup({})
 
