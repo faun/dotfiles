@@ -14,9 +14,12 @@ vim.api.nvim_set_keymap("n", "<C-w>s", "<C-w>s<C-w>w", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-w>v", "<C-w>v<C-w>w", { noremap = true })
 
 -- Map <leader>* to live grep in Telescope with the current word under cursor as default text
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>*",
-  [[<cmd>lua require('telescope.builtin').live_grep({default_text = vim.fn.expand('<cword>')})<CR>]],
-  { noremap = true, silent = true }
-)
+local wk = require("which-key")
+wk.register({
+  ["<leader>"] = {
+    ["*"] = {
+      "<cmd>lua require('telescope.builtin').live_grep({default_text = vim.fn.expand('<cword>')})<CR>",
+      "Live Grep with Current Word",
+    },
+  },
+}, { noremap = true, silent = true })
