@@ -179,3 +179,5 @@
 	insteadOf = https://github.com/
 [format]
 	signOff = Signed-off-by: Faun <git@faun.me>
+
+# vim: set ft=gitconfig ts=2 sw=2 et:
