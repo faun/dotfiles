@@ -8,6 +8,7 @@ homebrew_dependencies=(
 	direnv
 	fd
 	fish
+	flake8
 	fzf
 	gnu-sed
 	hashicorp/tap/terraform-ls
