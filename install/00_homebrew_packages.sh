@@ -4,6 +4,7 @@ set -e
 
 homebrew_dependencies=(
 	bat
+	git-delta
 	direnv
 	fd
 	fish
