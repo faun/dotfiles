@@ -4,13 +4,20 @@
 # shellcheck disable=1090
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export FZF_DEFAULT_OPTS='--bind ctrl-f:page-down,ctrl-b:page-up'
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --path-to-ignore ~/.ignore -g ""'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+--color=dark
+--color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C
+--color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B
+'
+
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
 # Options to fzf command
 export FZF_COMPLETION_OPTS='+c -x'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {}"'
 export FZF_PREVIEW_COMMAND="bat --style=numbers --color=always {}"
+export FZF_PREVIEW_PREVIEW_BAT_THEME='Nord'
 
 # Use ag instead of the default find command for listing candidates.
 # - The first argument to the function is the base path to start traversal
