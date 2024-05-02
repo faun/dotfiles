@@ -53,6 +53,7 @@ require("lazy").setup({
     { "tpope/vim-eunuch" },
     { "tpope/vim-fugitive" },
     { "embear/vim-localvimrc" },
+    { "jghauser/mkdir.nvim" },
     {
       "folke/flash.nvim",
       event = "VeryLazy",
