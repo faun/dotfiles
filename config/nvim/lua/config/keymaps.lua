@@ -23,3 +23,16 @@ wk.register({
     },
   },
 }, { noremap = true, silent = true })
+
+-- Reload init.lua function
+local function reload_config()
+  local config_path = vim.fn.stdpath("config") .. "/init.lua"
+  dofile(config_path)
+  vim.notify("Neovim configuration reloaded!", vim.log.levels.INFO)
+end
+
+-- Setting up which-key mapping
+local wk = require("which-key")
+wk.register({
+  r = { reload_config, "Reload init.lua" },
+}, { prefix = "<leader>" })
