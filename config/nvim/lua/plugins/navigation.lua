@@ -83,6 +83,10 @@ return {
           end
         end,
       },
+      style = {
+        border = "rounded",
+        seperator = "|",
+      },
     })
 
     -- Create aliases for vim-projectionist commonly used commands
