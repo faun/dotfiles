@@ -64,16 +64,6 @@ else
 fi
 
 # -----------------------------------------------------------------------------
+# Install Python packages
 
-pip_packages=(
-  yamllint
-  pynvim
-  djlint
-  black
-  isort
-  cmakelang
-)
-for egg in "${pip_packages[@]}"; do
-  echo "Installing egg: $egg"
-  pip3 install "$egg"
-done
+./03_python_packages.sh
