@@ -1,5 +1,8 @@
 return {
   {
+    "williamboman/mason.nvim",
+  },
+  {
     "stevearc/conform.nvim",
     optional = true,
     opts = {
@@ -43,5 +46,11 @@ return {
         desc = "Format buffer",
       },
     },
+  },
+  {
+    "zapling/mason-conform.nvim",
+    config = function()
+      require("mason-conform").setup()
+    end,
   },
 }

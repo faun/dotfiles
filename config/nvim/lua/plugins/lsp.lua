@@ -5,23 +5,7 @@ return {
     "williamboman/mason.nvim",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, {
-        "solargraph",
-        "black",
-        "delve",
-        "erb-formatter",
-        "gofumpt",
-        "gopls",
-        "goimports",
-        "golangci-lint",
-        "gopls",
-        "golangci-lint-langserver",
-        "isort",
-        "prettier",
-        "rubyfmt",
-        "shfmt",
-        "stylua",
-      })
+      vim.list_extend(opts.ensure_installed, {})
     end,
   },
   {
@@ -33,6 +17,18 @@ return {
       autotag = {
         enable = true,
       },
+    },
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    opts = {
+      ensure_installed = {
+        "golangci_lint_ls",
+        "gopls",
+        "lua_ls",
+        "solargraph",
+      },
+      automatic_installation = { exclude = {} },
     },
   },
   {
@@ -142,7 +138,6 @@ return {
       },
     },
   },
-  { "williamboman/mason-lspconfig.nvim" },
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
