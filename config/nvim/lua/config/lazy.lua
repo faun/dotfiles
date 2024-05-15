@@ -55,6 +55,13 @@ require("lazy").setup({
     { "embear/vim-localvimrc" },
     { "jghauser/mkdir.nvim" },
     {
+      "mcauley-penney/tidy.nvim",
+      opts = {
+        enabled_on_save = true,
+        filetype_exclude = { "markdown", "diff", "vim" },
+      },
+    },
+    {
       "folke/flash.nvim",
       event = "VeryLazy",
       opts = {},
