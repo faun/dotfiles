@@ -171,7 +171,9 @@ require("lazy").setup({
         "preservim/vimux",
         "nvim-neotest/neotest-vim-test",
         "nvim-neotest/neotest-go",
+        "nvim-neotest/neotest-plenary",
         "olimorris/neotest-rspec",
+        "nvim-neotest/neotest-python",
       },
       opts = {
         adapters = {
@@ -181,10 +183,17 @@ require("lazy").setup({
             },
             args = { "-v", "-count=1", "-timeout=60s" },
           },
-          ["neotest-vim-test"] = {
-            ignore_filetypes = {},
-          },
           ["neotest-rspec"] = {},
+          ["neotest-python"] = {
+            dap = {
+              justMyCode = false,
+            },
+            args = { "--log-level", "DEBUG" },
+          },
+          ["neotest-plenary"] = {},
+          ["neotest-vim-test"] = {
+            ignore_filetypes = { "python", "vim", "lua" },
+          },
         },
       },
       keys = {
