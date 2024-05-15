@@ -6,6 +6,7 @@ return {
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, {
+        "solargraph",
         "black",
         "delve",
         "erb-formatter",
@@ -14,10 +15,10 @@ return {
         "goimports",
         "golangci-lint",
         "gopls",
+        "golangci-lint-langserver",
         "isort",
         "prettier",
         "rubyfmt",
-        "rustfmt",
         "shfmt",
         "stylua",
       })
