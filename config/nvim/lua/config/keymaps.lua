@@ -13,26 +13,4 @@ vim.api.nvim_set_keymap("n", "<leader><down>", ":rightbelow new<CR>", { noremap 
 vim.api.nvim_set_keymap("n", "<C-w>s", "<C-w>s<C-w>w", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-w>v", "<C-w>v<C-w>w", { noremap = true })
 
--- Map <leader>* to live grep in Telescope with the current word under cursor as default text
-local wk = require("which-key")
-wk.register({
-  ["<leader>"] = {
-    ["*"] = {
-      "<cmd>lua require('telescope.builtin').live_grep({default_text = vim.fn.expand('<cword>')})<CR>",
-      "Live Grep with Current Word",
-    },
-  },
-}, { noremap = true, silent = true })
-
--- Reload init.lua function
-local function reload_config()
-  local config_path = vim.fn.stdpath("config") .. "/init.lua"
-  dofile(config_path)
-  vim.notify("Neovim configuration reloaded!", vim.log.levels.INFO)
-end
-
--- Setting up which-key mapping
-local wk = require("which-key")
-wk.register({
-  r = { reload_config, "Reload init.lua" },
-}, { prefix = "<leader>" })
+require("config/which-key")
