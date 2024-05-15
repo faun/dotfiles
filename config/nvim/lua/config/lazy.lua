@@ -121,8 +121,9 @@ require("lazy").setup({
       },
     },
     {
-      "kylechui/nvim-surround",
-      event = "VeryLazy",
+      "echasnovski/mini.surround",
+      opts = {},
+      version = "*",
     },
     {
       "sourcegraph/sg.nvim",
