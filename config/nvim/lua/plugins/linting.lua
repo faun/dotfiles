@@ -6,7 +6,6 @@ return {
       events = { "BufWritePost", "BufReadPost", "InsertLeave" },
       linters_by_ft = {
         css = { "stylelint" },
-        fish = { "fish" },
         go = { "golangcilint" },
         html = { "htmlhint" },
         json = { "jsonlint" },
@@ -18,7 +17,6 @@ return {
         scss = { "stylelint" },
         sh = { "shellcheck" },
         vim = { "vint" },
-        vue = { "eslint" },
         yaml = { "yamllint" },
       },
     },
