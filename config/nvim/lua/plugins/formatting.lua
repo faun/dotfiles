@@ -30,7 +30,7 @@ return {
         python = { "isort", "black" },
         rust = { "rustfmt" },
         scss = { "prettier" },
-        sh = { "shfmt" },
+        sh = { "shfmt", "shellcheck", "shellharden" },
         yaml = { "prettier" },
       },
     },
