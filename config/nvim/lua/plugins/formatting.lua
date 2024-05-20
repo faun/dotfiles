@@ -26,7 +26,7 @@ return {
         less = { "prettier" },
         lua = { "stylua" },
         markdown = { "prettier" },
-        ruby = { "rubyfmt" },
+        ruby = { "prettier" },
         python = { "isort", "black" },
         rust = { "rustfmt" },
         scss = { "prettier" },
