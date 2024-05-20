@@ -21,6 +21,7 @@ npm_packages=(
 	htmlhint
 	neovim
 	nginxbeautifier
+	open-cli
 	prettier
 	strip-ansi-cli
 	stylelint

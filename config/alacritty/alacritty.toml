@@ -41,7 +41,7 @@ x = 0
 y = 0
 
 [[hints.enabled]]
-command = "xdg-open"
+command = "open-cli"
 hyperlinks = true
 post_processing = true
 regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
