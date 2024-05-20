@@ -1,53 +1,18 @@
 [alias]
-	aa = add --all
-	blog = log origin/master... --left-right
 	br = branch
 	branches = branch -a -vv
 	cleanup = !git remote prune origin && git gc && git clean -df && git stash clear
 	clone = clone --recursive
 	co = checkout
 	d = diff
-	conflicts = !git ls-files --unmerged | cut -c51- | sort -u | xargs $EDITOR
-	count = !git shortlog -n $@ | grep \"):\" | sed \"s|:||\"
-	current-branch = !git branch | grep '^*' | sed s/\\*\\ //
-	di = diff
-	ds = diff --staged
-	current-branch = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
-	unstaged = diff
 	staged = diff --cached
-	dump = cat-file -p
-	fixup = commit --fixup
 	flog = log --pretty=fuller --decorate
-	ksreview = "!f() { local SHA=${1:-HEAD}; local BRANCH=${2:-master}; if [ $SHA == $BRANCH ]; then SHA=HEAD; fi; git difftool -y -t Kaleidoscope $BRANCH...$SHA; }; f"
-	review = difftool -y -t Kaleidoscope
-	review-cached = difftool --cached -y -t Kaleidoscope
-	last = difftool HEAD~1..HEAD
 	l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %Cblue[%cN]%Creset' --abbrev-commit --date=relative
-	llog = log --date=local
 	logc = log --graph --pretty=format:'%C(yellow)commit %h %Creset(%cr)%nAuthor: %C(green)%aN <%aE>%Creset%n%n %Cblue%s%Creset%n '
-	lol = log --pretty=oneline --abbrev-commit --graph --decorate
-	lola = log --graph --decorate --oneline --all
 	ls = log --all --pretty=format:'%C(red)%ad %C(reset)[%cN]%C(magenta)%d%C(reset) %s%C(reset)' --abbrev-commit --since=2.weeks --date="local" -30
-	modules = submodule foreach git pull origin master
-	rum = rebase master@{u}
-	sm = submodule foreach
-	squash = commit --squash
 	st = status -sb
-	sta = stash
-	sup = "submodule foreach 'git checkout master; git pull'"
-	track = !git branch --set-upstream $(git current-branch) origin/$(git current-branch)
-	type = cat-file -t
 	uncommit = reset HEAD~1
-	unpushed = !GIT_CURRENT_BRANCH=$(git name-rev --name-only HEAD) && git log origin/$GIT_CURRENT_BRANCH..$GIT_CURRENT_BRANCH --oneline
-	unstage = reset HEAD
-	up = fetch origin master:master
-	update = !git commit --amend --date=\"$(date)\"
-	wdiff = diff --color-words
-	prom = pull --rebase origin master
-	pom = push origin master
-	whoami = !echo "$(git config --get user.name) \\<$(git config --get user.email)\\>"
-	history = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen%cn%Creset %Cblue(%cr)%Creset' --abbrev-commit --date=relative
 
 [color "branch"]
 	current = yellow reverse
@@ -87,21 +52,6 @@
 	keepBackup = false
 	conflictstyle = diff3
 
-[mergetool "mvim"]
-	cmd=mvim -d -g $LOCAL $MERGED $REMOTE
-	keepbackup=false
-
-[merge "railsschema"]
-	name = newer Rails schema version
-	driver = "ruby -e '\n\
-		system %(git), %(merge-file), %(--marker-size=%L), %(%A), %(%O), %(%B)\n\
-		b = File.read(%(%A))\n\
-		b.sub!(/^<+ .*\\nActiveRecord::Schema\\.define.:version => (\\d+). do\\n=+\\nActiveRecord::Schema\\.define.:version => (\\d+). do\\n>+ .*/) do\n\
-			%(ActiveRecord::Schema.define(:version => #{[$1, $2].max}) do)\n\
-		end\n\
-		File.open(%(%A), %(w)) {|f| f.write(b)}\n\
-		exit 1 if b.include?(%(<)*%L)'"
-
 [core]
 	excludesfile = ~/.gitignore
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
@@ -130,11 +80,8 @@
 	renames = copies
 	mnemonicprefix = true
 
-[difftool "mvim"]
-	cmd = mvim -d \"$LOCAL\" \"$REMOTE\"
-
 [difftool "vim"]
-	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+	cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 
 [get]
 	recurseSubmodules = always
@@ -151,26 +98,24 @@
 [credential]
 	helper = osxkeychain
 
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustexitcode = true
-
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-
 [rerere]
 	enabled = 1
 
 [advice]
 	statusHints = false
+
 [diff-so-fancy]
 	first-run = false
+
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+
 [pull]
 	rebase = true
+
 [init]
 	defaultBranch = main
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -179,6 +124,7 @@
 
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
+
 [format]
 	signOff = Signed-off-by: Faun <git@faun.me>
 
@@ -188,10 +134,11 @@
 [delta]
   true-color = always
   side-by-side = true
-  line-numbers-left-format = ""
-  line-numbers-right-format = "│ "
   navigate = true
   features = side-by-side line-numbers decorations
   syntax-theme = Nord
+
+[commit]
+  gpgsign = true
 
 # vim: set ft=gitconfig ts=2 sw=2 et:
