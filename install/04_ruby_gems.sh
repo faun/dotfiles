@@ -5,9 +5,10 @@ cd "$(dirname "$0")" || exit 1
 # DIR="$(pwd)"
 
 rubygems_packages=(
-  neovim
-  ripper-tags
   erb-formatter
+  neovim
+  reek
+  ripper-tags
 )
 for gem in "${rubygems_packages[@]}"; do
   echo "Installing gem: $gem"
