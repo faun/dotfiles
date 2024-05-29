@@ -67,7 +67,12 @@ return {
         null_ls.builtins.diagnostics.protolint,
         null_ls.builtins.diagnostics.pylint,
         null_ls.builtins.diagnostics.reek,
-        null_ls.builtins.diagnostics.revive,
+        null_ls.builtins.diagnostics.revive.with({
+          condition = function(utils)
+            return utils.root_has_file({ "revive.toml" })
+          end,
+          args = { "-config", "revive.toml", "-formatter", "json", "./..." },
+        }),
         null_ls.builtins.diagnostics.rubocop,
         null_ls.builtins.diagnostics.selene,
         null_ls.builtins.diagnostics.semgrep,
