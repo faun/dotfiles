@@ -47,7 +47,6 @@ return {
         null_ls.builtins.diagnostics.actionlint,
         null_ls.builtins.diagnostics.ansiblelint,
         null_ls.builtins.diagnostics.codespell,
-        null_ls.builtins.diagnostics.commitlint,
         null_ls.builtins.diagnostics.editorconfig_checker,
         null_ls.builtins.diagnostics.erb_lint,
         null_ls.builtins.diagnostics.fish,
@@ -56,7 +55,6 @@ return {
         null_ls.builtins.diagnostics.proselint,
         null_ls.builtins.diagnostics.protolint,
         null_ls.builtins.diagnostics.pylint,
-        null_ls.builtins.diagnostics.reek,
         null_ls.builtins.diagnostics.revive.with({
           condition = function(utils)
             return utils.root_has_file({ "revive.toml" })
