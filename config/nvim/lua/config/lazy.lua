@@ -127,6 +127,38 @@ require("lazy").setup({
       },
     },
     {
+      "hedyhli/outline.nvim",
+      cmd = { "Outline", "OutlineOpen" },
+      keys = {
+        { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
+      },
+      opts = function()
+        local Config = require("lazyvim.config")
+        local defaults = require("outline.config").defaults
+        local opts = {
+          symbols = {},
+          symbol_blacklist = {},
+        }
+        local filter = Config.kind_filter
+
+        if type(filter) == "table" then
+          local filter_opts = filter.default
+          if type(filter_opts) == "table" then
+            for kind, symbol in pairs(defaults.symbols) do
+              opts.symbols[kind] = {
+                icon = Config.icons.kinds[kind] or symbol.icon,
+                hl = symbol.hl,
+              }
+              if not vim.tbl_contains(filter_opts, kind) then
+                table.insert(opts.symbol_blacklist, kind)
+              end
+            end
+          end
+        end
+        return opts
+      end,
+    },
+    {
       "folke/trouble.nvim",
       dependencies = { "nvim-tree/nvim-web-devicons" },
       opts = {
