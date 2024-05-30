@@ -75,6 +75,9 @@ return {
       -- Configure lua_ls
       local lua_settings = {
         Lua = {
+          runtime = {
+            version = "LuaJIT",
+          },
           completion = {
             callSnippet = "Replace",
           },
