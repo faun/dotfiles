@@ -104,7 +104,6 @@ require("lazy").setup({
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope.nvim",
       },
-      build = "nvim -l build/init.lua",
       keys = {
         {
           "<leader>sf",
