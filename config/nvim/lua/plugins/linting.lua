@@ -74,14 +74,22 @@ return {
         null_ls.builtins.diagnostics.todo_comments,
         null_ls.builtins.diagnostics.trivy,
         null_ls.builtins.diagnostics.vacuum,
-        null_ls.builtins.diagnostics.vale,
+        null_ls.builtins.diagnostics.vale.with({
+          condition = function(utils)
+            return utils.root_has_file({ "vale.ini", ".vale.ini" })
+          end,
+        }),
         null_ls.builtins.diagnostics.vint,
         null_ls.builtins.diagnostics.write_good,
         null_ls.builtins.diagnostics.yamllint,
         null_ls.builtins.diagnostics.zsh,
         null_ls.builtins.formatting.protolint,
         null_ls.builtins.formatting.remark,
-        null_ls.builtins.formatting.rubocop,
+        null_ls.builtins.formatting.rubocop.with({
+          condition = function(utils)
+            return utils.root_has_file({ ".rubocop.yml", ".rubocop.yaml" })
+          end,
+        }),
       })
     end,
   },
