@@ -2,6 +2,7 @@
 
 # Set PYENV_ROOT to ~/.pyenv unless it exists
 PYENV_ROOT="${PYENV_ROOT:-"${HOME:?}/.pyenv"}"
+export PYENV_ROOT
 record_time "pyenv paths"
 
 if [ -d "$PYENV_ROOT" ]; then
