@@ -30,6 +30,7 @@ homebrew_dependencies=(
 	tree
 	tree-sitter
 	universal-ctags
+	vale
 	watchman
 	wget
 	zsh-autosuggestions
