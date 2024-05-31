@@ -4,12 +4,12 @@ set -e
 
 homebrew_dependencies=(
 	bat
-	git-delta
 	direnv
 	fd
 	fish
 	flake8
 	fzf
+	git-delta
 	gnu-sed
 	hashicorp/tap/terraform-ls
 	jesseduffield/lazygit/lazygit

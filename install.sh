@@ -11,9 +11,9 @@ if [[ -n $DEBUG ]]; then
 fi
 
 for file in "${DIR:?}"/install/*; do
-  if [[ -x "$file" ]]; then
-    "$file"
-  fi
+	if [[ -x "$file" ]]; then
+		"$file"
+	fi
 done
 
 echo "Installing spelling dictionaries"
@@ -38,9 +38,9 @@ nvim +UpdateRemotePlugins +qa
 # -----------------------------------------------------------------------------
 
 if [[ -z $SKIP_HEALTH_CHECK ]]; then
-  nvim +CheckHealth
-  echo export SKIP_HEALTH_CHECK=true >>~/.local.sh
-  export SKIP_HEALTH_CHECK=true
+	nvim +CheckHealth
+	echo export SKIP_HEALTH_CHECK=true >>~/.local.sh
+	export SKIP_HEALTH_CHECK=true
 fi
 
 echo "Done."
