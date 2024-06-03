@@ -60,7 +60,11 @@ return {
           end,
           args = { "-config", "revive.toml", "-formatter", "json", "./..." },
         }),
-        null_ls.builtins.diagnostics.rubocop,
+        null_ls.builtins.diagnostics.rubocop.with({
+          condition = function(utils)
+            return utils.root_has_file({ ".rubocop.yml", ".rubocop.yaml" })
+          end,
+        }),
         null_ls.builtins.diagnostics.semgrep,
         null_ls.builtins.diagnostics.staticcheck,
         null_ls.builtins.diagnostics.stylelint,
