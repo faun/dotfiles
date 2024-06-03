@@ -226,31 +226,10 @@ return {
         end,
       })
 
-      -- Configure lua_ls
-      local lua_settings = {
-        Lua = {
-          runtime = {
-            version = "LuaJIT",
-          },
-          completion = {
-            callSnippet = "Replace",
-          },
-          diagnostics = {
-            globals = {
-              "vim",
-              "LazyVim",
-            },
-          },
-          telemetry = { enable = false },
-          hint = { enable = true },
-        },
-      }
-
       -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
       local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
       lspconfig.lua_ls.setup({
         capabilities = lsp_capabilities,
-        settings = lua_settings,
       })
     end,
   },
