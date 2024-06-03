@@ -1,14 +1,6 @@
 require("lazy").setup({
   spec = {
     {
-      "nvimdev/dashboard-nvim",
-      enabled = false,
-    },
-    {
-      "catppuccin/nvim",
-      enabled = false,
-    },
-    {
       "rmehri01/onenord.nvim",
       lazy = false,
       priority = 1000,
