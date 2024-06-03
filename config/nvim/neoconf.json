@@ -6,6 +6,7 @@
       "plugins": [
         "neoconf.nvim",
         "nvim-lspconfig",
+        "lsp",
         "nvim-treesitter",
         "nvim-lua-plugins",
         "nvim-lspkind",
@@ -18,10 +19,16 @@
       "lua_ls": {
         "enabled": true,
         "enabled_for_neovim_config": true,
+        "library": true,
         "diagnostic": true,
         "formatter": true,
         "completion": true
       }
+    }
+  },
+  "lspconfig": {
+    "lua_ls": {
+      "Lua.completion.callSnippet": "Replace"
     }
   }
 }
