@@ -66,6 +66,12 @@ return {
           end,
         }),
         null_ls.builtins.diagnostics.semgrep,
+        null_ls.builtins.diagnostics.sqlfluff.with({
+          condition = function(utils)
+            return utils.root_has_file({ ".sqlfluff" })
+          end,
+          extra_args = { "--dialect", "mysql" },
+        }),
         null_ls.builtins.diagnostics.staticcheck,
         null_ls.builtins.diagnostics.stylelint,
         null_ls.builtins.diagnostics.terraform_validate,
@@ -85,11 +91,16 @@ return {
         null_ls.builtins.diagnostics.yamllint,
         null_ls.builtins.diagnostics.zsh,
         null_ls.builtins.formatting.protolint,
-        null_ls.builtins.formatting.remark,
         null_ls.builtins.formatting.rubocop.with({
           condition = function(utils)
             return utils.root_has_file({ ".rubocop.yml", ".rubocop.yaml" })
           end,
+        }),
+        null_ls.builtins.formatting.sqlfluff.with({
+          condition = function(utils)
+            return utils.root_has_file({ ".sqlfluff" })
+          end,
+          extra_args = { "--dialect", "mysql" },
         }),
       })
     end,
