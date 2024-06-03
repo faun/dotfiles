@@ -67,9 +67,10 @@ return {
         }),
         null_ls.builtins.diagnostics.semgrep,
         null_ls.builtins.diagnostics.sqlfluff.with({
-          condition = function(utils)
-            return utils.root_has_file({ ".sqlfluff" })
-          end,
+          extra_filetypes = { "mysql" },
+          -- condition = function(utils)
+          --   return utils.root_has_file({ ".sqlfluff" })
+          -- end,
           extra_args = { "--dialect", "mysql" },
         }),
         null_ls.builtins.diagnostics.staticcheck,
@@ -97,9 +98,10 @@ return {
           end,
         }),
         null_ls.builtins.formatting.sqlfluff.with({
-          condition = function(utils)
-            return utils.root_has_file({ ".sqlfluff" })
-          end,
+          extra_filetypes = { "mysql" },
+          -- condition = function(utils)
+          --   return utils.root_has_file({ ".sqlfluff" })
+          -- end,
           extra_args = { "--dialect", "mysql" },
         }),
       })
