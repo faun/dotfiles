@@ -99,56 +99,16 @@ return {
         settings = lua_settings,
       })
     end,
-    opts = {
-      servers = {
-        gopls = {
-          cmd_env = {
-            GOFLAGS = "-tags=integration",
-          },
-        },
-        jsonls = {
-          -- lazy-load schemastore when needed
-          on_new_config = function(new_config)
-            new_config.settings.json.schemas = new_config.settings.json.schemas or {}
-            vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
-          end,
-          settings = {
-            json = {
-              format = {
-                enable = true,
-              },
-              validate = { enable = true },
-            },
-          },
-        },
-      },
-      diagnostics = {
-        underline = true,
-        update_in_insert = false,
-        virtual_text = {
-          spacing = 4,
-          prefix = "icons",
-        },
-        severity_sort = true,
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = require("lazyvim.config").icons.diagnostics.Error,
-            [vim.diagnostic.severity.WARN] = require("lazyvim.config").icons.diagnostics.Warn,
-            [vim.diagnostic.severity.HINT] = require("lazyvim.config").icons.diagnostics.Hint,
-            [vim.diagnostic.severity.INFO] = require("lazyvim.config").icons.diagnostics.Info,
-          },
-        },
-      },
-    },
   },
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
       "neovim/nvim-lspconfig",
       "ray-x/cmp-treesitter",
       "onsails/lspkind.nvim",
+      "hrsh7th/cmp-nvim-lua",
+      "kristijanhusak/vim-dadbod-completion",
       {
         "saadparwaiz1/cmp_luasnip",
         dependencies = "L3MON4D3/LuaSnip",
@@ -211,6 +171,7 @@ return {
           { name = "treesitter", group_index = 1 },
           { name = "emoji", group_index = 1 },
           { name = "nvim_lua", group_index = 1 },
+          { name = "vim-dadbod-completion", group_index = 1 },
           { name = "nvim_lsp", group_index = 2 },
           { name = "copilot", group_index = 2 },
           { name = "codeium", group_index = 2 },
