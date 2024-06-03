@@ -218,6 +218,14 @@ return {
       -- Configure ruby_lsp
       lspconfig.ruby_lsp.setup({})
 
+      -- Configure sqlls
+      lspconfig.sqlls.setup({
+        filetypes = { "sql", "mysql" },
+        root_dir = function()
+          return vim.loop.cwd()
+        end,
+      })
+
       -- Configure lua_ls
       local lua_settings = {
         Lua = {
