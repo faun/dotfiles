@@ -6,6 +6,10 @@ for file in $HOME/.shrc/*; do
   fi
 done
 
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+
 # Source zsh-specific files
 for file in $HOME/.zsh/*; do
   if [[ -f "$file" ]]; then
