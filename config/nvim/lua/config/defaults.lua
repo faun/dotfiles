@@ -87,3 +87,14 @@ vim.g.VimuxHeight = "40"
 vim.g.VimuxOrientation = "h"
 
 vim.g["test#ruby#bundle_exec"] = 0
+
+-- Quickly quit without saving with QQ
+vim.api.nvim_set_keymap("n", "QQ", ":q!<CR>", { noremap = true, silent = true })
+
+-- Conditional behavior when in diff mode
+if vim.wo.diff then
+  -- In diff mode, close all windows with Enter
+  vim.api.nvim_set_keymap("n", "<CR>", ":qa!<CR>", { noremap = true, silent = true })
+  -- And quit the diff with QQ
+  vim.api.nvim_set_keymap("n", "QQ", ":cq!<CR>", { noremap = true, silent = true })
+end
