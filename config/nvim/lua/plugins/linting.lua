@@ -76,7 +76,11 @@ return {
         null_ls.builtins.diagnostics.staticcheck,
         null_ls.builtins.diagnostics.stylelint,
         null_ls.builtins.diagnostics.terraform_validate,
-        null_ls.builtins.diagnostics.textlint,
+        null_ls.builtins.diagnostics.textlint.with({
+          condition = function(utils)
+            return utils.root_has_file({ ".textlintrc", ".textlintrc.json", ".textlint.yml" })
+          end,
+        }),
         null_ls.builtins.diagnostics.tfsec,
         null_ls.builtins.diagnostics.tidy,
         null_ls.builtins.diagnostics.todo_comments,
