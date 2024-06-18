@@ -300,6 +300,19 @@ return {
             end
           end, { "i", "s" }),
         },
+        formatting = {
+          format = function(entry, vim_item)
+            vim_item.menu = ({
+              buffer = "[Buffer]",
+              nvim_lsp = "[LSP]",
+              luas = "[Snippet]",
+              tags = "[Tag]",
+              path = "[Path]",
+              ["vim-dadbod-completion"] = "[DB]",
+            })[entry.source.name]
+            return vim_item
+          end,
+        },
         sources = cmp.config.sources({
           { name = "luasnip", group_index = 1 },
           { name = "treesitter", group_index = 1 },
