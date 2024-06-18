@@ -241,7 +241,8 @@ return {
       "ray-x/cmp-treesitter",
       "onsails/lspkind.nvim",
       "hrsh7th/cmp-nvim-lua",
-      "kristijanhusak/vim-dadbod-completion",
+      "hrsh7th/cmp-buffer",
+      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
       {
         "saadparwaiz1/cmp_luasnip",
         dependencies = "L3MON4D3/LuaSnip",

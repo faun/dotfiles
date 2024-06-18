@@ -229,15 +229,18 @@ require("lazy").setup({
       end,
     },
     {
-      "tpope/vim-dadbod",
+      "kristijanhusak/vim-dadbod-ui",
       dependencies = {
-        "kristijanhusak/vim-dadbod-ui",
-        "kristijanhusak/vim-dadbod-completion",
+        { "tpope/vim-dadbod", lazy = true },
+        { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
       },
       opts = {
         db_competion = function()
-          ---@diagnostic disable-next-line
-          require("cmp").setup.buffer({ sources = { { name = "vim-dadbod-completion" } } })
+          require("cmp").setup.buffer({
+            sources = {
+              { name = "vim-dadbod-completion" },
+            },
+          })
         end,
       },
       config = function(_, opts)
@@ -246,6 +249,8 @@ require("lazy").setup({
         vim.api.nvim_create_autocmd("FileType", {
           pattern = {
             "sql",
+            "mysql",
+            "plsql",
           },
           command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
         })
