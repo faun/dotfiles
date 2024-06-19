@@ -64,7 +64,7 @@ return {
     },
     opts = function()
       return {
-        -- options for vim.diagnostic.config()
+        -- https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.Opts
         ---@type vim.diagnostic.Opts
         diagnostics = {
           underline = true,
@@ -121,7 +121,7 @@ return {
           timeout_ms = nil,
         },
         -- LSP Server Settings
-        ---@type lspconfig.options
+        ---@type lspconfig.options.servers
         servers = {
           gopls = {
             cmd_env = {
@@ -209,6 +209,8 @@ return {
             return
           end
         end,
+
+        ---@type lspconfig.options.settings
         settings = {
           Lua = {
             runtime = {
