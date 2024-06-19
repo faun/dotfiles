@@ -122,51 +122,6 @@ return {
               },
             },
           },
-          lua_ls = {
-            -- mason = false, -- set to false if you don't want this server to be installed with mason
-            -- Use this to add any additional keymaps
-            -- for specific lsp servers
-            ---@type LazyKeysSpec[]
-            -- keys = {},
-            settings = {
-              Lua = {
-                runtime = {
-                  version = "LuaJIT",
-                },
-                diagnostics = {
-                  globals = {
-                    "vim",
-                    "LazyVim",
-                  },
-                },
-                codeLens = {
-                  enable = true,
-                },
-                completion = {
-                  callSnippet = "Replace",
-                },
-                doc = {
-                  privateName = { "^_" },
-                },
-                hint = {
-                  enable = true,
-                  setType = false,
-                  paramType = true,
-                  paramName = "Disable",
-                  semicolon = "Disable",
-                  arrayIndex = "Disable",
-                },
-                telemetry = { enable = false },
-
-                workspace = {
-                  checkThirdParty = false,
-                  library = {
-                    vim.env.VIMRUNTIME,
-                  },
-                },
-              },
-            },
-          },
         },
         -- you can do any additional lsp server setup here
         -- return true if you don't want this server to be setup with lspconfig
@@ -229,6 +184,52 @@ return {
       -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
       local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
       lspconfig.lua_ls.setup({
+        on_init = function(client)
+          local path = client.workspace_folders[1].name
+          if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
+            return
+          end
+        end,
+        settings = {
+          Lua = {
+            runtime = {
+              version = "LuaJIT",
+            },
+            diagnostics = {
+              globals = {
+                "vim",
+                "LazyVim",
+              },
+            },
+            codeLens = {
+              enable = true,
+            },
+            completion = {
+              callSnippet = "Replace",
+            },
+            doc = {
+              privateName = { "^_" },
+            },
+            hint = {
+              enable = true,
+              setType = false,
+              paramType = true,
+              paramName = "Disable",
+              semicolon = "Disable",
+              arrayIndex = "Disable",
+            },
+            telemetry = { enable = false },
+            workspace = {
+              checkThirdParty = false,
+              library = {
+                vim.env.VIMRUNTIME,
+                vim.fn.expand("$VIMRUNTIME/lua"),
+                vim.fn.expand("$VIMRUNTIME/lua/vim"),
+                vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
+              },
+            },
+          },
+        },
         capabilities = lsp_capabilities,
       })
     end,
