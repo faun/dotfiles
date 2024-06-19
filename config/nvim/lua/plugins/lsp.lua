@@ -377,7 +377,7 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local nvim_lsp = require("lspconfig")
 
-      -- Setup lspconfig fo gopls
+      -- Setup lspconfig for gopls
       nvim_lsp["gopls"].setup({
         cmd = { "gopls" },
         capabilities = capabilities,
