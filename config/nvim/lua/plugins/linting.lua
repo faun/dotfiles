@@ -49,7 +49,11 @@ return {
         null_ls.builtins.diagnostics.editorconfig_checker,
         null_ls.builtins.diagnostics.erb_lint,
         null_ls.builtins.diagnostics.fish,
-        null_ls.builtins.diagnostics.golangci_lint,
+        null_ls.builtins.diagnostics.golangci_lint.with({
+          extra_args = {
+            "--disable=maligned",
+          },
+        }),
         null_ls.builtins.diagnostics.hadolint,
         null_ls.builtins.diagnostics.proselint,
         null_ls.builtins.diagnostics.protolint,
