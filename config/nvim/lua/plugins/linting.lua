@@ -78,7 +78,18 @@ return {
           extra_args = { "--dialect", "mysql" },
         }),
         null_ls.builtins.diagnostics.staticcheck,
-        null_ls.builtins.diagnostics.stylelint,
+        null_ls.builtins.diagnostics.stylelint.with({
+          condition = function(utils)
+            return utils.root_has_file({
+              ".stylelintrc",
+              ".stylelintrc.json",
+              ".stylelintrc.yml",
+              ".stylelintrc.yaml",
+              "stylelint.config.js",
+              ".stylelintignore",
+            })
+          end,
+        }),
         null_ls.builtins.diagnostics.terraform_validate,
         null_ls.builtins.diagnostics.textlint.with({
           condition = function(utils)
