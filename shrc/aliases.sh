@@ -48,6 +48,10 @@ alias tree='tree --gitignore'
 alias py='python'
 alias sha1="openssl sha1"
 
+alias tf='terraform'
+alias tfp='terraform plan'
+alias tfa='terraform apply'
+
 # JavaScript
 alias nombom='npm cache verify && bower cache clean && rm -rf node_modules bower_components && npm install && bower install'
 
