@@ -133,6 +133,7 @@ return {
           -- end,
           extra_args = { "--dialect", "mysql" },
         }),
+        null_ls.builtins.formatting.terraform_fmt,
       })
     end,
   },
