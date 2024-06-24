@@ -29,6 +29,7 @@ return {
           "htmlhint",
           "jsonlint",
           "rubocop",
+          "golines",
         },
       })
     end,
@@ -70,6 +71,7 @@ return {
           end,
         }),
         null_ls.builtins.diagnostics.semgrep,
+        null_ls.builtins.formatting.shellharden,
         null_ls.builtins.diagnostics.sqlfluff.with({
           extra_filetypes = { "mysql" },
           -- condition = function(utils)
@@ -114,12 +116,16 @@ return {
           end,
         }),
         null_ls.builtins.diagnostics.zsh,
+        null_ls.builtins.formatting.golines.with({
+          extra_args = { "--max-len=120", "--base-formatter=gofumpt" },
+        }),
         null_ls.builtins.formatting.protolint,
         null_ls.builtins.formatting.rubocop.with({
           condition = function(utils)
             return utils.root_has_file({ ".rubocop.yml", ".rubocop.yaml" })
           end,
         }),
+        null_ls.builtins.formatting.shfmt,
         null_ls.builtins.formatting.sqlfluff.with({
           extra_filetypes = { "mysql" },
           -- condition = function(utils)
