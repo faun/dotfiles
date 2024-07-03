@@ -22,9 +22,6 @@ for cask in "${homebrew_casks[@]}"; do
     echo "Cask $cask already installed"
   fi
 done
-elif [ "$(expr substr "$(uname -s)" 1 5)" == "Linux" ]; then
-  curl -sSL -o /tmp/gcp_install.sh https://sdk.cloud.google.com
-  bash /tmp/gcp_install.sh --disable-prompts || true
 else
   echo "Installing casks not supported"
 fi
