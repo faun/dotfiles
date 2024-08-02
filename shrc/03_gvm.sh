@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+USE_GVM="${USE_GVM:-false}"
+if [[ "$USE_GVM" == "false" ]]; then
+	return
+fi
+
 # shellcheck source=/dev/null
 [[ -f "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
