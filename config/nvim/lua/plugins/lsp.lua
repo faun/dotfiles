@@ -266,6 +266,11 @@ return {
       "hrsh7th/cmp-buffer",
       { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
       {
+        "L3MON4D3/LuaSnip",
+        version = "v2.*",
+        build = "make install_jsregexp",
+      },
+      {
         "saadparwaiz1/cmp_luasnip",
         dependencies = "L3MON4D3/LuaSnip",
       },
