@@ -12,5 +12,3 @@ vim.api.nvim_set_keymap("n", "<leader><down>", ":rightbelow new<CR>", { noremap 
 -- New window splits gain focus
 vim.api.nvim_set_keymap("n", "<C-w>s", "<C-w>s<C-w>w", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-w>v", "<C-w>v<C-w>w", { noremap = true })
-
-require("config/which-key")
