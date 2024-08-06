@@ -13,11 +13,18 @@ if ! [[ -d "$GVM_HOME" ]]; then
 	brew install bison || true
 
 	bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+	set +u
 	source "${GVM_HOME:?}/scripts/gvm"
+	set -u
 
 	gvm use system --default || true
 else
 	echo "GVM is already installed, updating"
+
+	set +u
+	source "${GVM_HOME:?}/scripts/gvm"
+	set -u
+
 	gvm update || true
 fi
 
