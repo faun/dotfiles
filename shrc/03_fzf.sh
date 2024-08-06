@@ -27,4 +27,3 @@ _fzf_compgen_path() {
 	ag -g "" "$1"
 }
 
-record_time "fzf"

@@ -21,7 +21,6 @@ elif [[ "$OSTYPE" == darwin* ]]; then
 	alias a='ls -lrthG'
 	alias ls='ls -G'
 	[[ -f $CURRENT_DIR/optional/macos.sh ]] && source $CURRENT_DIR/optional/macos.sh
-	record_time "mac os"
 fi
 
 # Source .profile if it exists

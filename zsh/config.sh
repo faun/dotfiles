@@ -6,7 +6,6 @@ then
   else
     export PS1='%3~$(git_info_for_prompt)%# '
   fi
-  record_time "zsh prompt"
 
   fpath=(~/.zsh/functions $fpath)
   autoload -U ~/.zsh/functions/*(:t)
@@ -164,7 +163,6 @@ then
   bindkey '^?' backward-delete-char
   bindkey '^O' clear-screen
 
-  record_time "zsh keybinding"
 
   # Set screen titles to last run command
   setopt extended_glob
@@ -176,7 +174,6 @@ then
   }
 
   alias help="man zshbuiltins"
-  record_time "zsh config"
   alias reload="reset && source $HOME/.zshrc"
 
 fi

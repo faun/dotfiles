@@ -2,10 +2,8 @@
 # shellcheck disable=SC1090
 
 configure_antidote() {
-	record_time "antidote autoload"
 
 	source <(antidote init)
-	record_time "antidote init"
 
 	ANTIDOTE_PACKAGES="$(
 		cat <<EOF
@@ -20,7 +18,6 @@ EOF
 		echo "${ANTIDOTE_PACKAGES:?}" >"${ANTIDOTE_PLUGINS_PATH:?}"
 	fi
 	antidote load "${ANTIDOTE_PLUGINS_PATH:?}"
-	record_time "antidote plugins"
 
 	bindkey '^[[A' history-substring-search-up
 	bindkey '^[[B' history-substring-search-down
@@ -31,7 +28,6 @@ EOF
 	bindkey -M vicmd 'k' history-substring-search-up
 	bindkey -M vicmd 'j' history-substring-search-down
 
-	record_time "antidote keybindings"
 }
 
 ANTIDOTE_PATH="${ZDOTDIR:-$HOME}/.antidote"

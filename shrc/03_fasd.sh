@@ -20,4 +20,3 @@ configure_fasd() {
 
 configure_fasd
 
-record_time "fasd"

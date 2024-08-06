@@ -2,22 +2,17 @@ fpath=("$HOME/.zsh/functions/completions" $fpath)
 fpath=("/usr/share/zsh/5.3/functions" $fpath)
 fpath=("/usr/share/zsh/$ZSH_VERSION/functions/" $fpath)
 fpath=("$HOME/.zfunc" $fpath)
-record_time "zsh fpath"
 
 if type brew &>/dev/null; then
   HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-$(brew --prefix)}"
   FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH"
   FPATH="$HOMEBREW_PREFIX/share/zsh-completions:$FPATH"
 fi
-record_time "zsh homebrew fpaths"
 
 autoload -Uz compinit
-record_time "zsh autoload"
 compinit
-record_time "zsh compinit"
 
 autoload -U +X bashcompinit && bashcompinit
-record_time "zsh bashcompinit"
 
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'

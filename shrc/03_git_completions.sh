@@ -6,4 +6,3 @@ if [ -n "$ZSH_NAME" ]; then
   # shellcheck disable=SC1072,SC2039,SC2206
   fpath=(~/.zsh $fpath)
 fi
-record_time "git autocompletions"
