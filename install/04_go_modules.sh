@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+GOPROXY="${GOPROXY:-https://proxy.golang.org,direct}"
+export GOPROXY
+
 set -e
 
 go_modules=(
