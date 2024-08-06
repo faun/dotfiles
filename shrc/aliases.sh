@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+alias d="z dotfiles; and t"
+
 # directory listing & navigation
 alias l="ls -lAh"
 alias ll='ls -hl'
