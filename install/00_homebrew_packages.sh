@@ -4,6 +4,7 @@ set -e
 
 homebrew_dependencies=(
 	bat
+	clang-format
 	direnv
 	fd
 	fish
