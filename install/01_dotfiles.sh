@@ -8,9 +8,8 @@ DIR="$(pwd)"
 
 if ! command -v lndir >/dev/null 2>&1; then
 	echo "lndir is not installed"
-  exit 1
+	exit 1
 fi
-
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=${HOME}/.config}"
 mkdir -p "${XDG_CONFIG_HOME}"
@@ -55,12 +54,11 @@ linkFile() {
 			rm "$target"
 		fi
 		echo "Linking $source => $target"
-		if [[ -d "${source:?}" ]]
-		then
-		  mkdir -p "$target"
-      lndir "${source:?}" "$target"
-    fi
-    cp -asf "${source:?}" "$target"
+		if [[ -d "${source:?}" ]]; then
+			mkdir -p "$target"
+			lndir "${source:?}" "$target"
+		fi
+		cp -asf "${source:?}" "$target" || true
 	else
 		echo "Skipping ignored file ${source}"
 	fi
