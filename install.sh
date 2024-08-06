@@ -4,7 +4,7 @@ set -e
 shopt -s extglob
 
 cd "$(dirname "$0")" || exit 1
-DIR="$(pwd)"
+DIR="$PWD"
 
 if [[ -n $DEBUG ]]; then
 	set -x
@@ -12,7 +12,16 @@ fi
 
 for file in "${DIR:?}"/install/*; do
 	if [[ -x "$file" ]]; then
+		echo "Running $(basename "$file")"
+	fi
+done
+
+for file in "${DIR:?}"/install/*; do
+	if [[ -x "$file" ]]; then
 		"$file"
+		if [[ $? != 0 ]]; then
+			echo "There was a problem running $file"
+		fi
 	fi
 done
 
