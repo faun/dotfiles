@@ -8,22 +8,19 @@ fi
 GVM_HOME="${GVM_HOME:-$HOME/.gvm}"
 if ! [[ -d "$GVM_HOME" ]]; then
 	xcode-select --install >/dev/null 2>&1 || true
+	brew install go || true
 	brew update || true
 	brew install mercurial || true
 	brew install bison || true
 
 	bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-	set +u
+	set +eu
 	source "${GVM_HOME:?}/scripts/gvm"
-	set -u
+	set -eu
 
 	gvm use system --default || true
 else
 	echo "GVM is already installed, updating"
-
-	set +u
-	source "${GVM_HOME:?}/scripts/gvm"
-	set -u
 
 	gvm update || true
 fi
