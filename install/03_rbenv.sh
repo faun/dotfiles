@@ -10,7 +10,6 @@ install_rbenv() {
 	echo "Installing rbenv and ruby-build"
 	curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
 	mkdir -p "$RBENV_PLUGIN_DIR"
-	git clone https://github.com/rbenv/ruby-build.git "$RBENV_PLUGIN_DIR/ruby-build" || git -C "$RBENV_PLUGIN_DIR/ruby-build" pull
 	git clone https://github.com/rkh/rbenv-whatis.git "$RBENV_PLUGIN_DIR/rbenv-whatis" || git -C "$RBENV_PLUGIN_DIR/rbenv-whatis" pull
 	git clone https://github.com/rkh/rbenv-use.git "$RBENV_PLUGIN_DIR/rbenv-use" || git -C "$RBENV_PLUGIN_DIR/rbenv-use" pull
 	git clone https://github.com/rbenv/rbenv-each.git "$RBENV_PLUGIN_DIR/rbenv-each" || git -C "$RBENV_PLUGIN_DIR/rbenv-each" pull
