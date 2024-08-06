@@ -83,7 +83,7 @@ require("lazy").setup({
             dofile(config_path)
             vim.notify("Neovim configuration reloaded!", vim.log.levels.INFO)
           end,
-          "Reload init.lua",
+          desc = "Reload vim config",
         },
       },
     },
