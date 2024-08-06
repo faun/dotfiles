@@ -275,12 +275,6 @@ return {
         dependencies = "L3MON4D3/LuaSnip",
       },
       {
-        "Exafunction/codeium.nvim",
-        cmd = "Codeium",
-        build = ":Codeium Auth",
-        opts = {},
-      },
-      {
         "zbirenbaum/copilot-cmp",
         dependencies = "copilot.lua",
         opts = {},
