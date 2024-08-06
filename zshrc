@@ -1,3 +1,9 @@
+#
+if [[ -n $DEBUG_STARTUP_TIME ]]; then
+  # Run zprof to profile startup time
+  zmodload zsh/zprof
+fi
+
 # Source shell-agnostic config files
 for file in $HOME/.shrc/*; do
   if [[ -f "$file" ]]; then
@@ -47,7 +53,5 @@ if [ -f $HOME/.local.sh ]; then
 fi
 
 if [[ -n $DEBUG_STARTUP_TIME ]]; then
-  echo "Started up in $(printf "%d" $(($SECONDS * 1000)))ms"
-  print_recorded_times
-  clear
+  zprof
 fi
