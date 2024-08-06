@@ -51,5 +51,3 @@ if [[ -n $DEBUG_STARTUP_TIME ]]; then
   print_recorded_times
   clear
 fi
-
-[[ -s "/home/faun/.gvm/scripts/gvm" ]] && source "/home/faun/.gvm/scripts/gvm"
