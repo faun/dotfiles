@@ -71,8 +71,3 @@ pyenv virtualenv "${latest_python_version:?}" debugpy
 pyenv activate "${latest_python_version:?}/envs/debugpy"
 pip3 install --upgrade debugpy >/dev/null
 set -u
-
-# -----------------------------------------------------------------------------
-# Install Python packages
-
-./03_python_packages.sh
