@@ -11,6 +11,7 @@ go_modules=(
 	mvdan.cc/sh/v3/cmd/shfmt
 	github.com/golangci/golangci-lint/cmd/golangci-lint
 	mvdan.cc/gofumpt
+	golang.org/x/tools/cmd/goimports
 )
 
 for module in "${go_modules[@]}"; do
