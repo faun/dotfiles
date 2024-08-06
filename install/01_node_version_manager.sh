@@ -9,6 +9,8 @@ DIR="$(pwd)"
 N_PREFIX="${N_PREFIX:-$HOME/n}"
 export N_PREFIX
 
+brew uninstall --ignore-dependencies node || true
+
 if ! [[ -d "$N_PREFIX" ]]; then
   curl -o ./n-install -sSL https://raw.githubusercontent.com/mklement0/n-install/stable/bin/n-install
   chmod u+x ./n-install
