@@ -98,3 +98,6 @@ if vim.wo.diff then
   -- And quit the diff with QQ
   vim.api.nvim_set_keymap("n", "QQ", ":cq!<CR>", { noremap = true, silent = true })
 end
+
+-- Disable the Perl provider
+vim.g.loaded_perl_provider = 0
