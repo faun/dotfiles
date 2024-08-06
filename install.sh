@@ -24,19 +24,6 @@ nvim -u .nvimtest +q
 
 # -----------------------------------------------------------------------------
 
-echo "Updating and installing vim plugins"
-
-nvim +PlugInstall +qa
-nvim +PlugUpdate +qa
-nvim +PlugClean +qa
-
-# -----------------------------------------------------------------------------
-
-echo "Updating remote plugins"
-nvim +UpdateRemotePlugins +qa
-
-# -----------------------------------------------------------------------------
-
 if [[ -z $SKIP_HEALTH_CHECK ]]; then
 	nvim +CheckHealth
 	echo export SKIP_HEALTH_CHECK=true >>~/.local.sh
