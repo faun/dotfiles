@@ -1,39 +1,17 @@
-
-
 if status is-interactive
-    # Source shell-agnostic config files
-    for file in $HOME/.shrc/*
-        if test -f "$file"
-            source "$file"
-        end
-    end
-
     set -x GOPATH $HOME/go
     set -x GOBIN $GOPATH/bin
     set -x PATH $PATH $GOROOT/bin
 
-    # Source zsh-specific files
-    for file in $HOME/.zsh/*
-        if test -f "$file"
-            source "$file"
-        end
-    end
-
     # use .localrc for settings specific to one system
-
     if test -f $HOME/.local.fish
         source $HOME/.local.fish
     end
 
-
-
     # Don't greet the fish, it's just a shell
     set -U fish_greeting ""
 
-    # Commands to run in interactive sessions can go here
-    #
-    # For example, to set the prompt:
-    # function fish_prompt
+    # Nord color scheme settings
     set nord0 2e3440
     set nord1 3b4252
     set nord2 434c5e
@@ -73,7 +51,6 @@ if status is-interactive
     set fish_pager_color_description $nord10
     set fish_pager_color_progress $nord12
     set fish_pager_color_secondary $nord1
-
 end
 
 # vim: set ft=fish ts=4 sw=4 sts=4 et:
