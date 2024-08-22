@@ -45,6 +45,7 @@ require("lazy").setup({
     { "tpope/vim-fugitive" },
     { "embear/vim-localvimrc" },
     { "jghauser/mkdir.nvim" },
+    { "jake-stewart/jfind.nvim", branch = "2.0" },
     {
       "mcauley-penney/tidy.nvim",
       opts = {
