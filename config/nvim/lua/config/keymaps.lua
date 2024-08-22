@@ -12,3 +12,18 @@ vim.api.nvim_set_keymap("n", "<leader><down>", ":rightbelow new<CR>", { noremap 
 -- New window splits gain focus
 vim.api.nvim_set_keymap("n", "<C-w>s", "<C-w>s<C-w>w", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-w>v", "<C-w>v<C-w>w", { noremap = true })
+
+local diagnostics_active = true
+
+function ToggleDiagnostics()
+  diagnostics_active = not diagnostics_active
+  if diagnostics_active then
+    vim.diagnostic.enable()
+    print("Diagnostics enabled")
+  else
+    vim.diagnostic.disable()
+    print("Diagnostics disabled")
+  end
+end
+
+vim.api.nvim_set_keymap("n", "<leader>dx", ":lua ToggleDiagnostics()<CR>", { noremap = true, silent = true })
