@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 cd "$(dirname "$0")" || exit 1
-DIR="$(pwd)"
+DIR="$PWD"
 
 REPOS_TO_CLONE=(
 	zsh-users/antigen
@@ -13,14 +13,14 @@ REPOS_TO_CLONE=(
 )
 
 for LINE in "${REPOS_TO_CLONE[@]}"; do
-	declare -a TOKENS
-	TOKENS=(
-		$(echo "$LINE" | awk 'BEGIN{FS="/"}{for (i=1; i<=NF; i++) print $i}')
-	)
+	NAME=$(echo "$LINE" | cut -d'/' -f1)
+	REPO=$(echo "$LINE" | cut -d'/' -f2)
 	NAME=${TOKENS[0]}
 	REPO=${TOKENS[1]}
 	REPO_URL="https://github.com/$NAME/$REPO.git"
 	REPO_DEST="$HOME/.config/$REPO"
+
+	echo "Cloning $REPO_URL to $REPO_DEST"
 	if [ -d "$REPO_DEST" ]; then
 		pushd "$REPO_DEST" >/dev/null
 		echo "Updating $REPO"
@@ -58,7 +58,7 @@ for LINE in "${FILES_TO_LINK[@]}"; do
 	declare -a FILE_TOKENS
 	echo "$LINE"
 	FILE_TOKENS=(
-		$(echo "$LINE" | awk 'BEGIN{FS="/"}{for (i=1; i<=NF; i++) print $i}')
+		"$(echo "$LINE" | awk 'BEGIN{FS="/"}{for (i=1; i<=NF; i++) print $i}')"
 	)
-	symlink_files ${FILE_TOKENS[@]}
+	symlink_files "${FILE_TOKENS[@]}"
 done
