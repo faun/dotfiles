@@ -189,6 +189,7 @@ return {
       -- Configure rubocop
       lspconfig.rubocop.setup({
         capabilities = capabilities,
+        cmd = { "bundle", "exec", "rubocop", "--autocorrect-all", "--server" },
       })
 
       -- Configure ruby_lsp
