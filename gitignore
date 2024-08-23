@@ -62,3 +62,7 @@ go.work.sum
 node_modules/
 /app/assets/builds/
 /tmp/sorbet-cache/
+.nvim.lua
+.nvimrc
+.exrc
+.local.lua
