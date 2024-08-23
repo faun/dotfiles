@@ -61,4 +61,4 @@ go.work.sum
 .neoconf.json
 node_modules/
 /app/assets/builds/
-/sorbet/*.mdb
+/tmp/sorbet-cache/
