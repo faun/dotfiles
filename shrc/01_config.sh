@@ -5,7 +5,7 @@ export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
 export EDITOR='nvim'
-[ -z "$TMUX" ] && export TERM=xterm-256color
+[ "$TMUX" = "" ] && export TERM=xterm-256color
 
 # Load optional platform-specific configuration
 if [[ "$OSTYPE" == linux* ]]; then
@@ -16,11 +16,11 @@ elif [[ "$OSTYPE" == darwin* ]]; then
 	if [[ $SHELL_TYPE == 'bash' ]]; then
 		CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 	else
-		CURRENT_DIR=$(dirname $0)
+		CURRENT_DIR=$(dirname "$0")
 	fi
 	alias a='ls -lrthG'
 	alias ls='ls -G'
-	[[ -f $CURRENT_DIR/optional/macos.sh ]] && source $CURRENT_DIR/optional/macos.sh
+	[[ -f $CURRENT_DIR/optional/macos.sh ]] && source "$CURRENT_DIR"/optional/macos.sh
 fi
 
 # Source .profile if it exists
