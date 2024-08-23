@@ -473,7 +473,7 @@ return {
       require("lspconfig").sorbet.setup({
         capabilities = capabilities,
         on_attach = on_attach,
-        cmd = { "bin/srb", "tc", "--lsp", "--cache-dir", "sorbet" },
+        cmd = { "bin/srb", "tc", "--lsp", "--cache-dir", "tmp/sorbet-cache" },
         root_dir = require("lspconfig.util").root_pattern("sorbet/config"),
       })
 
