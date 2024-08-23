@@ -187,10 +187,14 @@ return {
       })
 
       -- Configure rubocop
-      lspconfig.rubocop.setup({})
+      lspconfig.rubocop.setup({
+        capabilities = capabilities,
+      })
 
       -- Configure ruby_lsp
-      lspconfig.ruby_lsp.setup({})
+      lspconfig.ruby_lsp.setup({
+        capabilities = capabilities,
+      })
 
       -- Configure sqlls
       lspconfig.sqlls.setup({
