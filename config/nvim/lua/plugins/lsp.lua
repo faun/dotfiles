@@ -458,6 +458,25 @@ return {
         },
       })
 
+      nvim_lsp["ruby_lsp"].setup({
+        capabilities = capabilities,
+        settings = {
+          ruby = {
+            completion = {
+              autoRequire = true,
+              enable = true,
+            },
+          },
+        },
+      })
+
+      require("lspconfig").sorbet.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        cmd = { "bin/srb", "tc", "--lsp", "--cache-dir", "sorbet" },
+        root_dir = require("lspconfig.util").root_pattern("sorbet/config"),
+      })
+
       local lspkind = require("lspkind")
       lspkind.init({
         mode = "symbol_text",
