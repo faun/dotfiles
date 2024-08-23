@@ -1,7 +1,6 @@
 #!/usr/bin/ruby
-require 'awesome_print'
+
 require 'irb/completion'
-require 'irb/ext/save-history'
 require 'rubygems'
 
 begin
@@ -9,10 +8,15 @@ begin
   Pry.start
   exit
 rescue LoadError
-  warn "=> Unable to load pry"
+  puts "=> Unable to load pry"
 end
 
-AwesomePrint.irb!
+begin
+  require 'awesome_print'
+  AwesomePrint.irb!
+rescue LoadError, ActiveSupport::DeprecationException
+  puts "=> Unable to load awesome_print"
+end
 
 IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
@@ -21,7 +25,6 @@ IRB.conf[:PROMPT_MODE] = :SIMPLE
 IRB.conf[:USE_READLINE] = true
 
 IRB.conf[:AUTO_INDENT] = true
-
 
 # don't save duplicates
 IRB.conf[:AT_EXIT].unshift Proc.new {
@@ -38,14 +41,12 @@ IRB.conf[:AT_EXIT].unshift Proc.new {
     }
 }
 
-
-
 class Object
   # list methods which aren't in superclass
   def local_methods(obj = self)
     (obj.methods - obj.class.superclass.instance_methods).sort
   end
-  
+
   # print documentation
   #
   #   ri 'Array#pop'
@@ -90,7 +91,7 @@ class Array
     def self.toy(n=10,&block)
         block_given? ? Array.new(n,&block) : Array.new(n) {|i| i+1}
     end
-end   
+end
 
 class Hash
     def self.toy(n=10)
@@ -102,8 +103,8 @@ end
 # detects a rails console, cares about version
 def rails?(*args)
     version=args.first
-    v2 = ($0 == 'irb' && ENV['RAILS_ENV']) 
-    v3 = ($0 == 'script/rails' && Rails.env) 
+    v2 = ($0 == 'irb' && ENV['RAILS_ENV'])
+    v3 = ($0 == 'script/rails' && Rails.env)
     version == 2 ? v2 : version == 3 ? v3 : v2 || v3
 end
 
