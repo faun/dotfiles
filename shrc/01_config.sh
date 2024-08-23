@@ -43,3 +43,16 @@ if [[ -f "$HOME/.git-prompt.sh" ]]; then
 else
 	curl -sSL 'https://git.io/v5oou' -o "$HOME/.git-prompt.sh" || true
 fi
+
+if [[ -n "$TMUX" ]] && [[ "$SHLVL" -eq 2 ]]; then
+	# If we are in a tmux session, reattach to it
+	# This enables using touch ID for sudo in
+	# tmux sessions
+	# See:
+	# - https://github.com/fabianishere/pam_reattach
+	# - https://github.com/artginzburg/sudo-touchid
+	if command -v reattach-to-session-namespace &>/dev/null; then
+		reattach-to-session-namespace -u "$(id -u)" "$SHELL"
+	else
+	fi
+fi
