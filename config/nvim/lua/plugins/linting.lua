@@ -74,7 +74,26 @@ return {
           debounce = 3000, -- 3000 milliseconds = 3 seconds
           timeout = 10000, -- 10 seconds timeout
         }),
-        null_ls.builtins.diagnostics.semgrep,
+        null_ls.builtins.diagnostics.semgrep.with({
+          condition = function(utils)
+            return utils.root_has_file(".semgrep.yml")
+              or utils.root_has_file(".semgrep.yaml")
+              or utils.root_has_file(".semgrep")
+          end,
+          extra_args = function(utils)
+            local config_files = {
+              [".semgrep"] = true,
+              [".semgrep.yml"] = true,
+              [".semgrep.yaml"] = true,
+            }
+
+            local function get_config(file)
+              return config_files[file] and { "--config", file } or nil
+            end
+
+            return get_config(".semgrep") or get_config(".semgrep.yml") or get_config(".semgrep.yaml") or {}
+          end,
+        }),
         null_ls.builtins.formatting.shellharden,
         null_ls.builtins.diagnostics.sqlfluff.with({
           extra_filetypes = { "mysql" },
