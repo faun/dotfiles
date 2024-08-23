@@ -5,6 +5,7 @@ cd "$(dirname "$0")" || exit 1
 # DIR="$(pwd)"
 
 rubygems_packages=(
+	awesome_print
 	erb-formatter
 	neovim
 	neovim-ruby-host
