@@ -8,7 +8,6 @@ rubygems_packages=(
 	awesome_print
 	erb-formatter
 	neovim
-	neovim-ruby-host
 	reek
 	ripper-tags
 )
