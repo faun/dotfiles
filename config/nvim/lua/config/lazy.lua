@@ -115,7 +115,7 @@ require("lazy").setup({
           desc = "Find Files",
         },
         {
-          "<C-F>",
+          "<C-G>",
           function()
             require("telescope.builtin").live_grep()
           end,
