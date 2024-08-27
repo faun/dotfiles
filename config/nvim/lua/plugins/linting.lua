@@ -65,15 +65,6 @@ return {
           end,
           args = { "-config", "revive.toml", "-formatter", "json", "./..." },
         }),
-        null_ls.builtins.diagnostics.rubocop.with({
-          condition = function(utils)
-            return utils.root_has_file({ ".rubocop.yml", ".rubocop.yaml" })
-          end,
-          command = "bundle",
-          args = vim.list_extend({ "exec", "rubocop" }, null_ls.builtins.diagnostics.rubocop._opts.args),
-          debounce = 3000, -- 3000 milliseconds = 3 seconds
-          timeout = 10000, -- 10 seconds timeout
-        }),
         null_ls.builtins.diagnostics.semgrep.with({
           condition = function(utils)
             return utils.root_has_file(".semgrep.yml")
