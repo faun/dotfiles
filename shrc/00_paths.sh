@@ -58,6 +58,11 @@ if [[ -d /usr/local ]]; then
 	PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 fi
 
+# Add Visual Studio Code (code)
+if [[ -d "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" ]]; then
+	PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+fi
+
 export PATH
 export RBENV_ROOT
 export MANPATH
