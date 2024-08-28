@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
 
+if [[ -s "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [[ -s "/opt/homebrew/bin/brew" ]]; then
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
-if [[ -d "/home/linuxbrew/.linuxbrew" ]]; then
-	export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
-
-	if type brew &>/dev/null; then
-		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-		if [[ -n "$HOMEBREW_PREFIX" ]]; then
-      PATH="${HOMEBREW_PREFIX:?}/bin:$PATH"
-    fi
-	fi
+if [[ -n "$HOMEBREW_PREFIX" ]]; then
+	PATH="${HOMEBREW_PREFIX:?}/bin:$PATH"
 fi
 
 HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-$(brew --prefix)}"
