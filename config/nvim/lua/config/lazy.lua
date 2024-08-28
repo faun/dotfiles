@@ -45,7 +45,6 @@ require("lazy").setup({
     { "tpope/vim-fugitive" },
     { "embear/vim-localvimrc" },
     { "jghauser/mkdir.nvim" },
-    { "jake-stewart/jfind.nvim", branch = "2.0" },
     {
       "klen/nvim-config-local",
       config = function()
@@ -114,12 +113,51 @@ require("lazy").setup({
           end,
           desc = "Find Files",
         },
+      },
+    },
+    {
+      "jake-stewart/jfind.nvim",
+      enabled = true,
+      branch = "2.0",
+      opts = {
+        exclude = {
+          ".git",
+          ".idea",
+          ".vscode",
+          ".sass-cache",
+          ".class",
+          "__pycache__",
+          "node_modules",
+          "target",
+          "build",
+          "tmp",
+          "assets",
+          "dist",
+          "public",
+          "*.iml",
+          "*.meta",
+        },
+      },
+      keys = {
         {
-          "<C-G>",
+          "<C-f>",
           function()
-            require("telescope.builtin").live_grep()
+            local jfind = require("jfind")
+
+            jfind.findFile({
+              preview = false,
+            })
           end,
-          desc = "Find Word",
+        },
+        {
+          "<C-p>",
+          function()
+            local jfind = require("jfind")
+
+            jfind.findFile({
+              preview = true,
+            })
+          end,
         },
       },
     },
