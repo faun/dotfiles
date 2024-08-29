@@ -433,9 +433,11 @@ return {
         formatting = {
           format = function(entry, vim_item)
             vim_item.menu = ({
-              buffer = "[Buffer]",
               nvim_lsp = "[LSP]",
-              luas = "[Snippet]",
+
+              buffer = "[Buffer]",
+              copilot = "[Copilot]",
+              luasnip = "[Snippet]",
               tags = "[Tag]",
               path = "[Path]",
               ["vim-dadbod-completion"] = "[DB]",
@@ -444,15 +446,14 @@ return {
           end,
         },
         sources = cmp.config.sources({
-          { name = "luasnip" },
-          { name = "treesitter" },
-          { name = "emoji" },
-          { name = "nvim_lua" },
-          { name = "buffer" },
-          { name = "path" },
           { name = "nvim_lsp" },
           { name = "copilot" },
-          { name = "codeium" },
+          { name = "luasnip" },
+          { name = "treesitter", max_item_count = 5 },
+          { name = "buffer", max_item_count = 5 },
+          { name = "emoji" },
+          { name = "nvim_lua" },
+          { name = "path" },
           { name = "vim-dadbod-completion" },
         }),
         snippet = {
