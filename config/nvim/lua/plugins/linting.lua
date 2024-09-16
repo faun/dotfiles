@@ -4,6 +4,7 @@ return {
   },
   {
     "mfussenegger/nvim-lint",
+    enabled = false,
     event = "LazyFile",
     opts = {
       events = { "BufWritePost", "BufReadPost", "InsertLeave" },
