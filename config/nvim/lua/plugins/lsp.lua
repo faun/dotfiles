@@ -255,7 +255,7 @@ return {
       lspconfig.rubocop.setup({
         on_attach = on_attach,
         capabilities = capabilities,
-        cmd = { "bin/rubocop", "--autocorrect-all", "--server" },
+        cmd = { "bin/rubocop", "--server" },
       })
 
       -- Configure ruby_lsp
