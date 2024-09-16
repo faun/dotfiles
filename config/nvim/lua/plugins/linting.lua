@@ -115,7 +115,7 @@ return {
         }),
         null_ls.builtins.diagnostics.tfsec,
         null_ls.builtins.diagnostics.tidy,
-        null_ls.builtins.diagnostics.todo_comments,
+        -- null_ls.builtins.diagnostics.todo_comments,
         null_ls.builtins.diagnostics.trivy,
         null_ls.builtins.diagnostics.vacuum,
         null_ls.builtins.diagnostics.vale.with({
