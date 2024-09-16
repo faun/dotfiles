@@ -16,25 +16,26 @@ vim.g.maplocalleader = "\\"
 
 require("config.lazy")
 require("config.defaults")
+require("config.filetypes")
 
 -- expand tilde in a file path
 local function expand_tilde(path)
-    if path:sub(1, 1) == '~' then
-        return os.getenv('HOME') .. path:sub(2)
-    else
-        return path
-    end
+  if path:sub(1, 1) == "~" then
+    return os.getenv("HOME") .. path:sub(2)
+  else
+    return path
+  end
 end
 
 -- Function to check if a file exists
 local function file_exists(path)
-    local f = io.open(path, "r")
-    if f then
-        f:close()
-        return true
-    else
-        return false
-    end
+  local f = io.open(path, "r")
+  if f then
+    f:close()
+    return true
+  else
+    return false
+  end
 end
 
 -- Path to the local machine-specific configuration file
