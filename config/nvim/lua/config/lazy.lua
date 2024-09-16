@@ -115,7 +115,7 @@ require("lazy").setup({
       },
     },
     {
-      "jake-stewart/jfind.nvim",
+      "faun/jfind.nvim",
       enabled = true,
       branch = "2.0",
       opts = {
