@@ -31,6 +31,8 @@ vim.opt.fillchars:append({ vert = "\\" })
 -- Limit completion popup menu height
 vim.opt.pumheight = 15
 
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
 -- Set - as keyword so that ctags work correctly with dashed-method-names
 vim.opt.iskeyword:append("-")
 
