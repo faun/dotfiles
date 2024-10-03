@@ -126,7 +126,10 @@ return {
         }),
         null_ls.builtins.diagnostics.zsh,
         null_ls.builtins.formatting.golines.with({
-          extra_args = { "--max-len=120", "--base-formatter=gofumpt" },
+          condition = function(utils)
+            return utils.root_has_file({ ".golines" })
+          end,
+          extra_args = { "--max-len=128", "--base-formatter=gofumpt" },
         }),
         null_ls.builtins.formatting.protolint,
         null_ls.builtins.formatting.shfmt,
