@@ -3,40 +3,6 @@ return {
     "williamboman/mason.nvim",
   },
   {
-    "mfussenegger/nvim-lint",
-    enabled = false,
-    event = "LazyFile",
-    opts = {
-      events = { "BufWritePost", "BufReadPost", "InsertLeave" },
-      linters_by_ft = {
-        sh = { "shfmt", "shellharden" },
-        html = { "htmlhint" },
-        json = { "jsonlint" },
-        python = { "flake8" },
-        ruby = { "ruby" },
-      },
-    },
-  },
-  {
-    "rshkarin/mason-nvim-lint",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "mfussenegger/nvim-lint",
-    },
-    config = function()
-      require("mason-nvim-lint").setup({
-        automatic_installation = false,
-        ensure_installed = {
-          "flake8",
-          "htmlhint",
-          "jsonlint",
-          "rubocop",
-          "golines",
-        },
-      })
-    end,
-  },
-  {
     "nvimtools/none-ls.nvim",
     opts = function(_, opts)
       local null_ls = require("null-ls")
