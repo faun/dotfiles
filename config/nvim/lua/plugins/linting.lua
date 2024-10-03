@@ -9,6 +9,7 @@ return {
     opts = {
       events = { "BufWritePost", "BufReadPost", "InsertLeave" },
       linters_by_ft = {
+        sh = { "shfmt", "shellharden" },
         html = { "htmlhint" },
         json = { "jsonlint" },
         python = { "flake8" },
