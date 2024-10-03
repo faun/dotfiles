@@ -89,7 +89,6 @@ return {
           -- end,
           extra_args = { "--dialect", "mysql" },
         }),
-        null_ls.builtins.diagnostics.staticcheck,
         null_ls.builtins.diagnostics.stylelint.with({
           condition = function(utils)
             return utils.root_has_file({
