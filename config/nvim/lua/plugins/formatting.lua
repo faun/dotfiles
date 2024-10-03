@@ -4,6 +4,7 @@ return {
   },
   {
     "stevearc/conform.nvim",
+    enabled = false,
     opts = {
       formatters = {
         shfmt = {
@@ -110,6 +111,7 @@ return {
   },
   {
     "zapling/mason-conform.nvim",
+    enabled = false,
     config = function()
       require("mason-conform").setup()
     end,
