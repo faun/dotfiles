@@ -118,7 +118,4 @@
 	process = git-lfs filter-process
 	required = true
 
-[url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
-
 # vim: set ft=gitconfig ts=2 sw=2 et:
