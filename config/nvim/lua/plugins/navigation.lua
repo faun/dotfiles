@@ -80,6 +80,12 @@ return {
             { context = "source", target = "/lib/%1/%2.rb" },
           },
         },
+        {
+          pattern = "/spec/(.*)/(.*)_spec.rb",
+          target = {
+            { context = "source", target = "/app/%1/%2.rb" },
+          },
+        },
 
         -- Switch between python test and implementation
         {
