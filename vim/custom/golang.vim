@@ -1,3 +1,5 @@
+let g:go_gopls_enabled = 0
+
 " Autosave settings for vim-go
 let g:go_asmfmt_autosave = 1
 let g:go_fmt_autosave = 1
