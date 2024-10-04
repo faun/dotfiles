@@ -8,31 +8,21 @@ export GOPATH
 GOBIN="${GOBIN:-$HOME/bin}"
 export GOBIN
 
-if [[ -d "/usr/local/mysql/bin" ]]; then
-	PATH="$PATH:/usr/local/mysql/bin"
+if command -v brew >/dev/null 2>&1; then
+	HOMEBREW_PREFIX="$(brew --prefix)"
 fi
 
-if [[ -d "/usr/local/git/bin" ]]; then
-	PATH="$PATH:/usr/local/git/bin"
-fi
+HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-"/opt/homebrew"}"
+export HOMEBREW_PREFIX
 
-if [[ -d "$HOME/.local/bin" ]]; then
-	PATH="$PATH:$HOME/.local/bin"
+if [[ -s "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [[ -s "${HOMEBREW_PREFIX:?}/bin/brew" ]]; then
+	eval "$("${HOMEBREW_PREFIX:?}"/bin/brew shellenv)"
 fi
 
 if [[ -d "$HOME/.yarn/bin" ]]; then
 	PATH="$PATH:$HOME/.yarn/bin"
-fi
-
-RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
-if [ -d "$RBENV_ROOT" ]; then
-	PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
-fi
-
-PYENV_ROOT="${PYENV_ROOT:-$HOME/.pyenv}"
-if [[ -d "$PYENV_ROOT" ]]; then
-	PATH="$HOME/.pyenv/bin:$PATH"
-	PATH="$HOME/.pyenv/shims:$PATH"
 fi
 
 if [[ -d "$HOME/.config/kubectx" ]]; then
@@ -51,11 +41,11 @@ PATH=".git/safe/../../bin:$PATH"
 PATH=".git/safe/../../node_modules/.bin:$PATH"
 PATH="$HOME/bin:$PATH"
 
-if [[ -d /usr/local ]]; then
-	MANPATH="/usr/local/man:$MANPATH"
-	MANPATH="/usr/local/mysql/man:$MANPATH"
-	MANPATH="/usr/local/git/man:$MANPATH"
-	PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+if [[ -d /usr/local/bin ]]; then
+	PATH="/usr/local/bin:$PATH"
+fi
+if [[ -d /usr/local/sbin ]]; then
+	PATH="/usr/local/sbin:$PATH"
 fi
 
 # Add Visual Studio Code (code)
@@ -64,5 +54,3 @@ if [[ -d "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" ]]; t
 fi
 
 export PATH
-export RBENV_ROOT
-export MANPATH
