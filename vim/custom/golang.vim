@@ -45,9 +45,10 @@ let g:go_list_type = 'locationlist'
 let g:go_list_type_commands = {'GoMetaLinter': 'quickfix'}
 let g:go_metalinter_autosave = 0
 let g:go_metalinter_autosave_enabled = []
+" let g:go_metalinter_enabled = ['errcheck', 'staticcheck', 'unused', 'gosec', 'ineffassign']
+let g:go_metalinter_enabled = []
 let g:go_metalinter_command = 'golangci-lint'
 let g:go_metalinter_deadline = '5s'
-let g:go_metalinter_enabled = ['errcheck', 'staticcheck', 'unused', 'gosec', 'ineffassign']
 let g:go_template_autocreate = 0
 let g:go_test_show_name = 1
 
