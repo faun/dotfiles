@@ -1,7 +1,7 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
-if command -v direnv &> /dev/null; then
-  eval "$(direnv hook zsh)"
+if command -v direnv &>/dev/null; then
+	eval "$(direnv hook zsh)"
 else
-  echo "direnv not found"
+	echo "direnv not found"
 fi
