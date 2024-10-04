@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-USE_GVM="${USE_GVM:-false}"
-if [[ "$USE_GVM" != "false" ]]; then
-	# shellcheck source=/dev/null
-	[[ -f "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+USE_GVM="${USE_GVM:-true}"
+GVM_HOME="${GVM_HOME:-$HOME/.gvm}"
+if [[ "$USE_GVM" == "true" ]]; then
+	[[ -s "${GVM_HOME:?}/scripts/gvm" ]] && source "${GVM_HOME:?}/scripts/gvm"
 
 	GOROOT="${GOROOT:-${HOME:?}/src}"
 	export GOROOT
