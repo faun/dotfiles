@@ -5,11 +5,11 @@ planetscale_branch() {
 }
 
 planetscale_organization() {
-	echo "${PLANETSCALE_ORGANIZATION:-planetscale}"
+	echo "${PLANETSCALE_ORGANIZATION:?}"
 }
 
 planetscale_database() {
-	echo "${PLANETSCALE_DATABASE:-planetscale}"
+	echo "${PLANETSCALE_DATABASE:-?}"
 }
 
 planetscale_branch_create_migrate_and_deploy_request() {
@@ -17,11 +17,11 @@ planetscale_branch_create_migrate_and_deploy_request() {
 }
 
 planetscale_branch_migrate() {
-	rails psdb:migrate:primary
+	rails psdb:migrate
 }
 
 planetscale_branch_rollback() {
-	rails psdb:rollback:primary
+	rails psdb:rollback
 }
 
 planetscale_branch_create_and_migrate() {
