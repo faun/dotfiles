@@ -65,7 +65,9 @@ function! s:build_go_files()
   endif
 endfunction
 
-autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+augroup golang
+  autocmd! FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+augroup END
 
 let g:projectionist_heuristics = {
       \ '*.go': {
