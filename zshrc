@@ -4,6 +4,9 @@ if [[ -n $DEBUG_STARTUP_TIME ]]; then
   zmodload zsh/zprof
 fi
 
+# use .localrc for settings specific to one system
+[[ -f ~/.localrc ]] && . ~/.localrc
+
 # Source shell-agnostic config files
 for file in $HOME/.shrc/*; do
   if [[ -f "$file" ]]; then
@@ -27,9 +30,6 @@ alias d="z dotfiles && t"
 [[ -f $HOME/.iterm2_shell_integration.zsh ]] && source $HOME/.iterm2_shell_integration.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# use .localrc for settings specific to one system
-[[ -f ~/.localrc ]] && . ~/.localrc
 
 if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
