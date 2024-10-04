@@ -15,9 +15,3 @@ fi
 if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
 	source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
 fi
-
-if command -v kubectl >/dev/null 2>&1; then
-	if ! [[ -f "${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl" ]]; then
-		kubectl completion bash >"${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl"
-	fi
-fi
