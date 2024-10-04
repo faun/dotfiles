@@ -55,7 +55,6 @@
 [core]
 	excludesfile = ~/.gitignore
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-	pager = delta
 	attributesfile = ~/.gitattributes
 
 [apply]
@@ -95,9 +94,6 @@
 [rebase]
 	autosquash = true
 
-[credential]
-	helper = osxkeychain
-
 [rerere]
 	enabled = 1
 
@@ -122,20 +118,7 @@
 	process = git-lfs filter-process
 	required = true
 
-[format]
-	signOff = Signed-off-by: Faun <git@faun.me>
-
-[interactive]
-  diffFilter = delta --color-only
-
-[delta]
-  true-color = always
-  side-by-side = true
-  navigate = true
-  features = side-by-side line-numbers decorations
-  syntax-theme = Nord
-
-[commit]
-  gpgsign = true
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
 
 # vim: set ft=gitconfig ts=2 sw=2 et:
