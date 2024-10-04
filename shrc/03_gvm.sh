@@ -16,4 +16,6 @@ if [[ "$USE_GVM" == "true" ]]; then
 
 	PATH="${PATH}:${GOBIN}"
 	export PATH
+
+	GOPROXY="${GOPROXY:-https://proxy.golang.org}"
 fi
