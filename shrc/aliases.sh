@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-alias d="z dotfiles; and t"
+alias d="z dotfiles; t"
 
 # directory listing & navigation
 alias l="ls -lAh"
