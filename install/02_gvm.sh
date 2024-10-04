@@ -22,6 +22,9 @@ if ! [[ -d "$GVM_HOME" ]]; then
 else
 	echo "GVM is already installed, updating"
 
+	set +eu
+	[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
 	gvm update || true
 fi
 
