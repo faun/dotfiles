@@ -34,6 +34,7 @@ return {
               or utils.root_has_file(".semgrep.yaml")
               or utils.root_has_file(".semgrep")
           end,
+          method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
           extra_args = function(utils)
             local config_files = {
               [".semgrep"] = true,
