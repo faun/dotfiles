@@ -203,6 +203,19 @@ return {
           buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
         end
 
+        -- Enable autoformat on save
+        vim.api.nvim_create_autocmd("LspAttach", {
+          group = vim.api.nvim_create_augroup("lsp", { clear = true }),
+          callback = function(args)
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer = args.buf,
+              callback = function()
+                vim.lsp.buf.format({ async = false, id = args.data.client_id })
+              end,
+            })
+          end,
+        })
+
         -- Set autocommands conditional on server_capabilities
         if client.server_capabilities.document_highlight then
           vim.api.nvim_exec(
