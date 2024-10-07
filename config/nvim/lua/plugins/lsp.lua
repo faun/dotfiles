@@ -268,7 +268,12 @@ return {
       lspconfig.rubocop.setup({
         on_attach = on_attach,
         capabilities = capabilities,
-        cmd = { "bin/rubocop", "--server" },
+        settings = {
+          rubocop = {
+            mason = false,
+            cmd = { vim.fn.expand("~/.rbenv/shims/rubocop"), "--lsp" },
+          },
+        },
       })
 
       -- Configure ruby_lsp
@@ -276,11 +281,9 @@ return {
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
-          ruby = {
-            completion = {
-              autoRequire = true,
-              enable = true,
-            },
+          ruby_lsp = {
+            mason = false,
+            cmd = { vim.fn.expand("~/.rbenv/shims/ruby-lsp") },
           },
         },
       })
