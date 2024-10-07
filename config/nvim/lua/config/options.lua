@@ -4,3 +4,7 @@
 
 -- Disable lazy loading of the `lazygit` plugin
 vim.g.lazygit_config = false
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.cmd([[ set foldenable]])
