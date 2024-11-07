@@ -13,6 +13,7 @@ vim.api.nvim_set_keymap("n", "<leader><down>", ":rightbelow new<CR>", { noremap 
 vim.api.nvim_set_keymap("n", "<C-w>s", "<C-w>s<C-w>w", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-w>v", "<C-w>v<C-w>w", { noremap = true })
 
+-- Toggle diagnostics with <leader>dx
 local diagnostics_active = true
 
 function ToggleDiagnostics()
