@@ -4,31 +4,33 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    enabled = false,
+    ---@type conform.setupOpts
     opts = {
+      ---@type table<string, conform.FormatterConfigOverride|fun(bufnr: integer): nil|conform.FormatterConfigOverride>
       formatters = {
         shfmt = {
           prepend_args = { "-i", "2" },
         },
+        injected = { options = { ignore_errors = true } },
+      },
+      default_format_opts = {
+        timeout_ms = 3000,
+        async = false, -- not recommended to change
+        quiet = false, -- not recommended to change
+        lsp_format = "fallback", -- not recommended to change
       },
       formatters_by_ft = {
-        c = { "clang_format" },
-        cmake = { "cmake_format" },
-        cpp = { "clang_format" },
-        css = { "prettier" },
-        eruby = { "erb_format" },
-        html = { "prettier" },
-        javascript = { "prettier" },
-        javascriptreact = { "prettier" },
-        json = { "prettier" },
-        jsonc = { "prettier" },
-        less = { "prettier" },
+        fish = { "fish_indent" },
+        css = { "prettier", "stylelint" },
+        scss = { "prettier", "stylelint" },
         lua = { "stylua" },
-        markdown = { "prettier" },
-        python = { "isort", "black" },
-        rust = { "rustfmt" },
-        scss = { "prettier" },
-        yaml = { "prettier" },
+        sh = { "shfmt" },
+        tsx = { "prettier", "eslint" },
+        js = { "prettier", "eslint" },
+        ts = { "prettier", "eslint" },
+        graphql = { "prettier", "eslint" },
+        ruby = { "ruby" },
+        yaml = {},
       },
     },
     keys = {
