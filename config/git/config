@@ -53,9 +53,7 @@
 	conflictstyle = diff3
 
 [core]
-	excludesfile = ~/.gitignore
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-	attributesfile = ~/.gitattributes
 
 [apply]
 	whitespace = nowarn
