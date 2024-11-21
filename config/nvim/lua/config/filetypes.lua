@@ -9,3 +9,10 @@ vim.filetype.add({
     RELEASE_EDITMSG = "markdown.ghrelease",
   },
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "sql", "mysql", "plsql" },
+  callback = function()
+    vim.bo.commentstring = "-- %s"
+  end,
+})
