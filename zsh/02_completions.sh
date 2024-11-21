@@ -1,12 +1,19 @@
-fpath=("$HOME/.zsh/functions/completions" $fpath)
-fpath=("/usr/share/zsh/5.3/functions" $fpath)
-fpath=("/usr/share/zsh/$ZSH_VERSION/functions/" $fpath)
-fpath=("$HOME/.zfunc" $fpath)
+# Add paths in order of priority
+fpath=(
+  "$HOME/.zsh/functions/completions"
+  "/usr/share/zsh/$ZSH_VERSION/functions"
+  "$HOME/.zfunc"
+  $fpath
+)
 
+# Add Homebrew paths if exists
 if type brew &>/dev/null; then
   HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-$(brew --prefix)}"
-  FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH"
-  FPATH="$HOMEBREW_PREFIX/share/zsh-completions:$FPATH"
+  fpath=(
+    "$HOMEBREW_PREFIX/share/zsh/site-functions"
+    "$HOMEBREW_PREFIX/share/zsh-completions"
+    $fpath
+  )
 fi
 
 autoload -Uz compinit
