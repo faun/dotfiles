@@ -53,6 +53,9 @@ return {
         "lua_ls",
         "solargraph",
         "sqlls",
+        "typescript",
+        "typescript-language-server",
+        "ts_ls",
       },
       automatic_installation = { exclude = {} },
       config = function(opts)
