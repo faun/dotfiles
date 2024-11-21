@@ -7,8 +7,18 @@ return {
     opts = function(_, opts)
       local null_ls = require("null-ls")
       vim.list_extend(opts.sources, {
-        null_ls.builtins.code_actions.gomodifytags,
-        null_ls.builtins.code_actions.impl,
+        null_ls.builtins.code_actions.gomodifytags.with({
+          filetypes = { "go" },
+          condition = function(utils)
+            return utils.root_has_file({ "go.mod" })
+          end,
+        }),
+        null_ls.builtins.code_actions.impl.with({
+          filetypes = { "go" },
+          condition = function(utils)
+            return utils.root_has_file({ "go.mod" })
+          end,
+        }),
         null_ls.builtins.code_actions.refactoring,
         null_ls.builtins.completion.spell,
         null_ls.builtins.completion.tags,
