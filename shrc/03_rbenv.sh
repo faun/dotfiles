@@ -1,9 +1,10 @@
-RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
-if [ -d "$RBENV_ROOT" ]; then
-	PATH="${RBENV_ROOT:?}/bin:$PATH"
-fi
-export RBENV_ROOT
+# Add rbenv to PATH if it's not already there
+if [[ -z $RBENV_SHELL ]]; then
+	RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
 
-if command -v rbenv >/dev/null; then
-	eval "$(rbenv init -)"
+	PATH="$RBENV_ROOT/bin:$PATH"
+
+	if command -v rbenv >/dev/null; then
+		eval "$(rbenv init -)"
+	fi
 fi
