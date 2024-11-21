@@ -43,6 +43,9 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+    },
     opts = {
       ensure_installed = {
         "golangci_lint_ls",
@@ -52,6 +55,11 @@ return {
         "sqlls",
       },
       automatic_installation = { exclude = {} },
+      config = function(opts)
+        local ensure_installed = vim.tbl_keys(opts.ensure_installed or {})
+
+        require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+      end,
     },
   },
   {
