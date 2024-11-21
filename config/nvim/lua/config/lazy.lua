@@ -45,6 +45,14 @@ require("lazy").setup({
     { "embear/vim-localvimrc" },
     { "jghauser/mkdir.nvim" },
     {
+      "sindrets/diffview.nvim",
+      opts = {
+        default_args = {
+          DiffviewOpen = { "--imply-local" },
+        },
+      },
+    },
+    {
       "klen/nvim-config-local",
       config = function()
         require("config-local").setup({
