@@ -72,6 +72,7 @@ return {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "b0o/SchemaStore.nvim",
     },
     opts = function()
       return {
