@@ -75,6 +75,7 @@ return {
       "b0o/SchemaStore.nvim",
     },
     opts = function()
+      local keys = require("lazyvim.plugins.lsp.keymaps").get()
       return {
         -- https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.Opts
         ---@type vim.diagnostic.Opts
@@ -168,6 +169,7 @@ return {
           -- Specify * to use this function as a fallback for any server
           -- ["*"] = function(server, opts) end,
         },
+        keys = keys,
       }
     end,
     config = function()
@@ -176,6 +178,19 @@ return {
 
       --Enable (broadcasting) snippet capability for completion
       capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+      local diagnostics_active = true
+
+      function ToggleDiagnostics()
+        diagnostics_active = not diagnostics_active
+        if diagnostics_active then
+          vim.diagnostic.enable()
+          print("Diagnostics enabled")
+        else
+          vim.diagnostic.disable()
+          print("Diagnostics disabled")
+        end
+      end
 
       local on_attach = function(client, bufnr)
         local function buf_set_keymap(...)
@@ -204,9 +219,13 @@ return {
         buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
         buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
         buf_set_keymap("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-        buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-        buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-        buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+
+        -- goto next and previous diagnostic with ]d and [d
+        vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+
+        -- toggle diagnostics with <space>dx
+        buf_set_keymap("n", "<space>dx", "<cmd>lua ToggleDiagnostics()<CR>", opts)
 
         -- Set some keybinds conditional on server capabilities
         if client.server_capabilities.document_formatting then
