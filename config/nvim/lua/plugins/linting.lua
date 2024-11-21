@@ -150,4 +150,60 @@ return {
       })
     end,
   },
+  {
+    "folke/trouble.nvim",
+    opts = {
+      auto_close = true,
+      focus = true,
+      auto_open = false,
+      -- Throttle/Debounce settings. Should usually not be changed.
+      ---@type table<string, number|{ms:number, debounce?:boolean}>
+      throttle = {
+        refresh = 100, -- fetches new data when needed
+        update = 10, -- updates the window
+        render = 10, -- renders the window
+        follow = 100, -- follows the current item
+        preview = { ms = 1000, debounce = true }, -- shows the preview for the current item
+      },
+      modes = {
+        diagnostics_buffer = {
+          mode = "diagnostics",
+          filter = { buf = 0 },
+        },
+      },
+    },
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>cl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>xQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
+    },
+  },
 }
