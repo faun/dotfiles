@@ -119,6 +119,19 @@ return {
         null_ls.builtins.formatting.terraform_fmt,
       })
     end,
+    config = function(opts)
+      local null_ls = require("null-ls")
+      local options = vim.tbl_deep_extend("force", opts or {}, {
+        debug = true,
+        debounce = 1000,
+      })
+      null_ls.setup(options)
+
+      require("mason").setup({
+        ensure_installed = nil,
+        automatic_installation = true,
+      })
+    end,
   },
   {
     "jay-babu/mason-null-ls.nvim",
