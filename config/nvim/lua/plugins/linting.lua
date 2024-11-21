@@ -26,7 +26,6 @@ return {
         null_ls.builtins.diagnostics.ansiblelint,
         null_ls.builtins.diagnostics.codespell,
         null_ls.builtins.diagnostics.editorconfig_checker,
-        null_ls.builtins.diagnostics.erb_lint,
         null_ls.builtins.diagnostics.fish,
         null_ls.builtins.diagnostics.hadolint,
         null_ls.builtins.diagnostics.proselint,
