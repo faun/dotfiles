@@ -5,7 +5,7 @@
 These are config files to set up a system the way I like it.
 
 ## Installation
-    
+
     export DESTINATION="$HOME/src/github.com/faun/dotfiles"
     export INSTALL_SCRIPT_URL="https://gist.githubusercontent.com/faun/67fadc3f1525399da236589562cb4583/raw/install_dotfiles.sh?$(date +%s)"
     curl -sSL -o dotfiles_installer.sh "$INSTALL_SCRIPT_URL"
@@ -49,23 +49,17 @@ Set Homebrew Zsh as your default user
 
     sudo chsh -s $(which zsh) $(whoami)
 
-Fix an apple mis-configuration for Zsh
-
-    sudo mv -i /etc/zshenv /etc/zprofile
-
 Install tmux
 
     brew install tmux
     brew install reattach-to-user-namespace
 
-Install rbenv (recommended)
+### Patch your terminal font with Powerline glyphs for maximum awesomeness
 
-    git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+See [Powerline repo](https://github.com/Lokaltog/powerline-fonts) for more info.
 
-### Patch your terminal font with Powerline glyphs for maximum awesomeness:
-  See [Powerline repo](https://github.com/Lokaltog/powerline-fonts) for more info.
-
-  My personal favorite is [inconsolata-dz](https://github.com/Lokaltog/powerline-fonts/raw/master/InconsolataDz/Inconsolata-dz%20for%20Powerline.otf).
+My personal favorite is [inconsolata-dz](https://github.com/Lokaltog/powerline-fonts/raw/master/InconsolataDz/Inconsolata-dz%20for%20Powerline.otf).
 
 ### Integrate iTerm2 with tmux
-  See [iTerm2 downloads](http://code.google.com/p/iterm2/downloads/list) for more info
+
+See [iTerm2 downloads](http://code.google.com/p/iterm2/downloads/list) for more info
