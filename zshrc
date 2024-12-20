@@ -1,4 +1,3 @@
-#
 if [[ -n $DEBUG_STARTUP_TIME ]]; then
   # Run zprof to profile startup time
   zmodload zsh/zprof
