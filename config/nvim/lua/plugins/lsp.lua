@@ -339,65 +339,319 @@ return {
         capabilities = capabilities,
       })
 
-      -- Configure rubocop
-      lspconfig.rubocop.setup({
+      -- Configure astro-ls
+      lspconfig.astro.setup({
         on_attach = on_attach,
+        filetypes = {
+          "astro",
+        },
         capabilities = capabilities,
+      })
+
+      -- Configure eslint with autoformat
+      lspconfig.eslint.setup({
+        filetypes = {
+          "javascript",
+          "javascriptreact",
+          "javascript.jsx",
+          "typescript",
+          "typescriptreact",
+          "typescript.tsx",
+        },
+        on_attach = function(client, bufnr)
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            command = "EslintFixAll",
+          })
+          on_attach(client, bufnr)
+        end,
+        capabilities = capabilities,
+      })
+
+      lspconfig.tsserver.setup({
+        on_attach = function(client, bufnr)
+          -- Disable tsserver formatting if you prefer to use prettier
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+
+          -- Attach the common keybindings and settings
+          on_attach(client, bufnr)
+
+          -- Add TypeScript specific keymaps here
+          local opts = { noremap = true, silent = true }
+          vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ti", ":TypescriptAddMissingImports<CR>", opts)
+          vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>to", ":TypescriptOrganizeImports<CR>", opts)
+          vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>tR", ":TypescriptRenameFile<CR>", opts)
+        end,
+        capabilities = capabilities,
+
+        -- TypeScript-specific settings
         settings = {
-          rubocop = {
-            mason = false,
-            cmd = { vim.fn.expand("~/.rbenv/shims/rubocop"), "--lsp" },
+          typescript = {
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            },
+            suggest = {
+              includeCompletionsForModuleExports = true,
+              includeCompletionsWithObjectLiteralMethodSnippets = true,
+            },
+            implementationsCodeLens = true,
+            referencesCodeLens = true,
+            preferences = {
+              importModuleSpecifier = "relative",
+              quoteStyle = "double",
+            },
+          },
+          javascript = {
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            },
+            suggest = {
+              includeCompletionsForModuleExports = true,
+              includeCompletionsWithObjectLiteralMethodSnippets = true,
+            },
+            implementationsCodeLens = true,
+            referencesCodeLens = true,
           },
         },
+
+        -- Additional commands that will be available
+        commands = {
+          TypescriptAddMissingImports = {
+            function()
+              vim.lsp.buf.execute_command({
+                command = "_typescript.addMissingImports",
+                arguments = { vim.api.nvim_buf_get_name(0) },
+              })
+            end,
+            description = "Add missing imports",
+          },
+          TypescriptOrganizeImports = {
+            function()
+              vim.lsp.buf.execute_command({
+                command = "_typescript.organizeImports",
+                arguments = { vim.api.nvim_buf_get_name(0) },
+              })
+            end,
+            description = "Organize imports",
+          },
+          TypescriptRenameFile = {
+            function()
+              vim.lsp.buf.execute_command({
+                command = "_typescript.renameFile",
+                arguments = { vim.api.nvim_buf_get_name(0) },
+              })
+            end,
+            description = "Rename file",
+          },
+        },
+
+        -- Configure file types
+        filetypes = {
+          "typescript",
+          "typescript.tsx",
+          "typescriptreact",
+          "javascript",
+          "javascript.jsx",
+          "javascriptreact",
+        },
+
+        -- Root directory patterns
+        root_dir = require("lspconfig.util").root_pattern("tsconfig.json", "jsconfig.json", "package.json"),
       })
+
+      -- Configure graphql-ls
+      lspconfig.graphql.setup({
+        on_attach = on_attach,
+        filetypes = {
+          "graphql",
+          "gql",
+        },
+        capabilities = capabilities,
+      })
+
+      -- Helper function to find executable with fallback
+      local function get_binstub_with_fallback(local_bin, fallback_path, args)
+        -- Ensure args is a table, default to empty if not provided
+        args = args or {}
+
+        -- Check if local binary exists in the current directory
+        local local_path = vim.fn.getcwd() .. "/bin/" .. local_bin
+        local bin_exists = vim.fn.filereadable(local_path) == 1
+
+        -- Base command depending on which binary exists
+        local base_cmd
+        if bin_exists then
+          base_cmd = "bin/" .. local_bin
+        else
+          base_cmd = fallback_path
+        end
+
+        -- Construct final command array
+        local cmd = { vim.fn.expand(base_cmd) }
+        -- Add any additional arguments
+        for _, arg in ipairs(args) do
+          table.insert(cmd, arg)
+        end
+
+        return cmd
+      end
+
+      local function has_rubocop_config()
+        -- Check for rubocop configuration file
+        local has_rubocop_config_file = vim.fn.glob(".rubocop.*") ~= ""
+
+        -- Check for rubocop executable in bin directory
+        local has_rubocop_binary = vim.fn.glob("bin/rubocop") ~= ""
+
+        return has_rubocop_config_file or has_rubocop_binary
+      end
+
+      if has_rubocop_config() then
+        -- Configure rubocop
+        lspconfig.rubocop.setup({
+          on_attach = on_attach,
+          filetypes = {
+            "ruby",
+            "rake",
+            "rbi",
+            "rabl",
+          },
+          capabilities = capabilities,
+          settings = {
+            rubocop = {
+              mason = false,
+              cmd = get_binstub_with_fallback(
+                "rubocop", -- use ./bin/rubocop if it exists
+                "$HOME/.local/share/mise/shims/rubocop", -- fallback to mise rubocop shim
+                { "--lsp" } -- additional arguments
+              ),
+            },
+          },
+        })
+      end
 
       -- Configure ruby_lsp
       lspconfig.ruby_lsp.setup({
         on_attach = on_attach,
+        filetypes = {
+          "ruby",
+          "rake",
+          "rbi",
+          "rabl",
+        },
         capabilities = capabilities,
         settings = {
           ruby_lsp = {
             mason = false,
-            cmd = { vim.fn.expand("~/.rbenv/shims/ruby-lsp") },
+            cmd = get_binstub_with_fallback(
+              "ruby-lsp", -- use ./bin/ruby-lsp if it exists
+              "$HOME/.local/share/mise/shims/ruby-lsp" -- fallback to mise ruby-lsp shim
+            ),
           },
         },
       })
 
-      -- Configure sorbet
-      lspconfig.sorbet.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        cmd = { "bin/srb", "tc", "--lsp", "--cache-dir", "tmp/sorbet-cache" },
-        root_dir = require("lspconfig.util").root_pattern("sorbet/config"),
-      })
+      local function is_sorbet_project()
+        -- Check for sorbet configuration file
+        local has_sorbet_config = vim.fn.glob("sorbet/config") ~= ""
 
-      -- Configure sqlls
-      lspconfig.sqlls.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        filetypes = { "sql", "mysql" },
-        root_dir = function()
-          return vim.loop.cwd()
-        end,
-      })
+        -- Check for srb executable in bin directory
+        local has_srb_binary = vim.fn.glob("bin/srb") ~= ""
+
+        return has_sorbet_config or has_srb_binary
+      end
+
+      if is_sorbet_project() then
+        -- Configure sorbet
+        lspconfig.sorbet.setup({
+          on_attach = on_attach,
+          filetypes = {
+            "ruby",
+            "rake",
+            "rbi",
+            "rabl",
+          },
+          capabilities = capabilities,
+          cmd = get_binstub_with_fallback(
+            "srb", -- use ./bin/srb if it exists
+            "$HOME/.local/share/mise/shims/srb", -- fallback to mise srb shim
+            { "tc", "--lsp", "--cache-dir", "tmp/sorbet-cache" } -- additional arguments
+          ),
+          root_dir = require("lspconfig.util").root_pattern("sorbet/config"),
+        })
+      end
+
+      local function has_sqlls_config()
+        -- Check for sqlls configuration file
+        return vim.fn.glob(".sqllsrc.json") ~= ""
+      end
+
+      if has_sqlls_config() then
+        -- Configure sqlls if .sqllsrc.json exists
+        lspconfig.sqlls.setup({
+          on_attach = on_attach,
+          capabilities = capabilities,
+          filetypes = { "sql", "mysql" },
+          root_dir = function()
+            return vim.loop.cwd()
+          end,
+        })
+      end
 
       -- Setup lspconfig for gopls
       lspconfig.gopls.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        cmd = { "gopls" },
+        on_attach = on_attach, -- Attach keybindings and other LSP features
+        capabilities = capabilities, -- LSP capabilities for better feature support
+        cmd = { "gopls" }, -- Command to start the gopls server
+
         settings = {
           gopls = {
-            experimentalPostfixCompletions = true,
+            -- Code analysis settings
             analyses = {
-              unusedparams = true,
-              shadow = true,
+              unusedparams = true, -- Highlight unused function parameters
+              unreachable = false, -- Don't analyze unreachable code
             },
-            staticcheck = false,
+
+            -- Code lens features
+            codelenses = {
+              generate = true, -- Show "go generate" commands
+              gc_details = true, -- Show garbage collector details
+              test = true, -- Show "run test" commands
+              tidy = true, -- Show "go mod tidy" commands
+            },
+
+            -- Editor features
+            usePlaceholders = true, -- Use placeholders in function completions
+            completeUnimported = true, -- Show completions from unimported packages
+            staticcheck = true, -- Enable staticcheck analyzer
+            matcher = "Fuzzy", -- Use fuzzy matching for completions
+            symbolMatcher = "fuzzy", -- Use fuzzy matching for symbols
+
+            -- Performance settings
+            diagnosticsDelay = "500ms", -- Delay before showing diagnostics
+            experimentalWatchedFileDelay = "100ms", -- Delay for file watching
+
+            -- Code style settings
+            ["local"] = "", -- Package path for local imports
+            gofumpt = true, -- Use gofumpt for formatting
+            goimports = true, -- Run goimports on save
+
+            -- Build settings
+            buildFlags = { "-tags", "integration" }, -- Add integration build tag
           },
-        },
-        init_options = {
-          usePlaceholders = true,
         },
       })
 
@@ -451,7 +705,7 @@ return {
             },
           },
         },
-        capabilities = lsp_capabilities,
+        capabilities = capabilities,
       })
     end,
   },
