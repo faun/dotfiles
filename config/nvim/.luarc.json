@@ -1,8 +1,31 @@
 {
-  "runtime.version": "LuaJIT",
-  "runtime.path": ["lua/?.lua", "lua/?/init.lua"],
-  "diagnostics.globals": ["vim", "LazyVim"],
-  "diagnostics.disable": ["undefined-doc-name"],
-  "workspace.checkThirdParty": false,
-  "workspace.library": ["$VIMRUNTIME", "./lua", "~/.local/share/nvim/lazy"]
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "workspace.library": [
+    "$VIMRUNTIME",
+    "./lua",
+    "~/.local/share/nvim/lazy",
+    "lua",
+    "${3rd}/luv/library",
+    "${3rd}/busted/library",
+    "${3rd}/luassert/library",
+    "${3rd}/lazy.nvim/lua",
+    "${3rd}/conform.nvim/types"
+  ],
+  "diagnostics": {
+    "disable": [
+      "undefined-doc-name"
+    ],
+    "globals": [
+      "vim",
+      "LazyVim"
+    ]
+  },
+  "runtime": {
+    "version": "LuaJIT",
+    "path": [
+      "lua/?.lua",
+      "lua/?/init.lua"
+    ]
+  },
+  "workspace.checkThirdParty": false
 }

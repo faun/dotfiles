@@ -147,24 +147,10 @@ return {
         -- LSP Server Settings
         ---@type lspconfig.options.servers
         servers = {
-          gopls = {
-            cmd_env = {
-              GOFLAGS = "-tags=integration",
-            },
-          },
-          jsonls = {
-            -- lazy-load schemastore when needed
-            on_new_config = function(new_config)
-              new_config.settings.json.schemas = new_config.settings.json.schemas or {}
-              vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
-            end,
+          eslint = {
             settings = {
-              json = {
-                format = {
-                  enable = true,
-                },
-                validate = { enable = true },
-              },
+              -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+              workingDirectories = { mode = "auto" },
             },
           },
         },
@@ -185,7 +171,12 @@ return {
     end,
     config = function()
       local lspconfig = require("lspconfig")
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local capabilities = vim.tbl_deep_extend(
+        "force",
+        vim.lsp.protocol.make_client_capabilities(),
+        require("cmp_nvim_lsp").default_capabilities()
+      )
+      capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
       --Enable (broadcasting) snippet capability for completion
       capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -245,19 +236,6 @@ return {
           buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
         end
 
-        -- Enable autoformat on save
-        vim.api.nvim_create_autocmd("LspAttach", {
-          group = vim.api.nvim_create_augroup("lsp", { clear = true }),
-          callback = function(args)
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = args.buf,
-              callback = function()
-                vim.lsp.buf.format({ async = false, id = args.data.client_id })
-              end,
-            })
-          end,
-        })
-
         -- Set autocommands conditional on server_capabilities
         if client.server_capabilities.document_highlight then
           vim.api.nvim_exec(
@@ -286,12 +264,67 @@ return {
       lspconfig.golangci_lint_ls.setup({
         on_attach = on_attach,
         capabilities = capabilities,
+        settings = {
+          golangci_lint = {},
+        },
       })
 
       -- Configure jsonls
       lspconfig.jsonls.setup({
         on_attach = on_attach,
         capabilities = capabilities,
+        settings = {
+          json = {
+            format = {
+              enable = true,
+            },
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+          },
+        },
+      })
+
+      -- Configure helm_ls
+      lspconfig.helm_ls.setup({
+        settings = {
+          ["helm-ls"] = {
+            yamlls = {
+              path = "yaml-language-server",
+            },
+          },
+        },
+      })
+
+      -- Configure yaml-ls
+      lspconfig.yamlls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+          yamlls = {
+            enabled = true,
+            enabledForFilesGlob = "*.{yaml,yml}",
+            diagnosticsLimit = 50,
+            showDiagnosticsDirectly = false,
+            path = "yaml-language-server",
+            config = {
+              schemas = {
+                kubernetes = "templates/**",
+              },
+              completion = true,
+              hover = true,
+            },
+          },
+          yaml = {
+            schemaStore = {
+              enable = false,
+              url = "",
+            },
+            schemas = require("schemastore").yaml.schemas(),
+            format = {
+              enable = false,
+            },
+          },
+        },
       })
 
       -- Configure html-ls
