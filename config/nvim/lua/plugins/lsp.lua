@@ -60,12 +60,17 @@ return {
         "tsserver",
       },
       automatic_installation = { exclude = {} },
-      config = function(opts)
-        local ensure_installed = vim.tbl_keys(opts.ensure_installed or {})
-
-        require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-      end,
     },
+    config = function(opts)
+      local ensure_installed = vim.tbl_keys(opts.ensure_installed or {})
+      require("mason").setup()
+      require("mason-registry").refresh()
+      require("mason-tool-installer").setup({
+        ensure_installed = ensure_installed,
+        auto_update = true,
+        run_on_start = true,
+      })
+    end,
   },
   {
     "neovim/nvim-lspconfig",
