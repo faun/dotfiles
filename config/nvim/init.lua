@@ -38,6 +38,9 @@ local function file_exists(path)
   end
 end
 
+-- Prepend mise shims to PATH
+vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
+
 -- Path to the local machine-specific configuration file
 local vimrc_local_path = expand_tilde("~/.local.lua")
 
