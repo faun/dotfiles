@@ -12,6 +12,29 @@ return {
           prepend_args = { "-i", "2" },
         },
         injected = { options = { ignore_errors = true } },
+        prettier = {
+          -- Only use prettier when config file is present
+          ---@param ctx conform.Context
+          condition = function(ctx)
+            return vim.fs.find({
+              ".prettierrc",
+              ".prettierrc.json",
+              ".prettierrc.yml",
+              ".prettierrc.yaml",
+              ".prettierrc.json5",
+              ".prettierrc.js",
+              "prettier.config.js",
+              ".prettierrc.cjs",
+              "prettier.config.cjs",
+              ".prettierrc.toml",
+              "package.json",
+            }, {
+              upward = true,
+              path = ctx.dirname,
+              stop = vim.fs.find({ ".git" }, { upward = true, path = ctx.dirname })[1],
+            })[1] ~= nil
+          end,
+        },
       },
       default_format_opts = {
         timeout_ms = 3000,
