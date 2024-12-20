@@ -50,12 +50,14 @@ return {
       ensure_installed = {
         "golangci_lint_ls",
         "gopls",
+        "helm-ls",
         "lua_ls",
+        "luarocks",
+        "prettier",
         "solargraph",
         "sqlls",
-        "typescript",
-        "typescript-language-server",
-        "ts_ls",
+        "stylua",
+        "tsserver",
       },
       automatic_installation = { exclude = {} },
       config = function(opts)
