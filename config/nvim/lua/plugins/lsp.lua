@@ -72,6 +72,8 @@ return {
       })
     end,
   },
+  { "nanotee/sqls.nvim" },
+  { "towolf/vim-helm" },
   {
     "neovim/nvim-lspconfig",
     event = "LazyFile",
@@ -80,6 +82,8 @@ return {
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "b0o/SchemaStore.nvim",
+      "nanotee/sqls.nvim",
+      "towolf/vim-helm",
     },
     opts = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
