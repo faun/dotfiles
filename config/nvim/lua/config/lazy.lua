@@ -4,6 +4,35 @@ require("lazy").setup({
       "rmehri01/onenord.nvim",
       lazy = false,
       priority = 1000,
+      config = function()
+        -- Function to apply the theme
+        local function set_theme()
+          -- Read theme from temporary file that shell script maintains
+          local handle = io.open(vim.fn.expand("~/.cache/nvim/theme_mode"), "r")
+          if handle then
+            local content = handle:read("*a")
+            handle:close()
+            local theme = content:match("^%s*(.-)%s*$") -- trim whitespace
+            if theme == "dark" or theme == "light" then
+              vim.o.background = theme
+              require("onenord").setup({
+                theme = theme,
+              })
+            end
+          end
+        end
+
+        -- Set up autocommand for theme changes
+        vim.api.nvim_create_autocmd("Signal", {
+          pattern = "SIGUSR1",
+          callback = function()
+            set_theme()
+          end,
+        })
+
+        -- Initial theme setup
+        set_theme()
+      end,
     },
     {
       "nvim-lualine/lualine.nvim",
@@ -15,13 +44,7 @@ require("lazy").setup({
     {
       "LazyVim/LazyVim",
       import = "lazyvim.plugins",
-      opts = {
-        colorscheme = function()
-          require("onenord").setup({
-            theme = "dark",
-          })
-        end,
-      },
+      opts = {},
     },
     { import = "lazyvim.plugins.extras.ai.copilot" },
     { import = "lazyvim.plugins.extras.dap.core" },
@@ -107,6 +130,14 @@ require("lazy").setup({
             vim.notify("Neovim configuration reloaded!", vim.log.levels.INFO)
           end,
           desc = "Reload vim config",
+        },
+        {
+          "<leader>ut", -- 'u' for ui, 't' for toggle
+          function()
+            -- Toggle between light and dark
+            vim.o.background = vim.o.background == "dark" and "light" or "dark"
+          end,
+          desc = "Toggle theme light/dark",
         },
       },
     },
