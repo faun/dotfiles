@@ -143,64 +143,6 @@ require("lazy").setup({
       },
     },
     {
-      "nvim-telescope/telescope.nvim",
-      keys = {
-        {
-          "<C-P>",
-          function()
-            require("telescope.builtin").find_files({ hidden = true })
-          end,
-          desc = "Find Files",
-        },
-      },
-    },
-    {
-      "faun/jfind.nvim",
-      enabled = true,
-      branch = "2.0",
-      opts = {
-        exclude = {
-          ".git",
-          ".idea",
-          ".vscode",
-          ".sass-cache",
-          ".class",
-          "__pycache__",
-          "node_modules",
-          "target",
-          "build",
-          "tmp",
-          "assets",
-          "dist",
-          "public",
-          "*.iml",
-          "*.meta",
-        },
-      },
-      keys = {
-        {
-          "<C-f>",
-          function()
-            local jfind = require("jfind")
-
-            jfind.findFile({
-              preview = false,
-            })
-          end,
-        },
-        {
-          "<C-p>",
-          function()
-            local jfind = require("jfind")
-
-            jfind.findFile({
-              preview = true,
-            })
-          end,
-        },
-      },
-    },
-    {
       "echasnovski/mini.surround",
       opts = {
         mappings = {
