@@ -7,22 +7,22 @@ cd "$(dirname "$0")" || exit 1
 DIR="$PWD"
 
 if [[ -n $DEBUG ]]; then
-	set -x
+  set -x
 fi
 
 for file in "${DIR:?}"/install/*; do
-	if [[ -x "$file" ]]; then
-		echo "Running $(basename "$file")"
-	fi
+  if [[ -x "$file" ]]; then
+    echo "Running $(basename "$file")"
+  fi
 done
 
 for file in "${DIR:?}"/install/*; do
-	if [[ -x "$file" ]]; then
-		"$file"
-		if [[ $? != 0 ]]; then
-			echo "There was a problem running $file"
-		fi
-	fi
+  if [[ -x "$file" ]]; then
+    "$file"
+    if [[ $? != 0 ]]; then
+      echo "There was a problem running $file"
+    fi
+  fi
 done
 
 echo "Installing spelling dictionaries"
@@ -34,9 +34,9 @@ nvim -u .nvimtest +q
 # -----------------------------------------------------------------------------
 
 if [[ -z $SKIP_HEALTH_CHECK ]]; then
-	nvim +CheckHealth
-	echo export SKIP_HEALTH_CHECK=true >>~/.local.sh
-	export SKIP_HEALTH_CHECK=true
+  nvim +CheckHealth
+  echo export SKIP_HEALTH_CHECK=true >>~/.local.sh
+  export SKIP_HEALTH_CHECK=true
 fi
 
 echo "Done."
