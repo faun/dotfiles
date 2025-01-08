@@ -6,6 +6,7 @@ DIR="$PWD"
 REPOS_TO_CLONE=(
   ahmetb/kubectx
   alacritty/alacritty-theme
+  dandavison/delta
   jonmosco/kube-tmux
   rupa/z
   tmux-plugins/tpm
