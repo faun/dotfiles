@@ -195,7 +195,9 @@ return {
   },
   {
     "faun/jfind.nvim",
-    enabled = true,
+    enabled = function()
+      return vim.fn.executable("jfind") == 1
+    end,
     branch = "2.0",
     opts = {
       exclude = {
