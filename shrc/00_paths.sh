@@ -44,8 +44,17 @@ PATH="$HOME/bin:$PATH"
 if [[ -d /usr/local/bin ]]; then
   PATH="/usr/local/bin:$PATH"
 fi
+
 if [[ -d /usr/local/sbin ]]; then
   PATH="/usr/local/sbin:$PATH"
+fi
+
+if [[ -d "$HOME/.local/bin" ]]; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [[ -d "$HOME/.local/share/mise/shims" ]]; then
+  PATH="$HOME/.local/share/mise/shims:$PATH"
 fi
 
 export PATH
