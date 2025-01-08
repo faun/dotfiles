@@ -84,6 +84,7 @@ return {
       "b0o/SchemaStore.nvim",
       "nanotee/sqls.nvim",
       "towolf/vim-helm",
+      "hrsh7th/cmp-nvim-lsp",
     },
     opts = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
