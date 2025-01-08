@@ -26,8 +26,6 @@ done
 
 alias d="z dotfiles && t"
 
-[[ -f $HOME/.iterm2_shell_integration.zsh ]] && source $HOME/.iterm2_shell_integration.zsh
-
 if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
   zstyle ':completion:*:*:kubectl:*' list-grouped false
