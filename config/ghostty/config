@@ -1,0 +1,8 @@
+
+font-family = "Inconsolata Nerd Font Mono"
+
+font-size = 20
+
+font-thicken = true
+
+theme = light:nord-light,dark:nord
