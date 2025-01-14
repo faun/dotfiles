@@ -468,33 +468,6 @@ return {
         capabilities = capabilities,
       })
 
-      -- Helper function to find executable with fallback
-      local function get_binstub_with_fallback(local_bin, fallback_path, args)
-        -- Ensure args is a table, default to empty if not provided
-        args = args or {}
-
-        -- Check if local binary exists in the current directory
-        local local_path = vim.fn.getcwd() .. "/bin/" .. local_bin
-        local bin_exists = vim.fn.filereadable(local_path) == 1
-
-        -- Base command depending on which binary exists
-        local base_cmd
-        if bin_exists then
-          base_cmd = "bin/" .. local_bin
-        else
-          base_cmd = fallback_path
-        end
-
-        -- Construct final command array
-        local cmd = { vim.fn.expand(base_cmd) }
-        -- Add any additional arguments
-        for _, arg in ipairs(args) do
-          table.insert(cmd, arg)
-        end
-
-        return cmd
-      end
-
       local function has_rubocop_config()
         -- Check for rubocop configuration file
         local has_rubocop_config_file = vim.fn.glob(".rubocop.*") ~= ""
@@ -519,11 +492,13 @@ return {
           settings = {
             rubocop = {
               mason = false,
-              cmd = get_binstub_with_fallback(
-                "rubocop", -- use ./bin/rubocop if it exists
-                "$HOME/.local/share/mise/shims/rubocop", -- fallback to mise rubocop shim
-                { "--lsp" } -- additional arguments
-              ),
+              cmd = {
+                "mise",
+                "x",
+                "--",
+                "rubocop",
+                "--lsp",
+              },
             },
           },
         })
@@ -542,10 +517,12 @@ return {
         settings = {
           ruby_lsp = {
             mason = false,
-            cmd = get_binstub_with_fallback(
-              "ruby-lsp", -- use ./bin/ruby-lsp if it exists
-              "$HOME/.local/share/mise/shims/ruby-lsp" -- fallback to mise ruby-lsp shim
-            ),
+            cmd = {
+              "mise",
+              "x",
+              "--",
+              "ruby-lsp",
+            },
           },
         },
       })
@@ -571,11 +548,16 @@ return {
             "rabl",
           },
           capabilities = capabilities,
-          cmd = get_binstub_with_fallback(
-            "srb", -- use ./bin/srb if it exists
-            "$HOME/.local/share/mise/shims/srb", -- fallback to mise srb shim
-            { "tc", "--lsp", "--cache-dir", "tmp/sorbet-cache" } -- additional arguments
-          ),
+          cmd = {
+            "mise",
+            "x",
+            "--",
+            "srb",
+            "tc",
+            "--lsp",
+            "--cache-dir",
+            "tmp/sorbet-cache",
+          },
           root_dir = require("lspconfig.util").root_pattern("sorbet/config"),
         })
       end
