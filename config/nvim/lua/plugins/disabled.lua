@@ -15,4 +15,8 @@ return {
     "folke/flash.nvim",
     enabled = false,
   },
+  {
+    "folke/neodev.nvim",
+    enabled = false,
+  },
 }
