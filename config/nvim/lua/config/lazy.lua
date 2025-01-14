@@ -47,7 +47,6 @@ require("lazy").setup({
       opts = {},
     },
     { import = "lazyvim.plugins.extras.ai.copilot" },
-    { import = "lazyvim.plugins.extras.coding.nvim-cmp" },
     { import = "lazyvim.plugins.extras.dap.core" },
     { import = "lazyvim.plugins.extras.dap.nlua" },
     { import = "lazyvim.plugins.extras.lang.go" },
@@ -303,15 +302,7 @@ require("lazy").setup({
         { "tpope/vim-dadbod", lazy = true },
         { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
       },
-      opts = {
-        db_competion = function()
-          require("cmp").setup.buffer({
-            sources = {
-              { name = "vim-dadbod-completion" },
-            },
-          })
-        end,
-      },
+      opts = {},
       config = function(_, opts)
         vim.g.db_ui_save_location = vim.fn.stdpath("config") .. require("plenary.path").path.sep .. "db_ui"
 

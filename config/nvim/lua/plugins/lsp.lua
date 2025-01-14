@@ -11,16 +11,6 @@ return {
     },
   },
   { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-  { -- optional completion source for require statements and module annotations
-    "hrsh7th/nvim-cmp",
-    opts = function(_, opts)
-      opts.sources = opts.sources or {}
-      table.insert(opts.sources, {
-        name = "lazydev",
-        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-      })
-    end,
-  },
   { "folke/neodev.nvim", enabled = false }, -- make sure to uninstall or disable neodev.nvim
   { "folke/neoconf.nvim", cmd = "Neoconf", config = false },
   {
@@ -84,7 +74,6 @@ return {
       "b0o/SchemaStore.nvim",
       "nanotee/sqls.nvim",
       "towolf/vim-helm",
-      "hrsh7th/cmp-nvim-lsp",
     },
     opts = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
@@ -172,11 +161,7 @@ return {
     end,
     config = function()
       local lspconfig = require("lspconfig")
-      local capabilities = vim.tbl_deep_extend(
-        "force",
-        vim.lsp.protocol.make_client_capabilities(),
-        require("cmp_nvim_lsp").default_capabilities()
-      )
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
       --Enable (broadcasting) snippet capability for completion
@@ -708,137 +693,6 @@ return {
         },
         capabilities = capabilities,
       })
-    end,
-  },
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "neovim/nvim-lspconfig",
-      "ray-x/cmp-treesitter",
-      "onsails/lspkind.nvim",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-buffer",
-      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
-      {
-        "L3MON4D3/LuaSnip",
-        version = "v2.*",
-        build = "make install_jsregexp",
-      },
-      {
-        "saadparwaiz1/cmp_luasnip",
-        dependencies = "L3MON4D3/LuaSnip",
-      },
-      {
-        "zbirenbaum/copilot-cmp",
-        dependencies = "copilot.lua",
-        opts = {},
-        init = function(_, opts)
-          require("copilot").setup({
-            suggestion = { enabled = false },
-            panel = { enabled = false },
-          })
-
-          local copilot_cmp = require("copilot_cmp")
-          copilot_cmp.setup(opts)
-          -- attach cmp source whenever copilot attaches
-          -- fixes lazy-loading issues with the copilot cmp source
-          LazyVim.lsp.on_attach(function(client)
-            if client.name == "copilot" then
-              copilot_cmp._on_insert_enter({})
-            end
-          end)
-        end,
-      },
-    },
-    init = function()
-      local has_words_before = function()
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-      end
-
-      local cmp = require("cmp")
-      cmp.setup({
-        mapping = {
-          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif has_words_before() then
-              cmp.complete()
-            else
-              fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function()
-            if cmp.visible() then
-              cmp.select_prev_item()
-            end
-          end, { "i", "s" }),
-        },
-        formatting = {
-          format = function(entry, vim_item)
-            vim_item.menu = ({
-              nvim_lsp = "[LSP]",
-
-              buffer = "[Buffer]",
-              copilot = "[Copilot]",
-              luasnip = "[Snippet]",
-              tags = "[Tag]",
-              path = "[Path]",
-              ["vim-dadbod-completion"] = "[DB]",
-            })[entry.source.name]
-            return vim_item
-          end,
-        },
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "copilot" },
-          { name = "luasnip" },
-          { name = "treesitter", max_item_count = 5 },
-          { name = "buffer", max_item_count = 5 },
-          { name = "emoji" },
-          { name = "nvim_lua" },
-          { name = "path" },
-          { name = "vim-dadbod-completion" },
-        }),
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end,
-        },
-        window = {
-          -- documentation = cmp.config.window.bordered(),
-          completion = cmp.config.window.bordered(),
-        },
-        sorting = {
-          priority_weight = 2,
-          comparators = {
-            cmp.config.compare.exact,
-            require("copilot_cmp.comparators").prioritize,
-
-            -- Below is the default comparator list and order for nvim-cmp
-            cmp.config.compare.offset,
-            -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-            cmp.config.compare.score,
-            cmp.config.compare.recently_used,
-            cmp.config.compare.locality,
-            cmp.config.compare.kind,
-            cmp.config.compare.sort_text,
-            cmp.config.compare.length,
-            cmp.config.compare.order,
-          },
-        },
-      })
-
-      local lspkind = require("lspkind")
-      lspkind.init({
-        mode = "symbol_text",
-        symbol_map = {
-          Copilot = "",
-        },
-      })
-      vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
     end,
   },
 }
