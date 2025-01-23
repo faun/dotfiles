@@ -67,4 +67,5 @@ node_modules/
 .exrc
 .local.lua
 /.pscale.yml
+.terraform.lock.hcl
 # vim: set ft=gitconfig ts=2 sw=2 et:
