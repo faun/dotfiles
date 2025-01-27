@@ -48,6 +48,9 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
+-- Don't fix newline end of file for existing files
+vim.opt.fixendofline = false
+
 -- Copy the previous indentation on autoindenting
 vim.opt.copyindent = true
 
