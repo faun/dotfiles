@@ -1,43 +1,37 @@
 # Add paths in order of priority
 fpath=(
+  "$HOME/.zsh/functions"
   "$HOME/.zsh/functions/completions"
-  "/usr/share/zsh/$ZSH_VERSION/functions"
   "$HOME/.zfunc"
   $fpath
 )
 
-# Add Homebrew paths if exists
+# Add "/usr/share/zsh/$ZSH_VERSION/functions" to fpath if it exists and
+# has the right permissions
+if [[ -d "/usr/share/zsh/$ZSH_VERSION/functions" ]]; then
+  if compaudit "/usr/share/zsh/$ZSH_VERSION/functions" >/dev/null 2>&1; then
+    fpath=(
+      "/usr/share/zsh/$ZSH_VERSION/functions"
+      $fpath
+    )
+  fi
+fi
+
+# Add Homebrew paths if they exist and have the right permissions
 if type brew &>/dev/null; then
   HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-$(brew --prefix)}"
-  fpath=(
-    "$HOMEBREW_PREFIX/share/zsh/site-functions"
-    "$HOMEBREW_PREFIX/share/zsh-completions"
-    $fpath
-  )
+  if [[ -d "$HOMEBREW_PREFIX/share/zsh-completions" ]]; then
+    if compaudit "$HOMEBREW_PREFIX/share/zsh-completions" >/dev/null 2>&1; then
+      fpath=(
+        "$HOMEBREW_PREFIX/share/zsh-completions"
+        $fpath
+      )
+    fi
+  fi
 fi
 
 autoload -Uz compinit
 compinit
-
-autoload -U +X bashcompinit && bashcompinit
-
-# matches case insensitive for lowercase
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-
-# ignore completions that begin with an '_'
-zstyle ':completion:*:*:-command-:*:*' ignored-patterns '_*'
-
-# pasting with tabs doesn't perform completion
-zstyle ':completion:*' insert-tab pending
-
-#Fuzzy matching
-zstyle ':completion:*' completer _complete _match _approximate
-zstyle ':completion:*:match:*' original only
-zstyle ':completion:*:approximate:*' max-errors 1 numeric
-
-#Use cache for completion
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.zsh_cache
 
 # git
 compdef _git got=git
@@ -68,3 +62,31 @@ compdef _git gdc=git-diff
 
 # git branch
 compdef _git gb=git-branch
+
+autoload -U +X bashcompinit && bashcompinit
+
+# matches case insensitive for lowercase
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# ignore completions that begin with an '_'
+zstyle ':completion:*:*:-command-:*:*' ignored-patterns '_*'
+
+# pasting with tabs doesn't perform completion
+zstyle ':completion:*' insert-tab pending
+
+#Fuzzy matching
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+
+#Use cache for completion
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh_cache
+
+zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
+  'local-directories named-directories'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format %d
+
+zstyle ':completion:*:descriptions' format %B%d%b        # bold
+zstyle ':completion:*:descriptions' format %F{green}%d%f # green foreground

@@ -7,28 +7,11 @@ then
     export PS1='%3~$(git_info_for_prompt)%# '
   fi
 
-  fpath=(~/.zsh/functions $fpath)
-  autoload -U ~/.zsh/functions/*(:t)
-
-  if command -v brew 1>/dev/null 2>&1
-  then
-    homebrew_zsh_completion=$(brew --prefix)/share/zsh/functions
-    fpath=($homebrew_zsh_completion $fpath)
-  fi
-
   HISTFILE=~/.zsh_history
   HISTSIZE=1000000
   SAVEHIST=$HISTSIZE
 
   setopt histignorealldups sharehistory
-
-  zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
-      'local-directories named-directories'
-  zstyle ':completion:*' group-name ''
-  zstyle ':completion:*:descriptions' format %d
-
-  zstyle ':completion:*:descriptions' format %B%d%b        # bold
-  zstyle ':completion:*:descriptions' format %F{green}%d%f # green foreground
 
   setopt NO_BG_NICE # don't nice background tasks
   setopt NO_HUP
