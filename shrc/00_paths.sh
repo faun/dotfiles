@@ -8,17 +8,21 @@ export GOPATH
 GOBIN="${GOBIN:-$HOME/bin}"
 export GOBIN
 
-if command -v brew >/dev/null 2>&1; then
-  HOMEBREW_PREFIX="$(brew --prefix)"
-fi
+USlocalE_HOMEBREW="${USE_HOMEBREW:-true}"
+if [[ "$USE_HOMEBREW" == "true" ]]; then
 
-HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-"/opt/homebrew"}"
-export HOMEBREW_PREFIX
+  if command -v brew >/dev/null 2>&1; then
+    HOMEBREW_PREFIX="$(brew --prefix)"
+  fi
 
-if [[ -s "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-elif [[ -s "${HOMEBREW_PREFIX:?}/bin/brew" ]]; then
-  eval "$("${HOMEBREW_PREFIX:?}"/bin/brew shellenv)"
+  HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-"/opt/homebrew"}"
+  export HOMEBREW_PREFIX
+
+  if [[ -s "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  elif [[ -s "${HOMEBREW_PREFIX:?}/bin/brew" ]]; then
+    eval "$("${HOMEBREW_PREFIX:?}"/bin/brew shellenv)"
+  fi
 fi
 
 if [[ -d "$HOME/.yarn/bin" ]]; then
