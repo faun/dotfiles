@@ -22,10 +22,11 @@ return {
   {
     "saghen/blink.cmp",
     dependencies = {
-      "giuxtaposition/blink-cmp-copilot",
-      "rafamadriz/friendly-snippets",
+      { "giuxtaposition/blink-cmp-copilot" },
+      { "rafamadriz/friendly-snippets" },
+      { "dmitmel/cmp-digraphs" },
       { "saghen/blink.compat", opts = { enable_events = true } },
-      "mini.icons",
+      { "mini.icons" },
     },
 
     -- use a release tag to download pre-built binaries
