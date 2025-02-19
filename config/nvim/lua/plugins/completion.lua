@@ -31,6 +31,7 @@ return {
 
     -- use a release tag to download pre-built binaries
     version = "*",
+    lazy = true,
 
     init = function()
       vim.api.nvim_create_autocmd("User", {
