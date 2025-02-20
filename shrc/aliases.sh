@@ -10,7 +10,6 @@ alias lla='ls -lah'
 
 alias ..='cd ..'
 alias ...='cd .. ; cd ..'
-alias q='exit'
 
 # tmux
 alias tat='tmux_attach'
