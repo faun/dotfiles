@@ -8,3 +8,7 @@ vim.g.lazygit_config = false
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.cmd([[ set foldenable]])
+
+-- Load blink.nvim from main branch when set to true.
+-- You need to have a working rust toolchain to build the plugin in this case.
+vim.g.lazyvim_blink_main = true
