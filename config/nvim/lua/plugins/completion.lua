@@ -66,7 +66,20 @@ return {
       },
 
       completion = {
-        accept = { auto_brackets = { enabled = true } },
+        list = {
+          selection = {
+            preselect = true,
+            auto_insert = false,
+          },
+        },
+        ghost_text = {
+          enabled = true,
+        },
+        accept = {
+          auto_brackets = {
+            enabled = true,
+          },
+        },
         menu = {
           draw = {
             treesitter = { "lsp" },
@@ -94,12 +107,12 @@ return {
           },
         },
         documentation = {
-          auto_show = true,
+          auto_show = false,
           auto_show_delay_ms = 800,
           treesitter_highlighting = true,
         },
       },
-      signature = { enabled = true },
+      signature = { enabled = false },
 
       -- 'default' for mappings similar to built-in completion
       -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
