@@ -47,7 +47,7 @@ return {
         "solargraph",
         "sqlls",
         "stylua",
-        "tsserver",
+        "ts_ls",
       },
       automatic_installation = { exclude = {} },
     },
@@ -149,7 +149,7 @@ return {
         ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
         setup = {
           -- example to setup with typescript.nvim
-          -- tsserver = function(_, opts)
+          -- ts_ls = function(_, opts)
           --   require("typescript").setup({ server = opts })
           --   return true
           -- end,
@@ -354,9 +354,9 @@ return {
         capabilities = capabilities,
       })
 
-      lspconfig.tsserver.setup({
+      lspconfig.ts_ls.setup({
         on_attach = function(client, bufnr)
-          -- Disable tsserver formatting if you prefer to use prettier
+          -- Disable ts_ls formatting if you prefer to use prettier
           client.server_capabilities.documentFormattingProvider = false
           client.server_capabilities.documentRangeFormattingProvider = false
 
