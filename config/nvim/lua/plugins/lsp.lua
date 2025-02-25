@@ -161,8 +161,11 @@ return {
     end,
     config = function()
       local lspconfig = require("lspconfig")
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
+
+      local default_capabilities = vim.lsp.protocol.make_client_capabilities()
+      local lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
+
+      local capabilities = vim.tbl_extend("force", default_capabilities, lsp_capabilities)
 
       --Enable (broadcasting) snippet capability for completion
       capabilities.textDocument.completion.completionItem.snippetSupport = true
