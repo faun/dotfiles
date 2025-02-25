@@ -54,8 +54,40 @@ return {
     ---@type blink.cmp.Config
     opts = {
       appearance = {
-        -- Use kinds from 'mini.icons' if you want to use the same icons as in the menu
-        kind_icons = LazyVim.config.icons.kinds,
+        -- Blink does not expose its default kind icons so you must copy them all (or set your custom ones) and add Copilot
+        kind_icons = {
+          Copilot = "",
+          Text = "󰉿",
+          Method = "󰊕",
+          Function = "󰊕",
+          Constructor = "󰒓",
+
+          Field = "󰜢",
+          Variable = "󰆦",
+          Property = "󰖷",
+
+          Class = "󱡠",
+          Interface = "󱡠",
+          Struct = "󱡠",
+          Module = "󰅩",
+
+          Unit = "󰪚",
+          Value = "󰦨",
+          Enum = "󰦨",
+          EnumMember = "󰦨",
+
+          Keyword = "󰻾",
+          Constant = "󰏿",
+
+          Snippet = "󱄽",
+          Color = "󰏘",
+          File = "󰈔",
+          Reference = "󰬲",
+          Folder = "󰉋",
+          Event = "󱐋",
+          Operator = "󰪚",
+          TypeParameter = "󰬛",
+        },
         -- Sets the fallback highlight groups to nvim-cmp's highlight groups
         -- Useful for when your theme doesn't support blink.cmp
         -- Will be removed in a future release
@@ -175,7 +207,7 @@ return {
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { "lazydev", "lsp", "path", "snippets", "buffer", "copilot" },
+        default = { "lazydev", "lsp", "path", "snippets", "buffer", "copilot", "digraphs" },
         providers = {
           lazydev = {
             name = "LazyDev",
@@ -211,6 +243,14 @@ return {
               end
               return items
             end,
+          },
+          digraphs = {
+            name = "digraphs",
+            module = "blink.compat.source",
+
+            opts = {
+              cache_digraphs_on_start = true,
+            },
           },
         },
       },
