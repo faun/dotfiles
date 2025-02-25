@@ -511,22 +511,27 @@ return {
       -- Configure ruby_lsp
       lspconfig.ruby_lsp.setup({
         on_attach = on_attach,
-        filetypes = {
-          "ruby",
-          "rake",
-          "rbi",
-          "rabl",
-        },
         capabilities = capabilities,
+        cmd = {
+          "mise",
+          "x",
+          "--",
+          "ruby-lsp",
+        },
         settings = {
           ruby_lsp = {
             mason = false,
-            cmd = {
-              "mise",
-              "x",
-              "--",
-              "ruby-lsp",
-            },
+          },
+        },
+        init_options = {
+          formatter = "auto",
+          enabledfeatures = {
+            "codeactions",
+            "diagnostics",
+            "documenthighlights",
+            "documentsymbols",
+            "formatting",
+            "inlayhint",
           },
         },
       })
