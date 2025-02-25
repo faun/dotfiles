@@ -215,24 +215,22 @@ return {
             score_offset = 100,
           },
           lsp = {
+            async = true,
             min_keyword_length = 2,
-            score_offset = 0,
           },
           path = {
             min_keyword_length = 0,
           },
-          snippets = {
-            min_keyword_length = 2,
-          },
           buffer = {
-            min_keyword_length = 5,
+            min_keyword_length = 2,
             max_items = 5,
+            score_offset = 100,
           },
           copilot = {
             name = "copilot",
             module = "blink-cmp-copilot",
             kind = "Copilot",
-            score_offset = 100,
+            score_offset = 99,
             async = true,
             transform_items = function(_, items)
               local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
