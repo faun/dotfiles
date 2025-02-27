@@ -22,7 +22,7 @@ return {
           "golang",
           -- Rails mappings per filetype
           {
-            pattern = "/app/controllers/(.*)_controller.rb",
+            pattern = "app/controllers/(.*)_controller.rb$",
             target = rails_alternative_targets,
           },
           {
