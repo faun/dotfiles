@@ -3,19 +3,7 @@
 USE_GVM="${USE_GVM:-false}"
 if [[ "$USE_GVM" != "false" ]]; then
   GVM_HOME="${GVM_HOME:-$HOME/.gvm}"
-  [[ -s "${GVM_HOME:?}/scripts/gvm" ]] && source "${GVM_HOME:?}/scripts/gvm"
-
-  GOROOT="${GOROOT:-${HOME:?}/src}"
-  export GOROOT
-
-  GOPATH="${HOME:?}/go"
-  export GOPATH
-
-  GOBIN="${GOPATH:?}/bin"
-  export GOBIN
-
-  PATH="${PATH}:${GOBIN}"
-  export PATH
-
-  GOPROXY="${GOPROXY:-https://proxy.golang.org}"
+  if [[ -d "${GVM_HOME}" ]]; then
+    [[ -s "${GVM_HOME:?}/scripts/gvm" ]] && source "${GVM_HOME:?}/scripts/gvm"
+  fi
 fi
