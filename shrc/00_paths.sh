@@ -41,8 +41,11 @@ if [[ -d "$GOBIN" ]]; then
   PATH="$PATH:$GOBIN"
 fi
 
-PATH=".git/safe/../../bin:$PATH"
-PATH=".git/safe/../../node_modules/.bin:$PATH"
+if [[ "$USE_GIT_SAFEPATH" == "true" ]]; then
+  PATH=".git/safe/../../bin:$PATH"
+  PATH=".git/safe/../../node_modules/.bin:$PATH"
+fi
+
 PATH="$HOME/bin:$PATH"
 
 if [[ -d /usr/local/bin ]]; then
