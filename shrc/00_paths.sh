@@ -8,7 +8,7 @@ export GOPATH
 GOBIN="${GOBIN:-$HOME/bin}"
 export GOBIN
 
-USlocalE_HOMEBREW="${USE_HOMEBREW:-true}"
+USE_HOMEBREW="${USE_HOMEBREW:-true}"
 if [[ "$USE_HOMEBREW" == "true" ]]; then
 
   if command -v brew >/dev/null 2>&1; then
