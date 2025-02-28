@@ -4,6 +4,9 @@ vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
 -- Set terminal title bar
 vim.opt.title = true
 
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3
+
 -- Use hidden buffers
 vim.opt.hidden = true
 
