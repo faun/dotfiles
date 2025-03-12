@@ -86,9 +86,9 @@ require("lazy").setup({
           hashfile = vim.fn.stdpath("data") .. "/config-local",
 
           autocommands_create = true, -- Create autocommands (VimEnter, DirectoryChanged)
-          commands_create = true, -- Create commands (ConfigLocalSource, ConfigLocalEdit, ConfigLocalTrust, ConfigLocalIgnore)
-          silent = false, -- Disable plugin messages (Config loaded/ignored)
-          lookup_parents = false, -- Lookup config files in parent directories
+          commands_create = true,     -- Create commands (ConfigLocalSource, ConfigLocalEdit, ConfigLocalTrust, ConfigLocalIgnore)
+          silent = false,             -- Disable plugin messages (Config loaded/ignored)
+          lookup_parents = false,     -- Lookup config files in parent directories
         })
       end,
     },
@@ -145,16 +145,16 @@ require("lazy").setup({
       "echasnovski/mini.surround",
       opts = {
         mappings = {
-          add = "sa", -- Add surrounding in Normal and Visual modes
-          delete = "sd", -- Delete surrounding
-          find = "sf", -- Find surrounding (to the right)
-          find_left = "sF", -- Find surrounding (to the left)
-          highlight = "sh", -- Highlight surrounding
-          replace = "cs", -- Replace surrounding
+          add = "sa",            -- Add surrounding in Normal and Visual modes
+          delete = "sd",         -- Delete surrounding
+          find = "sf",           -- Find surrounding (to the right)
+          find_left = "sF",      -- Find surrounding (to the left)
+          highlight = "sh",      -- Highlight surrounding
+          replace = "cs",        -- Replace surrounding
           update_n_lines = "sn", -- Update `n_lines`
 
-          suffix_last = "l", -- Suffix to search with "prev" method
-          suffix_next = "n", -- Suffix to search with "next" method
+          suffix_last = "l",     -- Suffix to search with "prev" method
+          suffix_next = "n",     -- Suffix to search with "next" method
         },
       },
       version = "*",
@@ -278,12 +278,12 @@ require("lazy").setup({
       },
       keys = {
         { "<leader><CR>", "<cmd>TestNearest<cr>", desc = "Test nearest" },
-        { "<leader>tn", "<cmd>TestNearest<cr>", desc = "Test file" },
-        { "<leader>\\", "<cmd>TestFile<cr>", desc = "Test file" },
-        { "<leader>tf", "<cmd>TestFile<cr>", desc = "Test file" },
-        { "<leader>ts", "<cmd>TestSuite<CR>", desc = "Test suite" },
-        { "<leader>tl", "<cmd>TestLast<CR>", desc = "Test last" },
-        { "<leader>tv", "<cmd>TestVisit<CR>", desc = "Test visit" },
+        { "<leader>tn",   "<cmd>TestNearest<cr>", desc = "Test file" },
+        { "<leader>\\",   "<cmd>TestFile<cr>",    desc = "Test file" },
+        { "<leader>tf",   "<cmd>TestFile<cr>",    desc = "Test file" },
+        { "<leader>ts",   "<cmd>TestSuite<CR>",   desc = "Test suite" },
+        { "<leader>tl",   "<cmd>TestLast<CR>",    desc = "Test last" },
+        { "<leader>tv",   "<cmd>TestVisit<CR>",   desc = "Test visit" },
       },
       init = function()
         if os.getenv("TMUX") ~= "" then
@@ -299,7 +299,7 @@ require("lazy").setup({
     {
       "kristijanhusak/vim-dadbod-ui",
       dependencies = {
-        { "tpope/vim-dadbod", lazy = true },
+        { "tpope/vim-dadbod",                     lazy = true },
         { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
       },
       opts = {},
@@ -327,9 +327,9 @@ require("lazy").setup({
         })
       end,
       keys = {
-        { "<leader>Dt", "<cmd>DBUIToggle<cr>", desc = "Toggle UI" },
-        { "<leader>Df", "<cmd>DBUIFindBuffer<cr>", desc = "Find Buffer" },
-        { "<leader>Dr", "<cmd>DBUIRenameBuffer<cr>", desc = "Rename Buffer" },
+        { "<leader>Dt", "<cmd>DBUIToggle<cr>",        desc = "Toggle UI" },
+        { "<leader>Df", "<cmd>DBUIFindBuffer<cr>",    desc = "Find Buffer" },
+        { "<leader>Dr", "<cmd>DBUIRenameBuffer<cr>",  desc = "Rename Buffer" },
         { "<leader>Dq", "<cmd>DBUILastQueryInfo<cr>", desc = "Last Query Info" },
       },
     },
