@@ -69,4 +69,5 @@ node_modules/
 /.pscale.yml
 .terraform.lock.hcl
 .lazy.lua
+mise.toml
 # vim: set ft=gitconfig ts=2 sw=2 et:
