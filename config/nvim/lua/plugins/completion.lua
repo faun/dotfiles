@@ -18,6 +18,12 @@ return {
     lazy = true,
     -- make sure to set opts so that lazy.nvim calls blink.compat's setup
     opts = {},
+    config = function()
+      require("cmp").ConfirmBehavior = {
+        Insert = "insert",
+        Replace = "replace",
+      }
+    end,
   },
   {
     "saghen/blink.cmp",
@@ -33,71 +39,14 @@ return {
     version = "*",
     lazy = true,
 
-    init = function()
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "BlinkCmpMenuOpen",
-        callback = function()
-          require("copilot.suggestion").dismiss()
-          vim.b.copilot_suggestion_hidden = true
-        end,
-      })
-
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "BlinkCmpMenuClose",
-        callback = function()
-          vim.b.copilot_suggestion_hidden = false
-        end,
-      })
-    end,
-
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
-    opts = {
-      appearance = {
-        -- Blink does not expose its default kind icons so you must copy them all (or set your custom ones) and add Copilot
-        kind_icons = {
-          Copilot = "",
-          Text = "󰉿",
-          Method = "󰊕",
-          Function = "󰊕",
-          Constructor = "󰒓",
-
-          Field = "󰜢",
-          Variable = "󰆦",
-          Property = "󰖷",
-
-          Class = "󱡠",
-          Interface = "󱡠",
-          Struct = "󱡠",
-          Module = "󰅩",
-
-          Unit = "󰪚",
-          Value = "󰦨",
-          Enum = "󰦨",
-          EnumMember = "󰦨",
-
-          Keyword = "󰻾",
-          Constant = "󰏿",
-
-          Snippet = "󱄽",
-          Color = "󰏘",
-          File = "󰈔",
-          Reference = "󰬲",
-          Folder = "󰉋",
-          Event = "󱐋",
-          Operator = "󰪚",
-          TypeParameter = "󰬛",
-        },
-        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-        -- Useful for when your theme doesn't support blink.cmp
-        -- Will be removed in a future release
+    opts = function(_, opts)
+      opts.appearance = {
         use_nvim_cmp_as_default = true,
-        -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-        -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = "mono",
-      },
+        kind_icons = vim.tbl_extend("force", opts.appearance.kind_icons or {}, LazyVim.config.icons.kinds),
+      }
 
-      completion = {
+      opts.completion = {
         list = {
           selection = {
             preselect = true,
@@ -115,25 +64,12 @@ return {
         menu = {
           draw = {
             treesitter = { "lsp" },
-            columns = { { "item_idx" }, { "kind_icon" }, { "label", "label_description", gap = 1 } },
             components = {
               item_idx = {
                 text = function(ctx)
                   return ctx.idx == 10 and "0" or ctx.idx >= 10 and " " or tostring(ctx.idx)
                 end,
-                highlight = "BlinkCmpItemIdx", -- optional, only if you want to change its color
-              },
-              kind_icon = {
-                ellipsis = false,
-                text = function(ctx)
-                  local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-                  return kind_icon
-                end,
-                -- Optionally, you may also use the highlights from mini.icons
-                highlight = function(ctx)
-                  local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
-                  return hl
-                end,
+                highlight = "BlinkCmpItemIdx",
               },
             },
           },
@@ -143,80 +79,36 @@ return {
           auto_show_delay_ms = 800,
           treesitter_highlighting = true,
         },
-      },
-      signature = { enabled = false },
-
-      -- 'default' for mappings similar to built-in completion
-      -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-      -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-      -- See the full "keymap" documentation for information on defining your own keymap.
-      keymap = {
+      }
+      opts.signature = { enabled = false }
+      opts.keymap = {
         preset = "enter",
-        ["<A-1>"] = {
-          function(cmp)
-            cmp.accept({ index = 1 })
-          end,
+      }
+      opts.sources = {
+        default = {
+          "lazydev",
+          "lsp",
+          "path",
+          "snippets",
+          "buffer",
+          "copilot",
+          "avante_commands",
+          "avante_mentions",
+          "avante_files",
         },
-        ["<A-2>"] = {
-          function(cmp)
-            cmp.accept({ index = 2 })
-          end,
+        per_filetype = {
+          codecompanion = { "codecompanion" },
         },
-        ["<A-3>"] = {
-          function(cmp)
-            cmp.accept({ index = 3 })
-          end,
-        },
-        ["<A-4>"] = {
-          function(cmp)
-            cmp.accept({ index = 4 })
-          end,
-        },
-        ["<A-5>"] = {
-          function(cmp)
-            cmp.accept({ index = 5 })
-          end,
-        },
-        ["<A-6>"] = {
-          function(cmp)
-            cmp.accept({ index = 6 })
-          end,
-        },
-        ["<A-7>"] = {
-          function(cmp)
-            cmp.accept({ index = 7 })
-          end,
-        },
-        ["<A-8>"] = {
-          function(cmp)
-            cmp.accept({ index = 8 })
-          end,
-        },
-        ["<A-9>"] = {
-          function(cmp)
-            cmp.accept({ index = 9 })
-          end,
-        },
-        ["<A-0>"] = {
-          function(cmp)
-            cmp.accept({ index = 10 })
-          end,
-        },
-      },
-
-      -- Default list of enabled providers defined so that you can extend it
-      -- elsewhere in your config, without redefining it, due to `opts_extend`
-      sources = {
-        default = { "lazydev", "lsp", "path", "snippets", "buffer", "copilot", "digraphs" },
         providers = {
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
-            score_offset = 100,
+            score_offset = 90,
           },
           lsp = {
             async = true,
             min_keyword_length = 2,
+            score_offset = 80,
           },
           path = {
             min_keyword_length = 0,
@@ -224,35 +116,36 @@ return {
           buffer = {
             min_keyword_length = 2,
             max_items = 5,
+            score_offset = 92,
+          },
+          avante_commands = {
+            name = "avante_commands",
+            module = "blink.compat.source",
+            score_offset = 90,
+            opts = {},
+          },
+          avante_files = {
+            name = "avante_commands",
+            module = "blink.compat.source",
             score_offset = 100,
+            opts = {},
+          },
+          avante_mentions = {
+            name = "avante_mentions",
+            module = "blink.compat.source",
+            score_offset = 1000,
+            opts = {},
           },
           copilot = {
             name = "copilot",
             module = "blink-cmp-copilot",
             kind = "Copilot",
-            score_offset = 99,
+            score_offset = 100,
             async = true,
-            transform_items = function(_, items)
-              local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-              local kind_idx = #CompletionItemKind + 1
-              CompletionItemKind[kind_idx] = "Copilot"
-              for _, item in ipairs(items) do
-                item.kind = kind_idx
-              end
-              return items
-            end,
-          },
-          digraphs = {
-            name = "digraphs",
-            module = "blink.compat.source",
-
-            opts = {
-              cache_digraphs_on_start = true,
-            },
           },
         },
-      },
-    },
+      }
+    end,
     opts_extend = { "sources.default" },
   },
 }
