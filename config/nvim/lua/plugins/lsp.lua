@@ -185,7 +185,7 @@ return {
           vim.diagnostic.enable()
           print("Diagnostics enabled")
         else
-          vim.diagnostic.disable()
+          vim.diagnostic.enable(false)
           print("Diagnostics disabled")
         end
       end
