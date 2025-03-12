@@ -26,6 +26,13 @@ return {
       "windwp/nvim-ts-autotag",
     },
     opts = {
+      endwise = {
+        enable = true,
+      },
+      indent = {
+        enable = true,
+        disable = { "yaml", "ruby" },
+      },
       autotag = {
         enable = true,
       },
