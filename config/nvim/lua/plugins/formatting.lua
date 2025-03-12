@@ -53,7 +53,6 @@ return {
         json = { "prettier" },
         lua = { "stylua" },
         markdown = { "prettier" },
-        ruby = { "ruby-lsp", "rubocop", "solargraph", "prettier" },
         scss = { "prettier", "stylelint" },
         sh = { "shfmt" },
         ts = { "prettier", "eslint" },

@@ -44,7 +44,6 @@ return {
         "lua_ls",
         "luarocks",
         "prettier",
-        "solargraph",
         "sqlls",
         "stylua",
         "ts_ls",
