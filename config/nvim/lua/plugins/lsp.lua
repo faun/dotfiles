@@ -140,6 +140,7 @@ return {
           formatting_options = nil,
           timeout_ms = nil,
         },
+
         -- LSP Server Settings
         ---@type lspconfig.options.servers
         servers = {
