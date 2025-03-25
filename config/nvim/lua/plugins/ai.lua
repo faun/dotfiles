@@ -241,16 +241,34 @@ local codecompanion_lazy_config = {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
-    "hrsh7th/nvim-cmp", -- Optional: For using slash commands and variables in the chat buffer
-    "nvim-telescope/telescope.nvim", -- Optional: For using slash commands
-    { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } }, -- Optional: For prettier markdown rendering
-    { "stevearc/dressing.nvim", opts = {} }, -- Optional: Improves `vim.ui.select`
+    "hrsh7th/nvim-cmp",
+    "echasnovski/mini.diff",
+    "nvim-telescope/telescope.nvim",
+    { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } },
+    { "stevearc/dressing.nvim", opts = {} },
+  },
+  keys = {
+    { "<leader>aa", "<cmd>CodeCompanionChat<CR>", mode = { "n", "v" }, desc = "[A]I [A]sk" },
+    { "<leader>at", "<cmd>CodeCompanionChat Toggle<CR>", mode = { "n", "v" }, desc = "[A]I [T]oggle" },
+    { "<leader>ae", "<cmd>CodeCompanionChat<CR>", mode = { "n", "v" }, desc = "[A]I [E]dit" },
+    { "<leader>am", "<cmd>CodeCompanionActions<CR>", mode = { "n", "v" }, desc = "[A]I [M]enu" },
+    { "<leader>ap", "<cmd>CodeCompanionChat Add<CR>", mode = { "v" }, desc = "[A]I [P]aste" },
   },
   config = function()
-    local strategy = function()
+    local chat_strategy = function()
       if ollama_base_url then
         return "ollama"
       elseif openai_api_key then
+        return "openai"
+      elseif anthropic_api_key then
+        return "anthropic"
+      else
+        return "copilot"
+      end
+    end
+
+    local inline_strategy = function()
+      if openai_api_key then
         return "openai"
       elseif anthropic_api_key then
         return "anthropic"
@@ -262,7 +280,7 @@ local codecompanion_lazy_config = {
 
       strategies = {
         chat = {
-          adapter = strategy(),
+          adapter = chat_strategy(),
           keymaps = {
             send = {
               modes = { n = "<C-s>", i = "<C-s>" },
@@ -273,7 +291,17 @@ local codecompanion_lazy_config = {
           },
         },
         inline = {
-          adapter = strategy(),
+          adapter = inline_strategy(),
+          keymaps = {
+            accept_change = {
+              modes = { n = "ga" },
+              description = "Accept the suggested change",
+            },
+            reject_change = {
+              modes = { n = "gr" },
+              description = "Reject the suggested change",
+            },
+          },
         },
       },
       adapters = {
@@ -302,6 +330,67 @@ local codecompanion_lazy_config = {
         copilot = function()
           return require("codecompanion.adapters").extend("copilot", {})
         end,
+      },
+      display = {
+        action_palette = {
+          width = 95,
+          height = 10,
+          prompt = "Prompt ", -- Prompt used for interactive LLM calls
+          provider = "default", -- default|telescope|mini_pick
+          opts = {
+            show_default_actions = true, -- Show the default actions in the action palette?
+            show_default_prompt_library = true, -- Show the default prompt library in the action palette?
+          },
+        },
+        diff = {
+          enabled = true,
+          close_chat_at = 240, -- Close an open chat buffer if the total columns of your display are less than...
+          layout = "vertical", -- vertical|horizontal split for default provider
+          opts = { "internal", "filler", "closeoff", "algorithm:patience", "followwrap", "linematch:120" },
+          provider = "mini_diff", -- default|mini_diff
+        },
+        chat = {
+          intro_message = "",
+          show_header_separator = false, -- Show header separators in the chat buffer? Set this to false if you're using an external markdown formatting plugin
+          separator = "─", -- The separator between the different messages in the chat buffer
+          show_references = true, -- Show references (from slash commands and variables) in the chat buffer?
+          show_settings = false, -- Show LLM settings at the top of the chat buffer?
+          show_token_count = true, -- Show the token count for each response?
+          start_in_insert_mode = true, -- Open the chat buffer in insert mode?
+          -- Options to customize the UI of the chat buffer
+          window = {
+            layout = "float", -- float|vertical|horizontal|buffer
+            position = "right", -- left|right|top|bottom (nil will default depending on vim.opt.plitright|vim.opt.splitbelow)
+            border = "single",
+            height = 0.8,
+            width = 0.45,
+            relative = "editor",
+            full_height = true, -- when set to false, vsplit will be used to open the chat buffer vs. botright/topleft vsplit
+            opts = {
+              breakindent = true,
+              cursorcolumn = false,
+              cursorline = false,
+              foldcolumn = "0",
+              linebreak = true,
+              list = false,
+              numberwidth = 1,
+              signcolumn = "no",
+              spell = false,
+              wrap = true,
+            },
+          },
+          slash_commands = {
+            ["file"] = {
+              -- Location to the slash command in CodeCompanion
+              callback = "strategies.chat.slash_commands.file",
+              description = "Select a file using Telescope",
+              opts = {
+                provider = "telescope", -- Other options include 'default', 'mini_pick', 'fzf_lua', snacks
+                contains_code = true,
+              },
+            },
+          },
+        },
       },
     })
   end,
