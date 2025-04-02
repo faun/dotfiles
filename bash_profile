@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 for file in "$HOME"/.shrc/*.sh; do
-	. "$file"
+  . "$file"
 done
 
 # Load in .bashrc
 if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+  . "$HOME/.bashrc"
 fi
 
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
@@ -26,13 +26,13 @@ shopt -s cdspell
 unset MAILCHECK
 # Turn on advanced bash completion if the file exists (get it here: http://www.caliban.org/bash/index.shtml#completion)
 if [ -f /etc/bash_completion ]; then
-	. /etc/bash_completion
+  . /etc/bash_completion
 fi
 
 # Disable flow control commands (keeps C-s from freezing everything)
 if [ -t 0 ] && [ -t 1 ]; then
-	stty start undef
-	stty stop undef
+  stty start undef
+  stty stop undef
 fi
 
 shopt -s cdable_vars # set the bash option so that no '$' is required when using the above facility
