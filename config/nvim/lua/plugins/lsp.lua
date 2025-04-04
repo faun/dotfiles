@@ -82,7 +82,11 @@ return {
       "towolf/vim-helm",
     },
     opts = function()
-      local keys = require("lazyvim.plugins.lsp.keymaps").get()
+      local lazy_keymaps = require("lazyvim.plugins.lsp.keymaps").get()
+      local custom_keymaps = {}
+      -- Combine existing keys with custom_keymaps
+      local keys = vim.tbl_extend("force", lazy_keymaps, custom_keymaps)
+
       return {
         -- https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.Opts
         ---@type vim.diagnostic.Opts
@@ -484,51 +488,64 @@ return {
         capabilities = capabilities,
       })
 
-      local function has_rubocop_config()
-        -- Check for rubocop configuration file
-        local has_rubocop_config_file = vim.fn.glob(".rubocop.*") ~= ""
-
-        -- Check for rubocop executable in bin directory
-        local has_rubocop_binary = vim.fn.glob("bin/rubocop") ~= ""
-
-        return has_rubocop_config_file or has_rubocop_binary
-      end
-
-      if has_rubocop_config() then
-        -- Configure rubocop
-        lspconfig.rubocop.setup({
-          on_attach = on_attach,
-          filetypes = {
-            "ruby",
-            "rake",
-            "rbi",
-            "rabl",
-          },
-          capabilities = capabilities,
-          settings = {
-            rubocop = {
-              mason = false,
-              cmd = {
-                "mise",
-                "x",
-                "--",
-                "rubocop",
-                "--stop-server",
-                ">/dev/null",
-                "2>&1",
-                ";",
-                "mise",
-                "x",
-                "rubocop",
-                "--lsp",
-              },
-            },
-          },
-        })
-      end
-
+      -- local function has_rubocop_config()
+      --   -- Check for rubocop configuration file
+      --   local has_rubocop_config_file = vim.fn.glob(".rubocop.*") ~= ""
+      --
+      --   -- Check for rubocop executable in bin directory
+      --   local has_rubocop_binary = vim.fn.glob("bin/rubocop") ~= ""
+      --
+      --   return has_rubocop_config_file or has_rubocop_binary
+      -- end
+      --
+      -- if has_rubocop_config() then
+      --   -- Configure rubocop
+      --   lspconfig.rubocop.setup({
+      --     on_attach = on_attach,
+      --     filetypes = {
+      --       "ruby",
+      --       "rake",
+      --       "rbi",
+      --       "rabl",
+      --     },
+      --     capabilities = capabilities,
+      --     settings = {
+      --       rubocop = {
+      --         mason = false,
+      --         cmd = function()
+      --           local has_rubocop_binary = vim.fn.glob("bin/rubocop") ~= ""
+      --           if has_rubocop_binary then
+      --             return {
+      --               "bin/rubocop",
+      --               "--stop-server",
+      --               "&&",
+      --               "bin/rubopcop",
+      --               "--lsp",
+      --               ")",
+      --             }
+      --           else
+      --             return { "mise", "x", "--", "rubocop", "--lsp" }
+      --           end
+      --         end,
+      --       },
+      --     },
+      --     init_options = {
+      --       formatter = "none", -- Use none to disable formatting
+      --       enabledfeatures = {
+      --         "codeactions",
+      --         "diagnostics",
+      --         "documenthighlights",
+      --         "documentsymbols",
+      --         "formatting",
+      --         "inlayhint",
+      --       },
+      --     },
+      --   })
+      -- end
+      --
       -- Configure ruby_lsp
       lspconfig.ruby_lsp.setup({
+        flags = { debounce_text_changes = 500 },
         on_attach = on_attach,
         capabilities = capabilities,
         cmd = {
@@ -537,27 +554,65 @@ return {
           "--",
           "ruby-lsp",
         },
+        single_file_support = true,
         settings = {
+          ruby = {
+            enabledFeatures = {
+              "codeActions",
+              "diagnostics",
+              "documentFormatting",
+              "hover",
+              "completion",
+              "rename",
+              "signatureHelp",
+              "workspaceSymbols",
+            },
+          },
           ruby_lsp = {
             mason = false,
           },
         },
         init_options = {
-          formatter = "auto",
-          enabledfeatures = {
-            "codeactions",
-            "diagnostics",
-            "documenthighlights",
-            "documentsymbols",
-            "formatting",
-            "inlayhint",
+          addonSettings = {
+            ["Ruby LSP Rails"] = {
+              enablePendingMigrationsPrompt = true,
+            },
+          },
+          formatter = "rubocop",
+          enabled_features = {
+            code_actions = true,
+            code_lens = true,
+            completion = true,
+            definition = true,
+            diagnostics = true,
+            document_highlights = true,
+            document_link = true,
+            document_symbols = true,
+            folding_ranges = true,
+            formatting = true,
+            hover = true,
+            inlay_hint = true,
+            on_type_formatting = true,
+            selection_ranges = true,
+            semantic_highlighting = true,
+            signature_help = true,
+            type_hierarchy = true,
+            workspace_symbol = true,
+          },
+          features_configuration = {
+            inlay_hint = {
+              implicit_hash_value = true,
+              implicit_rescue = true,
+            },
           },
         },
       })
 
       local function is_sorbet_project()
+        local root_dir = require("lspconfig.util").root_pattern("sorbet/config")
+
         -- Check for sorbet configuration file
-        local has_sorbet_config = vim.fn.glob("sorbet/config") ~= ""
+        local has_sorbet_config = root_dir ~= ""
 
         -- Check for srb executable in bin directory
         local has_srb_binary = vim.fn.glob("bin/srb") ~= ""
@@ -569,6 +624,11 @@ return {
         -- Configure sorbet
         lspconfig.sorbet.setup({
           on_attach = on_attach,
+          settings = {
+            sorbet = {
+              mason = false,
+            },
+          },
           filetypes = {
             "ruby",
             "rake",
