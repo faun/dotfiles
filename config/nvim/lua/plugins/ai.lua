@@ -334,7 +334,60 @@ local codecompanion_lazy_config = {
       end
     end
     require("codecompanion").setup({
+      prompt_library = {
+        ["Commit Message"] = {
+          strategy = "inline",
+          description = "Generate a commit message",
+          opts = {
+            index = 10,
+            is_default = true,
+            is_slash_cmd = true,
+            short_name = "commit",
+            auto_submit = true,
+          },
+          prompts = {
+            {
+              role = "user",
+              content = function()
+                return string.format(
+                  [[Generate a commit message with the following conventions:
 
+## Message Structure
+
+"Summary\n\nBody"
+
+### Subject Line
+
+- Use imperative mood ("Add" not "Added")
+- Keep it under 50 characters
+- Don't end with period
+- Start with capital letter
+- Use present tense
+
+### Body
+
+- Use present tense
+- Keep it under 3 paragraphs
+- Use bullet points if needed
+- Use github-flavored markdown for formatting
+
+Given the git diff listed below, please generate a commit message for me:
+
+```diff
+%s
+```
+
+]],
+                  vim.fn.system("git diff --no-ext-diff --staged")
+                )
+              end,
+              opts = {
+                contains_code = true,
+              },
+            },
+          },
+        },
+      },
       strategies = {
         chat = {
           adapter = chat_strategy(),
@@ -344,6 +397,30 @@ local codecompanion_lazy_config = {
             },
             close = {
               modes = { n = "<C-c>", i = "<C-c>" },
+            },
+          },
+          slash_commands = {
+            ["file"] = {
+              -- Location to the slash command in CodeCompanion
+              callback = "strategies.chat.slash_commands.file",
+              description = "Select a file using Telescope",
+              opts = {
+                provider = "telescope", -- Other options include 'default', 'mini_pick', 'fzf_lua', snacks
+                contains_code = true,
+              },
+            },
+          },
+          tools = {
+            ["mcp"] = {
+              -- calling it in a function would prevent mcphub from being loaded before it's needed
+              callback = function()
+                return require("mcphub.extensions.codecompanion")
+              end,
+              description = "Call tools and resources from the MCP Servers",
+              opts = {
+                requires_approval = false,
+                auto_approve = true,
+              },
             },
           },
         },
