@@ -7,7 +7,7 @@ return {
       -- Function to apply the theme
       local function set_theme()
         -- Read theme from temporary file that shell script maintains
-        local handle = io.open(vim.fn.expand("~/.cache/nvim/theme_mode"), "r")
+        local handle = io.open(vim.fn.expand("~/.cache/theme_mode"), "r")
         if handle then
           local content = handle:read("*a")
           handle:close()
