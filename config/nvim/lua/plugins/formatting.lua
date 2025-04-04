@@ -11,6 +11,70 @@ return {
         shfmt = {
           prepend_args = { "-i", "2" },
         },
+        rubocop = {
+          ---@param ctx conform.Context
+          condition = function(_, ctx)
+            if
+              vim.fs.find({
+                "bin/rubocop",
+              }, {
+                upward = true,
+                path = ctx.dirname,
+                stop = vim.fs.find({ ".git" }, { upward = true, path = ctx.dirname })[1],
+              })[1] ~= nil
+            then
+              return true
+            end
+
+            -- Otherwise, only use rubocop when config file is present
+            return vim.fs.find({
+              ".rubocop.yml",
+              ".rubocop.yaml",
+              ".rubocop_todo.yml",
+              ".rubocop_todo.yaml",
+            }, {
+              upward = true,
+              path = ctx.dirname,
+              stop = vim.fs.find({ ".git" }, { upward = true, path = ctx.dirname })[1],
+            })[1] ~= nil
+          end,
+          --@param ctx conform.Context
+          command = function(_, ctx)
+            if
+              vim.fs.find({
+                "bin/rubocop",
+              }, {
+                upward = true,
+                path = ctx.dirname,
+                stop = vim.fs.find({ ".git" }, { upward = true, path = ctx.dirname })[1],
+              })[1] ~= nil
+            then
+              return "bin/rubocop"
+            end
+
+            return "rubocop"
+          end,
+          --@param ctx conform.Context
+          args = function(_, ctx)
+            if
+              vim.fs.find({
+                "bin/rubocop",
+              }, {
+                upward = true,
+                path = ctx.dirname,
+                stop = vim.fs.find({ ".git" }, { upward = true, path = ctx.dirname })[1],
+              })[1] ~= nil
+            then
+              -- Use the binstub if it exists
+              return { "--server", "-a", "-f", "quiet", "--stderr", "--stdin", "$FILENAME" }
+            end
+            -- Otherwise, use the default rubocop command
+            return { "bundle", "exec", "rubocop", "-a", "-f", "quiet", "--stderr", "--stdin", "$FILENAME" }
+          end,
+          format_on_save = false, -- rubocop can be slow, so we don't want to run it on save
+          format_after_save = false,
+          lsp_format = "first",
+        },
         injected = { options = { ignore_errors = true } },
         prettier = {
           -- Only use prettier when config file is present
@@ -108,20 +172,15 @@ return {
           if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
             return
           end
-          return { timeout_ms = 5000, lsp_format = "fallback" }
+          return { timeout_ms = 500, lsp_format = "fallback" }
+        end,
+        format_after_save = function(bufnr)
+          if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+            return
+          end
+          return { timeout_ms = 5000, lsp_format = "first" }
         end,
       })
-      vim.api.nvim_create_user_command("Format", function(args)
-        local range = nil
-        if args.count ~= -1 then
-          local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
-          range = {
-            start = { args.line1, 0 },
-            ["end"] = { args.line2, end_line:len() },
-          }
-        end
-        require("conform").format({ async = true, lsp_format = "fallback", range = range })
-      end, { range = true })
 
       vim.api.nvim_create_user_command("FormatDisable", function(args)
         if args.bang then
