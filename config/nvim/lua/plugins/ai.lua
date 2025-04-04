@@ -335,7 +335,7 @@ local codecompanion_lazy_config = {
     end
     require("codecompanion").setup({
       prompt_library = {
-        ["Commit Message"] = {
+        ["Generate a Commit Message"] = {
           strategy = "inline",
           description = "Generate a commit message",
           opts = {
