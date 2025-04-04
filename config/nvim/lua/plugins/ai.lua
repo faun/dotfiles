@@ -287,12 +287,6 @@ local codecompanion_lazy_config = {
   keys = {
     { "<leader>aa", "<cmd>CodeCompanionChat<CR>", mode = { "n", "v" }, desc = "[A]I [A]sk" },
     { "<leader><esc>", "<cmd>CodeCompanionChat Toggle<CR>", mode = { "n", "v" }, desc = "[A]I [A]sk" },
-    {
-      "<leader>acm",
-      "<cmd>CodeCompanion Commit Message<CR>",
-      mode = { "n", "v" },
-      desc = "[A]I [C]ommit [M]essage",
-    },
     { "<leader>at", "<cmd>CodeCompanionChat Toggle<CR>", mode = { "n", "v" }, desc = "[A]I [T]oggle" },
     { "<leader>ae", "<cmd>CodeCompanionChat<CR>", mode = { "n", "v" }, desc = "[A]I [E]dit" },
     { "<leader>am", "<cmd>CodeCompanionActions<CR>", mode = { "n", "v" }, desc = "[A]I [M]enu" },
@@ -526,6 +520,19 @@ Given the git diff listed below, please generate a commit message for me:
           },
         },
       },
+    })
+
+    -- Create an autocommand group to organize related autocommands
+    local commit_msg_group = vim.api.nvim_create_augroup("CommitMessageGroup", { clear = true })
+
+    -- Define the autocommand to generate commit messages
+    vim.api.nvim_create_autocmd("FileType", {
+      group = commit_msg_group,
+      pattern = "gitcommit",
+      callback = function()
+        require("codecompanion").prompt("commit")
+      end,
+      desc = "Automatically generate commit messages using CodeCompanion",
     })
   end,
 }
