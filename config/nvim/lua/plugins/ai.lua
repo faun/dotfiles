@@ -246,15 +246,72 @@ local codecompanion_lazy_config = {
     "nvim-telescope/telescope.nvim",
     { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } },
     { "stevearc/dressing.nvim", opts = {} },
+    {
+      "ravitemer/mcphub.nvim",
+      dependencies = {
+        "nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
+      },
+      cmd = "MCPHub", -- lazily start the hub when `MCPHub` is called
+      build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
+      config = function()
+        require("mcphub").setup({
+          -- Required options
+          port = 3003, -- Port for MCP Hub server
+          config = vim.fn.expand("~/.config/mcp/servers.json"), -- Absolute path to config file
+          extensions = {
+            codecompanion = {
+              -- Show the mcp tool result in the chat buffer
+              -- NOTE:if the result is markdown with headers, content after the headers wont be sent by codecompanion
+              show_result_in_chat = true,
+              make_vars = true, -- make chat #variables from MCP server resources
+            },
+          },
+
+          -- -- Optional options
+          -- on_ready = function(hub)
+          --   -- Called when hub is ready
+          -- end,
+          -- on_error = function(err)
+          --   -- Called on errors
+          -- end,
+          log = {
+            level = vim.log.levels.WARN,
+            to_file = false,
+            file_path = nil,
+            prefix = "MCPHub",
+          },
+        })
+      end,
+    },
   },
   keys = {
     { "<leader>aa", "<cmd>CodeCompanionChat<CR>", mode = { "n", "v" }, desc = "[A]I [A]sk" },
+    { "<leader><esc>", "<cmd>CodeCompanionChat Toggle<CR>", mode = { "n", "v" }, desc = "[A]I [A]sk" },
+    {
+      "<leader>acm",
+      "<cmd>CodeCompanion Commit Message<CR>",
+      mode = { "n", "v" },
+      desc = "[A]I [C]ommit [M]essage",
+    },
     { "<leader>at", "<cmd>CodeCompanionChat Toggle<CR>", mode = { "n", "v" }, desc = "[A]I [T]oggle" },
     { "<leader>ae", "<cmd>CodeCompanionChat<CR>", mode = { "n", "v" }, desc = "[A]I [E]dit" },
     { "<leader>am", "<cmd>CodeCompanionActions<CR>", mode = { "n", "v" }, desc = "[A]I [M]enu" },
     { "<leader>ap", "<cmd>CodeCompanionChat Add<CR>", mode = { "v" }, desc = "[A]I [P]aste" },
   },
   config = function()
+    local spinner = require("plugins.codecompanion.spinner")
+    spinner:init({})
+    do
+      local ok, lualine = pcall(require, "lualine")
+      if not ok then
+        return
+      end
+
+      local lualine_cfg = lualine.get_config()
+      table.insert(lualine_cfg.sections.lualine_x, 1, spinner)
+      lualine.setup(lualine_cfg)
+    end
+
     local chat_strategy = function()
       if ollama_base_url then
         return "ollama"
