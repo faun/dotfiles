@@ -204,7 +204,7 @@ local avante_lazy_config = {
           temperature = 0,
           max_tokens = 4096,
         }
-      -- Check if ANTHROPIC_API_KEY is defined
+        -- Check if ANTHROPIC_API_KEY is defined
       elseif anthropic_api_key then
         print("Using Avante with Anthropic")
         local model = os.getenv("ANTHROPIC_MODEL") or "claude-3-7-sonnet-20250219"
