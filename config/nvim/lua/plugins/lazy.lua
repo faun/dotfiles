@@ -17,6 +17,29 @@ return {
             require("onenord").setup({
               theme = theme,
             })
+            if theme == "light" then
+              -- Set the Normal highlight group background color to (Nord 4 AKA Frost 1) light color #E5E9F0
+              vim.api.nvim_set_hl(0, "Normal", { ctermbg = "NONE", bg = "#E5E9F0" })
+              -- Set the color column highlight to the same color as the background,
+              -- so it creates a subtle knotch in the line highlight
+              vim.api.nvim_set_hl(0, "ColorColumn", { ctermbg = "lightgray", bg = "#E5E9F0" })
+              -- Set cursor line highlight to (Nord 6 AKA Snow Storm 3) light color #ECEFF4
+              vim.api.nvim_set_hl(0, "CursorLine", {
+                ctermbg = "lightgray",
+                bg = "#ECEFF4",
+              })
+            elseif theme == "dark" then
+              -- Set the Normal highlight group background color to (Nord 0 AKA Polar Night 1) dark color #2E3440
+              vim.api.nvim_set_hl(0, "Normal", { ctermbg = "NONE", bg = "#2E3440" })
+              -- Set the color column highlight to the same color as the background,
+              -- so it creates a subtle knotch in the line highlight
+              vim.api.nvim_set_hl(0, "ColorColumn", { ctermbg = "NONE", bg = "#2E3440" })
+              -- Set cursor line highlight to (Nord 1 AKA Polar Night 2) dark color #3B4252
+              vim.api.nvim_set_hl(0, "CursorLine", {
+                ctermbg = "darkgray",
+                bg = "#3B4252",
+              })
+            end
           end
         end
       end
