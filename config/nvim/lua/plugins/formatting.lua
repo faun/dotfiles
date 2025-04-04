@@ -208,6 +208,7 @@ return {
         desc = "Re-enable autoformat-on-save",
         bang = true,
       })
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
   },
   {
