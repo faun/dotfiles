@@ -68,8 +68,9 @@ autoload -U +X bashcompinit && bashcompinit
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
-# ignore completions that begin with an '_'
+# ignore completions that begin with an '_' for command and default completions
 zstyle ':completion:*:*:-command-:*:*' ignored-patterns '_*'
+zstyle ':completion:*:default:*:*:*:*' ignored-patterns '_*'
 
 # pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
@@ -78,6 +79,10 @@ zstyle ':completion:*' insert-tab pending
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
+
+# Disable disable username completions for 'cd' and 'pushd'
+zstyle ':completion:*:cd:*' users ""
+zstyle ':completion:*:pushd:*' users ""
 
 #Use cache for completion
 zstyle ':completion:*' use-cache on
