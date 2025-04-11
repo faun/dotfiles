@@ -28,7 +28,6 @@ return {
         null_ls.builtins.diagnostics.editorconfig_checker,
         null_ls.builtins.diagnostics.fish,
         null_ls.builtins.diagnostics.hadolint,
-        null_ls.builtins.diagnostics.proselint,
         null_ls.builtins.diagnostics.protolint,
         null_ls.builtins.diagnostics.pylint,
         null_ls.builtins.diagnostics.revive.with({
