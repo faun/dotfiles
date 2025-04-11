@@ -44,14 +44,11 @@ return {
           end,
           method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
           extra_args = function(utils)
-            local config_files = {
-              [".semgrep"] = true,
-              [".semgrep.yml"] = true,
-              [".semgrep.yaml"] = true,
-            }
-
             local function get_config(file)
-              return config_files[file] and { "--config", file } or nil
+              if utils.root_has_file(file) then
+                return { "--config", file }
+              end
+              return nil
             end
 
             return get_config(".semgrep") or get_config(".semgrep.yml") or get_config(".semgrep.yaml") or {}
