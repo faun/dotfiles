@@ -90,7 +90,6 @@ return {
           end,
         }),
         null_ls.builtins.diagnostics.vint,
-        null_ls.builtins.diagnostics.write_good,
         null_ls.builtins.diagnostics.yamllint.with({
           condition = function(utils)
             return utils.root_has_file({ ".yamllint", ".yamllint.yaml", ".yamllint.yml" })
