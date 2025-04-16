@@ -100,7 +100,7 @@ return {
           condition = function(utils)
             return utils.root_has_file({ ".golines" })
           end,
-          extra_args = { "--max-len=128", "--base-formatter=gofumpt" },
+          extra_args = { "--base-formatter=gofumpt" },
         }),
         null_ls.builtins.formatting.protolint,
         null_ls.builtins.formatting.shfmt,
