@@ -1,6 +1,3 @@
-GOROOT="${GOROOT:-${HOME:?}/src}"
-export GOROOT
-
 GOPATH="${HOME:?}/go"
 export GOPATH
 
