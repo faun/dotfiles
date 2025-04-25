@@ -75,7 +75,7 @@ return {
           },
         },
         documentation = {
-          auto_show = false,
+          auto_show = true,
           auto_show_delay_ms = 800,
           treesitter_highlighting = true,
         },
@@ -85,16 +85,15 @@ return {
         preset = "enter",
       }
       opts.sources = {
+        compat = {},
         default = {
           "lazydev",
           "lsp",
           "path",
           "snippets",
+          "omni",
           "buffer",
           "copilot",
-          "avante_commands",
-          "avante_mentions",
-          "avante_files",
         },
         per_filetype = {
           codecompanion = { "codecompanion" },
@@ -105,46 +104,16 @@ return {
             module = "lazydev.integrations.blink",
             score_offset = 90,
           },
-          lsp = {
-            async = true,
-            min_keyword_length = 2,
-            score_offset = 80,
-          },
-          path = {
-            min_keyword_length = 0,
-          },
-          buffer = {
-            min_keyword_length = 2,
-            max_items = 5,
-            score_offset = 92,
-          },
-          avante_commands = {
-            name = "avante_commands",
-            module = "blink.compat.source",
-            score_offset = 90,
-            opts = {},
-          },
-          avante_files = {
-            name = "avante_commands",
-            module = "blink.compat.source",
-            score_offset = 100,
-            opts = {},
-          },
-          avante_mentions = {
-            name = "avante_mentions",
-            module = "blink.compat.source",
-            score_offset = 1000,
-            opts = {},
-          },
           copilot = {
             name = "copilot",
             module = "blink-cmp-copilot",
             kind = "Copilot",
-            score_offset = 100,
+            score_offset = 80,
             async = true,
           },
         },
       }
+      return opts
     end,
     opts_extend = { "sources.default" },
   },
