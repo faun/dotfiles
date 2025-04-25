@@ -172,11 +172,16 @@ return {
     end,
     config = function()
       local lspconfig = require("lspconfig")
+      local blink_cmp = require("blink.cmp")
 
+      -- Start with default LSP capabilities
       local default_capabilities = vim.lsp.protocol.make_client_capabilities()
-      local lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
 
-      local capabilities = vim.tbl_extend("force", default_capabilities, lsp_capabilities)
+      -- Further extend with custom capabilities from blink.cmp
+      local capabilities = blink_cmp.get_lsp_capabilities(default_capabilities)
+
+      -- Apply the final capabilities to lspconfig defaults
+      lspconfig.util.default_config.capabilities = capabilities
 
       --Enable (broadcasting) snippet capability for completion
       capabilities.textDocument.completion.completionItem.snippetSupport = true
