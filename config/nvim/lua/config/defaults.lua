@@ -114,3 +114,42 @@ vim.g.loaded_perl_provider = 0
 -- This is done to improve the jump to definition comand when using ruby-lsp
 -- https://github.com/neovim/neovim/issues/30160
 vim.keymap.set("n", "<C-]>", "<C-]>", { noremap = true })
+
+if vim.fn.has('clipboard') == 1 then
+  vim.g.clipboard = {
+    name = 'pbcopy',
+    copy = {
+      -- Use `pbcopy` for copying to the system clipboard
+      ['+'] = 'pbcopy',
+      ['*'] = 'pbcopy',
+    },
+    paste = {
+      -- Use `pbpaste` for pasting from the system clipboard
+      ['+'] = 'pbpaste',
+      ['*'] = 'pbpaste',
+    },
+    cache_enabled = false,
+  }
+
+  vim.g.clipboard = {
+    name = 'xclip',
+    copy = {
+      ['+'] = 'xclip -selection clipboard',
+      ['*'] = 'xclip -selection primary',
+    },
+    paste = {
+      ['+'] = 'xclip -selection clipboard -o',
+      ['*'] = 'xclip -selection primary -o',
+    },
+    cache_enabled = false,
+  }
+
+  vim.opt.clipboard = 'unnamedplus'
+
+  -- Optional: Key mappings for convenience
+  -- Map <C-c> in visual mode to copy to system clipboard
+  vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true, silent = true })
+
+  -- Map <C-v> in normal mode to paste from system clipboard
+  vim.api.nvim_set_keymap('n', '<C-v>', '"+p', { noremap = true, silent = true })
+end

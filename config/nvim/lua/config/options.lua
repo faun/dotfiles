@@ -12,3 +12,16 @@ vim.cmd([[ set foldenable ]])
 -- Load blink.nvim from main branch when set to true.
 -- You need to have a working rust toolchain to build the plugin in this case.
 vim.g.lazyvim_blink_main = true
+
+vim.g.clipboard = {
+  name = "TmuxClipboard",
+  copy = {
+    ["+"] = "tmux load-buffer -w -",
+    ["*"] = "tmux load-buffer -w -",
+  },
+  paste = {
+    ["+"] = "tmux save-buffer -",
+    ["*"] = "tmux save-buffer -",
+  },
+  cache_enabled = 0,
+}
