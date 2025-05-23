@@ -683,6 +683,8 @@ return {
         on_attach = on_attach, -- Attach keybindings and other LSP features
         capabilities = capabilities, -- LSP capabilities for better feature support
         cmd = { "gopls" }, -- Command to start the gopls server
+        filetypes = { "go", "gomod", "gowork", "gotmpl" },
+        root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
 
         settings = {
           gopls = {
@@ -712,12 +714,9 @@ return {
             experimentalWatchedFileDelay = "100ms", -- Delay for file watching
 
             -- Code style settings
-            ["local"] = "", -- Package path for local imports
             gofumpt = true, -- Use gofumpt for formatting
             goimports = true, -- Run goimports on save
-
-            -- Build settings
-            buildFlags = { "-tags", "integration" }, -- Add integration build tag
+            golines = true, -- Use golines for formatting
           },
         },
       })
