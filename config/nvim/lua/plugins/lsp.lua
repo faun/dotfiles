@@ -266,15 +266,6 @@ return {
         capabilities = capabilities,
       })
 
-      -- Configure golangci_lint_ls
-      lspconfig.golangci_lint_ls.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = {
-          golangci_lint = {},
-        },
-      })
-
       -- Configure jsonls
       lspconfig.jsonls.setup({
         on_attach = on_attach,
@@ -671,6 +662,21 @@ return {
           end,
         })
       end
+
+      -- Configure golangci_lint_ls
+      lspconfig.golangci_lint_ls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+          golangci_lint_ls = {
+            lintMode = "file",
+            filetypes = { "go", "gomod", "gowork", "gotmpl" },
+            init_options = {
+              command = { "golangci-lint", "run", "--out-format", "json" },
+            },
+          },
+        },
+      })
 
       -- Setup lspconfig for gopls
       lspconfig.gopls.setup({
