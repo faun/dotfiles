@@ -1,11 +1,9 @@
-tmux_attach () {
-  if [[ $# -eq 0 ]]
-  then
+tmux_attach() {
+  if [[ $# -eq 0 ]]; then
     directory_name=$(basename "$PWD")
     session_name=${directory_name//\./_}
-    if \tmux -2 has-session -t "$session_name" > /dev/null 2>&1
-    then
-      \tmux -2 attach -d -t "$session_name" > /dev/null 2>&1
+    if \tmux -2 has-session -t "$session_name" >/dev/null 2>&1; then
+      \tmux -2 attach -d -t "$session_name" >/dev/null 2>&1
     else
       \tmux -2 new-session -s "$session_name"
     fi
@@ -16,7 +14,7 @@ tmux_attach () {
 
 # Override default rvm_prompt_info
 function rvm_prompt_info() {
-  ruby_version=$(~/.rvm/bin/rvm-prompt i v p 2> /dev/null)
+  ruby_version=$(~/.rvm/bin/rvm-prompt i v p 2>/dev/null)
   if [[ -n $ruby_version ]]; then
     echo "($ruby_version)"
   else
@@ -25,17 +23,18 @@ function rvm_prompt_info() {
 }
 
 # mkdir, cd into it
-mkcd () {
+mkcd() {
   mkdir -p "$*"
   cd "$*"
 }
 
 # Trash files
-function trash () {
+function trash() {
   local dir
   for dir in "$@"; do
     # ignore any arguments
-    if [[ "$dir" = -* ]]; then :
+    if [[ "$dir" = -* ]]; then
+      :
     else
       local dst=${dir##*/}
       # append the time if necessary
@@ -48,7 +47,7 @@ function trash () {
 }
 
 # build html from markdown, optimized for legibility on mobile devices
-function mdbuild () {
+function mdbuild() {
   read -d '' head <<"EOF"
 <!DOCTYPE html>
 <html>
@@ -62,14 +61,14 @@ EOF
   local foot="</body>\n</html>\n"
   for input in "$@"; do
     out=${input%.*}.html
-    echo $head > $out
-    markdown $input | smartypants >> $out
-    echo $foot >> $out
+    echo $head >$out
+    markdown $input | smartypants >>$out
+    echo $foot >>$out
   done
 }
 
 # run a command multiple times
-function dotimes () {
+function dotimes() {
   if [[ $# -lt 2 ]]; then
     echo "usage: dotimes number-of-times command-to-run"
     return 1
@@ -79,12 +78,12 @@ function dotimes () {
   local fails=0
   shift
   while [ $i -lt $max ]; do
-    i=`expr $i + 1`
+    i=$(expr $i + 1)
     "$@"
     echo -n "\n#### "
     if [[ $? -gt 0 ]]; then
       echo -n "FAILED"
-      fails=`expr $fails + 1`
+      fails=$(expr $fails + 1)
     else
       echo -n "PASSED"
     fi
@@ -99,8 +98,8 @@ function dotimes () {
 function imgsize() {
   local width height
   if [[ -f $1 ]]; then
-    height=$(sips -g pixelHeight "$1"|tail -n 1|awk '{print $2}')
-    width=$(sips -g pixelWidth "$1"|tail -n 1|awk '{print $2}')
+    height=$(sips -g pixelHeight "$1" | tail -n 1 | awk '{print $2}')
+    width=$(sips -g pixelWidth "$1" | tail -n 1 | awk '{print $2}')
     echo "${width} x ${height}"
   else
     echo "File not found"
@@ -109,17 +108,17 @@ function imgsize() {
 #
 # encode a given image file as base64 and output css background property to clipboard
 function 64enc() {
-  openssl base64 -in $1 | awk -v ext="${1#*.}" '{ str1=str1 $0 }END{ print "background:url(data:image/"ext";base64,"str1");" }'|pbcopy
+  openssl base64 -in $1 | awk -v ext="${1#*.}" '{ str1=str1 $0 }END{ print "background:url(data:image/"ext";base64,"str1");" }' | pbcopy
   echo "$1 encoded to clipboard"
 }
 
 function 64font() {
-  openssl base64 -in $1 | awk -v ext="${1#*.}" '{ str1=str1 $0 }END{ print "src:url(\"data:font/"ext";base64,"str1"\")  format(\"woff\");" }'|pbcopy
+  openssl base64 -in $1 | awk -v ext="${1#*.}" '{ str1=str1 $0 }END{ print "src:url(\"data:font/"ext";base64,"str1"\")  format(\"woff\");" }' | pbcopy
   echo "$1 encoded as font and copied to clipboard"
 }
 
 function show_colors() {
-  for i in {0..255} ; do
+  for i in {0..255}; do
     printf "\x1b[38;5;${i}mcolour${i}\n"
   done
 }
@@ -132,11 +131,11 @@ man() {
     LESS_TERMCAP_se=$'\e[0m' \
     LESS_TERMCAP_ue=$'\e[0m' \
     LESS_TERMCAP_us=$'\e[1;32m' \
-      man "$@"
+    man "$@"
 }
 
 heroku_apps() {
   heroku apps --all | awk '{print $1}' | fzf
 }
 
-ppid () { ps -p "${1:-$$}" -o ppid=; }
+ppid() { ps -p "${1:-$$}" -o ppid=; }
