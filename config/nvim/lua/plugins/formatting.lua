@@ -110,6 +110,7 @@ return {
         ["*"] = { "trim_whitespace", "trim_newlines" },
         css = { "prettier", "stylelint" },
         fish = { "fish_indent" },
+        go = { "gofumpt", "goimports", "golines" },
         graphql = { "prettier", "eslint" },
         html = { "prettier" },
         javascript = { "prettier" },
