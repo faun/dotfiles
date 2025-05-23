@@ -107,7 +107,7 @@ return {
         lsp_format = "fallback", -- not recommended to change
       },
       formatters_by_ft = {
-        ["*"] = { "trim_whitespace", "trim_newline" },
+        ["*"] = { "trim_whitespace", "trim_newlines" },
         css = { "prettier", "stylelint" },
         fish = { "fish_indent" },
         graphql = { "prettier", "eslint" },
