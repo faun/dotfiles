@@ -6,5 +6,3 @@ export GOBIN
 
 PATH="${PATH}:${GOBIN}"
 export PATH
-
-GOPROXY="${GOPROXY:-https://proxy.golang.org}"
