@@ -215,4 +215,29 @@ return {
       },
     },
   },
+  {
+    -- Fallback to telescope when jfind is not available
+    "nvim-telescope/telescope.nvim",
+    enabled = function()
+      return vim.fn.executable("jfind") ~= 1
+    end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    keys = {
+      {
+        "<C-f>",
+        function()
+          require("telescope.builtin").find_files()
+        end,
+      },
+      {
+        "<C-p>",
+        function()
+          require("telescope.builtin").find_files({ previewer = true })
+        end,
+      },
+    },
+  },
 }
