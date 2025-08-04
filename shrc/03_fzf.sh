@@ -2,7 +2,11 @@
 
 # FZF
 # shellcheck disable=1090
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [[ $SHELL =~ /zsh$/ ]]; then
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+elif [[ $SHELL =~ /bash$/ ]]; then
+  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+fi
 
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --color fg:-1,bg:-1,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B'
 
