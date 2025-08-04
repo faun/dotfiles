@@ -6,11 +6,6 @@ cd "$(dirname "$0")" || exit 1
 cd .. || exit 1
 DIR="$(pwd)"
 
-if ! command -v lndir >/dev/null 2>&1; then
-  echo "lndir is not installed"
-  exit 1
-fi
-
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=${HOME}/.config}"
 mkdir -p "${XDG_CONFIG_HOME}"
 
@@ -44,6 +39,32 @@ verbose() {
   $*
 }
 
+# Recursively link directory contents (replacement for lndir)
+link_dir_contents() {
+  local source_dir="$1"
+  local target_dir="$2"
+
+  # Create target directory if it doesn't exist
+  mkdir -p "$target_dir"
+
+  # Process each item in source directory
+  for item in "$source_dir"/*; do
+    # Skip if glob didn't match anything
+    [[ -e "$item" ]] || continue
+
+    local basename="$(basename "$item")"
+    local target_item="$target_dir/$basename"
+
+    if [[ -d "$item" ]]; then
+      # Recursively handle subdirectories
+      link_dir_contents "$item" "$target_item"
+    else
+      # Create symbolic link for files
+      ln -sf "$item" "$target_item"
+    fi
+  done
+}
+
 linkFile() {
   name=$1
   source=$2
@@ -60,10 +81,9 @@ linkFile() {
     fi
     echo "Linking $source => $target"
     if [[ -d "${source:?}" ]]; then
-      mkdir -p "$target"
-      verbose lndir "${source:?}" "$target"
+      link_dir_contents "${source:?}" "$target"
     else
-      verbose cp -asf "${source:?}" "$target" || true
+      verbose ln -sf "${source:?}" "$target"
     fi
   else
     echo "Skipping ignored file ${source}"
