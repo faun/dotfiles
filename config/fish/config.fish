@@ -62,7 +62,6 @@ if status is-interactive
             # Source each file in ~/.shrc/*
             for file in $HOME/.shrc/*
                 if test -f $file
-                    echo "Sourcing $file"
                     bass source "$file"
                 end
             end
