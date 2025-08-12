@@ -2,6 +2,9 @@ if status is-interactive
     set -x GOPATH $HOME/go
     set -x GOBIN $GOPATH/bin
     set -x PATH $PATH $GOROOT/bin
+    set -x PATH $HOME/.fzf/bin $PATH
+    set -x PATH $HOME/.local/bin $PATH
+    set -x PATH $HOME/bin $PATH
 
     # use .localrc for settings specific to one system
     if test -f $HOME/.local.fish
