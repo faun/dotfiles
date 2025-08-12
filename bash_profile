@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
-for file in "$HOME"/.shrc/*.sh; do
+#
+# Load in .bashrc
+for file in "${HOME:?}"/.shrc/*.sh; do
   . "$file"
 done
-
-# Load in .bashrc
-if [ -f "$HOME/.bashrc" ]; then
-  . "$HOME/.bashrc"
-fi
 
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 export CLICOLOR=1
