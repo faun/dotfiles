@@ -211,9 +211,7 @@ divergent() {
   if [[ "$branch" == "$(git_remote_mainline_ref)" ]]; then
     echo "This command cannot be run against the $(git_remote_mainline_ref) branch"
   else
-    set -x
     git log "${command_opt[@]}" "$(git_remote_mainline_ref)".."$branch"
-    set +x
   fi
 }
 
