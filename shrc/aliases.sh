@@ -138,7 +138,6 @@ alias k="kubectl"
 alias kctx='kubectx'
 alias kns='kubens "$(namespace_options)"'
 alias ktx='kubectx "$(context_options)"'
-alias ktxd='CONTEXT="$(context_options)"; confirm "Delete context $CONTEXT?" && kubectl config unset "contexts.$CONTEXT"'
 
 kcapp() {
   if [[ $# -ne 1 ]]; then
