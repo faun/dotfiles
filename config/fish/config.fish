@@ -87,6 +87,11 @@ if status is-interactive
 
         set -gx FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
     end
+
+    if command -q mise
+        # Activate mise if installed
+        mise activate fish | source
+    end
 end
 
 # vim: set ft=fish ts=4 sw=4 sts=4 et:
