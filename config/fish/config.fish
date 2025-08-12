@@ -55,6 +55,14 @@ if status is-interactive
     set fish_pager_color_progress $nord12
     set fish_pager_color_secondary $nord1
 
+    if command -q zoxide
+        # Initialize zoxide if installed
+        zoxide init fish | source
+    else if test -f $HOME/.config/zoxide/init.fish
+        # Use local zoxide init script if available
+        source $HOME/.config/zoxide/init.fish
+    end
+
     if command -q fzf
         # Set up fzf key bindings
         fzf --fish | source
