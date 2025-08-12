@@ -23,11 +23,6 @@ elif [[ "$OSTYPE" == darwin* ]]; then
   [[ -f $CURRENT_DIR/optional/macos.sh ]] && source "$CURRENT_DIR"/optional/macos.sh
 fi
 
-# Source .profile if it exists
-if [[ -f "$HOME/.profile" ]]; then
-  source "$HOME/.profile"
-fi
-
 # Source .gpg-agent-info if it exists
 if [[ -f "$HOME/.gpg-agent-info" ]]; then
   source "$HOME/.gpg-agent-info"
