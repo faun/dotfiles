@@ -54,6 +54,13 @@ if status is-interactive
     set fish_pager_color_description $nord10
     set fish_pager_color_progress $nord12
     set fish_pager_color_secondary $nord1
+
+    if command -q fzf
+        # Set up fzf key bindings
+        fzf --fish | source
+
+        set -gx FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
+    end
 end
 
 # vim: set ft=fish ts=4 sw=4 sts=4 et:
