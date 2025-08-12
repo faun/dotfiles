@@ -24,8 +24,6 @@ for file in $HOME/.zsh/*; do
   fi
 done
 
-alias d="z dotfiles && t"
-
 if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
   zstyle ':completion:*:*:kubectl:*' list-grouped false
