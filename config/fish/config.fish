@@ -55,6 +55,24 @@ if status is-interactive
     set fish_pager_color_progress $nord12
     set fish_pager_color_secondary $nord1
 
+    if test -f ~/.config/fish/functions/fisher.fish
+        source ~/.config/fish/functions/fisher.fish
+        if test -f ~/.config/fish/functions/bass.fish
+            source ~/.config/fish/functions/bass.fish
+            # Source each file in ~/.shrc/*
+            for file in $HOME/.shrc/*
+                if test -f $file
+                    echo "Sourcing $file"
+                    bass source "$file"
+                end
+            end
+        end
+    else
+        curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
+        fisher install jorgebucaran/fisher
+        fisher install edc/bass
+    end
+
     if command -q zoxide
         # Initialize zoxide if installed
         zoxide init fish | source
