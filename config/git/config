@@ -13,6 +13,8 @@
 	ls = log --all --pretty=format:'%C(red)%ad %C(reset)[%cN]%C(magenta)%d%C(reset) %s%C(reset)' --abbrev-commit --since=2.weeks --date="local" -30
 	st = status -sb
 	uncommit = reset HEAD~1
+  worktrees = "worktree list"
+  prunetrees = "worktree prune"
 
 [color "branch"]
 	current = yellow reverse
