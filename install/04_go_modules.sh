@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
 
+set -e
+
+eval "$(mise activate bash)"
+
+# Ensure Go is installed
+latest_go_version=$(mise ls-remote go | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | tail -1)
+echo "Installing Go ${latest_go_version:?}"
+mise use --global "go@${latest_go_version:?}"
+
 GOPROXY="${GOPROXY:-https://proxy.golang.org,direct}"
 export GOPROXY
-
-set -e
 
 go_modules=(
 	github.com/nametake/golangci-lint-langserver

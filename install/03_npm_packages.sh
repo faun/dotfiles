@@ -2,7 +2,13 @@
 set -eou pipefail
 
 cd "$(dirname "$0")" || exit 1
-# DIR="$(pwd)"
+
+eval "$(mise activate bash)"
+
+# Ensure Node is installed
+latest_node_version=$(mise ls-remote node | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | tail -1)
+echo "Installing Node ${latest_node_version:?}"
+mise use --global "node@${latest_node_version:?}"
 
 if ! command -v yarn >/dev/null; then
   npm install -g yarn
