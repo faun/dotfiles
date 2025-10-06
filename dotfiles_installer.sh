@@ -16,9 +16,12 @@ fi
 # Configure git to use 1Password
 mkdir -p ~/.1password
 
-if [[ -f "~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock" ]]
-then
- ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
+# Try to find 1Password agent socket on macOS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  onepassword_socket="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  if [[ -f "$onepassword_socket" ]]; then
+    ln -sf "$onepassword_socket" ~/.1password/agent.sock
+  fi
 fi
 
 export SSH_AUTH_SOCK=~/.1password/agent.sock

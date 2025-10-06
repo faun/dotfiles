@@ -47,7 +47,9 @@ mise exec python@"${latest_python_version:?}" -- python -m venv "$HOME/.virtuale
 "$HOME/.virtualenvs/debugpy/bin/python" -m pip install --upgrade debugpy >/dev/null
 
 # Symlink default packages so mise can use them
-if [[ -f "$HOME/src/github.com/faun/dotfiles/default-python-packages" ]]; then
-  ln -sf "$HOME/src/github.com/faun/dotfiles/default-python-packages" "$HOME/.default-python-packages"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
+if [[ -f "$DOTFILES_DIR/default-python-packages" ]]; then
+  ln -sf "$DOTFILES_DIR/default-python-packages" "$HOME/.default-python-packages"
   echo "Linked default-python-packages for mise"
 fi

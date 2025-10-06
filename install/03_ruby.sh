@@ -11,7 +11,9 @@ echo "Installing Ruby ${latest_ruby_version:?}"
 mise use --global "ruby@${latest_ruby_version:?}"
 
 # Symlink default gems so mise can use them
-if [[ -f "$HOME/src/github.com/faun/dotfiles/default-gems" ]]; then
-  ln -sf "$HOME/src/github.com/faun/dotfiles/default-gems" "$HOME/.default-gems"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
+if [[ -f "$DOTFILES_DIR/default-gems" ]]; then
+  ln -sf "$DOTFILES_DIR/default-gems" "$HOME/.default-gems"
   echo "Linked default-gems for mise"
 fi
