@@ -70,4 +70,6 @@ node_modules/
 .terraform.lock.hcl
 .lazy.lua
 mise.toml
+**/.claude/settings.local.json
+
 # vim: set ft=gitconfig ts=2 sw=2 et:
