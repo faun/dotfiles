@@ -26,7 +26,50 @@ heroku_remote() {
   git remote add "$app" "https://git.heroku.com/$app.git"
 }
 
+# Ensure origin/HEAD is configured as a symbolic reference
+ensure_origin_head_set() {
+  # Check if origin/HEAD is configured
+  if ! git symbolic-ref refs/remotes/origin/HEAD &>/dev/null; then
+    echo "Setting up origin/HEAD..."
+    if git remote set-head origin -a &>/dev/null; then
+      return 0
+    else
+      # If auto-detection fails, try setting to main/master
+      if git show-ref --verify --quiet refs/remotes/origin/main; then
+        git remote set-head origin main
+      elif git show-ref --verify --quiet refs/remotes/origin/master; then
+        git remote set-head origin master
+      else
+        echo "Error: Cannot determine default branch. Please run: git remote set-head origin <branch-name>"
+        return 1
+      fi
+    fi
+  fi
+}
+
+# Validate git repository setup
+validate_git_setup() {
+  # Check if we're in a git repo
+  if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+    echo "Error: Not in a git repository"
+    return 1
+  fi
+
+  # Check for origin remote
+  if ! git remote get-url origin &>/dev/null; then
+    echo "Error: No 'origin' remote configured"
+    return 1
+  fi
+
+  # Ensure origin/HEAD is set
+  ensure_origin_head_set
+}
+
 git_remote_mainline_ref() {
+  # Ensure origin/HEAD is configured before trying to use it
+  if ! ensure_origin_head_set; then
+    return 1
+  fi
   git rev-parse --abbrev-ref origin/HEAD | cut -c8-
 }
 
@@ -233,8 +276,20 @@ isolate() {
 }
 
 gg() {
-  if [[ "$(current_branch)" != git_remote_mainline_ref ]]; then
-    git fetch origin "$(git_remote_mainline_ref)"
+  # Validate git setup before proceeding
+  if ! validate_git_setup; then
+    return 1
+  fi
+
+  local mainline_ref
+  mainline_ref="$(git_remote_mainline_ref)"
+  if [[ $? -ne 0 ]]; then
+    echo "Error: Could not determine mainline branch"
+    return 1
+  fi
+
+  if [[ "$(current_branch)" != "$mainline_ref" ]]; then
+    git fetch origin "$mainline_ref"
   fi
   git log \
     --graph \
@@ -242,17 +297,29 @@ gg() {
     --abbrev-commit \
     --date=relative \
     "$(current_branch)" \
-    --not "refs/remotes/origin/$(git_remote_mainline_ref)"
+    --not "refs/remotes/origin/$mainline_ref"
 }
 
 gs() {
-  if [[ "$(current_branch)" != git_remote_mainline_ref ]]; then
-    git fetch origin "$(git_remote_mainline_ref)"
+  # Validate git setup before proceeding
+  if ! validate_git_setup; then
+    return 1
+  fi
+
+  local mainline_ref
+  mainline_ref="$(git_remote_mainline_ref)"
+  if [[ $? -ne 0 ]]; then
+    echo "Error: Could not determine mainline branch"
+    return 1
+  fi
+
+  if [[ "$(current_branch)" != "$mainline_ref" ]]; then
+    git fetch origin "$mainline_ref"
   fi
   git log \
     --stat \
     "$(current_branch)" \
-    --not "refs/remotes/origin/$(git_remote_mainline_ref)" \
+    --not "refs/remotes/origin/$mainline_ref" \
     "$@"
 }
 
