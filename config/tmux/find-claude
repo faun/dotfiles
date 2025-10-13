@@ -1,0 +1,298 @@
+#!/bin/bash
+
+# tmux-find-claude - Find tmux panes where Claude is waiting for input
+
+set -euo pipefail
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+# Options
+INTERACTIVE=false
+SHOW_ALL=false
+
+# Parse command line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -i|--interactive)
+            INTERACTIVE=true
+            shift
+            ;;
+        -a|--all)
+            SHOW_ALL=true
+            shift
+            ;;
+        -h|--help)
+            echo "Usage: $0 [OPTIONS]"
+            echo ""
+            echo "Find tmux panes where Claude is waiting for input"
+            echo ""
+            echo "OPTIONS:"
+            echo "  -i, --interactive    Use fzf to interactively select and switch to a Claude pane"
+            echo "  -a, --all           Show all panes when no Claude instances are found"
+            echo "  -h, --help          Show this help message"
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1"
+            echo "Use -h or --help for usage information"
+            exit 1
+            ;;
+    esac
+done
+
+# Function to print colored output
+print_header() {
+    echo -e "${CYAN}=== $1 ===${NC}"
+}
+
+print_pane() {
+    local session="$1"
+    local window="$2"
+    local pane="$3"
+    local command="$4"
+    local title="$5"
+
+    echo -e "${GREEN}$session${NC}:${YELLOW}$window${NC}.${BLUE}$pane${NC} [${RED}$command${NC}] $title"
+}
+
+# Check if tmux server is accessible
+if ! tmux info &> /dev/null; then
+    echo -e "${RED}Error: tmux server is not running or not accessible${NC}"
+    exit 1
+fi
+
+# Check if there are any tmux sessions
+if ! tmux list-sessions > /dev/null 2>&1; then
+    echo -e "${RED}Error: No tmux sessions found${NC}"
+    exit 1
+fi
+
+# Check if fzf is available for interactive mode
+if [[ "$INTERACTIVE" == true ]] && ! command -v fzf &> /dev/null; then
+    echo -e "${RED}Error: fzf is required for interactive mode but not found${NC}"
+    echo -e "${CYAN}Install fzf or run without -i flag${NC}"
+    exit 1
+fi
+
+# Array to store found Claude panes for interactive mode
+declare -a claude_panes=()
+declare -a claude_pane_display=()
+
+# Function to validate that a pane actually exists and is accessible
+validate_pane() {
+    local pane_id="$1"
+    # Check if the pane exists and is accessible
+    # Use a simpler check: just try to get info about the pane
+    tmux list-panes -t "$pane_id" 2>/dev/null >/dev/null
+}
+
+# Function to add a Claude pane to our arrays
+add_claude_pane() {
+    local session="$1"
+    local window="$2"
+    local pane="$3"
+    local command="$4"
+    local title="$5"
+    local method="$6"
+
+    local pane_id="${session}:${window}.${pane}"
+
+    # Validate that the pane actually exists before adding it (helps prevent false positives)
+    if ! validate_pane "$pane_id"; then
+        return
+    fi
+
+    local display_line="${session}:${window}.${pane} [${command}] ${title} (${method})"
+
+    # Check if we already have this pane (avoid duplicates)
+    local already_added=false
+    if [[ ${#claude_panes[@]} -gt 0 ]]; then
+        for existing_pane in "${claude_panes[@]}"; do
+            if [[ "$existing_pane" == "$pane_id" ]]; then
+                already_added=true
+                break
+            fi
+        done
+    fi
+
+    if [[ "$already_added" == false ]]; then
+        claude_panes+=("$pane_id")
+        claude_pane_display+=("$display_line")
+
+        if [[ "$INTERACTIVE" == false ]]; then
+            print_pane "$session" "$window" "$pane" "$command" "$title"
+        fi
+    fi
+}
+
+if [[ "$INTERACTIVE" == false ]]; then
+    print_header "Searching for Claude instances in tmux panes"
+fi
+
+# Method 1: Look for "claude" in pane_current_command
+if [[ "$INTERACTIVE" == false ]]; then
+    echo -e "\n${CYAN}Method 1: Checking pane_current_command for 'claude'${NC}"
+fi
+
+while IFS=$'\t' read -r session window pane command title; do
+    if [[ "$command" =~ [Cc]laude ]]; then
+        add_claude_pane "$session" "$window" "$pane" "$command" "$title" "command"
+    fi
+done < <(tmux list-panes -a -F "#{session_name}	#{window_index}	#{pane_index}	#{pane_current_command}	#{pane_title}")
+
+# Method 2: Look for "claude" in pane title
+if [[ "$INTERACTIVE" == false ]]; then
+    echo -e "\n${CYAN}Method 2: Checking pane_title for 'claude'${NC}"
+fi
+
+while IFS=$'\t' read -r session window pane command title; do
+    if [[ "$title" =~ [Cc]laude ]] && [[ ! "$command" =~ [Cc]laude ]]; then
+        add_claude_pane "$session" "$window" "$pane" "$command" "$title" "title"
+    fi
+done < <(tmux list-panes -a -F "#{session_name}	#{window_index}	#{pane_index}	#{pane_current_command}	#{pane_title}")
+
+# Method 3: Check for Claude processes in process tree
+if [[ "$INTERACTIVE" == false ]]; then
+    echo -e "\n${CYAN}Method 3: Checking running processes for Claude${NC}"
+fi
+
+while IFS=$'\t' read -r session window pane pid command title; do
+    if [[ -n "$pid" ]]; then
+        # Check if claude or claude-like processes are running in this pane's process tree
+        if pgrep -P "$pid" 2>/dev/null | xargs -I {} ps -p {} -o comm= 2>/dev/null | grep -qiE '(claude|anthropic)'; then
+            add_claude_pane "$session" "$window" "$pane" "$command" "$title" "process"
+        fi
+    fi
+done < <(tmux list-panes -a -F "#{session_name}	#{window_index}	#{pane_index}	#{pane_pid}	#{pane_current_command}	#{pane_title}")
+
+# Method 4: Check for common Claude-related patterns in command line arguments
+if [[ "$INTERACTIVE" == false ]]; then
+    echo -e "\n${CYAN}Method 4: Checking command line arguments for Claude patterns${NC}"
+fi
+
+while IFS=$'\t' read -r session window pane pid command title; do
+    if [[ -n "$pid" ]]; then
+        # Get full command line for processes in this pane
+        if pgrep -P "$pid" 2>/dev/null | xargs -I {} ps -p {} -o args= 2>/dev/null | grep -qiE '(claude|anthropic|ai-assistant)'; then
+            add_claude_pane "$session" "$window" "$pane" "$command" "$title" "cmdline"
+        fi
+    fi
+done < <(tmux list-panes -a -F "#{session_name}	#{window_index}	#{pane_index}	#{pane_pid}	#{pane_current_command}	#{pane_title}")
+
+# Method 5: Check for interactive shells that might have Claude running
+if [[ "$INTERACTIVE" == false ]]; then
+    echo -e "\n${CYAN}Method 5: Checking shell content for Claude usage${NC}"
+fi
+
+while IFS=$'\t' read -r session window pane pid command title; do
+    if [[ -n "$pid" && "$command" =~ ^(bash|zsh|fish)$ ]]; then
+        # Capture recent pane content to look for Claude prompts or output
+        pane_content=$(tmux capture-pane -t "${session}:${window}.${pane}" -p 2>/dev/null | tail -20)
+        if echo "$pane_content" | grep -qiE '(claude|anthropic|assistant|❯.*ai|🤖|claude\.ai|claude code)'; then
+            add_claude_pane "$session" "$window" "$pane" "$command" "$title" "content"
+        fi
+    fi
+done < <(tmux list-panes -a -F "#{session_name}	#{window_index}	#{pane_index}	#{pane_pid}	#{pane_current_command}	#{pane_title}")
+
+# Handle results
+if [[ ${#claude_panes[@]} -eq 0 ]]; then
+    # Count total sessions and panes for better error context
+    session_count=$(tmux list-sessions 2>/dev/null | wc -l | tr -d ' ')
+    pane_count=$(tmux list-panes -a 2>/dev/null | wc -l | tr -d ' ')
+
+    if [[ "$INTERACTIVE" == false ]]; then
+        echo -e "\n${RED}❌ No Claude instances found${NC}"
+        echo -e "${CYAN}Searched through ${session_count} tmux session(s) and ${pane_count} pane(s)${NC}"
+        echo -e ""
+        echo -e "${YELLOW}Claude might be running but not detected if:${NC}"
+        echo -e "  • Running inside a shell (bash/zsh/fish) that shows as the main command"
+        echo -e "  • Process name doesn't contain 'claude', 'anthropic', or related keywords"
+        echo -e "  • Running as a Python/Node script without clear Claude identifiers"
+        echo -e "  • Process is suspended, backgrounded, or in a different process group"
+        echo -e "  • Running with a custom binary name or alias"
+        echo -e ""
+        echo -e "${CYAN}To help find Claude manually:${NC}"
+        echo -e "  • Try: ${YELLOW}tmux list-panes -a -F '#{session_name}:#{window_index}.#{pane_index} [#{pane_current_command}] #{pane_title}'${NC}"
+        echo -e "  • Or use: ${YELLOW}$0 -a${NC} to show all panes"
+        echo -e "  • Look for panes with suspicious Python/Node processes"
+
+        if [[ "$SHOW_ALL" == true ]]; then
+            echo -e "\n${CYAN}All current panes (since you used -a flag):${NC}"
+            tmux list-panes -a -F "${GREEN}#{session_name}${NC}:${YELLOW}#{window_index}${NC}.${BLUE}#{pane_index}${NC} [${RED}#{pane_current_command}${NC}] #{pane_title}"
+        fi
+    else
+        # Interactive mode: provide brief but helpful error
+        echo -e "${RED}❌ No Claude instances found in ${session_count} session(s), ${pane_count} pane(s)${NC}"
+        echo -e "${CYAN}Try running without -i to see detailed search results${NC}"
+    fi
+    exit 1
+elif [[ "$INTERACTIVE" == true ]]; then
+    # Interactive mode: use fzf to select and switch
+    echo -e "${CYAN}Found ${#claude_panes[@]} Claude pane(s). Select one:${NC}"
+
+    # Create a temp file for fzf input
+    temp_file=$(mktemp)
+    printf '%s\n' "${claude_pane_display[@]}" > "$temp_file"
+
+    # Use fzf to select (similar to session-switch.sh)
+    selected_line=$(fzf --reverse --height=50% --border < "$temp_file")
+    rm "$temp_file"
+
+    if [[ -n "$selected_line" ]]; then
+        # Extract the pane ID from the selected line
+        selected_pane=$(echo "$selected_line" | awk '{print $1}')
+    else
+        echo -e "${YELLOW}No pane selected${NC}"
+        exit 0
+    fi
+
+    # Switch to the selected pane
+    if [[ -n "$selected_pane" ]]; then
+        echo -e "${GREEN}Switching to pane: ${selected_pane}${NC}"
+
+        # Parse the session, window, and pane from the pane ID (format: session:window.pane)
+        session_name=$(echo "$selected_pane" | cut -d: -f1)
+        window_and_pane=$(echo "$selected_pane" | cut -d: -f2)
+        window_index=$(echo "$window_and_pane" | cut -d. -f1)
+        pane_index=$(echo "$window_and_pane" | cut -d. -f2)
+
+        # Check if we're currently inside a tmux session
+        if [[ -n "${TMUX:-}" ]]; then
+            # We're inside tmux, use switch-client to change to the target session/window
+            if tmux switch-client -t "${session_name}:${window_index}" 2>/dev/null; then
+                # Then select the specific pane
+                if tmux select-pane -t "$selected_pane" 2>/dev/null; then
+                    echo -e "${GREEN}✓ Switched to pane ${selected_pane}${NC}"
+                else
+                    echo -e "${RED}✗ Failed to select pane ${selected_pane}${NC}"
+                fi
+            else
+                echo -e "${RED}✗ Failed to switch to session ${session_name}:${window_index}${NC}"
+            fi
+        else
+            # We're not inside tmux, need to attach to the session
+            # First select the pane to ensure it has focus
+            if tmux select-pane -t "$selected_pane" 2>/dev/null; then
+                # Then attach to the session, focusing on the correct window
+                if tmux attach-session -t "${session_name}:${window_index}" 2>/dev/null; then
+                    echo -e "${GREEN}✓ Attached to session and selected pane ${selected_pane}${NC}"
+                else
+                    echo -e "${RED}✗ Failed to attach to session ${session_name}${NC}"
+                fi
+            else
+                echo -e "${RED}✗ Failed to select pane ${selected_pane}${NC}"
+            fi
+        fi
+    fi
+else
+    # Non-interactive mode: just show results and instructions
+    echo -e "\n${GREEN}Found ${#claude_panes[@]} Claude instance(s) above.${NC}"
+    echo -e "${CYAN}To switch to a pane manually, use: tmux select-pane -t SESSION:WINDOW.PANE${NC}"
+    echo -e "${CYAN}Or run with -i flag for interactive selection: $0 -i${NC}"
+fi
