@@ -202,31 +202,48 @@ return {
     keys = {
       { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
     },
-    opts = function()
-      local Config = require("lazyvim.config")
-      local defaults = require("outline.config").defaults
-      local opts = {
-        symbols = {},
-        symbol_blacklist = {},
-      }
-      local filter = Config.kind_filter
-
-      if type(filter) == "table" then
-        local filter_opts = filter.default
-        if type(filter_opts) == "table" then
-          for kind, symbol in pairs(defaults.symbols) do
-            opts.symbols[kind] = {
-              icon = Config.icons.kinds[kind] or symbol.icon,
-              hl = symbol.hl,
-            }
-            if not vim.tbl_contains(filter_opts, kind) then
-              table.insert(opts.symbol_blacklist, kind)
-            end
-          end
-        end
-      end
-      return opts
-    end,
+    opts = {
+      -- Use default symbols and configuration
+      outline_window = {
+        position = "right",
+        width = 25,
+        relative_width = true,
+      },
+      outline_items = {
+        highlight_hovered_item = true,
+        show_symbol_details = true,
+      },
+      symbols = {
+        icons = {
+          File = { icon = "󰈔", hl = "Identifier" },
+          Module = { icon = "󰆧", hl = "Include" },
+          Namespace = { icon = "󰅪", hl = "Include" },
+          Package = { icon = "󰏗", hl = "Include" },
+          Class = { icon = "𝓒", hl = "Type" },
+          Method = { icon = "ƒ", hl = "Function" },
+          Property = { icon = "", hl = "Identifier" },
+          Field = { icon = "󰆨", hl = "Identifier" },
+          Constructor = { icon = "", hl = "Special" },
+          Enum = { icon = "ℰ", hl = "Type" },
+          Interface = { icon = "󰜰", hl = "Type" },
+          Function = { icon = "", hl = "Function" },
+          Variable = { icon = "", hl = "Constant" },
+          Constant = { icon = "", hl = "Constant" },
+          String = { icon = "𝓐", hl = "String" },
+          Number = { icon = "#", hl = "Number" },
+          Boolean = { icon = "⊨", hl = "Boolean" },
+          Array = { icon = "󰅪", hl = "Constant" },
+          Object = { icon = "⦿", hl = "Type" },
+          Key = { icon = "🔐", hl = "Type" },
+          Null = { icon = "NULL", hl = "Type" },
+          EnumMember = { icon = "", hl = "Identifier" },
+          Struct = { icon = "𝓢", hl = "Type" },
+          Event = { icon = "🗲", hl = "Type" },
+          Operator = { icon = "+", hl = "Identifier" },
+          TypeParameter = { icon = "𝙏", hl = "Identifier" },
+        },
+      },
+    },
   },
   {
     "nvim-neotest/neotest",
