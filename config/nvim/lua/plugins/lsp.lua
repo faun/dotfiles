@@ -82,10 +82,18 @@ return {
       "towolf/vim-helm",
     },
     opts = function()
-      local lazy_keymaps = require("lazyvim.plugins.lsp.keymaps").get()
-      local custom_keymaps = {}
-      -- Combine existing keys with custom_keymaps
-      local keys = vim.tbl_extend("force", lazy_keymaps, custom_keymaps)
+      -- Define custom LSP keymaps directly instead of relying on LazyVim
+      local keys = {
+        { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+        { "gd", vim.lsp.buf.definition, desc = "Goto Definition" },
+        { "gr", vim.lsp.buf.references, desc = "References" },
+        { "gi", vim.lsp.buf.implementation, desc = "Goto Implementation" },
+        { "gt", vim.lsp.buf.type_definition, desc = "Goto Type Definition" },
+        { "K", vim.lsp.buf.hover, desc = "Hover" },
+        { "gs", vim.lsp.buf.signature_help, desc = "Signature Help" },
+        { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action" },
+        { "<leader>rn", vim.lsp.buf.rename, desc = "Rename" },
+      }
 
       return {
         -- https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.Opts
