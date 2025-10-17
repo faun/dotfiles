@@ -40,10 +40,39 @@ return {
     lazy = true,
 
     opts = function(_, opts)
+      local kind_icons = {
+        Text = "󰉿",
+        Method = "󰆧",
+        Function = "󰊕",
+        Constructor = "",
+        Field = "󰜢",
+        Variable = "󰀫",
+        Class = "󰠱",
+        Interface = "",
+        Module = "",
+        Property = "󰜢",
+        Unit = "󰑭",
+        Value = "󰎠",
+        Enum = "",
+        Keyword = "󰌋",
+        Snippet = "",
+        Color = "󰏘",
+        File = "󰈔",
+        Reference = "󰈇",
+        Folder = "󰉋",
+        EnumMember = "",
+        Constant = "󰏿",
+        Struct = "󰙅",
+        Event = "",
+        Operator = "󰆕",
+        TypeParameter = "",
+        Copilot = "",
+      }
+
       opts.appearance = {
         use_nvim_cmp_as_default = true,
         nerd_font_variant = "mono",
-        kind_icons = vim.tbl_extend("force", opts.appearance.kind_icons or {}, LazyVim.config.icons.kinds),
+        kind_icons = vim.tbl_extend("force", opts.appearance and opts.appearance.kind_icons or {}, kind_icons),
       }
 
       opts.completion = {
