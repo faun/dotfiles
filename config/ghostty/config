@@ -6,4 +6,4 @@ font-size = 18
 font-thicken = true
 
 theme = light:nord-light,dark:nord
-keybind = shift+enter=text:\n
+keybind = shift+enter=text:\x1b\r
