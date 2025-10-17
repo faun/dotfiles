@@ -136,7 +136,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     opts = {
       mappings = {
         add = "sa", -- Add surrounding in Normal and Visual modes
@@ -361,4 +361,9 @@ return {
       -- log_level = 'debug',
     },
   },
+  -- Plugin overrides for renamed plugins
+  { "nvim-mini/mini.diff" },
+  { "nvim-mini/mini.pairs" },
+  { "mason-org/mason.nvim" },
+  { "mason-org/mason-lspconfig.nvim" },
 }
