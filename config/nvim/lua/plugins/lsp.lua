@@ -14,7 +14,7 @@ return {
   { "folke/neodev.nvim", enabled = false }, -- make sure to uninstall or disable neodev.nvim
   { "folke/neoconf.nvim", cmd = "Neoconf", config = false },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, {})
@@ -39,7 +39,7 @@ return {
     },
   },
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     dependencies = {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
@@ -76,7 +76,7 @@ return {
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
       "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      "mason-org/mason-lspconfig.nvim",
       "b0o/SchemaStore.nvim",
       "nanotee/sqls.nvim",
       "towolf/vim-helm",
