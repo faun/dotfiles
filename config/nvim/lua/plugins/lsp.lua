@@ -110,14 +110,6 @@ return {
             -- prefix = "icons",
           },
           severity_sort = true,
-          signs = {
-            text = {
-              [vim.diagnostic.severity.ERROR] = LazyVim.config.icons.diagnostics.Error,
-              [vim.diagnostic.severity.WARN] = LazyVim.config.icons.diagnostics.Warn,
-              [vim.diagnostic.severity.HINT] = LazyVim.config.icons.diagnostics.Hint,
-              [vim.diagnostic.severity.INFO] = LazyVim.config.icons.diagnostics.Info,
-            },
-          },
         },
         -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
         -- Be aware that you also will need to properly configure your LSP server to
