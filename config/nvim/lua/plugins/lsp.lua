@@ -738,7 +738,6 @@ return {
             diagnostics = {
               globals = {
                 "vim",
-                "LazyVim",
               },
             },
             codeLens = {
