@@ -1,7 +1,11 @@
+#!/usr/bin/env bash
+
 if [[ "${USE_MISE}:-true" != "false" ]]; then
   MISE_MODE="${MISE_MODE:-shim}"
 
   if command -v mise >/dev/null 2>&1; then
+    SHELL_NAME="$(basename "${SHELL:?}")"
+
     if [[ "${MISE_MODE}" == "shim" ]]; then
       # shellcheck disable=SC2155
       export PATH=$(
@@ -10,9 +14,8 @@ if [[ "${USE_MISE}:-true" != "false" ]]; then
           sed -e 's/::/:/' |
           sed -e 's/^://' | sed -e 's/:$//'
       )
-      eval "$(mise activate --shims)"
+      eval "$(mise activate ${SHELL_NAME:?} --shims)"
     else
-      SHELL_NAME="$(basename "${SHELL:?}")"
       eval "$(mise activate ${SHELL_NAME:?})"
     fi
   fi
