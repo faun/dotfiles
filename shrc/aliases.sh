@@ -45,7 +45,6 @@ alias m='more'
 alias df='df -h'
 alias lm='!! | more'
 alias sane='stty sane'
-alias tree='tree --gitignore'
 
 alias py='python'
 alias sha1="openssl sha1"
