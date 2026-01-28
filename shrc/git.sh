@@ -231,7 +231,7 @@ diff_with_mainline() {
 
 # git rebase
 alias grc='git rebase --continue'
-alias gri="git fetch origin \$(git_remote_mainline_ref):\$(git_remote_mainline_ref) && git rebase -i origin/\$(git_remote_mainline_ref)"
+alias gri="git fetch origin \$(git_remote_mainline_ref) && git rebase -i origin/\$(git_remote_mainline_ref)"
 
 show() {
   # Show a given commit in git difftool
