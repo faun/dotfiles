@@ -59,10 +59,10 @@ if status is-interactive
         source ~/.config/fish/functions/fisher.fish
         if test -f ~/.config/fish/functions/bass.fish
             source ~/.config/fish/functions/bass.fish
-            # Source each file in ~/.shrc/*
-            for file in $HOME/.shrc/*
+            # Source each file in ~/.fish/*
+            for file in $HOME/.fish/*.fish
                 if test -f $file
-                    bass source "$file"
+                    source "$file"
                 end
             end
         end
@@ -91,6 +91,11 @@ if status is-interactive
         # Activate mise if installed
         mise activate fish | source
     end
+end
+
+function reload --description "Reload Fish configuration"
+    source ~/.config/fish/config.fish
+    echo "Fish configuration reloaded."
 end
 
 # vim: set ft=fish ts=4 sw=4 sts=4 et:
