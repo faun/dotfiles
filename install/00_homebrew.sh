@@ -23,7 +23,21 @@ if [[ "$OSTYPE" == darwin* ]]; then
 
   install_homebrew_if_needed
 elif [[ "$OSTYPE" == linux* ]]; then
-  sudo apt-get install build-essential curl file git
+  if command -v apt-get >/dev/null 2>&1; then
+    PACKAGE_MANAGER="apt-get"
+    sudo apt-get install build-essential curl file git
+  elif command -v yum >/dev/null 2>&1; then
+    PACKAGE_MANAGER="yum"
+    sudo yum groupinstall 'Development Tools' -y
+    sudo yum install curl file git -y
+  elif command -v dnf >/dev/null 2>&1; then
+    PACKAGE_MANAGER="dnf"
+    sudo dnf groupinstall 'Development Tools' -y
+    sudo dnf install curl file git -y
+  else
+    echo "Unsupported Linux distribution. Please install Homebrew manually."
+    exit 1
+  fi
 
   install_homebrew_if_needed
 fi
