@@ -11,11 +11,79 @@ recent_branches() {
     head -n 10
 }
 
+list_worktrees() {
+  local wt_path wt_branch
+  git worktree list --porcelain 2>/dev/null | while IFS= read -r line; do
+    case "$line" in
+      worktree\ *)
+        wt_path="${line#worktree }"
+        ;;
+      branch\ *)
+        wt_branch="${line#branch refs/heads/}"
+        printf '[worktree] %s\t%s\n' "$wt_branch" "$wt_path"
+        ;;
+    esac
+  done
+}
+
+# Find the worktree path for a given branch, if it exists
+find_worktree_for_branch() {
+  local target_branch="$1"
+  local wt_path wt_branch
+  git worktree list --porcelain 2>/dev/null | while IFS= read -r line; do
+    case "$line" in
+      worktree\ *)
+        wt_path="${line#worktree }"
+        ;;
+      branch\ *)
+        wt_branch="${line#branch refs/heads/}"
+        if [[ "$wt_branch" == "$target_branch" ]]; then
+          printf '%s\n' "$wt_path"
+          return 0
+        fi
+        ;;
+    esac
+  done
+}
+
 recent() {
-  local branch_to_checkout
-  branch_to_checkout="$(recent_branches | fzf || return 1)"
-  if [[ -n $branch_to_checkout ]]; then
-    git checkout "$branch_to_checkout"
+  local selection worktree_path
+
+  # Combine worktrees and recent branches for fzf selection
+  selection="$({
+    list_worktrees
+    recent_branches | while read -r branch; do
+      echo "[branch] $branch"
+    done
+  } | fzf --with-nth=1,2 || return 1)"
+
+  if [[ -z $selection ]]; then
+    return 1
+  fi
+
+  if [[ $selection == "[worktree]"* ]]; then
+    # Extract the worktree path (after the tab)
+    worktree_path=$(echo "$selection" | cut -f2)
+    if [[ -d $worktree_path ]]; then
+      cd "$worktree_path" || return 1
+      echo "Changed to worktree: $worktree_path"
+    else
+      echo "Worktree path not found: $worktree_path"
+      return 1
+    fi
+  elif [[ $selection == "[branch]"* ]]; then
+    # Extract just the branch name
+    local branch_to_checkout
+    branch_to_checkout=$(echo "$selection" | sed 's/^\[branch\] //')
+
+    # Check if this branch is already checked out in a worktree
+    worktree_path=$(find_worktree_for_branch "$branch_to_checkout")
+    if [[ -n $worktree_path && -d $worktree_path ]]; then
+      cd "$worktree_path" || return 1
+      echo "Changed to worktree: $worktree_path"
+    else
+      git checkout "$branch_to_checkout"
+    fi
   else
     return 1
   fi
