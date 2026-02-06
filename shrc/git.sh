@@ -448,6 +448,175 @@ clean_branches() {
     echo "Done."
 }
 
+# Remove git worktrees that are no longer needed
+# A worktree is stale when it has no uncommitted changes AND
+# its remote branch is deleted OR its PR is merged/closed
+clean_worktrees() {
+  local dry_run=false
+  local remove_all=false
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --dry-run)
+        dry_run=true
+        shift
+        ;;
+      --all)
+        remove_all=true
+        shift
+        ;;
+      *)
+        echo "Usage: clean_worktrees [--dry-run] [--all]"
+        echo "  --dry-run  Preview which worktrees would be removed"
+        echo "  --all      Remove all stale worktrees without prompting"
+        return 1
+        ;;
+    esac
+  done
+
+  # Validate git setup
+  if ! validate_git_setup; then
+    return 1
+  fi
+
+  local main_worktree
+  main_worktree=$(git worktree list --porcelain | head -1 | sed 's/worktree //')
+
+  local stale_worktrees=()
+  local worktree_info=()
+
+  # Parse worktree list
+  while IFS= read -r line; do
+    if [[ "$line" =~ ^worktree\ (.+)$ ]]; then
+      local wt_path="${BASH_REMATCH[1]}"
+
+      # Skip the main worktree
+      if [[ "$wt_path" == "$main_worktree" ]]; then
+        continue
+      fi
+
+      local branch=""
+      local status_info=""
+      local is_stale=false
+
+      # Read the rest of this worktree's info
+      while IFS= read -r subline && [[ -n "$subline" ]]; do
+        if [[ "$subline" =~ ^branch\ refs/heads/(.+)$ ]]; then
+          branch="${BASH_REMATCH[1]}"
+        fi
+      done
+
+      # Skip if no branch (detached HEAD or bare)
+      if [[ -z "$branch" ]]; then
+        continue
+      fi
+
+      # Check for uncommitted changes
+      if ! git -C "$wt_path" diff-index --quiet HEAD -- 2>/dev/null; then
+        status_info="[dirty]"
+        continue  # Skip dirty worktrees
+      fi
+
+      # Check for untracked files
+      if [[ -n "$(git -C "$wt_path" ls-files --exclude-standard --others 2>/dev/null)" ]]; then
+        status_info="[untracked files]"
+        continue  # Skip worktrees with untracked files
+      fi
+
+      # Check if remote branch exists
+      local remote_exists=true
+      if ! git ls-remote --heads origin "$branch" 2>/dev/null | grep -q .; then
+        remote_exists=false
+        status_info="[remote deleted]"
+        is_stale=true
+      fi
+
+      # Check PR status if remote still exists
+      if [[ "$remote_exists" == true ]]; then
+        local pr_state
+        pr_state=$(gh pr view "$branch" --json state -q '.state' 2>/dev/null)
+        if [[ "$pr_state" == "MERGED" ]]; then
+          status_info="[PR merged]"
+          is_stale=true
+        elif [[ "$pr_state" == "CLOSED" ]]; then
+          status_info="[PR closed]"
+          is_stale=true
+        fi
+      fi
+
+      if [[ "$is_stale" == true ]]; then
+        stale_worktrees+=("$wt_path")
+        worktree_info+=("$wt_path	$branch	$status_info")
+      fi
+    fi
+  done < <(git worktree list --porcelain)
+
+  if [[ ${#stale_worktrees[@]} -eq 0 ]]; then
+    echo "No stale worktrees found."
+    return 0
+  fi
+
+  echo "Found ${#stale_worktrees[@]} stale worktree(s):"
+  echo ""
+
+  local selected_worktrees=()
+
+  if [[ "$remove_all" == true ]]; then
+    selected_worktrees=("${stale_worktrees[@]}")
+    for info in "${worktree_info[@]}"; do
+      echo "  $info"
+    done
+  else
+    # Use fzf for selection
+    local selected
+    selected=$(printf '%s\n' "${worktree_info[@]}" | fzf --multi --header="Select worktrees to remove (TAB to select, ENTER to confirm)")
+
+    if [[ -z "$selected" ]]; then
+      echo "No worktrees selected."
+      return 0
+    fi
+
+    while IFS= read -r line; do
+      local wt_path
+      wt_path=$(echo "$line" | cut -f1)
+      selected_worktrees+=("$wt_path")
+    done <<< "$selected"
+  fi
+
+  echo ""
+
+  if [[ "$dry_run" == true ]]; then
+    echo "Dry run - would remove:"
+    for wt in "${selected_worktrees[@]}"; do
+      echo "  git worktree remove $wt"
+    done
+    return 0
+  fi
+
+  # Remove selected worktrees
+  local removed=0
+  for wt in "${selected_worktrees[@]}"; do
+    echo "Removing worktree: $wt"
+    if git worktree remove "$wt" 2>/dev/null; then
+      ((removed++))
+    else
+      echo "  Warning: Failed to remove $wt (trying with --force)"
+      if git worktree remove --force "$wt" 2>/dev/null; then
+        ((removed++))
+      else
+        echo "  Error: Could not remove $wt"
+      fi
+    fi
+  done
+
+  echo ""
+  echo "Removed $removed worktree(s)."
+
+  # Prune stale worktree references
+  git worktree prune
+}
+
 make_or_cd_repo_path() {
   set -o pipefail
   path_to_repo=$(echo "$1" |
