@@ -255,7 +255,23 @@ alias grh='git reset HEAD'
 alias gcl='git clone'
 
 # git branches
-alias gco='git checkout'
+gco() {
+  # If no arguments, or first arg is a flag, pass through to git checkout
+  if [[ $# -eq 0 || "$1" == -* ]]; then
+    git checkout "$@"
+    return $?
+  fi
+
+  # Check if the first argument matches a branch that lives in a worktree
+  local worktree_path
+  worktree_path=$(find_worktree_for_branch "$1")
+  if [[ -n $worktree_path && -d $worktree_path ]]; then
+    cd "$worktree_path" || return 1
+    echo "Changed to worktree: $worktree_path"
+  else
+    git checkout "$@"
+  fi
+}
 alias gb='git branch'
 
 # git commit
