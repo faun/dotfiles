@@ -52,7 +52,7 @@ tags
 .rspec-local
 /.env.*
 /.vim/
-/.scratch/
+.scratch/
 /.env
 .envrc
 /logs/*
