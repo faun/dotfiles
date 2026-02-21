@@ -190,7 +190,7 @@ gpo() {
 
 gpf() {
   branch=$(current_branch)
-  if [[ $branch == git_remote_mainline_ref ]]; then
+  if [[ $branch == "$(git_remote_mainline_ref)" ]]; then
     echo "This command cannot be run from the $(git_remote_mainline_ref) branch"
     return 1
   else
@@ -218,23 +218,23 @@ wait_for_ci() {
 merge() {
   if [ -d .git ] || git rev-parse --git-dir >/dev/null 2>&1; then
     branch=$(current_branch)
-    if [[ $branch == git_remote_mainline_ref ]]; then
+    if [[ $branch == "$(git_remote_mainline_ref)" ]]; then
       echo "This command cannot be run from the $(git_remote_mainline_ref) branch"
       return 1
     else
       git fetch &&
         git diff-index --quiet --cached HEAD &&
-        git checkout git_remote_mainline_ref &&
+        git checkout "$(git_remote_mainline_ref)" &&
         git diff-index --quiet --cached HEAD &&
-        git pull origin git_remote_mainline_ref &&
+        git pull origin "$(git_remote_mainline_ref)" &&
         git checkout "$branch" &&
-        git rebase git_remote_mainline_ref &&
+        git rebase "$(git_remote_mainline_ref)" &&
         git push origin +"$branch" --force-with-lease &&
         wait_for_ci &&
-        git checkout git_remote_mainline_ref &&
+        git checkout "$(git_remote_mainline_ref)" &&
         git merge "$branch" --ff-only &&
         sleep 2 &&
-        git push origin git_remote_mainline_ref &&
+        git push origin "$(git_remote_mainline_ref)" &&
         hub browse &&
         sleep 10 &&
         git push origin ":$branch"
@@ -255,7 +255,7 @@ alias grh='git reset HEAD'
 alias gcl='git clone'
 
 # git branches
-gco() {
+function gco() {
   # If no arguments, or first arg is a flag, pass through to git checkout
   if [[ $# -eq 0 || "$1" == -* ]]; then
     git checkout "$@"
