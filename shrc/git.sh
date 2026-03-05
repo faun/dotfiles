@@ -33,6 +33,13 @@ refuse_main_checkout_in_linked_worktree() {
   return 0
 }
 
+recent_remote_branches() {
+  git for-each-ref --sort=-committerdate refs/remotes/origin/ --format='%(refname:short)' |
+    sed 's|^origin/||' |
+    grep -v '^HEAD$' |
+    head -n 10
+}
+
 list_worktrees() {
   local wt_path wt_branch
   git worktree list --porcelain 2>/dev/null | while IFS= read -r line; do
@@ -98,15 +105,33 @@ _cd_to_default_branch() {
 }
 
 recent() {
-  local selection worktree_path
+  local selection worktree_path show_remote=false
 
-  # Combine worktrees and recent branches for fzf selection
-  selection="$({
-    list_worktrees
-    recent_branches | while read -r branch; do
-      echo "[branch] $branch"
-    done
-  } | fzf --with-nth=1,2 || return 1)"
+  if [[ "$1" == "--remote" || "$1" == "-r" ]]; then
+    show_remote=true
+  fi
+
+  local local_branches
+  local_branches=$(recent_branches)
+
+  if [[ "$show_remote" == true ]]; then
+    # Show remote branches not already listed as local
+    selection="$({
+      recent_remote_branches | while read -r branch; do
+        if ! echo "$local_branches" | grep -qxF "$branch"; then
+          echo "[remote] $branch"
+        fi
+      done
+    } | fzf || return 1)"
+  else
+    # Combine worktrees and recent local branches for fzf selection
+    selection="$({
+      list_worktrees
+      echo "$local_branches" | while read -r branch; do
+        echo "[branch] $branch"
+      done
+    } | fzf --with-nth=1,2 || return 1)"
+  fi
 
   if [[ -z $selection ]]; then
     return 1
@@ -155,6 +180,15 @@ recent() {
       refuse_main_checkout_in_linked_worktree "$branch_to_checkout" || return 1
       git checkout "$branch_to_checkout"
     fi
+  elif [[ $selection == "[remote]"* ]]; then
+    local branch_to_checkout worktree_dir
+    branch_to_checkout=$(echo "$selection" | sed 's/^\[remote\] //')
+
+    # Create a new worktree for the remote branch
+    worktree_dir="$(git rev-parse --show-toplevel)/../worktrees/$branch_to_checkout"
+    git worktree add "$worktree_dir" "$branch_to_checkout" || return 1
+    cd "$worktree_dir" || return 1
+    echo "Created worktree: $worktree_dir"
   else
     return 1
   fi
