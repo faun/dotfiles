@@ -37,7 +37,7 @@ recent_remote_branches() {
   git for-each-ref --sort=-committerdate refs/remotes/origin/ --format='%(refname:short)' |
     sed 's|^origin/||' |
     grep -v '^HEAD$' |
-    head -n 10
+    head -n 25
 }
 
 list_worktrees() {
@@ -178,7 +178,13 @@ recent() {
       _set_tmux_pane_title_from_path "$existing_worktree"
     else
       refuse_main_checkout_in_linked_worktree "$branch_to_checkout" || return 1
-      git checkout "$branch_to_checkout"
+      # Create a new worktree for the branch
+      local worktree_dir
+      worktree_dir="$(git rev-parse --show-toplevel)/../worktrees/$branch_to_checkout"
+      git worktree add "$worktree_dir" "$branch_to_checkout" || return 1
+      cd "$worktree_dir" || return 1
+      echo "Created worktree: $worktree_dir"
+      _set_tmux_pane_title_from_path "$worktree_dir"
     fi
   elif [[ $selection == "[remote]"* ]]; then
     local branch_to_checkout worktree_dir
