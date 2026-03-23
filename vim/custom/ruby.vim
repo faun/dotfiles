@@ -5,8 +5,8 @@ augroup rubycomplete
   endif
 augroup END
 
-let g:ruby_host_prog = '~/.rbenv/shims/neovim-ruby-host'
-let g:ruby_path = system('echo $HOME/.rbenv/shims')
+let g:ruby_host_prog = '~/.local/share/mise/shims/neovim-ruby-host'
+let g:ruby_path = system('echo $HOME/.local/share/mise/shims')
 
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1

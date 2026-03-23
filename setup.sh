@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-RBENV_INSTALL_DIR="$HOME/.rbenv"
-
 # Install vim bundles
 vim +PlugInstall +qall
 
@@ -18,11 +16,6 @@ if ! [[ $SHELL =~ /(.*)/zsh ]]; then
 
   # Set zsh as your default shell
   sudo chsh -s $(which zsh) $(whoami)
-fi
-
-# Install rbenv
-if ! [[ -d $RBENV_INSTALL_DIR ]]; then
-  git clone https://github.com/sstephenson/rbenv.git $RBENV_INSTALL_DIR
 fi
 
 brew tap thoughtbot/formulae
