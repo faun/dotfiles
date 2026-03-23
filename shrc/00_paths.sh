@@ -46,8 +46,6 @@ if [[ "$USE_GIT_SAFEPATH" == "true" ]]; then
   PATH=".git/safe/../../node_modules/.bin:$PATH"
 fi
 
-PATH="$HOME/bin:$PATH"
-
 if [[ -d /usr/local/bin ]]; then
   PATH="/usr/local/bin:$PATH"
 fi
@@ -58,6 +56,10 @@ fi
 
 if [[ -d "$HOME/.local/bin" ]]; then
   PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [[ -d "$HOME/bin" ]]; then
+  PATH="$HOME/bin:$PATH"
 fi
 
 export PATH
