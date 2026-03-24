@@ -46,6 +46,25 @@ find_worktree_for_branch() {
   done
 }
 
+# Navigate to wherever the default branch is checked out.
+_cd_to_default_branch() {
+  local default_branch="$1"
+  local target
+  target=$(find_worktree_for_branch "$default_branch")
+
+  if [[ -z $target ]]; then
+    # Not checked out in any worktree — fall back to primary worktree
+    target=$(git worktree list --porcelain | awk '/^worktree /{print substr($0,10); exit}')
+  fi
+
+  if [[ -n $target && -d $target ]]; then
+    cd "$target" || return 1
+    echo "Changed to: $target"
+  else
+    return 1
+  fi
+}
+
 recent() {
   local selection worktree_path
 
@@ -62,8 +81,18 @@ recent() {
   fi
 
   if [[ $selection == "[worktree]"* ]]; then
-    # Extract the worktree path (after the tab)
+    local selected_branch
+    selected_branch=$(echo "$selection" | awk '{print $2}')
     worktree_path=$(echo "$selection" | cut -f2)
+
+    # If the selected branch is the default branch, go to the primary worktree
+    local default_branch
+    default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+    if [[ -n $default_branch && "$selected_branch" == "$default_branch" ]]; then
+      _cd_to_default_branch "$default_branch"
+      return $?
+    fi
+
     if [[ -d $worktree_path ]]; then
       cd "$worktree_path" || return 1
       echo "Changed to worktree: $worktree_path"
@@ -72,18 +101,18 @@ recent() {
       return 1
     fi
   elif [[ $selection == "[branch]"* ]]; then
-    # Extract just the branch name
     local branch_to_checkout
     branch_to_checkout=$(echo "$selection" | sed 's/^\[branch\] //')
 
-    # Check if this branch is already checked out in a worktree
-    worktree_path=$(find_worktree_for_branch "$branch_to_checkout")
-    if [[ -n $worktree_path && -d $worktree_path ]]; then
-      cd "$worktree_path" || return 1
-      echo "Changed to worktree: $worktree_path"
-    else
-      git checkout "$branch_to_checkout"
+    # If the selected branch is the default branch, go to the primary worktree
+    local default_branch
+    default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+    if [[ -n $default_branch && "$branch_to_checkout" == "$default_branch" ]]; then
+      _cd_to_default_branch "$default_branch"
+      return $?
     fi
+
+    git checkout "$branch_to_checkout"
   else
     return 1
   fi
@@ -442,7 +471,7 @@ clean_branches() {
   git checkout "$(git_remote_mainline_ref)" &&
     git diff-index --quiet --cached HEAD &&
     git branch --merged |
-    grep -v "\*" |
+    grep -v "[*+]" |
       grep -v "$(git_remote_mainline_ref)" |
       xargs -n 1 git branch -d &&
     echo "Done."
