@@ -72,5 +72,6 @@ node_modules/
 mise.toml
 **/.claude/settings.local.json
 /.jira
+.scratch/
 
 # vim: set ft=gitconfig ts=2 sw=2 et:
