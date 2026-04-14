@@ -41,9 +41,18 @@ if [[ -d "$GOBIN" ]]; then
   PATH="$PATH:$GOBIN"
 fi
 
-if [[ "$USE_GIT_SAFEPATH" == "true" ]]; then
-  PATH=".git/safe/../../bin:$PATH"
-  PATH=".git/safe/../../node_modules/.bin:$PATH"
+PATH=".git/safe/../../bin:$PATH"
+PATH=".git/safe/../../node_modules/.bin:$PATH"
+
+# Worktree support: .git is a file pointing to the main repo's .git dir.
+# If the main repo has .git/safe, trust this worktree's bin/ too.
+if [ -f .git ]; then
+  _main_gitdir="$(sed -n 's/^gitdir: \(.*\)\/\.git\/worktrees\/.*$/\1/p' .git 2>/dev/null)"
+  if [ -n "$_main_gitdir" ] && [ -d "$_main_gitdir/.git/safe" ]; then
+    PATH="./node_modules/.bin:$PATH"
+    PATH="./bin:$PATH"
+  fi
+  unset _main_gitdir
 fi
 
 if [[ -d /usr/local/bin ]]; then
