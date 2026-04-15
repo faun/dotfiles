@@ -214,7 +214,13 @@ glo() {
 # git push
 alias gp='git push'
 gpo() {
-  git push --set-upstream origin "$(git branch | awk '/^\* / { print $2 }')"
+  local branch
+  branch=$(git branch --show-current)
+  if [[ -z "$branch" ]]; then
+    echo "Error: not on a branch (detached HEAD state)" >&2
+    return 1
+  fi
+  git push --set-upstream origin "HEAD:$branch"
 }
 
 gpf() {
@@ -446,7 +452,15 @@ alias ggg="git log --graph --pretty=format:'%C(yellow)%h %Creset(%cr)%nAuthor: %
 alias gggg="git log --pretty=format:'%C(yellow)%h %Creset(%cr) %C(green)%aN <%aE>%Creset%n%Cblue%s%Creset%n ' --numstat"
 alias gitmine="git log --author='\$(git config --get user.name)' --pretty=format:'%Cgreen%ad%Creset %s%C(yellow)%d%Creset %Cred(%h)%Creset' --date=short"
 alias today='git lg --since="1 day ago"'
-alias mark_as_safe='[ -d .git ] && mkdir .git/safe || echo "Run this command at the root of a git repository"'
+mark_as_safe() {
+  local toplevel
+  toplevel="$(git rev-parse --show-toplevel 2>/dev/null)" || {
+    echo "Run this command inside a git repository"
+    return 1
+  }
+  git config --file ~/.gitconfig.local --add safe.directory "$toplevel"
+  echo "Marked $toplevel as safe"
+}
 
 # External Tools
 alias tower='gittower'
