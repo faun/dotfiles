@@ -46,6 +46,15 @@ find_worktree_for_branch() {
   done
 }
 
+# Set the tmux pane title to the basename of $1 (or $PWD), if inside tmux
+_set_tmux_pane_title_from_path() {
+  [[ -z ${TMUX:-} ]] && return 0
+  local path="${1:-$PWD}"
+  # Strip trailing slash, then take the part after the last /
+  path="${path%/}"
+  tmux select-pane -T "${path##*/}" 2>/dev/null || true
+}
+
 # Navigate to wherever the default branch is checked out.
 _cd_to_default_branch() {
   local default_branch="$1"
@@ -60,6 +69,7 @@ _cd_to_default_branch() {
   if [[ -n $target && -d $target ]]; then
     cd "$target" || return 1
     echo "Changed to: $target"
+    _set_tmux_pane_title_from_path "$target"
   else
     return 1
   fi
@@ -96,6 +106,7 @@ recent() {
     if [[ -d $worktree_path ]]; then
       cd "$worktree_path" || return 1
       echo "Changed to worktree: $worktree_path"
+      _set_tmux_pane_title_from_path "$worktree_path"
     else
       echo "Worktree path not found: $worktree_path"
       return 1
