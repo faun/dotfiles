@@ -68,7 +68,7 @@
 	autosetupmerge = true
 
 [push]
-	default = tracking
+	default = current
 
 [difftool]
 	prompt = false
