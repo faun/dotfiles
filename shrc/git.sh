@@ -458,6 +458,11 @@ mark_as_safe() {
     echo "Run this command inside a git repository"
     return 1
   }
+  if git config --file ~/.gitconfig.local --get-all safe.directory 2>/dev/null \
+      | grep -Fxq -- "$toplevel"; then
+    echo "$toplevel is already marked as safe"
+    return 0
+  fi
   git config --file ~/.gitconfig.local --add safe.directory "$toplevel"
   echo "Marked $toplevel as safe"
 }
