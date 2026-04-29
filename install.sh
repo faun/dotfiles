@@ -147,7 +147,7 @@ touch "$HOME/.vim/spell/en.utf-8.add"
 nvim -u .nvimtest +q
 
 if [[ -z ${SKIP_HEALTH_CHECK:-} ]]; then
-  nvim +CheckHealth
+  nvim +checkhealth
   echo "export SKIP_HEALTH_CHECK=true" >> ~/.local.sh
   export SKIP_HEALTH_CHECK=true
 fi
