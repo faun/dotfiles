@@ -11,6 +11,16 @@ return {
         shfmt = {
           prepend_args = { "-i", "2" },
         },
+        eslint = {
+          condition = function()
+            return vim.fn.executable("eslint") == 1
+          end,
+        },
+        packer_fmt = {
+          condition = function()
+            return vim.fn.executable("packer") == 1
+          end,
+        },
         rubocop = {
           ---@param ctx conform.Context
           condition = function(_, ctx)
@@ -77,9 +87,12 @@ return {
         },
         injected = { options = { ignore_errors = true } },
         prettier = {
-          -- Only use prettier when config file is present
+          -- Only use prettier when it is installed and a config file is present
           ---@param ctx conform.Context
           condition = function(ctx)
+            if vim.fn.executable("prettier") ~= 1 then
+              return false
+            end
             return vim.fs.find({
               ".prettierrc",
               ".prettierrc.json",
