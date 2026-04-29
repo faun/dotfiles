@@ -147,7 +147,37 @@ touch "$HOME/.vim/spell/en.utf-8.add"
 nvim -u .nvimtest +q
 
 if [[ -z ${SKIP_HEALTH_CHECK:-} ]]; then
-  nvim +checkhealth
+  echo "Running checkhealth..."
+  HEALTH_LOG="$(mktemp)"
+  nvim --headless +checkhealth +"w! $HEALTH_LOG" +qa 2>/dev/null || true
+
+  echo ""
+  echo "=== Neovim Health Check Summary ==="
+
+  # Print ERROR lines with context
+  errors=$(grep -n "ERROR\|error" "$HEALTH_LOG" 2>/dev/null || true)
+  warnings=$(grep -n "WARNING\|warn" "$HEALTH_LOG" 2>/dev/null || true)
+
+  if [[ -n "$errors" ]]; then
+    echo ""
+    echo "ERRORS:"
+    echo "$errors"
+  fi
+
+  if [[ -n "$warnings" ]]; then
+    echo ""
+    echo "WARNINGS:"
+    echo "$warnings"
+  fi
+
+  if [[ -z "$errors" && -z "$warnings" ]]; then
+    echo "All checks passed."
+  fi
+
+  echo ""
+  echo "Full report saved to: $HEALTH_LOG"
+  echo "==================================="
+
   echo "export SKIP_HEALTH_CHECK=true" >> ~/.local.sh
   export SKIP_HEALTH_CHECK=true
 fi
