@@ -16,11 +16,6 @@ return {
             return vim.fn.executable("eslint") == 1
           end,
         },
-        packer_fmt = {
-          condition = function()
-            return vim.fn.executable("packer") == 1
-          end,
-        },
         rubocop = {
           ---@param ctx conform.Context
           condition = function(_, ctx)
@@ -138,6 +133,7 @@ return {
         tsx = { "prettier" },
         typescript = { "prettier" },
         typescriptreact = { "prettier" },
+        hcl = {},
         yaml = {},
       },
     },
