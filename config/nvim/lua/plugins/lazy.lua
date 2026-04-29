@@ -74,6 +74,7 @@ return {
       default_args = {
         DiffviewOpen = { "--imply-local" },
       },
+      hg_cmd = nil,
     },
   },
   {
