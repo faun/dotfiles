@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-set -e
+set -eou pipefail
+
+cd "$(dirname "$0")" || exit 1
+
+eval "$(mise activate bash)"
 
 go_modules=(
   github.com/nametake/golangci-lint-langserver
