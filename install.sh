@@ -154,9 +154,8 @@ if [[ -z ${SKIP_HEALTH_CHECK:-} ]]; then
   echo ""
   echo "=== Neovim Health Check Summary ==="
 
-  # Print ERROR lines with context
-  errors=$(grep -n "ERROR\|error" "$HEALTH_LOG" 2>/dev/null || true)
-  warnings=$(grep -n "WARNING\|warn" "$HEALTH_LOG" 2>/dev/null || true)
+  errors=$(grep -n "ERROR" "$HEALTH_LOG" 2>/dev/null || true)
+  warnings=$(grep -n "WARNING" "$HEALTH_LOG" 2>/dev/null || true)
 
   if [[ -n "$errors" ]]; then
     echo ""
