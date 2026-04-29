@@ -3,7 +3,9 @@
 set -eou pipefail
 
 apps=(
-  497799835 # Xcode
+  # Xcode is excluded — it must be installed manually from the App Store under
+  # the correct Apple ID. Command Line Tools (installed by 00_homebrew.sh) are
+  # sufficient for most development work.
 )
 
 INSTALLED_APPS="$(mas list | awk '{ print $1 }')"
@@ -24,5 +26,9 @@ for app_id in "${apps[@]}"; do
     echo "App $APP_NAME already installed"
   fi
 done
-echo "Agreeing to the Xcode license"
-sudo xcodebuild -license accept
+# Accept the Xcode license only when full Xcode.app is the active developer
+# directory. Command Line Tools don't require (or support) this step.
+if [[ "$(xcode-select -p 2>/dev/null)" == /Applications/Xcode*.app/Contents/Developer ]]; then
+  echo "Agreeing to the Xcode license"
+  sudo xcodebuild -license accept
+fi

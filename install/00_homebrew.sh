@@ -9,17 +9,18 @@ install_homebrew_if_needed() {
 }
 
 if [[ "$OSTYPE" == darwin* ]]; then
-  # Accept the XCode license agreement
-  XCODE_EXIT_CODE=$(
-    xcodebuild >/dev/null 2>&1
-    echo $?
-  )
-  if [[ "$XCODE_EXIT_CODE" = "69" ]]; then
-    echo "Please accept the xcode license terms:"
-    sudo xcodebuild -license accept
-  fi
-
+  # Install Command Line Tools if missing (preferred over full Xcode).
   xcode-select --install >/dev/null 2>&1 || true
+
+  # Accept the Xcode license only when full Xcode.app is the active developer
+  # directory. CLT doesn't need it and xcodebuild will error if CLT is active.
+  if [[ "$(xcode-select -p 2>/dev/null)" == /Applications/Xcode*.app/Contents/Developer ]]; then
+    XCODE_EXIT_CODE=$(xcodebuild >/dev/null 2>&1; echo $?)
+    if [[ "$XCODE_EXIT_CODE" = "69" ]]; then
+      echo "Please accept the xcode license terms:"
+      sudo xcodebuild -license accept
+    fi
+  fi
 
   install_homebrew_if_needed
 elif [[ "$OSTYPE" == linux* ]]; then
