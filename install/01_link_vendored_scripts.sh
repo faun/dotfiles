@@ -19,15 +19,14 @@ for LINE in "${REPOS_TO_CLONE[@]}"; do
   REPO_URL="https://github.com/${NAME_OR_ORG:?}/${REPO_NAME:?}.git"
   REPO_DEST="${HOME:?}/.config/${NAME_OR_ORG:?}/${REPO_NAME:?}"
 
-  echo "Cloning $REPO_URL to $REPO_DEST"
-  mkdir -p "${REPO_DEST:?}"
-  if [ -d "$REPO_DEST" ]; then
+  if [ -d "$REPO_DEST/.git" ]; then
     pushd "$REPO_DEST" >/dev/null
     echo "Updating ${REPO_NAME:?}"
     git pull -q --rebase --autostash &>/dev/null || true
     popd >/dev/null
   else
     echo "Cloning $REPO_URL to $REPO_DEST"
+    mkdir -p "$(dirname "${REPO_DEST:?}")"
     git clone -q "$REPO_URL" "$REPO_DEST" || true
   fi
 done
@@ -37,9 +36,17 @@ FILES_TO_LINK=(
   ${HOME:?}/.config/ahmetb/kubectx/kubens
 )
 
+mkdir -p "${HOME:?}/bin"
+
 for TARGET in "${FILES_TO_LINK[@]}"; do
   FILE_NAME=$(basename $TARGET)
-  echo "Linking ${LINE:?} to ~/bin/${FILE_NAME:?}"
+
+  if [[ ! -f "$TARGET" ]]; then
+    echo "Skipping $FILE_NAME: $TARGET does not exist"
+    continue
+  fi
+
+  echo "Linking $TARGET to ~/bin/${FILE_NAME:?}"
 
   DESTINATION="${HOME:?}/bin/$FILE_NAME"
   if [[ -L "${DESTINATION:?}" ]]; then
