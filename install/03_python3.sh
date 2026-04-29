@@ -33,11 +33,15 @@ echo "$PYTHON3_PATH"
 
 "$PYTHON3_PATH" -m pip install --upgrade pip setuptools wheel neovim >/dev/null
 
-if ! grep "g:python3_host_prog" "$HOME/.vimrc.local" >/dev/null 2>&1; then
-  echo "Adding Neovim configuration for Python3"
-  echo "let g:python3_host_prog = '$PYTHON3_PATH'" >>"$HOME/.vimrc.local"
+LOCAL_LUA="$HOME/.local.lua"
+touch "$LOCAL_LUA"
+if ! grep "python3_host_prog" "$LOCAL_LUA" >/dev/null 2>&1; then
+  echo "Adding python3_host_prog to $LOCAL_LUA"
+  echo "vim.g.python3_host_prog = '$PYTHON3_PATH'" >> "$LOCAL_LUA"
 else
-  echo "Please remove g:python3_host_prog from $HOME/.vimrc.local and retry"
+  # Update the existing line in case the path changed
+  sed -i '' "s|vim.g.python3_host_prog = .*|vim.g.python3_host_prog = '$PYTHON3_PATH'|" "$LOCAL_LUA"
+  echo "Updated python3_host_prog in $LOCAL_LUA"
 fi
 
 echo "Installing debugpy"
