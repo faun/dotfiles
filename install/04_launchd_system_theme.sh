@@ -1,8 +1,16 @@
-# #!/usr/bin/env bash
+#!/usr/bin/env bash
 
 set -euo pipefail
 
-# Create the LaunchAgents directory if it doesn't exist
+# Write the current theme to the cache immediately so nvim gets the right
+# colorscheme on first launch, before the monitor loop has a chance to run.
+mkdir -p "$HOME/.cache"
+if defaults read -g AppleInterfaceStyle &>/dev/null; then
+  echo "dark" > "$HOME/.cache/theme_mode"
+else
+  echo "light" > "$HOME/.cache/theme_mode"
+fi
+
 mkdir -p ~/Library/LaunchAgents
 cat >~/Library/LaunchAgents/me.faun.nvim-theme-monitor.plist <<EOL
 <?xml version="1.0" encoding="UTF-8"?>
@@ -27,7 +35,7 @@ cat >~/Library/LaunchAgents/me.faun.nvim-theme-monitor.plist <<EOL
     <key>EnvironmentVariables</key>
     <dict>
         <key>PATH</key>
-        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
     </dict>
 </dict>
 </plist>
