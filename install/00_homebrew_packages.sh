@@ -23,7 +23,6 @@ if command -v brew >/dev/null 2>&1; then
     luarocks
     mas
     neovim
-    pyenv-virtualenv
     ripgrep
     rubyfmt
     shfmt
