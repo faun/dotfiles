@@ -1,3 +1,6 @@
+-- Required by auto-session to restore buffer-local options correctly
+vim.opt.sessionoptions:append("localoptions")
+
 -- Set vim shortmess options
 vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
 
