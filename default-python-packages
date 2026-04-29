@@ -2,7 +2,6 @@ black
 cmakelang
 djlint
 isort
-pynvim
 semgrep
 yamllint
 proselint
