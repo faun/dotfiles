@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-Z_DIR="${Z_DIR:-"$HOME/.config/z"}"
+Z_SCRIPT="${Z_SCRIPT:-"$HOME/.config/rupa/z/z.sh"}"
 
-if [[ -s "${Z_DIR:?}/z.sh" ]]; then
-	source "${Z_DIR:?}/z.sh"
+if [[ -s "$Z_SCRIPT" ]]; then
+	source "$Z_SCRIPT"
 fi
