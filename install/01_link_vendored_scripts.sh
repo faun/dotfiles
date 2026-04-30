@@ -38,15 +38,18 @@ FILES_TO_LINK=(
 
 mkdir -p "${HOME:?}/bin"
 
-for TARGET in "${FILES_TO_LINK[@]}"; do
-  FILE_NAME=$(basename $TARGET)
+for ENTRY in "${FILES_TO_LINK[@]}"; do
+  TARGET="${ENTRY%%|*}"
+  if [[ "$ENTRY" == *"|"* ]]; then
+    FILE_NAME="${ENTRY##*|}"
+  else
+    FILE_NAME=$(basename "$TARGET")
+  fi
 
   if [[ ! -f "$TARGET" ]]; then
     echo "Skipping $FILE_NAME: $TARGET does not exist"
     continue
   fi
-
-  echo "Linking $TARGET to ~/bin/${FILE_NAME:?}"
 
   DESTINATION="${HOME:?}/bin/$FILE_NAME"
   if [[ -L "${DESTINATION:?}" ]]; then
