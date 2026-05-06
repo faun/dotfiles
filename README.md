@@ -37,6 +37,32 @@ Add any additional configuration settings to `~/.local.sh` and these will be sou
 
 Things that can be added to this file include custom aliases, configuration settings, private environment variables, paths, etc.
 
+##### Secrets (1Password → macOS Keychain → env vars)
+
+`zsh/05_secrets.sh` provides three commands for loading secrets from 1Password into shell env vars, cached in the macOS Keychain so shell startup never blocks on a biometric prompt.
+
+The model is **one 1Password item with many fields**. Each field's label matches the env var name. The item is referenced only by UUID — names rename, UUIDs don't.
+
+Add the following to `~/.local.sh`:
+
+    export OP_ACCOUNT="<account>.1password.com"
+    export OP_SECRETS_VAULT="<vault-uuid>"
+    export OP_SECRETS_ITEM="<item-uuid>"
+
+Operations:
+
+| Command | What it does |
+| --- | --- |
+| `secret_store NAME` | Read field `NAME` from 1Password and cache it in Keychain under service `NAME`. Run once per machine, or after rotating the value. |
+| `secret_delete NAME` | Remove the cached value from Keychain. |
+| `secret_load NAME` | Read `NAME` from Keychain and `export NAME=<value>`. Silent on miss. Called from this file at shell startup; also callable directly. |
+
+To add a new secret:
+
+1. In 1Password, add a concealed field labeled exactly `NAME` (the desired env var name) to the configured item.
+2. Append `secret_load NAME` to the bottom of `zsh/05_secrets.sh`.
+3. Run `secret_store NAME` once. Every new shell will export `$NAME`.
+
 ### Change shell to latest Zsh
 
     brew install zsh
