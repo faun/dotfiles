@@ -53,15 +53,16 @@ Operations:
 
 | Command | What it does |
 | --- | --- |
-| `secret_store NAME` | Read field `NAME` from 1Password and cache it in Keychain under service `NAME`. Run once per machine, or after rotating the value. |
-| `secret_delete NAME` | Remove the cached value from Keychain. |
-| `secret_load NAME` | Read `NAME` from Keychain and `export NAME=<value>`. Silent on miss. Called from this file at shell startup; also callable directly. |
+| `secret_store NAME` | Read field `NAME` from 1Password, cache it in Keychain, and record `NAME` in the index. Run once per machine, or after rotating the value. |
+| `secret_store_all` | Fetch every populated field on the configured 1Password item and cache all of them. Use to bootstrap a new machine or refresh everything at once. |
+| `secret_delete NAME` | Remove the cached value from Keychain and from the index. |
+| `secret_load NAME` | Read `NAME` from Keychain and `export NAME=<value>`. Silent on miss. Called automatically at shell startup for every name in the index. |
 
 To add a new secret:
 
 1. In 1Password, add a concealed field labeled exactly `NAME` (the desired env var name) to the configured item.
-2. Append `secret_load NAME` to the bottom of `zsh/05_secrets.sh`.
-3. Run `secret_store NAME` once. Every new shell will export `$NAME`.
+2. Run `secret_store NAME` once — it caches the value and records `NAME` in the index.
+3. Every new shell exports `$NAME` automatically (no manual edit to the file needed).
 
 ### Change shell to latest Zsh
 
