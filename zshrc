@@ -3,6 +3,8 @@ if [[ -n $DEBUG_STARTUP_TIME ]]; then
   zmodload zsh/zprof
 fi
 
+typeset -U fpath
+
 # use .localrc for settings specific to one system
 [[ -f ~/.localrc ]] && . ~/.localrc
 
