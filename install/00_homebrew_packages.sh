@@ -7,6 +7,7 @@ if command -v brew >/dev/null 2>&1; then
   homebrew_dependencies=(
     bat
     clang-format
+    cmake
     direnv
     fd
     fish
