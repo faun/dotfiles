@@ -14,37 +14,39 @@
 # macOS-only: relies on `security` (macOS Keychain CLI).
 [[ "$OSTYPE" == darwin* ]] || return 0
 
-# secret_store <NAME>
-#   Read field <NAME> from the configured 1Password item and cache the
-#   value in the macOS Keychain under service <NAME>. Run once per machine.
+# secret_store
+#   Read all fields from the configured 1Password item and cache each value
+#   in the macOS Keychain under service <FIELD_LABEL>. Run once per machine.
 secret_store() {
-  local name="$1"
-  if [[ -z "$name" ]]; then
-    echo "usage: secret_store <NAME>" >&2
-    return 2
-  fi
   if [[ -z "${OP_SECRETS_VAULT:-}" || -z "${OP_SECRETS_ITEM:-}" ]]; then
     echo "secret_store: OP_SECRETS_VAULT and OP_SECRETS_ITEM must be set" >&2
     return 1
   fi
-  local op_uri="op://${OP_SECRETS_VAULT}/${OP_SECRETS_ITEM}/${name}"
-  local value op_err
+  local -a op_account_flag
+  [[ -n "${OP_ACCOUNT:-}" ]] && op_account_flag=(--account "$OP_ACCOUNT")
+  local op_err fields
   op_err=$(mktemp)
-  if ! value=$(op read ${OP_ACCOUNT:+--account "$OP_ACCOUNT"} --no-newline "$op_uri" 2>"$op_err"); then
-    echo "secret_store: failed to read $name from 1Password" >&2
+  if ! fields=$(op "${op_account_flag[@]}" item get "${OP_SECRETS_ITEM}" \
+      --vault "${OP_SECRETS_VAULT}" --format json 2>"$op_err" \
+      | jq -r '.fields[] | select(.value != null and .value != "") | [.label, .value] | @tsv'); then
+    echo "secret_store: failed to read item from 1Password" >&2
     sed 's/^/  /' "$op_err" >&2
     rm -f "$op_err"
     return 1
   fi
   rm -f "$op_err"
-  if security add-generic-password -U \
-      -a "$USER" -s "$name" -w "$value" \
-      -T /usr/bin/security >/dev/null 2>&1; then
-    echo "secret_store: stored $name in Keychain"
-  else
-    echo "secret_store: failed to write $name to Keychain" >&2
-    return 1
-  fi
+  local rc=0
+  while IFS=$'\t' read -r label value; do
+    if security add-generic-password -U \
+        -a "$USER" -s "$label" -w "$value" \
+        -T /usr/bin/security >/dev/null 2>&1; then
+      echo "secret_store: stored $label in Keychain"
+    else
+      echo "secret_store: failed to write $label to Keychain" >&2
+      rc=1
+    fi
+  done <<< "$fields"
+  return $rc
 }
 
 # secret_delete <NAME>
@@ -71,5 +73,5 @@ secret_load() {
   [[ -n "$value" ]] && export "$name=$value"
 }
 
-# --- Cached secrets (populate via `secret_store <NAME>`) ---
+# --- Cached secrets (populate via `secret_store`) ---
 secret_load HF_TOKEN
