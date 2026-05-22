@@ -9,7 +9,6 @@ REPOS_TO_CLONE=(
   dandavison/delta
   jonmosco/kube-tmux
   rupa/z
-  tmux-plugins/tpm
   zsh-users/antigen
 )
 
