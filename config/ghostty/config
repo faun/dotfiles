@@ -8,3 +8,6 @@ font-thicken = false
 
 theme = Nord
 keybind = shift+enter=text:\x1b\r
+
+confirm-close-surface = false
+window-save-state = always
