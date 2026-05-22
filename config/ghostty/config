@@ -1,9 +1,10 @@
 
 font-family = "Inconsolata Nerd Font Mono"
 
-font-size = 16
+font-size = 18
+font-variation-bold = wght=500
 
-font-thicken = true
+font-thicken = false
 
 theme = Nord
 keybind = shift+enter=text:\x1b\r
