@@ -11,6 +11,28 @@ recent_branches() {
     head -n 10
 }
 
+is_linked_worktree() {
+  local gitdir commondir
+  gitdir=$(git rev-parse --git-dir 2>/dev/null) || return 1
+  commondir=$(git rev-parse --git-common-dir 2>/dev/null) || return 1
+  [[ "$gitdir" != "$commondir" ]]
+}
+
+refuse_main_checkout_in_linked_worktree() {
+  local target="$1"
+  [[ -z "$target" ]] && return 0
+  is_linked_worktree || return 0
+  local default_branch
+  default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+  [[ -z "$default_branch" ]] && return 0
+  if [[ "$target" == "$default_branch" ]]; then
+    echo "Refusing to check out '$default_branch' from a linked worktree." >&2
+    echo "Use the main worktree for that, or 'recent' to jump there." >&2
+    return 1
+  fi
+  return 0
+}
+
 list_worktrees() {
   local wt_path wt_branch
   git worktree list --porcelain 2>/dev/null | while IFS= read -r line; do
@@ -123,6 +145,7 @@ recent() {
       return $?
     fi
 
+    refuse_main_checkout_in_linked_worktree "$branch_to_checkout" || return 1
     git checkout "$branch_to_checkout"
   else
     return 1
@@ -315,6 +338,7 @@ function gco() {
     cd "$worktree_path" || return 1
     echo "Changed to worktree: $worktree_path"
   else
+    refuse_main_checkout_in_linked_worktree "$1" || return 1
     git checkout "$@"
   fi
 }
