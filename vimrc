@@ -234,10 +234,9 @@ endfunction
 " {{{
 
 set t_Co=256
-let g:base16colorspace=256
 
 try
-  colorscheme base16-twilight
+  colorscheme molokai
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme darkblue
   set background=dark

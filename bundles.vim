@@ -3,7 +3,6 @@ Plug 'AndrewRadev/switch.vim'
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'chrisbra/matchit'
-Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
 Plug 'ecomba/vim-ruby-refactoring', { 'for': ['ruby'], 'branch': 'main' }
