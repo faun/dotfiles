@@ -145,8 +145,16 @@ recent() {
       return $?
     fi
 
-    refuse_main_checkout_in_linked_worktree "$branch_to_checkout" || return 1
-    git checkout "$branch_to_checkout"
+    local existing_worktree
+    existing_worktree=$(find_worktree_for_branch "$branch_to_checkout")
+    if [[ -n $existing_worktree && -d $existing_worktree ]]; then
+      cd "$existing_worktree" || return 1
+      echo "Changed to worktree: $existing_worktree"
+      _set_tmux_pane_title_from_path "$existing_worktree"
+    else
+      refuse_main_checkout_in_linked_worktree "$branch_to_checkout" || return 1
+      git checkout "$branch_to_checkout"
+    fi
   else
     return 1
   fi
