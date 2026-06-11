@@ -67,7 +67,6 @@ node_modules/
 .exrc
 .local.lua
 /.pscale.yml
-.terraform.lock.hcl
 .lazy.lua
 mise.toml
 **/.claude/settings.local.json
