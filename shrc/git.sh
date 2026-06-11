@@ -41,18 +41,33 @@ recent_remote_branches() {
 }
 
 list_worktrees() {
-  local wt_path wt_branch
-  git worktree list --porcelain 2>/dev/null | while IFS= read -r line; do
-    case "$line" in
-      worktree\ *)
-        wt_path="${line#worktree }"
-        ;;
-      branch\ *)
-        wt_branch="${line#branch refs/heads/}"
-        printf '[worktree] %s\t%s\n' "$wt_branch" "$wt_path"
-        ;;
-    esac
-  done
+  local wt_path wt_branch gitdir target mtime
+  git worktree list --porcelain 2>/dev/null | {
+    while IFS= read -r line; do
+      case "$line" in
+        worktree\ *)
+          wt_path="${line#worktree }"
+          ;;
+        branch\ *)
+          wt_branch="${line#branch refs/heads/}"
+          mtime=0
+          gitdir=$(git -C "$wt_path" rev-parse --absolute-git-dir 2>/dev/null)
+          if [[ -n "$gitdir" ]]; then
+            # Prefer index mtime (touched by add/commit/checkout/stash/pull);
+            # fall back to HEAD for newly-created worktrees with no index yet.
+            target="$gitdir/index"
+            [[ -f "$target" ]] || target="$gitdir/HEAD"
+            if [[ -f "$target" ]]; then
+              mtime=$(stat -c '%Y' "$target" 2>/dev/null \
+                   || stat -f '%m' "$target" 2>/dev/null \
+                   || echo 0)
+            fi
+          fi
+          printf '%s\t[worktree] %s\t%s\n' "$mtime" "$wt_branch" "$wt_path"
+          ;;
+      esac
+    done
+  } | sort -rn | cut -f2-
 }
 
 # Find the worktree path for a given branch, if it exists
