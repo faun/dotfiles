@@ -32,6 +32,13 @@ keybinds {
         bind "Ctrl a" { SwitchToMode "Tmux"; }
     }
 
+    // Switch tabs without the prefix, mirroring tmux's `bind -n S-Left/S-Right`
+    // (previous/next window). Active while at the shell in Normal mode.
+    normal {
+        bind "Shift Left"  { GoToPreviousTab; }
+        bind "Shift Right" { GoToNextTab; }
+    }
+
     // tmux-compatibility prefix layer, harmonized with the dotfiles tmux.conf.
     // Cleared of defaults so only the familiar tmux bindings live here.
     tmux clear-defaults=true {
