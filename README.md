@@ -107,6 +107,9 @@ keeps zellij's native modal keys *and* adds a tmux-compatibility prefix on
 | `Ctrl+a` then `[` | scroll / copy mode | `prefix [` |
 | `Ctrl+a` then `Ctrl+a` | send literal `Ctrl+a` | send-prefix |
 
+Plus, without the prefix: `Shift+Left` / `Shift+Right` switch to the
+previous / next tab (mirrors tmux's `bind -n S-Left` / `S-Right`).
+
 Sessions persist and resurrect automatically (`session_serialization`),
 replacing tmux-resurrect/continuum. Native zellij modes (`Ctrl+p` pane,
 `Ctrl+t` tab, `Ctrl+n` resize, `Ctrl+o` session, …) remain available.
