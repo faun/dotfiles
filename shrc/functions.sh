@@ -2,13 +2,26 @@ tmux_attach() {
   if [[ $# -eq 0 ]]; then
     directory_name=$(basename "$PWD")
     session_name=${directory_name//\./_}
-    if \tmux -2 has-session -t "$session_name" >/dev/null 2>&1; then
-      \tmux -2 attach -d -t "$session_name" >/dev/null 2>&1
-    else
-      \tmux -2 new-session -s "$session_name"
-    fi
+    # Attach to the session if it exists, otherwise create it. Running new-session
+    # in the foreground (no /dev/null redirect) holds the terminal in both cases;
+    # the old `attach … >/dev/null 2>&1` branch returned immediately under a
+    # one-shot `ssh -t` remote command and dropped the connection. -D detaches
+    # any other client (mirrors the old `attach -d`).
+    \tmux -2 new-session -A -D -s "$session_name"
   else
     \tmux -2 "$@"
+  fi
+}
+
+# Attach to (or create) a zellij session named after the current directory,
+# mirroring tmux_attach. Passes through any explicit args to zellij untouched.
+zellij_attach() {
+  if [[ $# -eq 0 ]]; then
+    directory_name=$(basename "$PWD")
+    session_name=${directory_name//\./_}
+    \zellij attach --create "$session_name"
+  else
+    \zellij "$@"
   fi
 }
 
