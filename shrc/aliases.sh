@@ -16,6 +16,9 @@ alias tat='tmux_attach'
 alias t='tmux_attach'
 alias tmux='tmux_attach'
 
+# zellij (coexists with tmux, which stays the default multiplexer)
+alias zj='zellij_attach'
+
 # ruby
 alias bi='bundle install'
 alias bu='bundle update'

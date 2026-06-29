@@ -1,0 +1,133 @@
+// Zellij configuration — managed by dotfiles (config/zellij/config.kdl).
+//
+// Philosophy: keep zellij's native, discoverable modal keybindings (the status
+// bar shows them) AND layer a tmux-compatibility prefix on Ctrl+a so existing
+// tmux muscle memory keeps working during the transition. tmux remains the
+// default multiplexer; launch zellij explicitly with `zj`.
+//
+// tmux -> zellij quick reference (press Ctrl+a first, just like the tmux prefix):
+//
+//   Ctrl+a |        split right (vertical divider)     [tmux: prefix |]
+//   Ctrl+a - or \   split down (horizontal divider)    [tmux: prefix - / \]
+//   Ctrl+a c        new tab                            [tmux: new-window]
+//   Ctrl+a ,        rename tab                         [tmux: rename-window]
+//   Ctrl+a n / p    next / previous tab
+//   Ctrl+a h/j/k/l  move focus between panes           [tmux: vim-navigator]
+//   Ctrl+a H/J/K/L  resize pane (repeatable)           [tmux: prefix H/J/K/L]
+//   Ctrl+a z        zoom (toggle fullscreen)           [tmux: prefix z]
+//   Ctrl+a x        close pane                         [tmux: prefix x]
+//   Ctrl+a s        session manager (switch sessions)  [tmux: prefix s]
+//   Ctrl+a d        detach                             [tmux: prefix d]
+//   Ctrl+a [        scroll / copy mode                 [tmux: prefix []
+//   Ctrl+a Ctrl+a   send a literal Ctrl+a to the shell [tmux: send-prefix]
+//
+// Native zellij modes are still reachable from Normal mode:
+//   Ctrl+p pane   Ctrl+t tab   Ctrl+n resize   Ctrl+s scroll/search
+//   Ctrl+o session   Ctrl+h move   Ctrl+g lock   Ctrl+b tmux (zellij default)
+
+keybinds {
+    // Enter the tmux-compatibility layer with the familiar tmux prefix from any
+    // mode. (Ctrl+b also works — it's zellij's built-in default for this mode.)
+    shared_except "tmux" "locked" {
+        bind "Ctrl a" { SwitchToMode "Tmux"; }
+    }
+
+    // tmux-compatibility prefix layer, harmonized with the dotfiles tmux.conf.
+    // Cleared of defaults so only the familiar tmux bindings live here.
+    tmux clear-defaults=true {
+        // tmux: `bind C-a send-prefix` — send a literal Ctrl+a to the shell.
+        bind "Ctrl a" { Write 1; SwitchToMode "Normal"; }
+        bind "Esc" { SwitchToMode "Normal"; }
+        bind "Ctrl c" { SwitchToMode "Normal"; }
+
+        // Splits. tmux.conf binds | and - (and \ as an alias for -); the
+        // zellij/tmux defaults " and % are kept too.
+        bind "|" { NewPane "Right"; SwitchToMode "Normal"; }
+        bind "%" { NewPane "Right"; SwitchToMode "Normal"; }
+        bind "-" { NewPane "Down"; SwitchToMode "Normal"; }
+        bind "\\" { NewPane "Down"; SwitchToMode "Normal"; }
+        bind "\"" { NewPane "Down"; SwitchToMode "Normal"; }
+
+        // Tabs (tmux windows).
+        bind "c" { NewTab; SwitchToMode "Normal"; }
+        bind "," { SwitchToMode "RenameTab"; TabNameInput 0; }
+        bind "n" { GoToNextTab; SwitchToMode "Normal"; }
+        bind "p" { GoToPreviousTab; SwitchToMode "Normal"; }
+
+        // Pane focus (tmux: vim-tmux-navigator h/j/k/l).
+        bind "h" "Left"  { MoveFocus "Left"; SwitchToMode "Normal"; }
+        bind "j" "Down"  { MoveFocus "Down"; SwitchToMode "Normal"; }
+        bind "k" "Up"    { MoveFocus "Up"; SwitchToMode "Normal"; }
+        bind "l" "Right" { MoveFocus "Right"; SwitchToMode "Normal"; }
+        bind "o" { FocusNextPane; }
+
+        // Resize (tmux: prefix H/J/K/L). Stay in Tmux mode so it repeats.
+        bind "H" { Resize "Increase Left"; }
+        bind "J" { Resize "Increase Down"; }
+        bind "K" { Resize "Increase Up"; }
+        bind "L" { Resize "Increase Right"; }
+
+        // Zoom / close / detach / scroll / swap layout.
+        bind "z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
+        bind "x" { CloseFocus; SwitchToMode "Normal"; }
+        bind "d" { Detach; }
+        bind "[" { SwitchToMode "Scroll"; }
+        bind "Space" { NextSwapLayout; }
+
+        // Session switcher (tmux.conf: prefix s -> fzf popup).
+        bind "s" {
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "Normal";
+        }
+    }
+}
+
+// --- options ---------------------------------------------------------------
+
+theme "faun"
+
+// Minimal single-line tab bar with no pane frames, matching the spare look of
+// the dotfiles tmux status line.
+default_layout "compact"
+pane_frames false
+
+// Start in Normal mode so both the native modal keys and the Ctrl+a prefix work.
+default_mode "normal"
+
+// macOS system clipboard (mirrors tmux.conf `pbcopy` + tmux-yank).
+copy_command "pbcopy"
+copy_on_select true
+
+// Open scrollback in nvim for vi-style search/yank (mirrors tmux vi copy-mode).
+scrollback_editor "nvim"
+
+// Large scrollback to match tmux `history-limit 50000`.
+scroll_buffer_size 50000
+
+// Built-in session persistence — replaces tmux-resurrect / tmux-continuum.
+session_serialization true
+serialize_pane_viewport true
+
+// Mouse support (mirrors tmux `mouse on`).
+mouse_mode true
+
+themes {
+    // Tomorrow Night palette, matching the dotfiles tmux status colors
+    // (#282a2e background, #373b41 accents, #b4b7b4 foreground).
+    faun {
+        fg "#c5c8c6"
+        bg "#282a2e"
+        black "#282a2e"
+        red "#cc6666"
+        green "#b5bd68"
+        yellow "#f0c674"
+        blue "#81a2be"
+        magenta "#b294bb"
+        cyan "#8abeb7"
+        white "#c5c8c6"
+        orange "#de935f"
+    }
+}

@@ -36,6 +36,7 @@ if command -v brew >/dev/null 2>&1; then
     vale
     watchman
     wget
+    zellij
     zsh-autosuggestions
   )
 

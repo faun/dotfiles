@@ -81,6 +81,36 @@ Install tmux
     brew install tmux
     brew install reattach-to-user-namespace
 
+### Zellij (tmux-compatible alternative)
+
+[Zellij](https://github.com/zellij-org/zellij) is installed alongside tmux. tmux
+stays the default multiplexer (`t` / `tat`); zellij is opt-in via `zj`, which
+attaches to (or creates) a session named after the current directory.
+
+Config lives at `config/zellij/config.kdl` (symlinked to `~/.config/zellij`). It
+keeps zellij's native modal keys *and* adds a tmux-compatibility prefix on
+`Ctrl+a` so existing muscle memory carries over. After pressing `Ctrl+a`:
+
+| Keys | Action | tmux equivalent |
+| --- | --- | --- |
+| `Ctrl+a` then `\|` | split right | `prefix \|` |
+| `Ctrl+a` then `-` / `\` | split down | `prefix -` / `\` |
+| `Ctrl+a` then `c` | new tab | new-window |
+| `Ctrl+a` then `,` | rename tab | rename-window |
+| `Ctrl+a` then `n` / `p` | next / previous tab | next/prev-window |
+| `Ctrl+a` then `h/j/k/l` | move focus | vim-tmux-navigator |
+| `Ctrl+a` then `H/J/K/L` | resize pane | `prefix H/J/K/L` |
+| `Ctrl+a` then `z` | zoom pane | `prefix z` |
+| `Ctrl+a` then `x` | close pane | `prefix x` |
+| `Ctrl+a` then `s` | session manager | `prefix s` |
+| `Ctrl+a` then `d` | detach | `prefix d` |
+| `Ctrl+a` then `[` | scroll / copy mode | `prefix [` |
+| `Ctrl+a` then `Ctrl+a` | send literal `Ctrl+a` | send-prefix |
+
+Sessions persist and resurrect automatically (`session_serialization`),
+replacing tmux-resurrect/continuum. Native zellij modes (`Ctrl+p` pane,
+`Ctrl+t` tab, `Ctrl+n` resize, `Ctrl+o` session, …) remain available.
+
 ### Patch your terminal font with Powerline glyphs for maximum awesomeness
 
 See [Powerline repo](https://github.com/Lokaltog/powerline-fonts) for more info.
