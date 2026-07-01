@@ -25,16 +25,6 @@ zellij_attach() {
   fi
 }
 
-# Override default rvm_prompt_info
-function rvm_prompt_info() {
-  ruby_version=$(~/.rvm/bin/rvm-prompt i v p 2>/dev/null)
-  if [[ -n $ruby_version ]]; then
-    echo "($ruby_version)"
-  else
-    echo "(system)"
-  fi
-}
-
 # mkdir, cd into it
 mkcd() {
   mkdir -p "$*"
@@ -145,10 +135,6 @@ man() {
     LESS_TERMCAP_ue=$'\e[0m' \
     LESS_TERMCAP_us=$'\e[1;32m' \
     man "$@"
-}
-
-heroku_apps() {
-  heroku apps --all | awk '{print $1}' | fzf
 }
 
 ppid() { ps -p "${1:-$$}" -o ppid=; }

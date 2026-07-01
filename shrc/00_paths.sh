@@ -2,9 +2,6 @@
 NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
 export NVM_DIR
 
-GOPATH="${GOPATH:-$HOME/src}"
-export GOPATH
-
 GOBIN="${GOBIN:-$HOME/bin}"
 export GOBIN
 

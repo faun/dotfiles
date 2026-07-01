@@ -5,7 +5,6 @@ for file in "${HOME:?}"/.shrc/*.sh; do
   . "$file"
 done
 
-export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 export CLICOLOR=1
 
 # ls colors, see: http://www.linux-sxs.org/housekeeping/lscolors.html
