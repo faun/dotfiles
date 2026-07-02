@@ -79,5 +79,12 @@ assert_eq "no match -> empty" "" \
 command tmux -L warptest -f /dev/null kill-server 2>/dev/null
 rm -rf "$_wtmp"
 
+print "\n== _warp_find_zellij =="
+_warp_zellij_sessions() { print -l "database-cli" "terraform-datainfra-2092" "migrant"; }
+assert_eq "exact repo-branch" "terraform-datainfra-2092" \
+  "$(_warp_find_zellij terraform datainfra-2092)"
+assert_eq "no match -> empty" "" "$(_warp_find_zellij nope zzz)"
+unfunction _warp_zellij_sessions
+
 print "\n$_pass passed, $_fail failed"
 (( _fail == 0 ))

@@ -111,3 +111,15 @@ _warp_find_tmux() {
     -F '#{pane_current_path}	#{session_name}	#{window_index}.#{pane_index}' 2>/dev/null \
     | awk -F'\t' -v p="$1" '$1==p {print $2"\t"$3; exit}'
 }
+
+_warp_zellij_sessions() { command zellij list-sessions -s 2>/dev/null; }
+
+# Session matching $1-$2 (sanitized), or one containing $2; empty if none.
+_warp_find_zellij() {
+  emulate -L zsh
+  local want; want="$(_zj_sanitize "$1-$2")"
+  if _warp_zellij_sessions | grep -qxF -- "$want"; then
+    print -r -- "$want"; return 0
+  fi
+  _warp_zellij_sessions | grep -iF -- "$2" | head -1
+}
