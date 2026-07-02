@@ -99,5 +99,25 @@ assert_eq "selected window 0" "0" \
 command tmux -L warptest -f /dev/null kill-server 2>/dev/null
 rm -rf "$_wtmp"
 
+print "\n== warp --dry-run =="
+_wtmp=$(mktemp -d); mkdir -p "$_wtmp/github.com/Gusto"
+_repo="$_wtmp/github.com/Gusto/database-cli"
+command git init -q "$_repo"; ( cd "$_repo"
+  git config user.email t@t; git config user.name t
+  echo x>a; git add a; git commit -qm init
+  git worktree add -q ../worktrees/datainfra-2092 -b datainfra-2092 >/dev/null )
+# no tmux/zellij match for this worktree -> action is "zj ... (open existing)"
+_out="$(WARP_SRC="$_wtmp" WARP_TMUX_SOCKET=warptest-none warp -n datainfra-2092 2>&1)"
+assert_eq "dry-run ticket found on disk, not open" \
+  "action: zj $_repo datainfra-2092 (open existing worktree)" \
+  "$(print -r -- "$_out" | tail -1)"
+_out2="$(WARP_SRC="$_wtmp" warp -n datainfra-0000 2>&1 | tail -1)"
+assert_eq "dry-run ticket not created" \
+  "action: prompt for repo, then zj <repo> datainfra-0000" "$_out2"
+assert_eq "unknown input -> nonzero" "1" \
+  "$(warp -n 'total garbage input' >/dev/null 2>&1; echo $?)"
+command tmux -L warptest-none kill-server 2>/dev/null
+rm -rf "$_wtmp"
+
 print "\n$_pass passed, $_fail failed"
 (( _fail == 0 ))

@@ -182,3 +182,55 @@ _warp_find_zellij() {
   fi
   _warp_zellij_sessions | grep -iF -- "$2" | head -1
 }
+
+warp() {
+  emulate -L zsh
+  local dry=0
+  [[ "$1" == -n || "$1" == --dry-run ]] && { dry=1; shift; }
+  if [[ -z "$1" ]]; then
+    print "usage: warp [-n|--dry-run] <pr-url | repo #num | JIRA-KEY | jira-url>" >&2
+    return 1
+  fi
+
+  local _parsed; _parsed="$(_warp_parse "$1")"
+  local type="${_parsed%%	*}"
+  local _rest="${_parsed#*	}"
+  local repo="${_rest%%	*}"
+  local sel="${_rest#*	}"
+  if [[ "$type" == unknown ]]; then
+    print "warp: unrecognized input: $1" >&2; return 1
+  fi
+
+  local _resolved; _resolved="$(_warp_resolve "$type" "$repo" "$sel")" || return 1
+  local repo_path="${_resolved%%	*}"
+  local _rest2="${_resolved#*	}"
+  local branch="${_rest2%%	*}"
+  local wt="${_rest2#*	}"
+
+  (( dry )) && print "type=$type repo=${repo_path:-?} branch=$branch worktree=${wt:-<none>}"
+
+  # Open on disk: try tmux, then zellij, else open via zj.
+  if [[ -n "$wt" ]]; then
+    local tm; tm="$(_warp_find_tmux "$wt")"
+    if [[ -n "$tm" ]]; then
+      local s="${tm%%	*}" w="${tm#*	}"
+      (( dry )) && { print "action: focus tmux $s:$w"; return 0; }
+      _warp_focus_tmux "$s" "$w"; return
+    fi
+    local zs; zs="$(_warp_find_zellij "${repo_path:t}" "$branch")"
+    if [[ -n "$zs" ]]; then
+      (( dry )) && { print "action: focus zellij session $zs"; return 0; }
+      _warp_ax_raise "$zs" || command zellij attach "$zs"; return
+    fi
+    (( dry )) && { print "action: zj $repo_path $branch (open existing worktree)"; return 0; }
+    zj "$repo_path" "$branch"; return
+  fi
+
+  # Not created yet.
+  if [[ -z "$repo_path" ]]; then
+    (( dry )) && { print "action: prompt for repo, then zj <repo> $branch"; return 0; }
+    repo_path="$(_warp_pick_repo)" || return 1
+  fi
+  (( dry )) && { print "action: zj $repo_path $branch (create)"; return 0; }
+  zj "$repo_path" "$branch"
+}
