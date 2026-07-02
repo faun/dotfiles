@@ -112,6 +112,32 @@ _warp_find_tmux() {
     | awk -F'\t' -v p="$1" '$1==p {print $2"\t"$3; exit}'
 }
 
+# Focus tmux session $1 window.pane $2, raising the hosting Ghostty tab when the
+# session is attached to a different client.
+_warp_focus_tmux() {
+  emulate -L zsh
+  local sess="$1" wp="$2"
+  local -a T; T=(command tmux)
+  [[ -n "$WARP_TMUX_SOCKET" ]] && T+=(-L "$WARP_TMUX_SOCKET")
+  [[ -n "$WARP_TMUX_ARGS" ]] && T+=(${=WARP_TMUX_ARGS})
+  "$T[@]" select-window -t "${sess}:${wp%.*}" 2>/dev/null
+  "$T[@]" select-pane   -t "${sess}:${wp}"    2>/dev/null
+  local clients; clients="$("$T[@]" list-clients -t "$sess" -F '#{client_tty}' 2>/dev/null)"
+  if [[ -n "$TMUX" ]]; then
+    if [[ -n "$clients" ]] && ! print -r -- "$clients" | grep -qxF -- "$(tty)"; then
+      _warp_ax_raise "$sess" || "$T[@]" switch-client -t "$sess"
+    else
+      "$T[@]" switch-client -t "$sess"
+    fi
+  else
+    if [[ -n "$clients" ]]; then
+      _warp_ax_raise "$sess"
+    else
+      "$T[@]" attach -t "$sess"
+    fi
+  fi
+}
+
 # Raise the Ghostty tab whose title contains $1. 0 = raised, non-zero otherwise.
 _warp_ax_raise() {
   emulate -L zsh

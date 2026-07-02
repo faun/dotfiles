@@ -86,5 +86,18 @@ assert_eq "exact repo-branch" "terraform-datainfra-2092" \
 assert_eq "no match -> empty" "" "$(_warp_find_zellij nope zzz)"
 unfunction _warp_zellij_sessions
 
+print "\n== _warp_focus_tmux (select mechanics) =="
+_wtmp=$(mktemp -d); mkdir -p "$_wtmp/a" "$_wtmp/b"
+command tmux -L warptest -f /dev/null kill-server 2>/dev/null
+command tmux -L warptest -f /dev/null new-session -d -s repoY -c "$_wtmp/a"
+command tmux -L warptest -f /dev/null new-window  -t repoY -c "$_wtmp/b"   # window 1, dir b
+# focus window 0 explicitly, then assert
+TMUX=fake WARP_TMUX_SOCKET=warptest WARP_TMUX_ARGS="-f /dev/null" _warp_focus_tmux repoY 0.0 2>/dev/null
+assert_eq "selected window 0" "0" \
+  "$(command tmux -L warptest -f /dev/null display-message -p -t repoY '#{active_window_index}' 2>/dev/null || \
+     command tmux -L warptest -f /dev/null list-windows -t repoY -F '#{?window_active,#{window_index},}' | tr -d '\n')"
+command tmux -L warptest -f /dev/null kill-server 2>/dev/null
+rm -rf "$_wtmp"
+
 print "\n$_pass passed, $_fail failed"
 (( _fail == 0 ))
