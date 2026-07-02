@@ -51,5 +51,22 @@ assert_eq "candidates by key" \
   "$(WARP_SRC="$_wtmp" _warp_worktree_candidates 2092)"
 rm -rf "$_wtmp"
 
+print "\n== _warp_resolve =="
+_wtmp=$(mktemp -d); mkdir -p "$_wtmp/github.com/Gusto"
+_repo="$_wtmp/github.com/Gusto/terraform"
+command git init -q "$_repo"; ( cd "$_repo"
+  git config user.email t@t; git config user.name t
+  echo x > a; git add a; git commit -qm init
+  git branch feat-30466 )
+# stub gh lookup
+_warp_pr_branch() { print -r -- "feat-30466"; }
+assert_eq "resolve pr -> repo/branch/empty-wt" \
+  $''"$_repo"$'\tfeat-30466\t' \
+  "$(WARP_SRC="$_wtmp" _warp_resolve pr terraform 30466)"
+assert_eq "resolve ticket not open" $'\tdatainfra-9999\t' \
+  "$(WARP_SRC="$_wtmp" _warp_resolve ticket '' datainfra-9999)"
+unfunction _warp_pr_branch   # restore real one for later
+rm -rf "$_wtmp"
+
 print "\n$_pass passed, $_fail failed"
 (( _fail == 0 ))

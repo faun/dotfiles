@@ -66,3 +66,37 @@ _warp_worktree_candidates() {
                  if (index(tolower(b),tolower(k))) printf "%s\t%s\t%s\n", r, b, p}'
   done
 }
+
+# Head branch of PR #$2 in repo $1, via gh (run inside the repo).
+_warp_pr_branch() {
+  emulate -L zsh
+  ( cd "$1" && command gh pr view "$2" --json headRefName -q .headRefName )
+}
+
+# Resolve (TYPE REPO SELECTOR) -> "repo_path\tbranch\tworktree_path".
+_warp_resolve() {
+  emulate -L zsh
+  local type="$1" repo="$2" sel="$3" repo_path branch wt
+  case "$type" in
+    pr)
+      repo_path="$(_warp_repo_path "${repo##*/}")" \
+        || { print "warp: repo not found: ${repo##*/}" >&2; return 1; }
+      branch="$(_warp_pr_branch "$repo_path" "$sel")" \
+        || { print "warp: gh could not resolve PR $sel" >&2; return 1; }
+      [[ -z "$branch" ]] && { print "warp: PR $sel has no head branch" >&2; return 1; }
+      wt="$(_warp_worktree_for_branch "$repo_path" "$branch")"
+      printf '%s\t%s\t%s\n' "$repo_path" "$branch" "$wt"
+      ;;
+    ticket)
+      local -a cands
+      cands=("${(@f)$(_warp_worktree_candidates "$sel")}")
+      cands=(${cands:#})
+      case ${#cands} in
+        0) printf '\t%s\t\n' "$sel" ;;
+        1) print -r -- "$cands[1]" ;;
+        *) print -rl -- $cands | fzf --delimiter='\t' --with-nth=2,1 || return 1 ;;
+      esac
+      ;;
+    *) return 1 ;;
+  esac
+}
