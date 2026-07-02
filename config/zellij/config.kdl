@@ -21,6 +21,10 @@
 //   Ctrl+a [        scroll / copy mode                 [tmux: prefix []
 //   Ctrl+a Ctrl+a   send a literal Ctrl+a to the shell [tmux: send-prefix]
 //
+// Prefix-less (no Ctrl+a needed):
+//   Alt s           session switcher (fuzzy picker)   [same as Ctrl+a s]
+//   Shift+Left/Right previous / next tab
+//
 // Native zellij modes are still reachable from Normal mode:
 //   Ctrl+p pane   Ctrl+t tab   Ctrl+n resize   Ctrl+s scroll/search
 //   Ctrl+o session   Ctrl+h move   Ctrl+g lock   Ctrl+b tmux (zellij default)
@@ -30,6 +34,17 @@ keybinds {
     // mode. (Ctrl+b also works — it's zellij's built-in default for this mode.)
     shared_except "tmux" "locked" {
         bind "Ctrl a" { SwitchToMode "Tmux"; }
+
+        // Prefix-less session switcher: jump straight to the fuzzy picker
+        // without the Ctrl+a prefix (still available via Ctrl+a s). Handy now
+        // that each worktree/ticket gets its own session.
+        bind "Alt s" {
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "Normal";
+        }
     }
 
     // Switch tabs without the prefix, mirroring tmux's `bind -n S-Left/S-Right`
