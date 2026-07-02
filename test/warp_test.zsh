@@ -68,5 +68,16 @@ assert_eq "resolve ticket not open" $'\tdatainfra-9999\t' \
 unfunction _warp_pr_branch   # restore real one for later
 rm -rf "$_wtmp"
 
+print "\n== _warp_find_tmux =="
+_wtmp=$(mktemp -d); _wtmp=$(cd "$_wtmp" && pwd -P); mkdir -p "$_wtmp/proj"
+command tmux -L warptest -f /dev/null kill-server 2>/dev/null
+command tmux -L warptest -f /dev/null new-session -d -s repoX -c "$_wtmp/proj"
+assert_eq "find tmux pane by cwd" $'repoX\t0.0' \
+  "$(WARP_TMUX_SOCKET=warptest WARP_TMUX_ARGS="-f /dev/null" _warp_find_tmux "$_wtmp/proj")"
+assert_eq "no match -> empty" "" \
+  "$(WARP_TMUX_SOCKET=warptest WARP_TMUX_ARGS="-f /dev/null" _warp_find_tmux /nonexistent/path)"
+command tmux -L warptest -f /dev/null kill-server 2>/dev/null
+rm -rf "$_wtmp"
+
 print "\n$_pass passed, $_fail failed"
 (( _fail == 0 ))

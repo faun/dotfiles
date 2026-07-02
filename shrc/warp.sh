@@ -100,3 +100,14 @@ _warp_resolve() {
     *) return 1 ;;
   esac
 }
+
+# First tmux pane whose CWD is $1 -> "session\twindow.pane" (empty if none).
+_warp_find_tmux() {
+  emulate -L zsh
+  local -a T; T=(command tmux)
+  [[ -n "$WARP_TMUX_SOCKET" ]] && T+=(-L "$WARP_TMUX_SOCKET")
+  [[ -n "$WARP_TMUX_ARGS" ]] && T+=(${=WARP_TMUX_ARGS})
+  "$T[@]" list-panes -a \
+    -F '#{pane_current_path}	#{session_name}	#{window_index}.#{pane_index}' 2>/dev/null \
+    | awk -F'\t' -v p="$1" '$1==p {print $2"\t"$3; exit}'
+}
