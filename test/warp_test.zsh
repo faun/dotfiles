@@ -36,5 +36,20 @@ WARP_SRC="$_wtmp" _warp_repo_path nonesuch >/dev/null 2>&1
 assert_eq "missing repo -> nonzero" "1" "$?"
 rm -rf "$_wtmp"
 
+print "\n== worktree lookup =="
+_wtmp=$(mktemp -d); _wtmp=$(cd "$_wtmp" && pwd -P)
+mkdir -p "$_wtmp/github.com/Gusto"
+_repo="$_wtmp/github.com/Gusto/database-cli"
+command git init -q "$_repo"; ( cd "$_repo"
+  git config user.email t@t; git config user.name t
+  echo x > a; git add a; git commit -qm init
+  git worktree add -q ../worktrees/datainfra-2092 -b datainfra-2092 >/dev/null )
+assert_eq "worktree for branch" "$_wtmp/github.com/Gusto/worktrees/datainfra-2092" \
+  "$(cd "$_repo" && _warp_worktree_for_branch "$_repo" datainfra-2092)"
+assert_eq "candidates by key" \
+  $''"$_repo"$'\tdatainfra-2092\t'"$_wtmp/github.com/Gusto/worktrees/datainfra-2092" \
+  "$(WARP_SRC="$_wtmp" _warp_worktree_candidates 2092)"
+rm -rf "$_wtmp"
+
 print "\n$_pass passed, $_fail failed"
 (( _fail == 0 ))

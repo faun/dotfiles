@@ -42,3 +42,27 @@ _warp_pick_repo() {
   local root="${WARP_SRC:-$HOME/src}"
   find "$root" -maxdepth 5 -type d -name .git 2>/dev/null | sed 's#/\.git$##' | fzf
 }
+
+# Worktree path checked out on $2 within repo $1 (empty if none).
+_warp_worktree_for_branch() {
+  emulate -L zsh
+  command git -C "$1" worktree list --porcelain 2>/dev/null | awk -v b="$2" '
+    /^worktree /{p=substr($0,10)}
+    /^branch /{wb=$2; sub("refs/heads/","",wb); if (wb==b) {print p; exit}}'
+}
+
+# For every repo with worktrees under $WARP_SRC, emit repo\tbranch\tpath
+# for worktrees whose branch contains $1 (case-insensitive).
+_warp_worktree_candidates() {
+  emulate -L zsh
+  local key="$1" root="${WARP_SRC:-$HOME/src}" wt repo
+  local -a dirs
+  dirs=("${(@f)$(find "$root" -maxdepth 6 -type d -path '*/.git/worktrees' 2>/dev/null)}")
+  for wt in ${dirs:#}; do
+    repo="${wt%/.git/worktrees}"
+    command git -C "$repo" worktree list --porcelain 2>/dev/null | awk -v k="$key" -v r="$repo" '
+      /^worktree /{p=substr($0,10)}
+      /^branch /{b=$2; sub("refs/heads/","",b);
+                 if (index(tolower(b),tolower(k))) printf "%s\t%s\t%s\n", r, b, p}'
+  done
+}
