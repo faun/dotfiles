@@ -84,8 +84,27 @@ Install tmux
 ### Zellij (tmux-compatible alternative)
 
 [Zellij](https://github.com/zellij-org/zellij) is installed alongside tmux. tmux
-stays the default multiplexer (`t` / `tat`); zellij is opt-in via `zj`, which
-attaches to (or creates) a session named after the current directory.
+stays the default multiplexer (`t` / `tat`); zellij is opt-in via `zj`.
+
+`zj` is worktree-aware. Sessions are grouped by git checkout: a repo's mainline
+checkout gets one session named after the repo (e.g. `dotfiles`), and each
+linked worktree gets its own `<repo>-<branch>` session (e.g.
+`dotfiles-DATAINFRA-1234`). Worktrees live at `<repo>/../worktrees/<branch>`,
+the same layout `recent` uses.
+
+| Command | Action |
+| --- | --- |
+| `zj` | attach to (or switch to) this checkout's session |
+| `zj <ticket-key>` | jump to the worktree matching a ticket key in the current repo, creating it if needed |
+| `zj <repo-path> <ticket-key>` | same, but for another repo by path |
+| `zj list-sessions`, `zj kill-session …` | any zellij subcommand is passed straight through |
+
+The ticket key is matched as a substring of existing worktree / branch names
+(fuzzy-picked if several match). If nothing matches, a worktree is created on a
+new branch named exactly the key. When run from **inside** a zellij session,
+`zj` switches the attached client (via `zellij action switch-session`) instead
+of nesting; from a plain shell it attaches. The active session name is set as
+the terminal tab title so it stays visible.
 
 Config lives at `config/zellij/config.kdl` (symlinked to `~/.config/zellij`). It
 keeps zellij's native modal keys *and* adds a tmux-compatibility prefix on
