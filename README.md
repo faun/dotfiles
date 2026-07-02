@@ -134,6 +134,12 @@ Sessions persist and resurrect automatically (`session_serialization`),
 replacing tmux-resurrect/continuum. Native zellij modes (`Ctrl+p` pane,
 `Ctrl+t` tab, `Ctrl+n` resize, `Ctrl+o` session, …) remain available.
 
+The status line is [zjstatus](https://github.com/dj95/zjstatus) (fetched to
+`~/.local/share/zellij/plugins/` by `install/06_zellij.sh`), configured in
+`config/zellij/layouts/spare.kdl` to mirror the tmux status bar — session, mode,
+and tab list. It replaces zellij's built-in `compact-bar`, which hardcodes a
+`Zellij (<session>)` label that no config option can remove.
+
 ### Patch your terminal font with Powerline glyphs for maximum awesomeness
 
 See [Powerline repo](https://github.com/Lokaltog/powerline-fonts) for more info.

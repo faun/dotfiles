@@ -111,9 +111,10 @@ keybinds {
 
 theme "faun"
 
-// Minimal single-line tab bar with no pane frames, matching the spare look of
-// the dotfiles tmux status line.
-default_layout "compact"
+// Spare, tmux-style status line via the zjstatus plugin (layouts/spare.kdl),
+// replacing zellij's built-in compact-bar — which hardcodes a "Zellij (<session>)"
+// ribbon that no option can remove. pane_frames stays off for the minimal look.
+default_layout "spare"
 pane_frames false
 
 // Start in Normal mode so both the native modal keys and the Ctrl+a prefix work.
