@@ -26,5 +26,15 @@ assert_eq "ticket url"     $'ticket\t\tdatainfra-2092' \
   "$(_warp_parse 'https://gustohq.atlassian.net/browse/DATAINFRA-2092')"
 assert_eq "unknown"        $'unknown\t\trandom words' "$(_warp_parse 'random words')"
 
+print "\n== _warp_repo_path =="
+_wtmp=$(mktemp -d)
+mkdir -p "$_wtmp/github.com/Gusto/terraform" "$_wtmp/github.com/faun/dotfiles"
+mkdir -p "$_wtmp/github.com/Gusto/worktrees/terraform"   # decoy: must be ignored
+WARP_SRC="$_wtmp" assert_eq "unique repo" "$_wtmp/github.com/Gusto/terraform" \
+  "$(WARP_SRC="$_wtmp" _warp_repo_path terraform)"
+WARP_SRC="$_wtmp" _warp_repo_path nonesuch >/dev/null 2>&1
+assert_eq "missing repo -> nonzero" "1" "$?"
+rm -rf "$_wtmp"
+
 print "\n$_pass passed, $_fail failed"
 (( _fail == 0 ))

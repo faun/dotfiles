@@ -20,3 +20,25 @@ _warp_parse() {
     printf 'unknown\t\t%s\n' "$in"
   fi
 }
+
+# Absolute path of the repo checkout named $1 under $WARP_SRC.
+_warp_repo_path() {
+  emulate -L zsh
+  local name="$1" root="${WARP_SRC:-$HOME/src}"
+  local -a hits
+  hits=("${(@f)$(find "$root" -maxdepth 5 -type d -name "$name" \
+    -not -path '*/worktrees/*' -not -path '*/.git/*' 2>/dev/null)}")
+  hits=(${hits:#})
+  case ${#hits} in
+    0) return 1 ;;
+    1) print -r -- "$hits[1]" ;;
+    *) print -rl -- $hits | fzf || return 1 ;;
+  esac
+}
+
+# fzf over every repo under $WARP_SRC; prints the chosen checkout path.
+_warp_pick_repo() {
+  emulate -L zsh
+  local root="${WARP_SRC:-$HOME/src}"
+  find "$root" -maxdepth 5 -type d -name .git 2>/dev/null | sed 's#/\.git$##' | fzf
+}
