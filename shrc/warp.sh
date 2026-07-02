@@ -112,6 +112,39 @@ _warp_find_tmux() {
     | awk -F'\t' -v p="$1" '$1==p {print $2"\t"$3; exit}'
 }
 
+# Raise the Ghostty tab whose title contains $1. 0 = raised, non-zero otherwise.
+_warp_ax_raise() {
+  emulate -L zsh
+  local res
+  res="$(osascript - "$1" <<'APPLESCRIPT'
+on run argv
+  set needle to item 1 of argv
+  tell application "System Events"
+    if not (exists process "Ghostty") then return "no-ghostty"
+    tell process "Ghostty"
+      repeat with w in windows
+        try
+          repeat with tg in (tab groups of w)
+            repeat with rb in (radio buttons of tg)
+              if (name of rb) contains needle then
+                set frontmost to true
+                perform action "AXRaise" of w
+                perform action "AXPress" of rb
+                return "ok"
+              end if
+            end repeat
+          end repeat
+        end try
+      end repeat
+    end tell
+  end tell
+  return "no-match"
+end run
+APPLESCRIPT
+)"
+  [[ "$res" == "ok" ]]
+}
+
 _warp_zellij_sessions() { command zellij list-sessions -s 2>/dev/null; }
 
 # Session matching $1-$2 (sanitized), or one containing $2; empty if none.
