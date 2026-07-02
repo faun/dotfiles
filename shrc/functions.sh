@@ -57,10 +57,20 @@ _zj_session_name() {
 # how the session name stays visible — zellij 0.44's built-in bars don't pin it.
 _zj_set_title() { printf '\033]2;%s\a' "$1"; }
 
+# Unsubscribe from terminal color-scheme (light/dark) change notifications — DEC
+# private mode 2031. Shared with the precmd hook in
+# 04_colorscheme_notify_guard.sh (see that file for the full rationale); called
+# below so a session handoff doesn't leave a stray subscription behind. Only
+# writes when stdout is a tty, so it's inert in pipes and tests.
+_reset_colorscheme_notifications() { [[ -t 1 ]] && printf '\033[?2031l'; }
+
 # Attach (outside zellij) or switch (inside zellij) to a named session, anchored
 # in $2 and created on demand.
 _zj_switch() {
   local session="$1" cwd="${2:-$PWD}"
+  # Drop any live 2031 subscription before handing the terminal to zellij, so a
+  # theme flip during/after the switch can't drop "997;..n" onto the new prompt.
+  _reset_colorscheme_notifications
   _zj_set_title "$session"
   if [[ -n ${ZELLIJ:-} ]]; then
     # `attach` refuses to nest inside a session, so switch the attached client.
