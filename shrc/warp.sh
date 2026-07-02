@@ -101,6 +101,11 @@ _warp_resolve() {
   esac
 }
 
+# $WARP_TMUX_SOCKET / $WARP_TMUX_ARGS are test-only seams: the suite points warp
+# at a scratch tmux server (-L) with a clean config (-f /dev/null) so the user's
+# real base-index/config can't perturb assertions. Both are unset in normal use,
+# so real invocations honor the user's tmux server and config.
+
 # First tmux pane whose CWD is $1 -> "session\twindow.pane" (empty if none).
 _warp_find_tmux() {
   emulate -L zsh
@@ -124,6 +129,8 @@ _warp_focus_tmux() {
   "$T[@]" select-pane   -t "${sess}:${wp}"    2>/dev/null
   local clients; clients="$("$T[@]" list-clients -t "$sess" -F '#{client_tty}' 2>/dev/null)"
   if [[ -n "$TMUX" ]]; then
+    # $(tty) reads stdin; run interactively, stdin is the pane, so this resolves
+    # the caller's real tty. (Interactive path — manually verified, see plan Task 10.)
     if [[ -n "$clients" ]] && ! print -r -- "$clients" | grep -qxF -- "$(tty)"; then
       _warp_ax_raise "$sess" || "$T[@]" switch-client -t "$sess"
     else
