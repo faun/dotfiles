@@ -10,3 +10,4 @@
 /zsh/functions/*
 /zsh/completion/
 /install/n-install
+/config/cmux/*.bak
