@@ -2,6 +2,9 @@
 
 set -e
 
+cd "$(dirname "$0")" || exit 1
+source ./_common.sh
+
 install_homebrew_if_needed() {
   if ! command -v brew >/dev/null 2>&1; then
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
@@ -24,21 +27,25 @@ if [[ "$OSTYPE" == darwin* ]]; then
 
   install_homebrew_if_needed
 elif [[ "$OSTYPE" == linux* ]]; then
-  if command -v apt-get >/dev/null 2>&1; then
-    PACKAGE_MANAGER="apt-get"
-    sudo apt-get install build-essential curl file git
-  elif command -v yum >/dev/null 2>&1; then
-    PACKAGE_MANAGER="yum"
-    sudo yum groupinstall 'Development Tools' -y
-    sudo yum install curl file git -y
-  elif command -v dnf >/dev/null 2>&1; then
-    PACKAGE_MANAGER="dnf"
-    sudo dnf groupinstall 'Development Tools' -y
-    sudo dnf install curl file git -y
-  else
-    echo "Unsupported Linux distribution. Please install Homebrew manually."
-    exit 1
-  fi
-
-  install_homebrew_if_needed
+  # Homebrew is not required on Linux: package installation goes through the
+  # native package manager instead (see 00_homebrew_packages.sh).
+  pm="$(detect_linux_package_manager)"
+  case "$pm" in
+    apt-get)
+      sudo apt-get update
+      sudo apt-get install -y build-essential curl file git
+      ;;
+    dnf)
+      sudo dnf groupinstall 'Development Tools' -y
+      sudo dnf install -y curl file git
+      ;;
+    yum)
+      sudo yum groupinstall 'Development Tools' -y
+      sudo yum install -y curl file git
+      ;;
+    *)
+      echo "Unsupported Linux distribution: no apt-get, dnf, or yum found. Please install build tools, curl, file, and git manually."
+      exit 1
+      ;;
+  esac
 fi
