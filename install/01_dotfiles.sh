@@ -56,6 +56,13 @@ link_dir_contents() {
     local target_item="$target_dir/$basename"
 
     if [[ -d "$item" ]]; then
+      # If target_item is a leftover directory-level symlink (e.g. from an
+      # older install method that symlinked whole dirs), remove it first so
+      # we get a real directory of per-file symlinks instead of recursing
+      # into a symlink that points back at $item itself.
+      if [[ -L "$target_item" ]]; then
+        rm "$target_item"
+      fi
       # Recursively handle subdirectories
       link_dir_contents "$item" "$target_item"
     else
