@@ -14,7 +14,6 @@ excludes=(
   README.md
   fonts
   install.sh
-  install_vim_plugged.sh
   mac_os_defaults
   optional
   setup

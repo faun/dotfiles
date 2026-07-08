@@ -28,19 +28,12 @@ set shell=/bin/bash
 " }}}
 
 " ==========================================
-" Vim-plug
+" Native packages (vim 8+, pack/*/start under 'packpath')
 "  {{{
 
-call plug#begin('~/.vim/plugged')
-source $HOME/.bundles.vim
-if filereadable(expand("$HOME/.bundles.local.vim"))
-  source $HOME/.bundles.local.vim
-endif
 if !has('nvim')
-  Plug 'tpope/vim-sensible'
+  packadd vim-sensible
 endif
-Plug 'thinca/vim-localrc'
-call plug#end()
 
 "  }}}
 "

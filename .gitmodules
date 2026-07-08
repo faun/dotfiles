@@ -52,3 +52,9 @@
 [submodule "vim/pack/vendor/start/vim-commentary"]
 	path = vim/pack/vendor/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
+[submodule "vim/pack/vendor/opt/vim-sensible"]
+	path = vim/pack/vendor/opt/vim-sensible
+	url = https://github.com/tpope/vim-sensible.git
+[submodule "vim/pack/vendor/start/vim-localrc"]
+	path = vim/pack/vendor/start/vim-localrc
+	url = https://github.com/thinca/vim-localrc.git
