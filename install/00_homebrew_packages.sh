@@ -11,18 +11,11 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 
     homebrew_dependencies=(
       bat
-      clang-format
       cmake
-      fd
       fish
-      flake8
       fzf
-      git-delta
-      gnu-sed
       hashicorp/tap/terraform-ls
       jesseduffield/lazygit/lazygit
-      jsonlint
-      lndir
       lua
       lua-language-server
       luarocks
@@ -30,19 +23,13 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
       mise
       neovim
       ripgrep
-      rubyfmt
       shfmt
       terraform
       the_silver_searcher
       tmux
-      tree
-      tree-sitter
       universal-ctags
       vale
-      watchman
-      wget
       zellij
-      zsh-autosuggestions
     )
 
     for brew_package in "${homebrew_dependencies[@]}"; do
@@ -69,11 +56,10 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 else
   # Linux: no Homebrew requirement here. Install the closest equivalents via
   # the native package manager instead. A handful of the macOS brew formulas
-  # above (mise, zellij, terraform, terraform-ls, vale, watchman,
-  # lua-language-server, jsonlint on dnf/yum, rubyfmt, mas, lndir, gnu-sed)
-  # have no reliable apt/dnf/yum package across distros; mise is installed
-  # separately via its own official installer (see 02_mise.sh) and the rest
-  # are skipped here and can be installed manually if needed.
+  # above (mise, zellij, terraform, terraform-ls, vale, lua-language-server,
+  # mas) have no reliable apt/dnf/yum package across distros; mise is
+  # installed separately via its own official installer (see 02_mise.sh) and
+  # the rest are skipped here and can be installed manually if needed.
 
   pm="$(detect_linux_package_manager)"
 
@@ -90,14 +76,9 @@ else
   # (empty field = no reliable package on that manager; skipped)
   linux_dependencies=(
     "bat:bat:bat:bat"
-    "clang-format:clang-format:clang-tools-extra:clang-tools-extra"
     "cmake:cmake:cmake:cmake"
-    "fd:fd-find:fd-find:fd-find"
     "fish:fish:fish:fish"
-    "flake8:flake8:python3-flake8:python3-flake8"
     "fzf:fzf:fzf:fzf"
-    "git-delta:git-delta:git-delta:"
-    "jsonlint:jsonlint::"
     "lazygit:lazygit:lazygit:"
     "lua:lua5.4:lua:lua"
     "luarocks:luarocks:luarocks:luarocks"
@@ -106,11 +87,7 @@ else
     "shfmt:shfmt:shfmt:"
     "the_silver_searcher:silversearcher-ag:the_silver_searcher:the_silver_searcher"
     "tmux:tmux:tmux:tmux"
-    "tree:tree:tree:tree"
-    "tree-sitter-cli:tree-sitter-cli::"
     "universal-ctags:universal-ctags:universal-ctags:universal-ctags"
-    "wget:wget:wget:wget"
-    "zsh-autosuggestions:zsh-autosuggestions:zsh-autosuggestions:zsh-autosuggestions"
   )
 
   case "$pm" in

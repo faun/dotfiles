@@ -16,20 +16,7 @@ go_modules=(
   github.com/golangci/golangci-lint/cmd/golangci-lint
   mvdan.cc/gofumpt
   golang.org/x/tools/cmd/goimports
-  github.com/cweill/gotests/gotests
-  golang.org/x/vuln/cmd/govulncheck
-  github.com/moznion/gojsonstruct/cmd/gojsonstruct
-  gotest.tools/gotestsum
-  golang.org/x/tools/cmd/callgraph
-  github.com/koron/iferr
-  github.com/haya14busa/goplay/cmd/goplay
   github.com/josharian/impl
-  github.com/abenz1267/gomvp
-  github.com/davidrjenni/reftools/cmd/fillswitch
-  github.com/dmarkham/enumer
-  github.com/google/gonew
-  github.com/vektra/mockgen/v2/cmd/mockgen
-  github.com/kyoh86/richgo
 )
 
 for module in "${go_modules[@]}"; do

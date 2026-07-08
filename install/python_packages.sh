@@ -5,13 +5,8 @@
 set -eou pipefail
 
 pipx_packages=(
-  black
-  cmakelang
-  djlint
-  isort
   semgrep
   yamllint
-  proselint
 )
 
 for package in "${pipx_packages[@]}"; do
