@@ -66,8 +66,8 @@ done
 
 ALL_STEPS=()
 while IFS= read -r f; do
-  ALL_STEPS+=("$f")
-done < <(find "$DIR/install" -maxdepth 1 -name "*.sh" -perm +111 | sort)
+  [[ -x "$f" ]] && ALL_STEPS+=("$f")
+done < <(find "$DIR/install" -maxdepth 1 -name "*.sh" | sort)
 
 # ---------------------------------------------------------------------------
 # --list: print step names and checkpoint status, then exit

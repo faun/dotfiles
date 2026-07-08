@@ -36,7 +36,18 @@ fi
 if [[ -f "$HOME/.git-prompt.sh" ]]; then
   source "$HOME/.git-prompt.sh"
 else
-  curl -sSL 'https://git.io/v5oou' -o "$HOME/.git-prompt.sh" || true
+  # Fetch straight from the canonical source rather than the git.io shortlink
+  # (git.io is a GitHub redirect service that occasionally 503s, and plain
+  # curl -o would happily cache that error page as if it were the script).
+  # -f makes curl fail on HTTP errors instead of writing the error body, and
+  # downloading to a tmpfile first keeps a failed fetch from leaving a
+  # corrupt/partial file that a later shell would try to source.
+  tmp="$(mktemp)"
+  if curl -sSL -f 'https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh' -o "$tmp"; then
+    mv "$tmp" "$HOME/.git-prompt.sh"
+  else
+    rm -f "$tmp"
+  fi
 fi
 
 if [[ -n "$TMUX" ]] && [[ "$SHLVL" -eq 2 ]]; then
