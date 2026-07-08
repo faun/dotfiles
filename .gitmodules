@@ -1,0 +1,54 @@
+[submodule "vim/pack/vendor/start/vim-airline"]
+	path = vim/pack/vendor/start/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
+[submodule "vim/pack/vendor/start/vim-airline-themes"]
+	path = vim/pack/vendor/start/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes.git
+[submodule "vim/pack/vendor/start/ale"]
+	path = vim/pack/vendor/start/ale
+	url = https://github.com/dense-analysis/ale.git
+[submodule "vim/pack/vendor/start/vim-endwise"]
+	path = vim/pack/vendor/start/vim-endwise
+	url = https://github.com/tpope/vim-endwise.git
+[submodule "vim/pack/vendor/start/vim-fugitive"]
+	path = vim/pack/vendor/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/pack/vendor/start/fzf.vim"]
+	path = vim/pack/vendor/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
+[submodule "vim/pack/vendor/start/vim-go"]
+	path = vim/pack/vendor/start/vim-go
+	url = https://github.com/fatih/vim-go.git
+[submodule "vim/pack/vendor/start/vim-projectionist"]
+	path = vim/pack/vendor/start/vim-projectionist
+	url = https://github.com/tpope/vim-projectionist.git
+[submodule "vim/pack/vendor/start/nerdtree"]
+	path = vim/pack/vendor/start/nerdtree
+	url = https://github.com/preservim/nerdtree.git
+[submodule "vim/pack/vendor/start/vim-ruby"]
+	path = vim/pack/vendor/start/vim-ruby
+	url = https://github.com/vim-ruby/vim-ruby.git
+[submodule "vim/pack/vendor/start/vim-surround"]
+	path = vim/pack/vendor/start/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "vim/pack/vendor/start/vim-test"]
+	path = vim/pack/vendor/start/vim-test
+	url = https://github.com/vim-test/vim-test.git
+[submodule "vim/pack/vendor/start/vimux"]
+	path = vim/pack/vendor/start/vimux
+	url = https://github.com/benmills/vimux.git
+[submodule "vim/pack/vendor/start/vim-lsp"]
+	path = vim/pack/vendor/start/vim-lsp
+	url = https://github.com/prabirshrestha/vim-lsp.git
+[submodule "vim/pack/vendor/start/asyncomplete.vim"]
+	path = vim/pack/vendor/start/asyncomplete.vim
+	url = https://github.com/prabirshrestha/asyncomplete.vim.git
+[submodule "vim/pack/vendor/start/asyncomplete-lsp.vim"]
+	path = vim/pack/vendor/start/asyncomplete-lsp.vim
+	url = https://github.com/prabirshrestha/asyncomplete-lsp.vim.git
+[submodule "vim/pack/vendor/start/vim-lsp-settings"]
+	path = vim/pack/vendor/start/vim-lsp-settings
+	url = https://github.com/mattn/vim-lsp-settings.git
+[submodule "vim/pack/vendor/start/vim-commentary"]
+	path = vim/pack/vendor/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
