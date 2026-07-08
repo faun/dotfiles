@@ -5,7 +5,6 @@ DIR="$PWD"
 
 REPOS_TO_CLONE=(
   ahmetb/kubectx
-  alacritty/alacritty-theme
   rupa/z
 )
 
