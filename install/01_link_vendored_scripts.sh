@@ -6,10 +6,7 @@ DIR="$PWD"
 REPOS_TO_CLONE=(
   ahmetb/kubectx
   alacritty/alacritty-theme
-  dandavison/delta
-  jonmosco/kube-tmux
   rupa/z
-  zsh-users/antigen
 )
 
 for LINE in "${REPOS_TO_CLONE[@]}"; do
