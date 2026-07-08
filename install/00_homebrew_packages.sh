@@ -8,7 +8,6 @@ if command -v brew >/dev/null 2>&1; then
     bat
     clang-format
     cmake
-    direnv
     fd
     fish
     flake8
@@ -23,6 +22,7 @@ if command -v brew >/dev/null 2>&1; then
     lua-language-server
     luarocks
     mas
+    mise
     neovim
     ripgrep
     rubyfmt

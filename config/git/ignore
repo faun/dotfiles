@@ -54,7 +54,8 @@ tags
 /.vim/
 .scratch/
 /.env
-.envrc
+.mise.local.toml
+mise.local.toml
 /logs/*
 go.work
 go.work.sum
