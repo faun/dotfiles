@@ -121,11 +121,6 @@ return {
         debounce = 1000,
       })
       null_ls.setup(options)
-
-      require("mason").setup({
-        ensure_installed = nil,
-        automatic_installation = true,
-      })
     end,
   },
   {
@@ -137,7 +132,38 @@ return {
     },
     config = function()
       require("mason-null-ls").setup({
-        automatic_installation = true,
+        ensure_installed = {
+          "actionlint",
+          "ansiblelint",
+          "codespell",
+          "editorconfig_checker",
+          "fish",
+          "golines",
+          "gomodifytags",
+          "hadolint",
+          "impl",
+          "protolint",
+          "pylint",
+          "refactoring",
+          "revive",
+          "semgrep",
+          "shellharden",
+          "spell",
+          "sqlfluff",
+          "stylelint",
+          "tags",
+          "terraform_fmt",
+          "terraform_validate",
+          "textlint",
+          "tfsec",
+          "tidy",
+          "trivy",
+          "vacuum",
+          "vale",
+          "vint",
+          "yamllint",
+          "zsh",
+        },
       })
     end,
   },
