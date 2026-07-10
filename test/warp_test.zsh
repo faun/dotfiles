@@ -36,6 +36,18 @@ WARP_SRC="$_wtmp" _warp_repo_path nonesuch >/dev/null 2>&1
 assert_eq "missing repo -> nonzero" "1" "$?"
 rm -rf "$_wtmp"
 
+_wtmp=$(mktemp -d)
+# A repo that vendors a same-named nested checkout, mirroring Gusto/terraform's
+# real layout (resources/terraform is its own git repo also named "terraform").
+mkdir -p "$_wtmp/github.com/Gusto/terraform/resources/terraform"
+assert_eq "org-qualified repo is unambiguous (no search, no picker)" \
+  "$_wtmp/github.com/Gusto/terraform" \
+  "$(WARP_SRC="$_wtmp" _warp_repo_path Gusto/terraform)"
+assert_eq "bare-name search breaks the tie toward the shallowest match" \
+  "$_wtmp/github.com/Gusto/terraform" \
+  "$(WARP_SRC="$_wtmp" _warp_repo_path terraform)"
+rm -rf "$_wtmp"
+
 print "\n== worktree lookup =="
 _wtmp=$(mktemp -d); _wtmp=$(cd "$_wtmp" && pwd -P)
 mkdir -p "$_wtmp/github.com/Gusto"
@@ -63,6 +75,14 @@ _warp_pr_branch() { print -r -- "feat-30466"; }
 assert_eq "resolve pr -> repo/branch/empty-wt" \
   $''"$_repo"$'\tfeat-30466\t' \
   "$(WARP_SRC="$_wtmp" _warp_resolve pr terraform 30466)"
+# decoy: a same-named nested repo, like Gusto/terraform/resources/terraform in
+# the real checkout. Added only now so it doesn't perturb the bare-name case
+# above. A PR URL's "org/repo" must disambiguate against this without falling
+# into an fzf prompt.
+mkdir -p "$_repo/resources/terraform"
+assert_eq "resolve pr with org prefix ignores same-named nested repo" \
+  $''"$_repo"$'\tfeat-30466\t' \
+  "$(WARP_SRC="$_wtmp" _warp_resolve pr Gusto/terraform 30466)"
 assert_eq "resolve ticket not open" $'\tdatainfra-9999\t' \
   "$(WARP_SRC="$_wtmp" _warp_resolve ticket '' datainfra-9999)"
 unfunction _warp_pr_branch   # restore real one for later

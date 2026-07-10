@@ -21,10 +21,27 @@ _warp_parse() {
   fi
 }
 
-# Absolute path of the repo checkout named $1 under $WARP_SRC.
+# Absolute path of the repo checkout named $1 under $WARP_SRC. $1 may be a
+# bare repo name ("terraform") or an "org/repo" pair (from a PR URL).
+#
+# An "org/repo" pair has exactly one valid path: $WARP_SRC/github.com/org/repo
+# — the same layout `clone` (shrc/git.sh) derives from a git URL. So it's
+# constructed directly, never searched for; there's nothing to disambiguate
+# even if a same-named repo happens to be vendored elsewhere (e.g.
+# Gusto/terraform/resources/terraform).
+#
+# A bare name has no org to anchor on, so it's found by basename search; if
+# that's still ambiguous, the shortest (shallowest) match wins deterministically
+# rather than prompting, since a shallower checkout is always the "real" one
+# and a nested same-named repo is always deeper.
 _warp_repo_path() {
   emulate -L zsh
   local name="$1" root="${WARP_SRC:-$HOME/src}"
+  if [[ "$name" == */* ]]; then
+    local path="$root/github.com/$name"
+    [[ -d "$path" ]] && { print -r -- "$path"; return 0; }
+    return 1
+  fi
   local -a hits
   hits=("${(@f)$(find "$root" -maxdepth 5 -type d -name "$name" \
     -not -path '*/worktrees/*' -not -path '*/.git/*' 2>/dev/null)}")
@@ -32,7 +49,13 @@ _warp_repo_path() {
   case ${#hits} in
     0) return 1 ;;
     1) print -r -- "$hits[1]" ;;
-    *) print -rl -- $hits | fzf || return 1 ;;
+    *)
+      local best="$hits[1]" h
+      for h in "$hits[@]"; do
+        (( ${#${(s:/:)h}} < ${#${(s:/:)best}} )) && best="$h"
+      done
+      print -r -- "$best"
+      ;;
   esac
 }
 
@@ -79,8 +102,8 @@ _warp_resolve() {
   local type="$1" repo="$2" sel="$3" repo_path branch wt
   case "$type" in
     pr)
-      repo_path="$(_warp_repo_path "${repo##*/}")" \
-        || { print "warp: repo not found: ${repo##*/}" >&2; return 1; }
+      repo_path="$(_warp_repo_path "$repo")" \
+        || { print "warp: repo not found: $repo" >&2; return 1; }
       branch="$(_warp_pr_branch "$repo_path" "$sel")" \
         || { print "warp: gh could not resolve PR $sel" >&2; return 1; }
       [[ -z "$branch" ]] && { print "warp: PR $sel has no head branch" >&2; return 1; }
