@@ -88,6 +88,23 @@ assert_eq "resolve ticket not open" $'\tdatainfra-9999\t' \
 unfunction _warp_pr_branch   # restore real one for later
 rm -rf "$_wtmp"
 
+print "\n== _drain_stray_input =="
+if zmodload zsh/zpty 2>/dev/null; then
+  # Simulate a stray terminal report (e.g. CSI ?997;2n) already sitting in the
+  # input queue when _drain_stray_input runs, by writing into a real pty via
+  # zpty — a plain pipe won't do, since read -t 0 -k needs an actual tty.
+  zpty _drain_pty "zsh -c 'source $DOT/shrc/functions.sh; sleep 0.3; _drain_stray_input; if read -t 0.3 -k 1 rest 2>/dev/null; then print leftover=\$rest; else print leftover=none; fi'"
+  sleep 0.1
+  zpty -w _drain_pty $'\e[?997;2nX'
+  sleep 1
+  zpty -r _drain_pty _drain_out
+  zpty -d _drain_pty
+  assert_eq "drains a stray report before it can leak" "leftover=none" \
+    "$(print -r -- "$_drain_out" | tr -d '\r\n')"
+else
+  print "  skip: zsh/zpty module unavailable"
+fi
+
 print "\n== _warp_find_tmux =="
 _wtmp=$(mktemp -d); _wtmp=$(cd "$_wtmp" && pwd -P); mkdir -p "$_wtmp/proj"
 command tmux -L warptest -f /dev/null kill-server 2>/dev/null

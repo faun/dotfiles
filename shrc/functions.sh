@@ -64,6 +64,22 @@ _zj_set_title() { printf '\033]2;%s\a' "$1"; }
 # writes when stdout is a tty, so it's inert in pipes and tests.
 _reset_colorscheme_notifications() { [[ -t 1 ]] && printf '\033[?2031l'; }
 
+# Discard any input already sitting in the terminal's queue. warp/zj block on
+# gh/git/osascript calls before reaching here, during which zle isn't looping
+# and can't catch a stray color-scheme report (CSI ?997;{1,2}n — see
+# 04_colorscheme_notify_guard.sh) via its bindkey; the bytes just sit buffered
+# and get handed to whatever reads the terminal next — the zellij process
+# we're about to attach/switch to, before its own pane's shell is ready to
+# swallow them. Draining right before handoff prevents that. Non-blocking:
+# stops as soon as nothing more is immediately available. Only meaningful on
+# a real tty.
+_drain_stray_input() {
+  emulate -L zsh
+  [[ -t 0 ]] || return 0
+  local _junk
+  while read -t 0 -k 1 _junk 2>/dev/null; do :; done
+}
+
 # Attach (outside zellij) or switch (inside zellij) to a named session, anchored
 # in $2 and created on demand.
 _zj_switch() {
@@ -72,14 +88,17 @@ _zj_switch() {
   # theme flip during/after the switch can't drop "997;..n" onto the new prompt.
   _reset_colorscheme_notifications
   _zj_set_title "$session"
+  _drain_stray_input
   if [[ -n ${ZELLIJ:-} ]]; then
     # `attach` refuses to nest inside a session, so switch the attached client.
     # `switch-session` won't create a brand-new session, so ensure it exists.
     if ! \zellij list-sessions -s 2>/dev/null | grep -qxF "$session"; then
       (cd "$cwd" && \zellij attach --create-background "$session")
     fi
+    _drain_stray_input
     \zellij action switch-session --cwd "$cwd" "$session"
   else
+    _drain_stray_input
     cd "$cwd" && \zellij attach --create "$session"
   fi
 }
