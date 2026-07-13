@@ -1,0 +1,93 @@
+# Herdr configuration — managed by dotfiles (config/herdr/config.toml).
+#
+# Herdr is an agent-aware terminal multiplexer: like tmux it splits panes and
+# persists sessions, but it also tracks the state of AI coding agents (Claude
+# Code, Codex, …) in a sidebar. Its hierarchy is workspace > tab > pane, which
+# maps onto tmux's session > window > pane.
+#
+# Philosophy: keep the tmux/zellij muscle memory. tmux stays the default
+# multiplexer (`t`); launch Herdr with `hd`. The prefix is Ctrl+a (matching
+# tmux.conf and config/zellij/config.kdl) and the familiar combos are mapped
+# onto Herdr's actions.
+#
+# tmux/zellij -> herdr quick reference (press Ctrl+a first):
+#
+#   Ctrl+a |        split right (side by side)      [tmux: prefix |]
+#   Ctrl+a -        split down (stacked)            [tmux: prefix - / \]
+#   Ctrl+a c        new tab                         [tmux: new-window]
+#   Ctrl+a ,        rename tab                      [tmux: rename-window]
+#   Ctrl+a n / p    next / previous tab
+#   Ctrl+a h/j/k/l  move focus between panes        [tmux: vim-navigator]
+#   Ctrl+a z        zoom (toggle fullscreen)        [tmux: prefix z]
+#   Ctrl+a x        close pane                      [tmux: prefix x]
+#   Ctrl+a d        detach                          [tmux: prefix d]
+#   Ctrl+a [        scrollback (opens $EDITOR)      [tmux: prefix [ scroll/copy]
+#   Ctrl+a s        workspace / session picker      [tmux: prefix s]
+#   Ctrl+a r        reload this config              [tmux: prefix r]
+#
+# Prefix-less (no Ctrl+a needed):
+#   Shift+Left / Shift+Right   previous / next tab  [tmux: bind -n S-Left/Right]
+#
+# Where Herdr's model differs from tmux (no exact equivalent):
+#   - Resize is a mode (Ctrl+a Shift+R), not one-shot Ctrl+a H/J/K/L. Herdr's
+#     Ctrl+a Shift+H/J/K/L is swap-pane (left at its default).
+#   - There is no interactive copy-mode; [ opens the scrollback in $EDITOR,
+#     like zellij's scrollback_editor.
+#   - There is no send-prefix, so Ctrl+a Ctrl+a is not remapped.
+
+[keys]
+prefix = "ctrl+a"
+
+# Splits. Herdr's split_vertical puts the new pane to the right (side by side);
+# split_horizontal puts it below (stacked) — same sense as tmux's `|` vs `-`.
+split_vertical   = "prefix+|"          # tmux: prefix |
+split_horizontal = "prefix+minus"      # tmux: prefix - / \
+
+# Tabs (tmux windows).
+new_tab      = "prefix+c"                     # tmux: new-window
+rename_tab   = "prefix+comma"                 # tmux: prefix ,
+next_tab     = ["prefix+n", "shift+right"]    # tmux: prefix n + bind -n S-Right
+previous_tab = ["prefix+p", "shift+left"]     # tmux: prefix p + bind -n S-Left
+switch_tab   = "prefix+1..9"                  # jump straight to tab N (base-index 1)
+
+# Pane focus (tmux: vim-tmux-navigator h/j/k/l). These equal Herdr's defaults;
+# kept explicit so the muscle-memory map lives in one place.
+focus_pane_left  = "prefix+h"
+focus_pane_down  = "prefix+j"
+focus_pane_up    = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# Zoom / close / detach.
+zoom       = "prefix+z"                 # tmux: prefix z
+close_pane = "prefix+x"                 # tmux: prefix x
+detach     = "prefix+d"                 # tmux: prefix d (Herdr default is prefix+q)
+
+# Scrollback. Herdr has no interactive copy-mode; edit_scrollback opens the
+# buffer in $EDITOR (like zellij's scrollback_editor). Bind the tmux copy-mode
+# key `[` to it alongside Herdr's own prefix+e.
+edit_scrollback = ["prefix+e", "prefix+["]
+
+# Session / workspace switcher (tmux: prefix s). A Herdr "workspace" is the
+# closest thing to a tmux session. Herdr's default prefix+s is `settings`, so
+# that moves aside to prefix+Shift+S.
+workspace_picker = "prefix+s"
+settings         = "prefix+shift+s"
+
+# Reload config (tmux: prefix r). Herdr defaults reload to prefix+Shift+R and
+# resize to prefix+r; swap them so the tmux muscle memory wins.
+reload_config = "prefix+r"
+resize_mode   = "prefix+shift+r"
+
+[ui]
+# Mouse support, mirroring tmux `mouse on`.
+mouse_capture = true
+
+[session]
+# Resume AI-agent panes into their conversation sessions after a server restart
+# — Herdr's answer to tmux-resurrect / tmux-continuum.
+resume_agents_on_restore = true
+
+[theme]
+# Inherit the outer terminal's palette (Ghostty's Tomorrow Night here), so Herdr
+# matches the tmux / zellij look without pinning colors.
+name = "terminal"

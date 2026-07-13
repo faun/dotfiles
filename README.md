@@ -140,6 +140,53 @@ The status line is [zjstatus](https://github.com/dj95/zjstatus) (fetched to
 and tab list. It replaces zellij's built-in `compact-bar`, which hardcodes a
 `Zellij (<session>)` label that no config option can remove.
 
+### Herdr (agent-aware multiplexer)
+
+[Herdr](https://herdr.dev) is installed alongside tmux and zellij. tmux stays the
+default multiplexer (`t` / `tat`); Herdr is opt-in via `hd`. Like tmux it splits
+panes and persists sessions, but it also tracks the live state of AI coding
+agents (Claude Code, Codex, …) in a sidebar. Its hierarchy is
+workspace > tab > pane (tmux's session > window > pane).
+
+`hd` is a simple, worktree-aware launcher. With no arguments it launch/attaches a
+session named after the current git checkout — the repo name on the mainline
+(e.g. `dotfiles`), or `<repo>-<branch>` in a linked worktree (e.g.
+`dotfiles-datainfra-1234`), reusing the same naming as `zj`. Any arguments pass
+straight through to `herdr` (e.g. `hd session list`). Herdr manages git worktrees
+natively, so `hd` stays lighter than `zj`.
+
+Config lives at `config/herdr/config.toml` (symlinked to
+`~/.config/herdr/config.toml` — only the file is linked, since Herdr keeps its
+sockets and session state in that same directory). It sets the tmux prefix
+`Ctrl+a` and maps the familiar combos onto Herdr's actions. After pressing
+`Ctrl+a`:
+
+| Keys | Action | tmux equivalent |
+| --- | --- | --- |
+| `Ctrl+a` then `\|` | split right (side by side) | `prefix \|` |
+| `Ctrl+a` then `-` | split down (stacked) | `prefix -` / `\` |
+| `Ctrl+a` then `c` | new tab | new-window |
+| `Ctrl+a` then `,` | rename tab | rename-window |
+| `Ctrl+a` then `n` / `p` | next / previous tab | next/prev-window |
+| `Ctrl+a` then `h/j/k/l` | move focus | vim-tmux-navigator |
+| `Ctrl+a` then `z` | zoom pane | `prefix z` |
+| `Ctrl+a` then `x` | close pane | `prefix x` |
+| `Ctrl+a` then `s` | workspace / session picker | `prefix s` |
+| `Ctrl+a` then `d` | detach | `prefix d` |
+| `Ctrl+a` then `[` | scrollback (opens `$EDITOR`) | `prefix [` scroll/copy |
+| `Ctrl+a` then `r` | reload config | `prefix r` |
+
+Plus, without the prefix: `Shift+Left` / `Shift+Right` switch to the previous /
+next tab (mirrors tmux's `bind -n S-Left` / `S-Right`).
+
+Where Herdr's model differs from tmux: resizing is a mode (`Ctrl+a` then
+`Shift+R`), not one-shot `Ctrl+a H/J/K/L` (Herdr uses `Ctrl+a Shift+H/J/K/L` to
+swap panes); there is no interactive copy-mode, so `[` opens the scrollback in
+`$EDITOR`; and there is no send-prefix, so `Ctrl+a Ctrl+a` is left unmapped.
+Sessions persist across restarts (`resume_agents_on_restore`), replacing
+tmux-resurrect/continuum. `warp` locates Herdr sessions too, so a worktree
+already open in Herdr is raised rather than reopened.
+
 ### Patch your terminal font with Powerline glyphs for maximum awesomeness
 
 See [Powerline repo](https://github.com/Lokaltog/powerline-fonts) for more info.

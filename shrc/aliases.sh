@@ -19,6 +19,9 @@ alias tmux='tmux_attach'
 # zellij (coexists with tmux, which stays the default multiplexer)
 alias zj='zellij_attach'
 
+# herdr (agent-aware multiplexer; coexists with tmux/zellij)
+alias hd='herdr_attach'
+
 # ruby
 alias bi='bundle install'
 alias bu='bundle update'

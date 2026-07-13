@@ -123,6 +123,13 @@ assert_eq "exact repo-branch" "terraform-datainfra-2092" \
 assert_eq "no match -> empty" "" "$(_warp_find_zellij nope zzz)"
 unfunction _warp_zellij_sessions
 
+print "\n== _warp_find_herdr =="
+_warp_herdr_sessions() { print -l "default" "database-cli" "terraform-datainfra-2092" "migrant"; }
+assert_eq "exact repo-branch" "terraform-datainfra-2092" \
+  "$(_warp_find_herdr terraform datainfra-2092)"
+assert_eq "no match -> empty" "" "$(_warp_find_herdr nope zzz)"
+unfunction _warp_herdr_sessions
+
 print "\n== _warp_focus_tmux (select mechanics) =="
 _wtmp=$(mktemp -d); mkdir -p "$_wtmp/a" "$_wtmp/b"
 command tmux -L warptest -f /dev/null kill-server 2>/dev/null

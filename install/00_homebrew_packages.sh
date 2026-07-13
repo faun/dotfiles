@@ -15,6 +15,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
       fish
       fzf
       hashicorp/tap/terraform-ls
+      herdr
       jesseduffield/lazygit/lazygit
       lua
       lua-language-server
@@ -56,8 +57,9 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 else
   # Linux: no Homebrew requirement here. Install the closest equivalents via
   # the native package manager instead. A handful of the macOS brew formulas
-  # above (mise, zellij, terraform, terraform-ls, vale, lua-language-server,
-  # mas) have no reliable apt/dnf/yum package across distros; mise is
+  # above (mise, zellij, herdr, terraform, terraform-ls, vale,
+  # lua-language-server, mas) have no reliable apt/dnf/yum package across
+  # distros; mise is
   # installed separately via its own official installer (see 02_mise.sh) and
   # the rest are skipped here and can be installed manually if needed.
 

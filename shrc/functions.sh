@@ -183,6 +183,21 @@ zellij_attach() {
   fi
 }
 
+# herdr, a simple per-checkout launcher. Herdr manages git worktrees natively,
+# so this stays lighter than zellij_attach: `hd` with no args launch/attaches
+# this checkout's session (reusing the same session-name helpers as zj, which
+# warp also shares); any args pass straight through to herdr.
+herdr_attach() {
+  if [[ $# -eq 0 ]]; then
+    local session
+    session="$(_zj_session_name)"
+    _zj_set_title "$session"   # keep the name in the tab title so `warp` can AXRaise it
+    \herdr --session "$session"
+    return
+  fi
+  \herdr "$@"
+}
+
 # mkdir, cd into it
 mkcd() {
   mkdir -p "$*"
