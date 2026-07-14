@@ -4,6 +4,7 @@ cd "$(dirname "$0")" || exit 1
 DIR="$PWD"
 
 REPOS_TO_CLONE=(
+  ahmetb/kubectl-aliases
   ahmetb/kubectx
   alacritty/alacritty-theme
   dandavison/delta

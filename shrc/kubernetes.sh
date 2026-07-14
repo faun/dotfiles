@@ -2,6 +2,25 @@
 
 # Kubernetes aliases and functions
 
+# kubectl-aliases (https://github.com/ahmetb/kubectl-aliases), vendored to
+# ~/.config/ahmetb/kubectl-aliases by install/01_link_vendored_scripts.sh.
+# Sourced before the bespoke aliases below so those still win on any collision.
+_kubectl_aliases="$HOME/.config/ahmetb/kubectl-aliases/.kubectl_aliases"
+if command -v kubectl >/dev/null 2>&1 && [[ -r "$_kubectl_aliases" ]]; then
+  # shellcheck source=/dev/null
+  source "$_kubectl_aliases"
+  # zsh expands aliases before completing (COMPLETE_ALIASES unset here; kubectl
+  # completion is loaded in ~/.zshrc), so kgpo<TAB> etc. complete for free.
+  # bash does not expand aliases for completion, so the alias shortcuts won't
+  # tab-complete (that would need complete-alias); still load kubectl's own bash
+  # completion so at least `kubectl` completes there.
+  if [ -n "$BASH_VERSION" ]; then
+    # shellcheck disable=SC1090
+    source <(kubectl completion bash)
+  fi
+fi
+unset _kubectl_aliases
+
 alias k="kubectl"
 alias kctx='kubectx'
 alias kns='kubens "$(namespace_options)"'

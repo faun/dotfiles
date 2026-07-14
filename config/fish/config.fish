@@ -91,6 +91,16 @@ if status is-interactive
         # Activate mise if installed
         mise activate fish | source
     end
+
+    if command -q kubectl
+        # kubectl subcommand/resource completion
+        kubectl completion fish | source
+        # kubectl-aliases (github.com/ahmetb/kubectl-aliases) abbreviations,
+        # vendored to ~/.config/ahmetb/kubectl-aliases. Typing e.g. `kg `
+        # expands to `kubectl get ` and then completes.
+        set -l _kaf $HOME/.config/ahmetb/kubectl-aliases/.kubectl_aliases.fish
+        test -r $_kaf && source $_kaf
+    end
 end
 
 function reload --description "Reload Fish configuration"
