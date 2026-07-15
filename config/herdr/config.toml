@@ -93,3 +93,14 @@ resume_agents_on_restore = true
 # matches the tmux / zellij look without pinning colors.
 name = "terminal"
 auto_switch = false
+
+[ui.sound]
+# Quiet notification sounds — short tones synthesized with ffmpeg
+# (sounds/generate.sh), since Herdr has no volume setting of its own (only a
+# fixed sound file per event type). Not derived from any OS or third-party
+# sound asset, so they're ours to commit outright. Relative to this config
+# file's directory; sounds/ is symlinked in by install/08_herdr.sh alongside
+# config.toml.
+enabled = true
+request_path = "sounds/request.mp3"  # needs attention — rising blip
+done_path = "sounds/done.mp3"        # finished — descending chime
