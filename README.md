@@ -134,11 +134,12 @@ Sessions persist and resurrect automatically (`session_serialization`),
 replacing tmux-resurrect/continuum. Native zellij modes (`Ctrl+p` pane,
 `Ctrl+t` tab, `Ctrl+n` resize, `Ctrl+o` session, …) remain available.
 
-The status line is [zjstatus](https://github.com/dj95/zjstatus) (fetched to
-`~/.local/share/zellij/plugins/` by `install/06_zellij.sh`), configured in
-`config/zellij/layouts/spare.kdl` to mirror the tmux status bar — session, mode,
-and tab list. It replaces zellij's built-in `compact-bar`, which hardcodes a
-`Zellij (<session>)` label that no config option can remove.
+The status line is zellij's own built-in `tab-bar`/`status-bar` (the default
+layout — no `default_layout` override). A previous version used the
+third-party [zjstatus](https://github.com/dj95/zjstatus) plugin for a
+tmux-style status line, but it was dropped after hitting an unresolved
+zjstatus bug under zellij 0.44's wasmi plugin runtime that permanently
+corrupted the rendered tab names after a session re-attach.
 
 ### Herdr (agent-aware multiplexer)
 

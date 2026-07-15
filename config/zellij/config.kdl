@@ -111,10 +111,13 @@ keybinds {
 
 theme "faun"
 
-// Spare, tmux-style status line via the zjstatus plugin (layouts/spare.kdl),
-// replacing zellij's built-in compact-bar — which hardcodes a "Zellij (<session>)"
-// ribbon that no option can remove. pane_frames stays off for the minimal look.
-default_layout "spare"
+// Use zellij's own built-in default layout (tab-bar + status-bar) rather than
+// the third-party zjstatus plugin: zjstatus has an unresolved bug under
+// zellij 0.44's new wasmi plugin runtime where a client re-attach or layout
+// re-evaluation permanently corrupts its rendered tab names (they keep
+// cycling/flickering until the session's server restarts) —
+// https://github.com/dj95/zjstatus/issues/247. pane_frames stays off for the
+// minimal look.
 pane_frames false
 
 // Start in Normal mode so both the native modal keys and the Ctrl+a prefix work.
