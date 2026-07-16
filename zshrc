@@ -42,3 +42,5 @@ fi
 if [[ -n $DEBUG_STARTUP_TIME ]]; then
   zprof
 fi
+
+export PATH="$(brew --prefix mysql-client)/bin:$PATH"
