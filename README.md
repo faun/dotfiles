@@ -173,6 +173,8 @@ sockets and session state in that same directory). It sets the tmux prefix
 | `Ctrl+a` then `z` | zoom pane | `prefix z` |
 | `Ctrl+a` then `x` | close pane | `prefix x` |
 | `Ctrl+a` then `s` | workspace / session picker | `prefix s` |
+| `Ctrl+a` then `o` | previous workspace (vim: Ctrl-O) | *(no equivalent)* |
+| `Ctrl+a` then `i` | next workspace (vim: Ctrl-I) | *(no equivalent)* |
 | `Ctrl+a` then `d` | detach | `prefix d` |
 | `Ctrl+a` then `[` | scrollback (opens `$EDITOR`) | `prefix [` scroll/copy |
 | `Ctrl+a` then `r` | reload config | `prefix r` |

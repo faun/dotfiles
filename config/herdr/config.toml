@@ -23,6 +23,8 @@
 #   Ctrl+a d        detach                          [tmux: prefix d]
 #   Ctrl+a [        scrollback (opens $EDITOR)      [tmux: prefix [ scroll/copy]
 #   Ctrl+a s        workspace / session picker      [tmux: prefix s]
+#   Ctrl+a o        previous workspace (vim: Ctrl-O)
+#   Ctrl+a i        next workspace (vim: Ctrl-I)
 #   Ctrl+a r        reload this config              [tmux: prefix r]
 #
 # Prefix-less (no Ctrl+a needed):
@@ -72,6 +74,13 @@ edit_scrollback = ["prefix+e", "prefix+["]
 # that moves aside to prefix+Shift+S.
 workspace_picker = "prefix+s"
 settings         = "prefix+shift+s"
+
+# Workspace jump (vim: Ctrl-O back / Ctrl-I forward through the jumplist).
+# Herdr's default prefix+o is `open_notification_target`; that moves aside to
+# prefix+Shift+O so i/o can drive workspace history instead.
+previous_workspace       = "prefix+o"   # vim: Ctrl-O (older)
+next_workspace           = "prefix+i"   # vim: Ctrl-I (newer)
+open_notification_target = "prefix+shift+o"
 
 # Reload config (tmux: prefix r). Herdr defaults reload to prefix+Shift+R and
 # resize to prefix+r; swap them so the tmux muscle memory wins.
