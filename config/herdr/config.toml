@@ -97,6 +97,11 @@ agent_panel_sort = "priority"
 # — Herdr's answer to tmux-resurrect / tmux-continuum.
 resume_agents_on_restore = true
 
+[experimental]
+# Also keep recent pane scrollback across full server restarts, on top of
+# agent-conversation resume above.
+pane_history = true
+
 [theme]
 # Inherit the outer terminal's palette (Ghostty's Tomorrow Night here), so Herdr
 # matches the tmux / zellij look without pinning colors.
