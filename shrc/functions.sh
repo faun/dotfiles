@@ -192,6 +192,13 @@ herdr_attach() {
     local session
     session="$(_zj_session_name)"
     _zj_set_title "$session"   # keep the name in the tab title so `warp` can AXRaise it
+    # Homebrew installs can't live-handoff a stale per-session server (herdr
+    # disables that path for package-manager installs), so just nudge rather
+    # than silently killing/resuming panes on every attach.
+    if [[ -S "$HOME/.config/herdr/sessions/$session/herdr.sock" ]] && \
+       [[ "$(\herdr status --session "$session" --json 2>/dev/null | jq -r '.update.restart_needed // false')" == "true" ]]; then
+      print -u2 "herdr: '$session' server is stale — run \`herdr session stop $session\` then reattach to refresh it"
+    fi
     \herdr --session "$session"
     return
   fi

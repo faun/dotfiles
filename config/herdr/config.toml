@@ -1,3 +1,4 @@
+onboarding = false
 # Herdr configuration — managed by dotfiles (config/herdr/config.toml).
 #
 # Herdr is an agent-aware terminal multiplexer: like tmux it splits panes and
@@ -92,6 +93,7 @@ resize_mode   = "prefix+shift+r"
 mouse_capture = true
 
 agent_panel_sort = "priority"
+show_agent_labels_on_pane_borders = true
 [session]
 # Resume AI-agent panes into their conversation sessions after a server restart
 # — Herdr's answer to tmux-resurrect / tmux-continuum.
@@ -118,3 +120,6 @@ auto_switch = false
 enabled = true
 request_path = "sounds/request.mp3"  # needs attention — rising blip
 done_path = "sounds/done.mp3"        # finished — descending chime
+
+[ui.toast]
+delivery = "system"
