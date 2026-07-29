@@ -1,0 +1,58 @@
+# ~/.local.sh — machine-local shell config. NOT tracked in dotfiles.
+#
+# Sourced by the last line of zshrc, after everything else, so anything set
+# here wins. install/01_local_env.sh copies this example to ~/.local.sh once,
+# the first time a machine is set up; after that this file is never touched
+# automatically, so edit ~/.local.sh directly and edit/extend freely.
+#
+# Uncomment and fill in whichever sections apply to this machine.
+
+# --- Neovim AI completion (config/nvim/lua/config/ai.lua) -------------------
+#
+# Each tier defaults to "off"/safe behavior if unset, so uncommenting nothing
+# here is fine. See config/nvim/lua/config/ai.lua for the full resolution
+# order.
+#
+# Inline ghost-text completion tier: off | copilot | fireworks | local | auto
+# "auto" (the default) uses a local llama-server if one answers on
+# NVIM_AI_LLAMA_PORT, else Fireworks if FIREWORKS_API_KEY is set, else Copilot.
+# export NVIM_AI_COMPLETION=auto
+
+# Only needed if you run `llama-server` on a non-default port:
+#   llama-server -hf ggml-org/Qwen2.5-Coder-3B-Q8_0-GGUF --port 8012 -ngl 99
+# export NVIM_AI_LLAMA_PORT=8012
+
+# Fireworks tier: FIM-style code completion via api.fireworks.ai.
+# export FIREWORKS_API_KEY=
+# export NVIM_AI_FIREWORKS_MODEL=accounts/fireworks/models/qwen2p5-coder-32b-instruct
+
+# Next Edit Suggestions (sidekick.nvim, rides on Copilot's LSP): on | off
+# export NVIM_AI_NES=on
+
+# Chat / inline-edit assistant (CodeCompanion): off | codecompanion
+# export NVIM_AI_ASSIST=codecompanion
+
+# CodeCompanion/Avante provider selection, in priority order: Ollama, OpenAI,
+# Anthropic, then Copilot as the no-config fallback.
+# export ANTHROPIC_API_KEY=
+# export ANTHROPIC_MODEL=
+# export OPENAI_API_KEY=
+# export OPENAI_MODEL=
+# export OLLAMA_API_BASE_URL=
+# export OLLAMA_MODEL=
+# export COPILOT_MODEL=
+
+# --- 1Password-backed secrets (zsh/05_secrets.sh, macOS only) ---------------
+#
+# Bootstrap a new machine with `secret_store_all`; thereafter every cached
+# secret auto-loads on shell start via the Keychain.
+# export OP_SECRETS_VAULT=   # vault UUID
+# export OP_SECRETS_ITEM=    # item UUID
+# export OP_ACCOUNT=         # e.g. yourteam.1password.com
+
+# --- Misc ---------------------------------------------------------------
+#
+# Set automatically by install.sh after the first successful checkhealth run;
+# left here as documentation. Delete the line in ~/.local.sh to re-run the
+# health check summary on the next `./install.sh`.
+# export SKIP_HEALTH_CHECK=true
