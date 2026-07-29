@@ -28,7 +28,6 @@ return {
   {
     "saghen/blink.cmp",
     dependencies = {
-      { "giuxtaposition/blink-cmp-copilot" },
       { "rafamadriz/friendly-snippets" },
       { "dmitmel/cmp-digraphs" },
       { "saghen/blink.compat", opts = { enable_events = true } },
@@ -66,7 +65,6 @@ return {
         Event = "",
         Operator = "󰆕",
         TypeParameter = "",
-        Copilot = "",
       }
 
       opts.appearance = {
@@ -122,7 +120,6 @@ return {
           "snippets",
           "omni",
           "buffer",
-          "copilot",
         },
         per_filetype = {
           codecompanion = { "codecompanion" },
@@ -132,13 +129,6 @@ return {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
             score_offset = 90,
-          },
-          copilot = {
-            name = "copilot",
-            module = "blink-cmp-copilot",
-            kind = "Copilot",
-            score_offset = 80,
-            async = true,
           },
         },
       }
