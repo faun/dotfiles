@@ -74,5 +74,6 @@ mise.toml
 /.jira
 .scratch/
 .claude/*.lock
+**/.claude/.cc-writes/
 
 # vim: set ft=gitconfig ts=2 sw=2 et:
