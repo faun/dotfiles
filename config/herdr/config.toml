@@ -122,4 +122,6 @@ request_path = "sounds/request.mp3"  # needs attention — rising blip
 done_path = "sounds/done.mp3"        # finished — descending chime
 
 [ui.toast]
-delivery = "system"
+# No visual popups — the sounds above are enough of a signal, and system
+# notifications stack up and steal focus during long agent runs.
+delivery = "off"
