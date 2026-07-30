@@ -125,3 +125,8 @@ done_path = "sounds/done.mp3"        # finished — descending chime
 # No visual popups — the sounds above are enough of a signal, and system
 # notifications stack up and steal focus during long agent runs.
 delivery = "off"
+
+[update]
+# Track released builds rather than preview. Equivalent to running
+# `herdr channel set stable`, kept here so it survives a fresh install.
+channel = "stable"
