@@ -44,3 +44,7 @@ if [[ -n $DEBUG_STARTUP_TIME ]]; then
 fi
 
 export PATH="$(brew --prefix mysql-client)/bin:$PATH"
+
+if [[ -f ~/.gusto/init.sh ]]; then
+  source ~/.gusto/init.sh
+fi

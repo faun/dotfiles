@@ -37,3 +37,6 @@ export PS1="→ "
 export PS2='>' # Secondary prompt
 export PS3='?' # Prompt 3
 export PS4='+' # Prompt 4
+if [ -f ~/.gusto/init.sh ]; then
+  . ~/.gusto/init.sh
+fi
