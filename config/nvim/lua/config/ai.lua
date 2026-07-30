@@ -54,6 +54,14 @@ end
 
 local completion_tier
 
+local valid_tiers = { off = true, copilot = true, fireworks = true, ["local"] = true }
+
+local function warn(msg)
+  vim.schedule(function()
+    vim.notify(msg, vim.log.levels.WARN)
+  end)
+end
+
 ---@return "off"|"copilot"|"fireworks"|"local"
 function M.completion()
   if completion_tier == nil then
@@ -66,6 +74,16 @@ function M.completion()
       else
         tier = "copilot"
       end
+    elseif not valid_tiers[tier] then
+      warn(
+        ("NVIM_AI_COMPLETION=%s is not a recognized tier (off|copilot|fireworks|local|auto); AI completion disabled"):format(
+          tier
+        )
+      )
+      tier = "off"
+    elseif tier == "fireworks" and not os.getenv("FIREWORKS_API_KEY") then
+      warn("NVIM_AI_COMPLETION=fireworks but FIREWORKS_API_KEY is unset; falling back to copilot")
+      tier = "copilot"
     end
     completion_tier = tier
   end

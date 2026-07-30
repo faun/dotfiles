@@ -66,7 +66,10 @@ if completion == "local" or completion == "fireworks" then
 
   table.insert(plugins, {
     "milanglacier/minuet-ai.nvim",
-    event = "InsertEnter",
+    -- Must load before the first buffer's FileType event: minuet arms
+    -- virtual-text auto-trigger from a FileType autocmd, so InsertEnter
+    -- would be too late for the initially opened file.
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
       provider = "openai_fim_compatible",
