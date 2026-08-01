@@ -29,7 +29,9 @@ end
 
 -- Cheap synchronous probe: localhost connections succeed or are refused in
 -- ~1ms; the vim.wait bound only matters if the port is firewalled to DROP.
-local function llama_server_up()
+-- Exposed for the health check (:checkhealth config.ai), which re-probes
+-- live instead of trusting the startup snapshot.
+function M.llama_server_up()
   local uv = vim.uv or vim.loop
   local tcp = uv.new_tcp()
   if not tcp then
@@ -67,7 +69,7 @@ function M.completion()
   if completion_tier == nil then
     local tier = os.getenv("NVIM_AI_COMPLETION") or "auto"
     if tier == "auto" then
-      if llama_server_up() then
+      if M.llama_server_up() then
         tier = "local"
       elseif os.getenv("FIREWORKS_API_KEY") then
         tier = "fireworks"

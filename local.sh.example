@@ -6,6 +6,8 @@
 # automatically, so edit ~/.local.sh directly and edit/extend freely.
 #
 # Uncomment and fill in whichever sections apply to this machine.
+# Run `:checkhealth config.ai` in Neovim to see how the AI tiers resolved
+# and what to change.
 
 # --- Neovim AI completion (config/nvim/lua/config/ai.lua) -------------------
 #
