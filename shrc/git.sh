@@ -428,9 +428,13 @@ gg() {
   if [[ "$(current_branch)" != "$mainline_ref" ]]; then
     git fetch origin "$mainline_ref"
   fi
+  # %G? is the signature status: G good, B bad, U good but untrusted, X expired,
+  # Y expired key, R revoked key, E cannot check, N none. Note that an SSH-signed
+  # commit reports N unless gpg.ssh.allowedSignersFile is set, because git cannot
+  # even attempt verification without it, which is indistinguishable from unsigned.
   git log \
     --graph \
-    --pretty=format:'%Cred%h%Creset %aN: %s %Cgreen(%cr)%Creset' \
+    --pretty=format:'%Cred%h%Creset %C(magenta)%G?%Creset %aN: %s %Cgreen(%cr)%Creset' \
     --abbrev-commit \
     --date=relative \
     "$(current_branch)" \
