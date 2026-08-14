@@ -44,25 +44,37 @@ return {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     opts = {
-      ensure_installed = {
-        "golangci_lint_ls",
-        "gopls",
-        "helm-ls",
-        "lua_ls",
-        "luarocks",
-        "prettier",
-        "sqlls",
-        "stylua",
-        "ts_ls",
-      },
-      automatic_installation = { exclude = {} },
+      -- Every server is configured by hand further down this file. automatic_enable
+      -- defaults to true and would vim.lsp.enable() each installed server on top of
+      -- that, giving two clients per buffer.
+      automatic_enable = false,
     },
-    config = function(opts)
-      local ensure_installed = vim.tbl_keys(opts.ensure_installed or {})
+    config = function(_, opts)
+      -- lazy.nvim calls config(plugin, opts). Taking the first argument as opts read
+      -- ensure_installed off the plugin spec, where it does not exist, which is how
+      -- this list quietly installed nothing at all.
       require("mason").setup()
-      require("mason-registry").refresh()
+      require("mason-lspconfig").setup(opts)
+
+      -- Installs go through mason-tool-installer rather than mason-lspconfig's own
+      -- ensure_installed, which no-ops under --headless (see its init.lua) and so
+      -- cannot be verified from a script. That means Mason *package* names here, not
+      -- lspconfig server names: typescript-language-server, not ts_ls.
+      --
+      -- Only list what nothing else already supplies. Mason prepends its bin dir to
+      -- PATH, so naming a tool that also comes from yarn/go/brew installs a second
+      -- copy that silently wins. Deliberately absent for that reason:
+      -- bash-language-server, vscode-{css,html,json,eslint}-language-server and
+      -- yaml-language-server (~/.yarn/bin), gopls and golangci-lint-langserver
+      -- (~/go/bin), lua-language-server (homebrew).
       require("mason-tool-installer").setup({
-        ensure_installed = ensure_installed,
+        ensure_installed = {
+          "graphql-language-service-cli",
+          "helm-ls",
+          "prettier",
+          "stylua",
+          "typescript-language-server",
+        },
         auto_update = true,
         run_on_start = true,
       })
@@ -202,12 +214,9 @@ return {
         local function buf_set_keymap(...)
           vim.api.nvim_buf_set_keymap(bufnr, ...)
         end
-        local function buf_set_option(...)
-          vim.api.nvim_buf_set_option(bufnr, ...)
-        end
 
-        -- Enable completion
-        buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+        -- omnifunc is set to the LSP completer by default since 0.11, so there is
+        -- nothing to do here.
 
         local opts = { noremap = true, silent = true }
 
@@ -224,37 +233,47 @@ return {
         buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
         buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
         buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-        buf_set_keymap("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+        buf_set_keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 
         -- goto next and previous diagnostic with ]d and [d
-        vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+        vim.keymap.set("n", "]d", function()
+          vim.diagnostic.jump({ count = 1 })
+        end, { buffer = bufnr, desc = "Next diagnostic" })
+        vim.keymap.set("n", "[d", function()
+          vim.diagnostic.jump({ count = -1 })
+        end, { buffer = bufnr, desc = "Previous diagnostic" })
 
         -- toggle diagnostics with <space>dx
         buf_set_keymap("n", "<space>dx", "<cmd>lua ToggleDiagnostics()<CR>", opts)
 
-        -- Set some keybinds conditional on server capabilities
-        if client.server_capabilities.document_formatting then
-          buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-        elseif client.server_capabilities.document_range_formatting then
-          buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+        -- Set some keybinds conditional on server capabilities. These are the
+        -- camelCase names the LSP protocol actually sends; the snake_case spellings
+        -- are always nil, which left both branches below dead.
+        if
+          client.server_capabilities.documentFormattingProvider
+          or client.server_capabilities.documentRangeFormattingProvider
+        then
+          buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
         end
 
         -- Set autocommands conditional on server_capabilities
-        if client.server_capabilities.document_highlight then
-          vim.api.nvim_exec(
-            [[
-              hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-              hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-              hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-              augroup lsp_document_highlight
-                autocmd!
-                autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-                autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-              augroup END
-            ]],
-            false
-          )
+        if client.server_capabilities.documentHighlightProvider then
+          for _, group in ipairs({ "LspReferenceRead", "LspReferenceText", "LspReferenceWrite" }) do
+            vim.api.nvim_set_hl(0, group, { cterm = { bold = true }, ctermbg = "red", bg = "LightYellow" })
+          end
+
+          local highlight_group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
+          vim.api.nvim_clear_autocmds({ group = highlight_group, buffer = bufnr })
+          vim.api.nvim_create_autocmd("CursorHold", {
+            group = highlight_group,
+            buffer = bufnr,
+            callback = vim.lsp.buf.document_highlight,
+          })
+          vim.api.nvim_create_autocmd("CursorMoved", {
+            group = highlight_group,
+            buffer = bufnr,
+            callback = vim.lsp.buf.clear_references,
+          })
         end
       end
 
@@ -340,14 +359,9 @@ return {
         capabilities = capabilities,
       })
 
-      -- Configure astro-ls
-      lspconfig.astro.setup({
-        on_attach = on_attach,
-        filetypes = {
-          "astro",
-        },
-        capabilities = capabilities,
-      })
+      -- astro-ls was configured here but astro-language-server has never been
+      -- installed, so opening an .astro file only produced a spawn error. Removed
+      -- rather than installed: nothing else in this config references astro.
 
       -- Configure eslint with autoformat
       lspconfig.eslint.setup({
@@ -368,6 +382,21 @@ return {
         end,
         capabilities = capabilities,
       })
+
+      -- The command callbacks below are invoked by lspconfig with no client in
+      -- scope, so resolve it from the current buffer. vim.lsp.buf.execute_command
+      -- is deprecated as of 0.12 in favour of client:exec_cmd.
+      local function ts_exec_cmd(command)
+        local client = vim.lsp.get_clients({ bufnr = 0, name = "ts_ls" })[1]
+        if not client then
+          vim.notify("ts_ls is not attached to this buffer", vim.log.levels.WARN)
+          return
+        end
+        client:exec_cmd({
+          command = command,
+          arguments = { vim.api.nvim_buf_get_name(0) },
+        })
+      end
 
       lspconfig.ts_ls.setup({
         on_attach = function(client, bufnr)
@@ -432,28 +461,19 @@ return {
         commands = {
           TypescriptAddMissingImports = {
             function()
-              vim.lsp.buf.execute_command({
-                command = "_typescript.addMissingImports",
-                arguments = { vim.api.nvim_buf_get_name(0) },
-              })
+              ts_exec_cmd("_typescript.addMissingImports")
             end,
             description = "Add missing imports",
           },
           TypescriptOrganizeImports = {
             function()
-              vim.lsp.buf.execute_command({
-                command = "_typescript.organizeImports",
-                arguments = { vim.api.nvim_buf_get_name(0) },
-              })
+              ts_exec_cmd("_typescript.organizeImports")
             end,
             description = "Organize imports",
           },
           TypescriptRenameFile = {
             function()
-              vim.lsp.buf.execute_command({
-                command = "_typescript.renameFile",
-                arguments = { vim.api.nvim_buf_get_name(0) },
-              })
+              ts_exec_cmd("_typescript.renameFile")
             end,
             description = "Rename file",
           },
@@ -538,76 +558,91 @@ return {
       --   })
       -- end
       --
+      -- ruby-lsp is resolved through mise, so vim.fn.executable cannot see it. Ask
+      -- mise directly, and only in a Ruby project so the subprocess is not paid for
+      -- on every startup. Without this guard the server is configured everywhere and
+      -- fails with `mise ERROR "ruby-lsp" couldn't exec process`.
+      local function has_ruby_lsp()
+        local in_ruby_project = require("lspconfig.util").root_pattern("Gemfile", ".ruby-version")(vim.fn.getcwd())
+        if not in_ruby_project or vim.fn.executable("mise") ~= 1 then
+          return false
+        end
+
+        vim.fn.system({ "mise", "which", "ruby-lsp" })
+        return vim.v.shell_error == 0
+      end
+
       -- Configure ruby_lsp
-      lspconfig.ruby_lsp.setup({
-        flags = { debounce_text_changes = 500 },
-        on_attach = on_attach,
-        capabilities = capabilities,
-        cmd = {
-          "mise",
-          "x",
-          "--",
-          "ruby-lsp",
-        },
-        single_file_support = true,
-        settings = {
-          ruby = {
-            enabledFeatures = {
-              "codeActions",
-              "diagnostics",
-              "documentFormatting",
-              "hover",
-              "completion",
-              "rename",
-              "signatureHelp",
-              "workspaceSymbols",
+      if has_ruby_lsp() then
+        lspconfig.ruby_lsp.setup({
+          flags = { debounce_text_changes = 500 },
+          on_attach = on_attach,
+          capabilities = capabilities,
+          cmd = {
+            "mise",
+            "x",
+            "--",
+            "ruby-lsp",
+          },
+          single_file_support = true,
+          settings = {
+            ruby = {
+              enabledFeatures = {
+                "codeActions",
+                "diagnostics",
+                "documentFormatting",
+                "hover",
+                "completion",
+                "rename",
+                "signatureHelp",
+                "workspaceSymbols",
+              },
+            },
+            ruby_lsp = {
+              mason = false,
             },
           },
-          ruby_lsp = {
-            mason = false,
-          },
-        },
-        init_options = {
-          addonSettings = {
-            ["Ruby LSP Rails"] = {
-              enablePendingMigrationsPrompt = true,
+          init_options = {
+            addonSettings = {
+              ["Ruby LSP Rails"] = {
+                enablePendingMigrationsPrompt = true,
+              },
+            },
+            formatter = "rubocop",
+            enabled_features = {
+              code_actions = true,
+              code_lens = true,
+              completion = true,
+              definition = true,
+              diagnostics = true,
+              document_highlights = true,
+              document_link = true,
+              document_symbols = true,
+              folding_ranges = true,
+              formatting = true,
+              hover = true,
+              inlay_hint = true,
+              on_type_formatting = true,
+              selection_ranges = true,
+              semantic_highlighting = true,
+              signature_help = true,
+              type_hierarchy = true,
+              workspace_symbol = true,
+            },
+            features_configuration = {
+              inlay_hint = {
+                implicit_hash_value = true,
+                implicit_rescue = true,
+              },
             },
           },
-          formatter = "rubocop",
-          enabled_features = {
-            code_actions = true,
-            code_lens = true,
-            completion = true,
-            definition = true,
-            diagnostics = true,
-            document_highlights = true,
-            document_link = true,
-            document_symbols = true,
-            folding_ranges = true,
-            formatting = true,
-            hover = true,
-            inlay_hint = true,
-            on_type_formatting = true,
-            selection_ranges = true,
-            semantic_highlighting = true,
-            signature_help = true,
-            type_hierarchy = true,
-            workspace_symbol = true,
-          },
-          features_configuration = {
-            inlay_hint = {
-              implicit_hash_value = true,
-              implicit_rescue = true,
-            },
-          },
-        },
-      })
+        })
+      end
 
       local function is_sorbet_project()
-        local root_dir = require("lspconfig.util").root_pattern("sorbet/config")
-
-        -- Check for sorbet configuration file
-        local has_sorbet_config = root_dir ~= ""
+        -- root_pattern returns a matcher function, so comparing it to "" is always
+        -- true and used to enable sorbet in every Ruby project. Call it instead.
+        local has_sorbet_config = require("lspconfig.util").root_pattern("sorbet/config")(vim.fn.getcwd()) ~= nil
 
         -- Check for srb executable in bin directory
         local has_srb_binary = vim.fn.glob("bin/srb") ~= ""
@@ -657,7 +692,7 @@ return {
           capabilities = capabilities,
           filetypes = { "sql", "mysql" },
           root_dir = function()
-            return vim.loop.cwd()
+            return vim.uv.cwd()
           end,
         })
       end
@@ -724,7 +759,7 @@ return {
       lspconfig.lua_ls.setup({
         on_init = function(client)
           local path = client.workspace_folders[1].name
-          if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
+          if vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc") then
             return
           end
         end,
