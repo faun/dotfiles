@@ -2,6 +2,11 @@
 
 set -euo pipefail
 
+if [[ "$(uname -s)" != "Darwin" ]]; then
+  echo "launchd is macOS-only; skipping."
+  exit 0
+fi
+
 # Write the current theme to the cache immediately so nvim gets the right
 # colorscheme on first launch, before the monitor loop has a chance to run.
 mkdir -p "$HOME/.cache"
