@@ -57,6 +57,12 @@
 [core]
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
+[gpg "ssh"]
+	# Signature verification is impossible without this: git reports every
+	# ssh-signed commit as unsigned and errors out per commit. Generated from
+	# your GitHub-registered signing keys by install/01_configure_git_signing.sh.
+	allowedSignersFile = ~/.config/git/allowed_signers
+
 [apply]
 	whitespace = nowarn
 
