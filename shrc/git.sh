@@ -412,6 +412,21 @@ divergent() {
   fi
 }
 
+# Whether `git log` can verify the signatures it is about to print. git picks the
+# verification backend from each signature's own payload, so an ssh-signed commit
+# needs gpg.ssh.allowedSignersFile regardless of gpg.format; without it git errors
+# once per commit and reports every commit as unsigned. Signing with ssh locally is
+# a good proxy for "this history is ssh-signed", so a missing signers file only
+# rules verification out in that case.
+git_can_verify_signatures() {
+  local signers
+  signers="$(git config --get gpg.ssh.allowedSignersFile)"
+  if [[ -n $signers ]] && [[ -f ${signers/#\~/$HOME} ]]; then
+    return 0
+  fi
+  [[ "$(git config --get gpg.format)" != "ssh" ]]
+}
+
 gg() {
   # Validate git setup before proceeding
   if ! validate_git_setup; then
@@ -428,13 +443,17 @@ gg() {
   if [[ "$(current_branch)" != "$mainline_ref" ]]; then
     git fetch origin "$mainline_ref"
   fi
-  # %G? is the signature status: G good, B bad, U good but untrusted, X expired,
-  # Y expired key, R revoked key, E cannot check, N none. Note that an SSH-signed
-  # commit reports N unless gpg.ssh.allowedSignersFile is set, because git cannot
-  # even attempt verification without it, which is indistinguishable from unsigned.
+  # %G? is the signature status: G good, B bad, U good but untrusted (signer not in
+  # the allowed signers file), X expired, Y expired key, R revoked key, E cannot
+  # check, N none. Dropped entirely when git cannot verify, so an unverifiable
+  # setup shows no column rather than a column of misleading Ns.
+  local sig=''
+  if git_can_verify_signatures; then
+    sig='%C(magenta)%G?%Creset '
+  fi
   git log \
     --graph \
-    --pretty=format:'%Cred%h%Creset %C(magenta)%G?%Creset %aN: %s %Cgreen(%cr)%Creset' \
+    --pretty=format:"%Cred%h%Creset ${sig}%aN: %s %Cgreen(%cr)%Creset" \
     --abbrev-commit \
     --date=relative \
     "$(current_branch)" \
