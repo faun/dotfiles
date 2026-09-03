@@ -2,6 +2,16 @@
 
 set -eou pipefail
 
+if [[ "$(uname -s)" != "Darwin" ]]; then
+  echo "Mac App Store apps are macOS-only; skipping."
+  exit 0
+fi
+
+if ! command -v mas >/dev/null 2>&1; then
+  echo "mas is not installed (brew install mas); skipping."
+  exit 0
+fi
+
 apps=(
   # Xcode is excluded — it must be installed manually from the App Store under
   # the correct Apple ID. Command Line Tools (installed by 00_homebrew.sh) are
