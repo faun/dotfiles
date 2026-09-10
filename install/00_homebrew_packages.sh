@@ -25,13 +25,19 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
       neovim
       ripgrep
       shfmt
-      terraform
       the_silver_searcher
       tmux
       universal-ctags
       vale
       zellij
     )
+
+    # terraform-ls is only published in hashicorp/tap, and Homebrew refuses to
+    # load formulas from a tap that has not been explicitly trusted. Guarded
+    # because `brew trust` only exists in newer Homebrew.
+    if brew trust --help >/dev/null 2>&1; then
+      brew trust --tap hashicorp/tap
+    fi
 
     for brew_package in "${homebrew_dependencies[@]}"; do
       if ! brew ls --versions | awk '{ print $1 }' | grep "^$brew_package\$" >/dev/null; then
@@ -57,7 +63,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 else
   # Linux: no Homebrew requirement here. Install the closest equivalents via
   # the native package manager instead. A handful of the macOS brew formulas
-  # above (mise, zellij, herdr, terraform, terraform-ls, vale,
+  # above (mise, zellij, herdr, terraform-ls, vale,
   # lua-language-server, mas) have no reliable apt/dnf/yum package across
   # distros; mise is
   # installed separately via its own official installer (see 02_mise.sh) and
