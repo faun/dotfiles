@@ -50,9 +50,9 @@ alias sane='stty sane'
 alias py='python'
 alias sha1="openssl sha1"
 
-alias tf='terraform'
-alias tfp='terraform plan'
-alias tfa='terraform apply'
+alias tf='tofu'
+alias tfp='tofu plan'
+alias tfa='tofu apply'
 
 alias vim_bundle_install='vim +PlugInstall'
 alias vim_bundle_update='vim +PlugUpdate +qall'
