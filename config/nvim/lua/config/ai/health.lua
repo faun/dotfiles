@@ -6,7 +6,7 @@ local M = {}
 
 local health = vim.health
 
-local VALID_COMPLETION = { off = true, copilot = true, fireworks = true, ["local"] = true, auto = true }
+local VALID_COMPLETION = { off = true, fireworks = true, ["local"] = true, auto = true }
 
 local function env(name)
   local v = os.getenv(name)
@@ -40,7 +40,7 @@ local function check_completion(ai)
 
   if raw and not VALID_COMPLETION[raw] then
     health.error(("NVIM_AI_COMPLETION=%s is not a recognized value; completion is disabled"):format(raw), {
-      "Set NVIM_AI_COMPLETION to one of: off | copilot | fireworks | local | auto (in ~/.local.sh)",
+      "Set NVIM_AI_COMPLETION to one of: off | fireworks | local | auto (in ~/.local.sh)",
     })
     return
   end
@@ -67,7 +67,7 @@ local function check_completion(ai)
 
   if tier == "off" then
     health.ok("AI completion disabled on this machine")
-    health.info("Enable it with NVIM_AI_COMPLETION=copilot|fireworks|local|auto in ~/.local.sh")
+    health.info("Enable it with NVIM_AI_COMPLETION=fireworks|local|auto in ~/.local.sh")
     return
   end
 
@@ -114,30 +114,6 @@ local function check_completion(ai)
     end
     health.info("Ghost text hides while the completion menu is open; <M-]> always requests one manually")
   end
-
-  if tier == "copilot" then
-    local copilot = plugin_state("copilot.lua")
-    if copilot and copilot.loaded then
-      local ok, status = pcall(function()
-        return require("copilot.status").data
-      end)
-      if ok and status.status == "Error" then
-        health.error(("copilot.lua loaded but reports: %s"):format(status.message or "error"), {
-          "Run :Copilot auth to sign into GitHub",
-        })
-      elseif ok then
-        health.ok(("copilot.lua loaded, status: %s"):format(status.status ~= "" and status.status or "idle"))
-      else
-        health.warn("copilot.lua loaded but status is unavailable")
-      end
-    elseif copilot and copilot.in_spec then
-      health.warn("copilot.lua not loaded yet (loads on BufReadPost)", {
-        "Open a file, then run :Copilot status",
-      })
-    else
-      health.error("copilot.lua missing from the plugin spec")
-    end
-  end
 end
 
 local function check_nes(ai)
@@ -170,7 +146,9 @@ local function check_nes(ai)
     )
   end
 
-  health.info("NES rides on Copilot's LSP: it needs copilot.lua enabled and a GitHub sign-in (:Copilot auth)")
+  health.info(
+    "NES has no LSP-based suggestion backend wired up right now (this previously rode on Copilot's LSP, which was removed); <Tab> will not surface next-edit suggestions until a replacement backend is configured"
+  )
 end
 
 local function check_assist(ai)
@@ -197,20 +175,34 @@ local function check_assist(ai)
   end
 
   local cc = plugin_state("codecompanion.nvim")
-  if cc and not cc.installed then
-    health.warn("codecompanion.nvim is not installed yet", { "Run :Lazy install" })
-  elseif cc and cc.in_spec then
-    health.ok("codecompanion.nvim " .. (cc.loaded and "loaded" or "installed"))
-  end
 
-  -- Mirrors the adapter fallback chains in plugins/ai.lua.
+  -- Mirrors the adapter selection in plugins/ai.lua (no Copilot/Fireworks
+  -- fallback: nothing configured means codecompanion.nvim is never
+  -- registered in the plugin spec).
   local chat = env("OLLAMA_API_BASE_URL") and "ollama"
     or env("OPENAI_API_KEY") and "openai"
     or env("ANTHROPIC_API_KEY") and "anthropic"
-    or "copilot"
-  local inline = env("OPENAI_API_KEY") and "openai" or env("ANTHROPIC_API_KEY") and "anthropic" or "copilot"
+    or nil
+  local inline = env("OPENAI_API_KEY") and "openai" or env("ANTHROPIC_API_KEY") and "anthropic" or chat
+
+  if not chat then
+    health.warn(
+      "no adapter configured (checked OLLAMA_API_BASE_URL, OPENAI_API_KEY, ANTHROPIC_API_KEY); codecompanion.nvim was not registered this session",
+      { "Set one of OLLAMA_API_BASE_URL, OPENAI_API_KEY, ANTHROPIC_API_KEY in ~/.local.sh" }
+    )
+    return
+  end
+
+  if cc and not cc.in_spec then
+    health.error("codecompanion.nvim is not in the plugin spec (unexpected: an adapter is configured)")
+  elseif cc and not cc.installed then
+    health.warn("codecompanion.nvim is not installed yet", { "Run :Lazy install" })
+  elseif cc then
+    health.ok("codecompanion.nvim " .. (cc.loaded and "loaded" or "installed"))
+  end
+
   health.info(
-    ("adapters: chat=%s, inline=%s (priority: OLLAMA_API_BASE_URL > OPENAI_API_KEY > ANTHROPIC_API_KEY > copilot)"):format(
+    ("adapters: chat=%s, inline=%s (priority: OLLAMA_API_BASE_URL > OPENAI_API_KEY > ANTHROPIC_API_KEY; inline reuses the chat adapter when only OLLAMA_API_BASE_URL is set)"):format(
       chat,
       inline
     )

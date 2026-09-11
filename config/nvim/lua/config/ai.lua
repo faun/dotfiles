@@ -4,9 +4,9 @@
 -- (chat / inline edits) are opted into independently on each machine via
 -- environment variables, typically set in ~/.local.sh:
 --
---   NVIM_AI_COMPLETION = off | copilot | fireworks | local | auto  (default: auto)
---   NVIM_AI_NES        = off | on                                  (default: on)
---   NVIM_AI_ASSIST     = off | codecompanion                       (default: off)
+--   NVIM_AI_COMPLETION = off | fireworks | local | auto  (default: auto)
+--   NVIM_AI_NES        = off | on                        (default: on)
+--   NVIM_AI_ASSIST     = off | codecompanion              (default: off)
 --
 -- "auto" resolves to:
 --   local      when a llama-server is listening on 127.0.0.1:$NVIM_AI_LLAMA_PORT
@@ -14,7 +14,7 @@
 --              capable GPU, e.g.:
 --                llama-server -hf ggml-org/Qwen2.5-Coder-3B-Q8_0-GGUF --port 8012 -ngl 99
 --   fireworks  when FIREWORKS_API_KEY is set
---   copilot    otherwise
+--   off        otherwise
 --
 -- Legacy CONFIG_USE_CODECOMPANION/CONFIG_USE_AVANTE=true map to
 -- NVIM_AI_ASSIST=codecompanion (avante has been removed).
@@ -56,7 +56,7 @@ end
 
 local completion_tier
 
-local valid_tiers = { off = true, copilot = true, fireworks = true, ["local"] = true }
+local valid_tiers = { off = true, fireworks = true, ["local"] = true }
 
 local function warn(msg)
   vim.schedule(function()
@@ -64,7 +64,7 @@ local function warn(msg)
   end)
 end
 
----@return "off"|"copilot"|"fireworks"|"local"
+---@return "off"|"fireworks"|"local"
 function M.completion()
   if completion_tier == nil then
     local tier = os.getenv("NVIM_AI_COMPLETION") or "auto"
@@ -74,18 +74,18 @@ function M.completion()
       elseif os.getenv("FIREWORKS_API_KEY") then
         tier = "fireworks"
       else
-        tier = "copilot"
+        tier = "off"
       end
     elseif not valid_tiers[tier] then
       warn(
-        ("NVIM_AI_COMPLETION=%s is not a recognized tier (off|copilot|fireworks|local|auto); AI completion disabled"):format(
+        ("NVIM_AI_COMPLETION=%s is not a recognized tier (off|fireworks|local|auto); AI completion disabled"):format(
           tier
         )
       )
       tier = "off"
     elseif tier == "fireworks" and not os.getenv("FIREWORKS_API_KEY") then
-      warn("NVIM_AI_COMPLETION=fireworks but FIREWORKS_API_KEY is unset; falling back to copilot")
-      tier = "copilot"
+      warn("NVIM_AI_COMPLETION=fireworks but FIREWORKS_API_KEY is unset; AI completion disabled")
+      tier = "off"
     end
     completion_tier = tier
   end

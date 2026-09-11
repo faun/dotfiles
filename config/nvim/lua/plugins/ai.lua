@@ -1,7 +1,8 @@
 -- Layered AI features, gated per machine by lua/config/ai.lua:
 --
---   Layer 1: inline ghost-text completion (copilot | fireworks | local llama.cpp)
---   Layer 2: next-edit suggestions via sidekick.nvim (Copilot LSP)
+--   Layer 1: inline ghost-text completion (fireworks | local llama.cpp)
+--   Layer 2: next-edit suggestions via sidekick.nvim (no backend currently
+--            wired up -- previously rode on Copilot's LSP, which was removed)
 --   Layer 3: chat / inline edits via CodeCompanion
 --
 -- The deterministic completion menu (LSP/snippets/buffer) lives in
@@ -17,23 +18,23 @@ local anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")
 local openai_api_key = os.getenv("OPENAI_API_KEY")
 local ollama_base_url = os.getenv("OLLAMA_API_BASE_URL")
 
+-- CodeCompanion adapter selection: highest-priority configured backend wins,
+-- no Copilot/Fireworks fallback. If chat_adapter is nil, nothing is
+-- configured and codecompanion.nvim is never registered below. Inline has
+-- fewer candidates than chat (no Ollama) by design; if only Ollama is
+-- configured, inline reuses the chat adapter rather than falling through to
+-- codecompanion's own built-in "copilot" default.
+local chat_adapter = ollama_base_url and "ollama"
+  or openai_api_key and "openai"
+  or anthropic_api_key and "anthropic"
+  or nil
+local inline_adapter = openai_api_key and "openai" or anthropic_api_key and "anthropic" or chat_adapter
+
 local plugins = {}
 
 -- ---------------------------------------------------------------------------
 -- Layer 1: inline ghost text
 -- ---------------------------------------------------------------------------
-
--- Copilot ghost text only when it is the selected completion tier. The plugin
--- stays loaded on other tiers when NES is enabled, since sidekick.nvim rides
--- on its LSP server.
-table.insert(plugins, {
-  "zbirenbaum/copilot.lua",
-  optional = true,
-  enabled = completion == "copilot" or nes,
-  opts = {
-    suggestion = { enabled = completion == "copilot" },
-  },
-})
 
 if completion == "local" or completion == "fireworks" then
   -- Qwen-Coder FIM prompt, used both by llama.cpp and Fireworks since neither
@@ -99,6 +100,10 @@ end
 -- Layer 2: next-edit suggestions
 -- ---------------------------------------------------------------------------
 
+-- No LSP-based suggestion source is wired up here right now (this
+-- previously rode on Copilot's LSP, which was removed). NVIM_AI_NES and the
+-- <Tab> keymap stay in place for when a replacement backend is configured;
+-- until then, enabling NES is a no-op.
 table.insert(plugins, {
   "folke/sidekick.nvim",
   enabled = nes,
@@ -186,27 +191,6 @@ local codecompanion_lazy_config = {
       lualine.setup(lualine_cfg)
     end
 
-    local chat_strategy = function()
-      if ollama_base_url then
-        return "ollama"
-      elseif openai_api_key then
-        return "openai"
-      elseif anthropic_api_key then
-        return "anthropic"
-      else
-        return "copilot"
-      end
-    end
-
-    local inline_strategy = function()
-      if openai_api_key then
-        return "openai"
-      elseif anthropic_api_key then
-        return "anthropic"
-      else
-        return "copilot"
-      end
-    end
     require("codecompanion").setup({
       prompt_library = {
         ["Generate a Commit Message"] = {
@@ -264,7 +248,7 @@ Given the git diff listed below, please generate a commit message for me:
       },
       strategies = {
         chat = {
-          adapter = chat_strategy(),
+          adapter = chat_adapter,
           keymaps = {
             send = {
               modes = { n = "<C-s>", i = "<C-s>" },
@@ -299,7 +283,7 @@ Given the git diff listed below, please generate a commit message for me:
           },
         },
         inline = {
-          adapter = inline_strategy(),
+          adapter = inline_adapter,
           keymaps = {
             accept_change = {
               modes = { n = "ga" },
@@ -333,10 +317,6 @@ Given the git diff listed below, please generate a commit message for me:
               base_url = ollama_base_url,
             },
           })
-        end,
-
-        copilot = function()
-          return require("codecompanion.adapters").extend("copilot", {})
         end,
       },
       display = {
@@ -418,8 +398,17 @@ Given the git diff listed below, please generate a commit message for me:
 }
 
 if assist == "codecompanion" then
-  vim.env["CODECOMPANION_TOKEN_PATH"] = vim.fn.expand("~/.config")
-  table.insert(plugins, codecompanion_lazy_config)
+  if chat_adapter then
+    vim.env["CODECOMPANION_TOKEN_PATH"] = vim.fn.expand("~/.config")
+    table.insert(plugins, codecompanion_lazy_config)
+  else
+    vim.schedule(function()
+      vim.notify(
+        "NVIM_AI_ASSIST=codecompanion but no adapter is configured (set OLLAMA_API_BASE_URL, OPENAI_API_KEY, or ANTHROPIC_API_KEY in ~/.local.sh); CodeCompanion disabled for this session",
+        vim.log.levels.WARN
+      )
+    end)
+  end
 end
 
 return plugins
