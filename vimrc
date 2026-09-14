@@ -227,12 +227,12 @@ endfunction
 " {{{
 
 set t_Co=256
+set background=dark
 
 try
   colorscheme molokai
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme darkblue
-  set background=dark
 endtry
 
 " }}}
