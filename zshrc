@@ -43,7 +43,10 @@ if [[ -n $DEBUG_STARTUP_TIME ]]; then
   zprof
 fi
 
-export PATH="$(brew --prefix mysql-client)/bin:$PATH"
+if command -v brew >/dev/null 2>&1
+then
+  export PATH="$(brew --prefix mysql-client)/bin:$PATH"
+fi
 
 if [[ -f ~/.gusto/init.sh ]]; then
   source ~/.gusto/init.sh
