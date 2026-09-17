@@ -39,6 +39,8 @@ verbose() {
 }
 
 # Recursively link directory contents (replacement for lndir)
+link_progress_count=0
+
 link_dir_contents() {
   local source_dir="$1"
   local target_dir="$2"
@@ -51,7 +53,7 @@ link_dir_contents() {
     # Skip if glob didn't match anything
     [[ -e "$item" ]] || continue
 
-    local basename="$(basename "$item")"
+    local basename="${item##*/}"
     local target_item="$target_dir/$basename"
 
     if [[ -d "$item" ]]; then
@@ -65,8 +67,22 @@ link_dir_contents() {
       # Recursively handle subdirectories
       link_dir_contents "$item" "$target_item"
     else
-      # Create symbolic link for files
-      ln -sf "$item" "$target_item"
+      # Only re-link if target_item doesn't already resolve to $item.
+      # `-ef` is a bash builtin (no forked subprocess), unlike comparing
+      # against `readlink` output, so re-runs over large vendored trees
+      # (e.g. vim/pack/vendor) skip thousands of already-correct files
+      # without forking `ln` (or anything else) for them.
+      if [[ ! "$target_item" -ef "$item" ]]; then
+        ln -sf "$item" "$target_item"
+      fi
+
+      # Pre-increment: under `set -e`, a bare `((expr))` exits nonzero (and
+      # aborts the script) if expr evaluates to 0, which post-increment
+      # would do on the very first file.
+      ((++link_progress_count))
+      if (( link_progress_count % 250 == 0 )); then
+        echo "  ...linked $link_progress_count files so far"
+      fi
     fi
   done
 }
