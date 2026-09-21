@@ -4,8 +4,11 @@
 # zprofile activates mise in shims mode, which is what non-interactive login
 # shells get, since they never read this directory. Interactive shells want
 # hook-env instead: it re-resolves tools on every prompt, so a per-project
-# mise.toml takes effect on cd. The two modes both want to own the same
-# commands, so the shims directory comes off PATH before hook-env activates.
+# mise.toml takes effect on cd.
+#
+# zprofile skips the shims entirely for interactive shells, so the PATH strip
+# below is a safety net for the MISE_MODE=shim case and for shims arriving from
+# an inherited environment, not something that normally has work to do.
 #
 # This file is numbered to sort late in ~/.shrc/* on purpose. mise wants to
 # activate after everything else has finished editing PATH.

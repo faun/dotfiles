@@ -7,9 +7,10 @@ function start_agent {
 	ssh-add -A &>/dev/null || ssh-add -l
 }
 
-if [[ -n "$SSH_AUTH_SOCK" ]]; then
-	killall ssh-agent &>/dev/null || true
-elif [[ -d "$HOME/.ssh" ]]; then
+# A socket already in the environment means an agent is being provided for us
+# (1Password's, or one forwarded over SSH). Use it rather than killing agents
+# this shell does not own.
+if [[ -z "$SSH_AUTH_SOCK" ]] && [[ -d "$HOME/.ssh" ]]; then
 	# Source SSH settings, if applicable
 
 	if [ -f "${SSH_ENV}" ]; then

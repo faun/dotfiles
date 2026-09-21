@@ -52,6 +52,34 @@
 # export OP_SECRETS_ITEM=    # item UUID
 # export OP_ACCOUNT=         # e.g. yourteam.1password.com
 
+# --- Keeping this file off the startup critical path ------------------------
+#
+# This file is sourced on every interactive shell, so anything slow here is
+# paid on every new tab. Four patterns are worth avoiding, all of which were
+# measured costing over a second combined before they were removed:
+#
+# 1. No network calls. A credential probe such as `aws sts get-caller-identity`
+#    or `gh auth status` costs 600-900ms per shell, and the `|| <tool> login`
+#    fallback opens a browser and blocks the prompt when credentials expire.
+#    Check credentials when a command actually fails instead.
+#
+# 2. No `<tool> completion zsh`. Each call costs 70-140ms. Add the tool to the
+#    list in zsh/02_completions.sh instead, which caches the output into an
+#    fpath directory and regenerates only when the tool binary changes. Use
+#    `compdef k=kubectl` for an alias rather than generating a rewritten copy.
+#
+# 3. No `compinit` here. zsh/02_completions.sh already runs it, cache-aware.
+#    A second call roughly doubles completion-init cost.
+#
+# 4. No `brew --prefix` and no PATH dedupe pipeline. $HOMEBREW_PREFIX is
+#    already exported by shrc/00_paths.sh, and zshrc collapses duplicate PATH
+#    entries with `path=($path)` after this file is sourced.
+#
+# For a second name for an existing secret, use `secret_alias NEW EXISTING`
+# (zsh/05_secrets.sh) rather than `NEW="$EXISTING"`. It takes variable names
+# rather than a value, so `set -x` tracing of shell startup cannot write the
+# secret into a log.
+
 # --- Misc ---------------------------------------------------------------
 #
 # Set automatically by install.sh after the first successful checkhealth run;

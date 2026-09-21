@@ -119,10 +119,25 @@ secret_delete() {
 #   Read cached secret <NAME> from the Keychain and export it as $NAME.
 #   Silent on miss so shell startup never blocks or prints noise.
 secret_load() {
+  # noxtrace: under `set -x` the expansions below print every secret in full,
+  # so tracing the shell would write live credentials into the trace log.
+  # localoptions scopes this to the function body.
+  setopt localoptions noxtrace
   local name="$1"
   local value
   value=$(security find-generic-password -a "$USER" -s "$name" -w 2>/dev/null) || return 0
   [[ -n "$value" ]] && export "$name=$value"
+}
+
+# secret_alias <NEW_NAME> <EXISTING_NAME>
+#   Export <NEW_NAME> with the value of <EXISTING_NAME>. Takes names rather
+#   than a value so the secret never appears at the call site, where `set -x`
+#   would print it.
+secret_alias() {
+  setopt localoptions noxtrace
+  local dest="$1" src="$2"
+  [[ -n "$dest" && -n "$src" ]] || return 0
+  [[ -n "${(P)src}" ]] && export "$dest=${(P)src}"
 }
 
 # Auto-load every secret named in the index.

@@ -56,6 +56,15 @@
 
 [core]
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	# The prompt runs `git status` on every draw. fsmonitor keeps a daemon
+	# watching the worktree so status does not have to stat every file, and
+	# untrackedcache persists the untracked-file scan between runs. Measured on
+	# a 130k-file repo this took status from ~250ms to ~80ms. It does not help a
+	# small repo with many submodules, where the cost is the submodule gitlinks
+	# rather than the file scan, and it adds ~40ms to the first git call in a
+	# repo while the daemon is contacted. Requires git 2.37 or newer.
+	fsmonitor = true
+	untrackedcache = true
 
 [apply]
 	whitespace = nowarn
