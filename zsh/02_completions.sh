@@ -145,8 +145,3 @@ zstyle ':completion:*:descriptions' format %d
 
 zstyle ':completion:*:descriptions' format %B%d%b        # bold
 zstyle ':completion:*:descriptions' format %F{green}%d%f # green foreground
-
-# tenv completion
-if [[ -f $HOME/.tenv.completion.zsh ]]; then
-  source $HOME/.tenv.completion.zsh
-fi
