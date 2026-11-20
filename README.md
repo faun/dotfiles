@@ -37,9 +37,9 @@ Add any additional configuration settings to `~/.local.sh` and these will be sou
 
 Things that can be added to this file include custom aliases, configuration settings, private environment variables, paths, etc.
 
-##### Secrets (1Password → macOS Keychain → env vars)
+##### Secrets (1Password → local cache → env vars)
 
-`zsh/05_secrets.sh` provides three commands for loading secrets from 1Password into shell env vars, cached in the macOS Keychain so shell startup never blocks on a biometric prompt.
+`zsh/05_secrets.sh` provides three commands for loading secrets from 1Password into shell env vars, cached locally so shell startup never blocks on a biometric prompt. On macOS the cache is the login Keychain; on Linux it is one `systemd-creds encrypt --user` blob per secret in `~/.config/secret_store/values/<NAME>.cred` (override with `SECRET_STORE_DIR`), bound to the host's credential key (plus TPM2 if present), your UID and the secret's name, so a copied or renamed file won't decrypt. Needs systemd ≥ 256; without `systemd-creds` it refuses rather than storing plaintext. With no TPM, root or someone with the raw disk can still recover the host key.
 
 The model is **one 1Password item with many fields**. Each field's label matches the env var name. The item is referenced only by UUID — names rename, UUIDs don't.
 
@@ -53,10 +53,10 @@ Operations:
 
 | Command | What it does |
 | --- | --- |
-| `secret_store NAME` | Read field `NAME` from 1Password, cache it in Keychain, and record `NAME` in the index. Run once per machine, or after rotating the value. |
+| `secret_store NAME` | Read field `NAME` from 1Password, cache it locally, and record `NAME` in the index. Run once per machine, or after rotating the value. |
 | `secret_store_all` | Fetch every populated field on the configured 1Password item and cache all of them. Use to bootstrap a new machine or refresh everything at once. |
-| `secret_delete NAME` | Remove the cached value from Keychain and from the index. |
-| `secret_load NAME` | Read `NAME` from Keychain and `export NAME=<value>`. Silent on miss. Called automatically at shell startup for every name in the index. |
+| `secret_delete NAME` | Remove the cached value and drop `NAME` from the index. |
+| `secret_load NAME` | Read `NAME` from the cache and `export NAME=<value>`. Silent on miss. Called automatically at shell startup for every name in the index. |
 
 To add a new secret:
 

@@ -44,10 +44,10 @@
 # export OLLAMA_API_BASE_URL=
 # export OLLAMA_MODEL=
 
-# --- 1Password-backed secrets (zsh/05_secrets.sh, macOS only) ---------------
+# --- 1Password-backed secrets (zsh/05_secrets.sh) ---------------------------
 #
 # Bootstrap a new machine with `secret_store_all`; thereafter every cached
-# secret auto-loads on shell start via the Keychain.
+# secret auto-loads on shell start from the local cache (Keychain on macOS).
 # export OP_SECRETS_VAULT=   # vault UUID
 # export OP_SECRETS_ITEM=    # item UUID
 # export OP_ACCOUNT=         # e.g. yourteam.1password.com
