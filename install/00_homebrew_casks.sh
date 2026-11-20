@@ -5,6 +5,7 @@ set -e
 if [ "$(uname)" == "Darwin" ]; then
   homebrew_casks=(
     1password-cli
+    herdr-app
   )
 
   INSTALLED_CASKS="$(brew list --cask --versions)"

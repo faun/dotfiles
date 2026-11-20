@@ -183,26 +183,40 @@ zellij_attach() {
   fi
 }
 
-# herdr, a simple per-checkout launcher. Herdr manages git worktrees natively,
-# so this stays lighter than zellij_attach: `hd` with no args launch/attaches
-# this checkout's session (reusing the same session-name helpers as zj, which
-# warp also shares); any args pass straight through to herdr.
+# hc terminal names must be 1-32 chars of a-z 0-9 - _ (unique among live
+# terminals), so fold the zj-style session name into that alphabet.
+_hd_name() {
+  local n="${1:l}"
+  n="${n//[^a-z0-9_-]/_}"
+  print -r -- "${n[1,32]}"
+}
+
+# hd, a per-checkout launcher for herdr-core (hc). With no args it attaches to
+# the core terminal named after this checkout (same naming as zj, which warp
+# also shares), starting a shell there first if none is live. The terminal
+# lives in the core, not this shell: detaching (ctrl+\) or dropping SSH leaves
+# it running, and the Herdr desktop and phone apps see the same terminals. Any
+# args pass straight through to hc (e.g. `hd ls`, `hd attach t3`).
 herdr_attach() {
   if [[ $# -eq 0 ]]; then
-    local session
-    session="$(_zj_session_name)"
-    _zj_set_title "$session"   # keep the name in the tab title so `warp` can AXRaise it
-    # Homebrew installs can't live-handoff a stale per-session server (herdr
-    # disables that path for package-manager installs), so just nudge rather
-    # than silently killing/resuming panes on every attach.
-    if [[ -S "$HOME/.config/herdr/sessions/$session/herdr.sock" ]] && \
-       [[ "$(\herdr status --session "$session" --json 2>/dev/null | jq -r '.update.restart_needed // false')" == "true" ]]; then
-      print -u2 "herdr: '$session' server is stale — run \`herdr session stop $session\` then reattach to refresh it"
+    if [[ -n ${HC_TERMINAL_ID:-} ]]; then
+      print -ru2 -- "hd: already inside hc terminal $HC_TERMINAL_ID (detach with ctrl+\\ first)"
+      return 1
     fi
-    \herdr --session "$session"
+    local name top
+    name="$(_hd_name "$(_zj_session_name)")"
+    _zj_set_title "$name"   # keep the name in the tab title so `warp` can AXRaise it
+    if ! command hc ls --json 2>/dev/null |
+        jq -e --arg n "$name" 'any(.terminals[]; .name == $n)' >/dev/null; then
+      top="$(git rev-parse --show-toplevel 2>/dev/null)" || top="$PWD"
+      # --keep: if the core loses the program (crash, restart), a shell takes
+      # its place instead of the terminal vanishing.
+      command hc run --bg --no-parent --keep --name "$name" --cwd "$top" >/dev/null || return
+    fi
+    command hc attach "$name"
     return
   fi
-  \herdr "$@"
+  command hc "$@"
 }
 
 # mkdir, cd into it

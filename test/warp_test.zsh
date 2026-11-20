@@ -123,12 +123,18 @@ assert_eq "exact repo-branch" "terraform-datainfra-2092" \
 assert_eq "no match -> empty" "" "$(_warp_find_zellij nope zzz)"
 unfunction _warp_zellij_sessions
 
-print "\n== _warp_find_herdr =="
-_warp_herdr_sessions() { print -l "default" "database-cli" "terraform-datainfra-2092" "migrant"; }
+print "\n== _warp_find_hc =="
+_warp_hc_terminals() { print -l "default" "database-cli" "terraform-datainfra-2092" "dotfiles-feat_x" "migrant"; }
 assert_eq "exact repo-branch" "terraform-datainfra-2092" \
-  "$(_warp_find_herdr terraform datainfra-2092)"
-assert_eq "no match -> empty" "" "$(_warp_find_herdr nope zzz)"
-unfunction _warp_herdr_sessions
+  "$(_warp_find_hc terraform datainfra-2092)"
+assert_eq "branch folded like hd" "dotfiles-feat_x" "$(_warp_find_hc dotfiles Feat/X)"
+assert_eq "no match -> empty" "" "$(_warp_find_hc nope zzz)"
+unfunction _warp_hc_terminals
+
+print "\n== _hd_name =="
+assert_eq "lowercased, slashes folded" "dotfiles-feat_x" "$(_hd_name 'dotfiles-Feat/X')"
+assert_eq "dots folded" "my_repo" "$(_hd_name 'my.repo')"
+assert_eq "capped at 32" "abcdefghijklmnopqrstuvwxyz012345" "$(_hd_name 'abcdefghijklmnopqrstuvwxyz0123456789')"
 
 print "\n== _warp_focus_tmux (select mechanics) =="
 _wtmp=$(mktemp -d); mkdir -p "$_wtmp/a" "$_wtmp/b"

@@ -213,18 +213,17 @@ _warp_find_zellij() {
   _warp_zellij_sessions | grep -iF -- "$2" | head -1
 }
 
-# `herdr session list` prints a header + columns (name status directory socket);
-# take column 1, skipping the header, for bare session names (no jq dependency).
-_warp_herdr_sessions() { command herdr session list 2>/dev/null | awk 'NR>1 {print $1}'; }
+# Live herdr-core terminal names, one per line (what `hd` creates per checkout).
+_warp_hc_terminals() { command hc ls --json 2>/dev/null | jq -r '.terminals[].name // empty'; }
 
-# Session matching $1-$2 (sanitized), or one containing $2; empty if none.
-_warp_find_herdr() {
+# Terminal named for $1-$2 (as hd names it), or one containing $2; empty if none.
+_warp_find_hc() {
   emulate -L zsh
-  local want; want="$(_zj_sanitize "$1-$2")"
-  if _warp_herdr_sessions | grep -qxF -- "$want"; then
+  local want; want="$(_hd_name "$1-$2")"
+  if _warp_hc_terminals | grep -qxF -- "$want"; then
     print -r -- "$want"; return 0
   fi
-  _warp_herdr_sessions | grep -iF -- "$2" | head -1
+  _warp_hc_terminals | grep -iF -- "$2" | head -1
 }
 
 warp() {
@@ -266,10 +265,10 @@ warp() {
       (( dry )) && { print "action: focus zellij session $zs"; return 0; }
       _warp_ax_raise "$zs" || command zellij attach "$zs"; return
     fi
-    local hs; hs="$(_warp_find_herdr "${repo_path:t}" "$branch")"
+    local hs; hs="$(_warp_find_hc "${repo_path:t}" "$branch")"
     if [[ -n "$hs" ]]; then
-      (( dry )) && { print "action: focus herdr session $hs"; return 0; }
-      _warp_ax_raise "$hs" || command herdr session attach "$hs"; return
+      (( dry )) && { print "action: attach hc terminal $hs"; return 0; }
+      _warp_ax_raise "$hs" || command hc attach "$hs"; return
     fi
     (( dry )) && { print "action: zj $repo_path $branch (open existing worktree)"; return 0; }
     zj "$repo_path" "$branch"; return

@@ -141,54 +141,36 @@ tmux-style status line, but it was dropped after hitting an unresolved
 zjstatus bug under zellij 0.44's wasmi plugin runtime that permanently
 corrupted the rendered tab names after a session re-attach.
 
-### Herdr (agent-aware multiplexer)
+### Herdr (agent runtime)
 
-[Herdr](https://herdr.dev) is installed alongside tmux and zellij. tmux stays the
-default multiplexer (`t` / `tat`); Herdr is opt-in via `hd`. Like tmux it splits
-panes and persists sessions, but it also tracks the live state of AI coding
-agents (Claude Code, Codex, …) in a sidebar. Its hierarchy is
-workspace > tab > pane (tmux's session > window > pane).
+[Herdr](https://herdr.dev) runs coding agents (Claude Code, Codex, …) in
+terminals that outlive the window, the shell, and the SSH connection. It sits
+alongside tmux and zellij, and tmux stays the default multiplexer (`t` /
+`tat`). It has three parts:
 
-`hd` is a simple, worktree-aware launcher. With no arguments it launch/attaches a
-session named after the current git checkout — the repo name on the mainline
-(e.g. `dotfiles`), or `<repo>-<branch>` in a linked worktree (e.g.
-`dotfiles-datainfra-1234`), reusing the same naming as `zj`. Any arguments pass
-straight through to `herdr` (e.g. `hd session list`). Herdr manages git worktrees
-natively, so `hd` stays lighter than `zj`.
+- **herdr-core** (`hc`): the background runtime that owns the terminals.
+  `install/08_herdr.sh` installs or updates it into `~/.local/bin` using the
+  upstream installer, which is saved to a file and checksum-verified, not
+  piped to sh.
+- **Herdr desktop app**: Homebrew cask `herdr-app` (macOS). It arranges hc
+  terminals into windows and connects to other machines' cores over SSH.
+- **Herdr phone app** (iOS/Android): connects to a machine's core over SSH.
+  There is nothing to install for it beyond herdr-core on that machine.
 
-Config lives at `config/herdr/config.toml` (symlinked to
-`~/.config/herdr/config.toml` — only the file is linked, since Herdr keeps its
-sockets and session state in that same directory). It sets the tmux prefix
-`Ctrl+a` and maps the familiar combos onto Herdr's actions. After pressing
-`Ctrl+a`:
+`hd` is a worktree-aware launcher on top of `hc`. With no arguments it attaches
+to the core terminal named after the current git checkout, starting a shell
+there first if none is live. The name is the repo name on the mainline (e.g.
+`dotfiles`) or `<repo>-<branch>` in a linked worktree (e.g.
+`dotfiles-datainfra-1234`), the same naming as `zj`, lowercased and folded
+into hc's `a-z 0-9 - _` alphabet (32 chars max). Detach with `ctrl+\`.
+The terminal keeps running, and the desktop and phone apps see it too. Any
+arguments pass straight through to `hc` (e.g. `hd ls`, `hd attach t3`).
+`warp` finds these terminals as well, so a worktree already open in hc is
+reattached rather than reopened.
 
-| Keys | Action | tmux equivalent |
-| --- | --- | --- |
-| `Ctrl+a` then `\|` | split right (side by side) | `prefix \|` |
-| `Ctrl+a` then `-` | split down (stacked) | `prefix -` / `\` |
-| `Ctrl+a` then `c` | new tab | new-window |
-| `Ctrl+a` then `,` | rename tab | rename-window |
-| `Ctrl+a` then `n` / `p` | next / previous tab | next/prev-window |
-| `Ctrl+a` then `h/j/k/l` | move focus | vim-tmux-navigator |
-| `Ctrl+a` then `z` | zoom pane | `prefix z` |
-| `Ctrl+a` then `x` | close pane | `prefix x` |
-| `Ctrl+a` then `s` | workspace / session picker | `prefix s` |
-| `Ctrl+a` then `o` | previous workspace (vim: Ctrl-O) | *(no equivalent)* |
-| `Ctrl+a` then `i` | next workspace (vim: Ctrl-I) | *(no equivalent)* |
-| `Ctrl+a` then `d` | detach | `prefix d` |
-| `Ctrl+a` then `[` | scrollback (opens `$EDITOR`) | `prefix [` scroll/copy |
-| `Ctrl+a` then `r` | reload config | `prefix r` |
-
-Plus, without the prefix: `Shift+Left` / `Shift+Right` switch to the previous /
-next tab (mirrors tmux's `bind -n S-Left` / `S-Right`).
-
-Where Herdr's model differs from tmux: resizing is a mode (`Ctrl+a` then
-`Shift+R`), not one-shot `Ctrl+a H/J/K/L` (Herdr uses `Ctrl+a Shift+H/J/K/L` to
-swap panes); there is no interactive copy-mode, so `[` opens the scrollback in
-`$EDITOR`; and there is no send-prefix, so `Ctrl+a Ctrl+a` is left unmapped.
-Sessions persist across restarts (`resume_agents_on_restore`), replacing
-tmux-resurrect/continuum. `warp` locates Herdr sessions too, so a worktree
-already open in Herdr is raised rather than reopened.
+This replaced the standalone herdr TUI, whose sessions are not shared with
+herdr-core. Its config (prefix keys, sounds, theme) lives in git history under
+`config/herdr/`.
 
 ### Patch your terminal font with Powerline glyphs for maximum awesomeness
 

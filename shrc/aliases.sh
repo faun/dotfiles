@@ -19,7 +19,7 @@ alias tmux='tmux_attach'
 # zellij (coexists with tmux, which stays the default multiplexer)
 alias zj='zellij_attach'
 
-# herdr (agent-aware multiplexer; coexists with tmux/zellij)
+# herdr-core (agent runtime behind the Herdr apps; coexists with tmux/zellij)
 alias hd='herdr_attach'
 
 # ruby

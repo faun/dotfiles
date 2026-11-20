@@ -2,42 +2,31 @@
 
 set -eou pipefail
 
-cd "$(dirname "$0")" || exit 1
-cd .. || exit 1
-DIR="$(pwd)"
+# Installs herdr-core (`hc`), the background runtime the Herdr desktop app
+# (Homebrew cask herdr-app, see 00_homebrew_casks.sh) and the Herdr phone app
+# attach to, locally or over SSH. Re-running it updates hc in place; running
+# terminals keep running.
+#
+# No package manager ships herdr-core, so this uses the upstream installer.
+# It is saved to a file rather than piped to sh. It checks the tarball's
+# sha256 against the releases.herdr.dev manifest and installs into
+# ~/.local/bin/herdr-core, with an `hc` symlink beside it.
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=${HOME}/.config}"
 
-# Herdr keeps its runtime state (herdr.sock, herdr-client.sock, session.json,
-# logs) in ~/.config/herdr — the SAME directory as config.toml — and a server
-# may already be running there. So, unlike ghostty/zellij (whose config dirs
-# hold only config and are symlinked whole), link just the config FILE: a
-# directory-level symlink would drag live sockets/state into the repo and
-# clobber the running server's state dir.
-HERDR_CONFIG_DIR="${XDG_CONFIG_HOME}/herdr"
-HERDR_CONFIG_SOURCE="${DIR}/config/herdr/config.toml"
-HERDR_CONFIG_TARGET="${HERDR_CONFIG_DIR}/config.toml"
+tmp="$(mktemp -d)"
+trap 'rm -rf "${tmp}"' EXIT
 
-mkdir -p "${HERDR_CONFIG_DIR}"
+curl -fsSL https://releases.herdr.dev/core/install.sh -o "${tmp}/install.sh"
+sh "${tmp}/install.sh"
 
-if [[ -L "${HERDR_CONFIG_TARGET}" || -e "${HERDR_CONFIG_TARGET}" ]]; then
-  rm -f "${HERDR_CONFIG_TARGET}"
-fi
-
-echo "Linking ${HERDR_CONFIG_SOURCE} => ${HERDR_CONFIG_TARGET}"
-ln -s "${HERDR_CONFIG_SOURCE}" "${HERDR_CONFIG_TARGET}"
-
-# sounds/ holds only committed audio assets (no live runtime state), so unlike
-# the config dir as a whole, it's safe to symlink as a directory. This lets
-# config.toml reference sound files with relative paths (e.g.
-# "sounds/request.mp3"), since Herdr resolves those relative to config.toml's
-# directory.
-HERDR_SOUNDS_SOURCE="${DIR}/config/herdr/sounds"
-HERDR_SOUNDS_TARGET="${HERDR_CONFIG_DIR}/sounds"
-
-if [[ -L "${HERDR_SOUNDS_TARGET}" || -e "${HERDR_SOUNDS_TARGET}" ]]; then
-  rm -rf "${HERDR_SOUNDS_TARGET}"
-fi
-
-echo "Linking ${HERDR_SOUNDS_SOURCE} => ${HERDR_SOUNDS_TARGET}"
-ln -s "${HERDR_SOUNDS_SOURCE}" "${HERDR_SOUNDS_TARGET}"
+# The herdr TUI this replaces had config.toml and sounds/ symlinked into
+# ~/.config/herdr from this repo. Those sources are gone, so drop the dangling
+# links. The rest of ~/.config/herdr is the TUI's own state (sockets,
+# sessions), which is left alone.
+for link in "${XDG_CONFIG_HOME}/herdr/config.toml" "${XDG_CONFIG_HOME}/herdr/sounds"; do
+  if [[ -L "${link}" && ! -e "${link}" ]]; then
+    echo "Removing dangling ${link}"
+    rm -f "${link}"
+  fi
+done
