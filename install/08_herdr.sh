@@ -12,6 +12,9 @@ set -eou pipefail
 # sha256 against the releases.herdr.dev manifest and installs into
 # ~/.local/bin/herdr-core, with an `hc` symlink beside it.
 
+cd "$(dirname "$0")/.." || exit 1
+DIR="$(pwd)"
+
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=${HOME}/.config}"
 
 tmp="$(mktemp -d)"
@@ -20,13 +23,20 @@ trap 'rm -rf "${tmp}"' EXIT
 curl -fsSL https://releases.herdr.dev/core/install.sh -o "${tmp}/install.sh"
 sh "${tmp}/install.sh"
 
-# The herdr TUI this replaces had config.toml and sounds/ symlinked into
-# ~/.config/herdr from this repo. Those sources are gone, so drop the dangling
-# links. The rest of ~/.config/herdr is the TUI's own state (sockets,
-# sessions), which is left alone.
-for link in "${XDG_CONFIG_HOME}/herdr/config.toml" "${XDG_CONFIG_HOME}/herdr/sounds"; do
-  if [[ -L "${link}" && ! -e "${link}" ]]; then
-    echo "Removing dangling ${link}"
-    rm -f "${link}"
+# The herdr TUI runs alongside hc (Moshi's herdr support only drives the TUI).
+# Its runtime state (sockets, session.json, logs) lives in ~/.config/herdr next
+# to config.toml and a server may be running there, so link just the config
+# file, not the directory. sounds/ holds only committed audio, so it is linked
+# whole; config.toml's relative "sounds/..." paths resolve against it.
+HERDR_CONFIG_DIR="${XDG_CONFIG_HOME}/herdr"
+mkdir -p "${HERDR_CONFIG_DIR}"
+
+for name in config.toml sounds; do
+  source="${DIR}/config/herdr/${name}"
+  target="${HERDR_CONFIG_DIR}/${name}"
+  if [[ -L "${target}" || -e "${target}" ]]; then
+    rm -rf "${target}"
   fi
+  echo "Linking ${source} => ${target}"
+  ln -s "${source}" "${target}"
 done
