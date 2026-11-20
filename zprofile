@@ -1,3 +1,17 @@
+# Non-interactive login shells (`ssh host cmd`, hc, systemd-run) never read
+# zshrc, so shrc/00_paths.sh never adds Homebrew and tools like gh, nvim and
+# tmux are missing. A plain prepend, no `brew shellenv` fork; interactive
+# shells get the full setup from shrc/00_paths.sh instead.
+if ! [[ -o interactive ]]; then
+  for _brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew; do
+    if [[ -x "$_brew_prefix/bin/brew" ]]; then
+      PATH="$_brew_prefix/bin:$_brew_prefix/sbin:$PATH"
+      break
+    fi
+  done
+  unset _brew_prefix
+fi
+
 if [[ -d "$HOME/.local/bin" ]]; then
   PATH="$HOME/.local/bin:$PATH"
 fi
